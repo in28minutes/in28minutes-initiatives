@@ -6,6 +6,10 @@
 
 ## What's in it for you?
 - Spread your message to my 43,000 Subscribers on YouTube (https://www.youtube.com/rithustutorials) and 97,000 Students on Udemy (https://www.udemy.com/user/in28minutes/)
+- Get visibility for things you are doing
+	- Blog
+	- Website
+	- Anything Else?
 
 ## Approach
 - We would do a video recording on Skype. Ensure that you have a good background and a good internet connection for the video.
@@ -41,11 +45,11 @@
 	- As an Enterpreneur 
 		- What's your goal?
 		- What inspires you?
-		- Your message to buddy enterpreneurs in India
+		- Your message to budding enterpreneurs in India
 	- As an IT Professional 
 		- What's your goal?
 		- What inspires you?
-		- Your message to buddy enterpreneurs in India
+		- Your message to budding IT Professional in India
 	- Anything else you wanna add
 - Your Time
 	- How do you manage to stay connected with your family inspite of being busy?
@@ -53,10 +57,12 @@
 	- Trends
 	- IT Products vs Services
 	- Startups	
-	- About future of IT
+	- Technology
 		- Microservices - Spring Boot
 		- Frontend
+		- Mobile - Android/iPhone/Cross Platform
 		- AI
+		- IOT
 		- Machine Learning
 		- Big Data
 	- About Indian IT

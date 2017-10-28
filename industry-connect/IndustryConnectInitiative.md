@@ -43,7 +43,7 @@
 		- What's your goal?
 		- What inspires you?
 		- Your message to buddy enterpreneurs in India
-	- As an IT Expert 
+	- As an techie
 		- What's your goal?
 		- What inspires you?
 		- Your message to buddy enterpreneurs in India
@@ -54,12 +54,15 @@
 - Your Time
 	- How do you manage to stay connected with your family inspite of being busy?
 - Your Views
+	- Trends
 	- IT Products vs Services
-	- Startups
-	- About future of IT
+	- Startups	
+	- Technology
 		- Microservices - Spring Boot
 		- Frontend
+		- Mobile - Android/iPhone/Cross Platform
 		- AI
+		- IOT
 		- Machine Learning
 		- Big Data
 	- About Indian IT

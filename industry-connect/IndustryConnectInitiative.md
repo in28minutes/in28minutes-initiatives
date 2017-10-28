@@ -96,7 +96,7 @@
 	- Your recommendations for in28Minutes
 
 ## What Next
-- Ranga Karanam, in28Minutes will own the content of the video and possibly, post it to the Youtube channel.
+- Ranga Karanam, in28Minutes will own the content of the video and possibly, post it to the Youtube channel after getting an approval from interviewee.
 - The interviewee can post the link or embed the video in platforms of their choice 
    - Their YouTube Channel
    - Udemy Educational Announcement

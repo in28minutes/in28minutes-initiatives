@@ -87,3 +87,12 @@
 			- Bring about an attitude shift - Be an expert at what you do.
 			- Promote Hands-on Trainings for Programming
 	- Your recommendations for in28Minutes
+
+## What Next
+- Ranga Karanam, in28Minutes will own the content of the video and possibly, post it to the Youtube channel.
+- The interviewee can post the link or embed the video in platforms of their choice 
+   - Their YouTube Channel
+   - Udemy Educational Announcement
+   - Website
+   - Blog
+   - etc

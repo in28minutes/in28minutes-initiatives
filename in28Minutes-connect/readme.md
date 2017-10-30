@@ -1,8 +1,3 @@
-## Audience
-
-- Online Video Course Instructors
-- Software/IT Industry Experts
-
 ## Aim
 
 - Promote Online Learning in India

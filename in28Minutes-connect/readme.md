@@ -14,7 +14,7 @@
 
 - You can book a slot using calendly - https://calendly.com/in28minutes/60min
 	- You have the flexibility of rescheduling if needed directly on Calendly
-- We would do a video recording on Skype. Ensure that you have a good background and a good internet connection for the video.
+- We would establish initial contact on Skype. Ensure that you have a good background and a good internet connection for the video. After that we would record video using Zoom - https://zoom.us/wc/join/327761132
 - Typical Schedule
 	- 15 Minutes - Build a Rapport
 	- 45 Minutes - Do the interview

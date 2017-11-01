@@ -3,7 +3,7 @@
 - Promote Online Learning in India
 	- Especially at college level and industry entry level!
 - Give you a platform to share your expertise
-	- Possibly share your message with our 43,000 Subscribers on YouTube (https://www.youtube.com/rithustutorials)	
+	- Possibly share your message with our 43,000 Subscribers on YouTube (https://www.youtube.com/rithustutorials)
 	- Possibly share your message with our 100,000 Students on Udemy (https://www.udemy.com/user/in28minutes/)
 - Give learners an exposure to 
 	- Behind the scenes look at you - stories, lessons, beliefs and vision!
@@ -14,7 +14,9 @@
 
 - You can book a slot using calendly - https://calendly.com/in28minutes/60min
 	- You have the flexibility of rescheduling if needed directly on Calendly
-- We would establish initial contact on Skype. Ensure that you have a good background and a good internet connection for the video. After that we would record video using Zoom - https://zoom.us/wc/join/327761132
+- We would establish initial contact on Skype. Ensure that you have a good background and a good internet connection for the video. After that we can 
+      - Go live on facebook - https://www.facebook.com/in28Minutes/. I will share you a link before the meeting. You would need Google Chrome browser. ~~We can record video using Zoom - https://zoom.us/wc/join/327761132~~
+
 - Typical Schedule
 	- 15 Minutes - Build a Rapport
 	- 45 Minutes - Do the interview

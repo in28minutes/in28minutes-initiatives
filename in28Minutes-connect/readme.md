@@ -98,7 +98,7 @@
 		- Approach
 			- Create Great Learning Experiences
 			- Promote Online Learning in India
-			- Bring about an attitude shift - Be an expert at what you do.
+			- Be an expert at what you do.
 			- Promote Hands-on Trainings for Programming
 	- Your recommendations for in28Minutes
 
@@ -112,3 +112,17 @@
    - Website
    - Blog
    - etc
+
+## Quick Reference
+- What drives you? What made you a programmer? What made you teach online?
+- First Program? First Video etc...
+- What's the coolest stuff you are working on?
+- What are the problems that will be solved in the future in ABC (the technology you are working on)?
+- How do you think we can promote self learning?
+- How important you think it is to be hands-on while doing a tech course?
+- What is your suggestion for programmers who are starting off?
+- If you have to learn a new concept/tool/framework, how do you do it?
+- How do you keep up with whats happening in the industry?
+- What are your all-time favourite books on technology and learning? Any recent thought-provoking books that you've read recently.
+- Which blogs and podcasts do you follow/listen to keep yourself updated about latest development on technology.
+- What 2-minute advice you'd like to give to your younger self who's just getting started in the IT industry?

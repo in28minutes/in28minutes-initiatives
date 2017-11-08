@@ -342,14 +342,14 @@ We cater to the needs of Beginners and Experts with the same course by structuri
 - They can create their own learning paths based on their needs/experience/abilities.
 
 Here are the modules for one of our courses - Master Web Services and REST API with Spring Boot
-	- Introduction To Web Services
-	- Introduction to Spring Framework in 10 Steps
-	- Introduction to Spring Boot in 10 Steps
-	- SOAP Web Services with Spring and Spring Boot
-	- RESTful Web Services with Spring and Spring Boot
-	- Introduction to JPA in 10 Steps
-	- Connecting RESTful Web Service to JPA
-	- RESTful Web Services - Best Practices
+- Introduction To Web Services
+- Introduction to Spring Framework in 10 Steps
+- Introduction to Spring Boot in 10 Steps
+- SOAP Web Services with Spring and Spring Boot
+- RESTful Web Services with Spring and Spring Boot
+- Introduction to JPA in 10 Steps
+- Connecting RESTful Web Service to JPA
+- RESTful Web Services - Best Practices
 
 An intermediate learner who is familiar with Spring and Spring Boot and wants to learn RESTful Services can skip the introduction and jump directly into to the specific section "RESTful Web Services with Spring and Spring Boot" directly.
 
@@ -605,3 +605,4 @@ We want you to achieve what you want by making you experts and enjoy what you ar
 > By the time you complete the course, you realise that he has taught you all the most important Spring concepts in a fun, entertaining and easy to understand manner.
 
 > This guy is fantastic. Really. Wonderful teaching skills, and goes well out of his way to make sure that everything he is doing is fully understood. This is the kind of tutorial that gets me excited to work with a framework that I may otherwise not be.
+

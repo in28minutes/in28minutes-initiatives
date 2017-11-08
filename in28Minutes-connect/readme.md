@@ -28,7 +28,7 @@
 		- Calendly provides flexibility of rescheduling if needed
 
 ## Before We Meet
-- This would be a video interview. Ensure that you have a good background and a good internet connection for the video.
+- This would be a video interview. Ensure that you have a good background (preferably light color - white) and a good internet connection for the video.
 - We would establish initial contact on Skype.  After that we can 
       - Go live on facebook - https://www.facebook.com/in28Minutes/. using belive.tv.
       	- I will share you a link before the meeting. 

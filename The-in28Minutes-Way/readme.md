@@ -341,7 +341,8 @@ We cater to the needs of Beginners and Experts with the same course by structuri
 - This gives our learners the ability to pick and choose what they want to learn. 
 - They can create their own learning paths based on their needs/experience/abilities.
 
-Here are the modules for one of our courses - Master Web Services and REST API with Spring Boot
+Here are the modules for one of our courses
+- Master Web Services and REST API with Spring Boot
 - Introduction To Web Services
 - Introduction to Spring Framework in 10 Steps
 - Introduction to Spring Boot in 10 Steps

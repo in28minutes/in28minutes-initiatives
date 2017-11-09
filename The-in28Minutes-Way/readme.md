@@ -1,5 +1,6 @@
 # The in28Minutes Way
 
+
 #### Question
 
 > How did in28Minutes get to 100,000 learners across the world? 
@@ -9,6 +10,8 @@
 #### Answer
 
 > We are focused on creating the awesome course (learning) experiences. Period.
+
+
 
 #### An awesome learning experience? What's that?
 

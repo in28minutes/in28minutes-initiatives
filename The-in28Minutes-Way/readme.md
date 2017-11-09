@@ -30,7 +30,7 @@ Let's get started on "The in28Minutes Way"!
 * [We don't teach frameworks. We teach building applications!](#we-don-t-teach-frameworks-we-teach-building-applications-)
 * [We want you to be strong on the fundamentals](#we-want-you-to-be-strong-on-the-fundamentals)
 * [Step By Step](#step-by-step)
-* [Efficient](#efficient)
+* [Efficient and Effective](#efficient-and-effective)
 * [Real Project Experiences](#real-project-experiences)
 * [Debugging and Troubleshooting skills](#debugging-and-troubleshooting-skills)
 * [Modules - Beginners and Experts!](#modules---beginners-and-experts-)
@@ -244,7 +244,7 @@ Let's hear this being reflected in our reviews for our courses
 
 > The course is structured in a very logical way and the instructor is well versed with whatever he is teaching. Liked it. A great experience!
 
-## Efficient
+## Efficient and Effective
 
 We value your time and our time. 
 - We want our courses to be very efficient. 

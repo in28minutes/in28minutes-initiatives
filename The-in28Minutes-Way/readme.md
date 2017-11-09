@@ -12,7 +12,7 @@
 
 #### An awesome learning experience? What's that?
 
-Yeah. You need to get insight into the in28Minutes world to answer that. You need to understand "The in28Minutes Way"
+You need to get insight into the in28Minutes world to answer that. You need to understand "The in28Minutes Way"
 - What are our beliefs? 
 - What do we love? 
 - Why do we do what we do? 

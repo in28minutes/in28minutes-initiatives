@@ -1,24 +1,26 @@
 # The in28Minutes Way
 
-A question we get asked frequently is 
+#### Question
 
-> How did in28Minutes get to 100,000 students? 
+> How did in28Minutes get to 100,000 learners across the world? 
 
 ![](images/udemy-total-students.png)
 
-There is a simple answer to this:
+#### Answer
 
-> We are focused on creating the awesome course experiences for our learners. Period.
+> We are focused on creating the awesome course (learning) experiences. Period.
 
-What is an awesome course experience? 
+#### An awesome learning experience? What's that?
 
-To answer this, you would need to understand what we call 'The in28Minutes Way'
-- How do we design our courses?
+Yeah. You need to get insight into the in28Minutes world to answer that. You need to understand "The in28Minutes Way"
 - What are our beliefs? 
 - What do we love? 
 - Why do we do what we do? 
+- How do we design our courses?
 
-Let's get started on 'The in28Minutes Way'!
+Let's get started on "The in28Minutes Way"!
+
+#### Important Components of "The in28Minutes Way"
 
 * [Continuous Learning](#continuous-learning)
 * [Hands-on](#hands-on)
@@ -606,4 +608,3 @@ We want you to achieve what you want by making you experts and enjoy what you ar
 > By the time you complete the course, you realise that he has taught you all the most important Spring concepts in a fun, entertaining and easy to understand manner.
 
 > This guy is fantastic. Really. Wonderful teaching skills, and goes well out of his way to make sure that everything he is doing is fully understood. This is the kind of tutorial that gets me excited to work with a framework that I may otherwise not be.
-

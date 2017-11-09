@@ -39,7 +39,6 @@ Let's get started on "The in28Minutes Way"!
 * [Bring the technology trends to you](#bring-the-technology-trends-to-you)
 * [Building a connect](#building-a-connect)
 * [Socially Conscious](#socially-conscious)
-* [We want to create a better India](#we-want-to-create-a-better-india)
 * [We care for our learners](#we-care-for-our-learners)
 * [We love what we do](#we-love-what-we-do)
 
@@ -503,18 +502,17 @@ We are ready to offer our courses at substantial discounts and even for free for
 
 If you are aware of organizations supporting these intiatives, do help us reach out to them and help them Re-skill.
 
-## We want to create a better India 
-
-We have done great things on the technology front
+in28Minutes is proud of the great things that India has done on the technology front
 - We invented Zero and thats the base for everything we do in the programming world.
 - We created wonderful programmers.
 - We created wonderful world leaders for top technology organizations.
 
-However, we believe there is a lot of work still to be done
+However, we believe there is a lot of work to be done.
 
-We think it is our responsibility to 
+And we would want to do our bit.
 
-##### Promote Online Learning in India
+###### Promote Online Learning in India
+
 > We think Online Learning is a great socio economic leveller. Online learning has come a long way in the last few years around the world. However, adoption in India remains slow and we want to increase adoption by bringing online learning at an early stage - college and industry entry level. We belive once you start learning online, it will remain your No 1 choice of learning.
 
 ##### Create More Great Programmers from India

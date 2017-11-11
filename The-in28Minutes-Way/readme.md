@@ -9,8 +9,8 @@
 
 #### Answer
 
-> We are focused on creating the awesome course (learning) experiences. Period.
 
+> We are focused on creating the awesome course (learning) experiences. Period.
 
 
 #### An awesome learning experience? What's that?
@@ -22,6 +22,10 @@ You need to get insight into the in28Minutes world to answer that. You need to u
 - How do we design our courses?
 
 Let's get started on "The in28Minutes Way"!
+
+To find out more about our courses visit http://www.in28minutes.com
+
+![](images/in28Minutes-Java-Course-Roadmap.png)
 
 #### Important Components of "The in28Minutes Way"
 

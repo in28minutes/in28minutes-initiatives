@@ -15,15 +15,17 @@
 
 #### An awesome learning experience? What's that?
 
-You need to get insight into the in28Minutes world to answer that. You need to understand "The in28Minutes Way"
+You need to get insight into the in28Minutes world to answer that. 
+
+You need to understand "The in28Minutes Way"
 - What are our beliefs? 
 - What do we love? 
 - Why do we do what we do? 
 - How do we design our courses?
 
-Let's get started on "The in28Minutes Way"!
-
 To find out more about our courses visit http://www.in28minutes.com
+
+Let's get started on "The in28Minutes Way"!
 
 #### Important Components of "The in28Minutes Way"
 
@@ -49,8 +51,6 @@ To find out more about our courses visit http://www.in28minutes.com
 
 ![](images/in28Minutes-Java-Course-Roadmap.png)
 
-To find out more about our courses visit http://www.in28minutes.com
-
 ## Continuous Learning
 
 Trends change. Period. 
@@ -69,8 +69,6 @@ Infact, this belief in continuous learning is what made me choose the name - in2
 
 
 > I'm a great believer that if you spend 30 minutes every day taking a small step towards your dream, you will reach the top 5% of whichever career path you choose. And that where in28Minutes comes from. 
-
-I searched for a domain name in30Minutes and in28Minutes was the closest I got.
 
 At in28Minutes we believe in Continous Learning. We are learning with you and identifying things you would want to learn. 
 

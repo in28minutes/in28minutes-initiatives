@@ -23,10 +23,6 @@ You need to get insight into the in28Minutes world to answer that. You need to u
 
 Let's get started on "The in28Minutes Way"!
 
-To find out more about our courses visit http://www.in28minutes.com
-
-![](images/in28Minutes-Java-Course-Roadmap.png)
-
 #### Important Components of "The in28Minutes Way"
 
 * [Continuous Learning](#continuous-learning)
@@ -48,6 +44,10 @@ To find out more about our courses visit http://www.in28minutes.com
 * [Socially Conscious](#socially-conscious)
 * [We care for our learners](#we-care-for-our-learners)
 * [We love what we do](#we-love-what-we-do)
+
+To find out more about our courses visit http://www.in28minutes.com
+
+![](images/in28Minutes-Java-Course-Roadmap.png)
 
 ## Continuous Learning
 

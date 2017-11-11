@@ -49,8 +49,6 @@ Let's get started on "The in28Minutes Way"!
 * [We care for our learners](#we-care-for-our-learners)
 * [We love what we do](#we-love-what-we-do)
 
-![](images/in28Minutes-Java-Course-Roadmap.png)
-
 ## Continuous Learning
 
 Trends change. Period. 
@@ -59,7 +57,9 @@ Yesterday it was REST, Spring, Spring MVC. Today it is Spring Boot, Microservice
 
 Irrespective of the direction technology is heading, we think there are two characteristics that seperate the frontrunners from others
 - You are an expert at what you do.
-- You are a continuous learner. You know what is happening. You keep learning every day. You know how to adapt when things go in a direction different from your expectations.
+- You are a continuous learner. 
+
+> You know what is happening. You keep learning every day. You know how to adapt when things go in a direction different from your expectations.
 
 We believe that while you should work hard at your job and achieve great success with it, you should always have an eye towards 
 - Getting better at what you do.
@@ -68,7 +68,7 @@ We believe that while you should work hard at your job and achieve great success
 Infact, this belief in continuous learning is what made me choose the name - in28Minutes.
 
 
-> I'm a great believer that if you spend 30 minutes every day taking a small step towards your dream, you will reach the top 5% of whichever career path you choose. And that where in28Minutes comes from. 
+> I'm a great believer that if you spend 30 minutes every day taking a small step towards your dream, you will reach the top 5% of whichever career path you choose. And that where in28Minutes comes from.
 
 At in28Minutes we believe in Continous Learning. We are learning with you and identifying things you would want to learn. 
 
@@ -78,7 +78,7 @@ Today, we have courses to help a Java beginner to become an expert on APIs, Web 
 - Best sellers on Udemy
 - Have Great Reviews
 
-![](images/udemy-courses.png)
+![](images/in28Minutes-Java-Course-Roadmap.png)
 
 In the next few months, we are expanding into 
 - Front End
@@ -93,7 +93,7 @@ We continuously work on creating awesome course experiences.
 
 We spend time every day visualizing how we can make your course experiences better.
 
-> You are a 28Minuter if you spend atleast half an hour a day in making your dreams come true. 
+> You are a 28Minuter if you spend atleast half an hour a day in making your dreams come a step closer. 
 
 ## Hands-on
 
@@ -607,3 +607,9 @@ We want you to achieve what you want by making you experts and enjoy what you ar
 > By the time you complete the course, you realise that he has taught you all the most important Spring concepts in a fun, entertaining and easy to understand manner.
 
 > This guy is fantastic. Really. Wonderful teaching skills, and goes well out of his way to make sure that everything he is doing is fully understood. This is the kind of tutorial that gets me excited to work with a framework that I may otherwise not be.
+
+## The End
+
+Wow! Wasn't it a wonderful read? We would love to hear your thoughts.  
+To find out more about our courses visit http://www.in28minutes.com
+![](images/udemy-courses.png)

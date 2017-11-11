@@ -65,14 +65,8 @@ We believe that while you should work hard at your job and achieve great success
 - Getting better at what you do.
 - Expanding your horizons.
 
-> Infact, this belief in continuous learning is what made me choose the name - in28Minutes.
+Infact, this belief in continuous learning is what made me choose the name - in28Minutes.
 
-Everybody has their own dreams. 
-- Somebody wants to learn something. 
-- Somebody wants to be something. 
-- Somebody wants to do something. 
-
-But how do you make your dreams come true?
 
 > I'm a great believer that if you spend 30 minutes every day taking a small step towards your dream, you will reach the top 5% of whichever career path you choose. And that where in28Minutes comes from. 
 

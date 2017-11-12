@@ -87,7 +87,7 @@ In the next few months, we are expanding into
 We continuously work on creating awesome course experiences.  
 - Code and Complete Notes on Github (https://github.com/in28minutes/)
 - Course Companion Guides
-- Troubleshooting Guides
+- Troubleshooting Guides (https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-TroubleshootingGuide-And-FAQ)
 - Modularity of Courses helping them cater to the needs of both Beginners and Experts
 - Increased Coverage of Topics
 

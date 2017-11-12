@@ -3012,6 +3012,7 @@ There are three ways - Practice, Practice and More Practice.
 
 I would suggest joining a programming contest like CodeChef or TopCoder for a start. Once you start being active there, you will understand everything else.
 
+### You are awesome
 
 Wow! You are incredible! If you got here, you must be a 28Minuter and you should understand "The in28Minutes Way"
 - https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-Way

@@ -612,4 +612,5 @@ We want you to achieve what you want by making you experts and enjoy what you ar
 
 Wow! Wasn't it a wonderful read? We would love to hear your thoughts.  
 To find out more about our courses visit http://www.in28minutes.com
+
 ![](images/udemy-courses.png)

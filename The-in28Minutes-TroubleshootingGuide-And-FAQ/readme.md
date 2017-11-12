@@ -1,10 +1,262 @@
-We love all our 100,000 learners. We want to help you in every way possible. 
+We love all our 100,000 learners. We want to help you in every way possible.
 
-We do not want you to get stuck because of a simple error. 
+We do not want you to get stuck because of a simple error.
 
 This 50 page troubleshooting guide and faq is our way of thanking you for choosing to learn from in28Minutes. 
 
+- [How to use this guide?](#how-to-use-this-guide)
+	- [1. Ensure You Have The Recommended Versions of Tools/Versions](#1-ensure-you-have-the-recommended-versions-of-toolsversions)
+	- [2. Highly Probable Errors](#2-highly-probable-errors)
+	- [3. Go for the complete list](#3-go-for-the-complete-list)
+- [Basics](#basics)
+	- [Tip :  Ensure you have the right version of Java Installed](#tip---ensure-you-have-the-right-version-of-java-installed)
+	- [Tip : Ensure you have the right version of Eclipse Installed](#tip--ensure-you-have-the-right-version-of-eclipse-installed)
+	- [Tip : Troubleshooting Embedded Maven in Eclipse](#tip--troubleshooting-embedded-maven-in-eclipse)
+	- [Error :  You are not using a JDK](#error---you-are-not-using-a-jdk)
+	- [Error : You are not connected to internet or You are behind a proxy!](#error--you-are-not-connected-to-internet-or-you-are-behind-a-proxy)
+		- [Configuring a Proxy](#configuring-a-proxy)
+	- [Error : Files Downloaded by Maven are Corrupt](#error--files-downloaded-by-maven-are-corrupt)
+		- [Force Update of Snapshots/Release](#force-update-of-snapshotsrelease)
+		- [Purge Your Maven Repository](#purge-your-maven-repository)
+		- [Delete your local repository](#delete-your-local-repository)
+	- [Error :  org.codehaus.plexus.archiver.jar.Manifest.write\(java.io.PrintWriter\)](#error---orgcodehausplexusarchiverjarmanifestwritejavaioprintwriter)
+	- [Error : Unsupported major.minor version 52.0](#error--unsupported-majorminor-version-520)
+	- [Tip :  Your Project Maven configuration should be configured to compile at Java 8](#tip---your-project-maven-configuration-should-be-configured-to-compile-at-java-8)
+		- [Approach 1 : Spring Boot Project](#approach-1--spring-boot-project)
+		- [Approach 2: Non Spring Boot Project](#approach-2-non-spring-boot-project)
+	- [Error :  On Maven > Update Project, Java 1.4 is auto selected](#error---on-maven--update-project-java-14-is-auto-selected)
+	- [Error :  Changes you made are not reflected](#error---changes-you-made-are-not-reflected)
+	- [Q :  What should I do when some other application is using default port 8080?](#q---what-should-i-do-when-some-other-application-is-using-default-port-8080)
+		- [Option 1 - Kill](#option-1---kill)
+		- [Option 2 - Switch Port](#option-2---switch-port)
+		- [Option 1 - Kill](#option-1---kill-1)
+		- [Option 2 - Switch Port](#option-2---switch-port-1)
+	- [Q :  Do I need to install Tomcat seperately for this course?](#q---do-i-need-to-install-tomcat-seperately-for-this-course)
+	- [Q :  Why do we use this specific project structure in all our courses?](#q---why-do-we-use-this-specific-project-structure-in-all-our-courses)
+	- [Q :  What software do you use for your diagrams or Mind Maps?](#q---what-software-do-you-use-for-your-diagrams-or-mind-maps)
+	- [Q :  How to debug the application?](#q---how-to-debug-the-application)
+	- [Q :  How do I configure auto restarting the server whenever source code changes?](#q---how-do-i-configure-auto-restarting-the-server-whenever-source-code-changes)
+		- [Approach 1 : Spring Boot Project](#approach-1--spring-boot-project-1)
+		- [Approach 2: Non Spring Boot Project](#approach-2-non-spring-boot-project-1)
+	- [Q :  Can I use jboss instead of tomcat server?](#q---can-i-use-jboss-instead-of-tomcat-server)
+	- [Q :  How to get the projects to run in Tomcat 8 or 9?](#q---how-to-get-the-projects-to-run-in-tomcat-8-or-9)
+- [Maven](#maven)
+	- [Q :  Why Maven?](#q---why-maven)
+	- [Q :  What is ArtifactId and GroupId?](#q---what-is-artifactid-and-groupid)
+	- [Q :  How to know the exact string and name of a dependency and its artifactid?](#q---how-to-know-the-exact-string-and-name-of-a-dependency-and-its-artifactid)
+	- [Q :  What's the difference between scope and phase?](#q---whats-the-difference-between-scope-and-phase)
+	- [Q :  Maven - How did a specific jar end up in our deployable?](#q---maven---how-did-a-specific-jar-end-up-in-our-deployable)
+	- [Q :  What is a SNAPSHOT as in 0.0.1-SNAPSHOT?](#q---what-is-a-snapshot-as-in-001-snapshot)
+	- [Q :  What is difference between runtime and provided scopes?](#q---what-is-difference-between-runtime-and-provided-scopes)
+	- [Q :  How can you always exclude a specific jar using Maven Exclusions?](#q---how-can-you-always-exclude-a-specific-jar-using-maven-exclusions)
+- [Tip : Example of a multi layered maven project](#tip--example-of-a-multi-layered-maven-project)
+	- [Error : java.lang.ClassNotFoundException](#error--javalangclassnotfoundexception)
+	- [Q :  Why are we not using Gradle?](#q---why-are-we-not-using-gradle)
+- [Eclipse](#eclipse)
+	- [Q :  How do I see the list of methods in a class?](#q---how-do-i-see-the-list-of-methods-in-a-class)
+	- [Q :  How do I become more efficient developer?](#q---how-do-i-become-more-efficient-developer)
+	- [Q :  How do you download source code to Eclipse so that you can see the code for frameworks?](#q---how-do-you-download-source-code-to-eclipse-so-that-you-can-see-the-code-for-frameworks)
+- [Intellij and/or Mac](#intellij-andor-mac)
+	- [Q :  How to install Maven on MAC OS X?](#q---how-to-install-maven-on-mac-os-x)
+	- [Q :  How do I import a Maven project into Intellij?](#q---how-do-i-import-a-maven-project-into-intellij)
+	- [Q :  How do I create and run unit tests \(JUnit\) with Intellij?](#q---how-do-i-create-and-run-unit-tests-junit-with-intellij)
+	- [Error :  I'm having a problem running jsps with Spring Boot in Intellij. What should I do?](#error---im-having-a-problem-running-jsps-with-spring-boot-in-intellij-what-should-i-do)
+	- [Q :  Why does Hot reload not work with Spring Boot DevTools and Intellij?](#q---why-does-hot-reload-not-work-with-spring-boot-devtools-and-intellij)
+- [Spring](#spring)
+	- [Q :  What is the need for a Component Scan?](#q---what-is-the-need-for-a-component-scan)
+	- [Q :  How do you define a Component Scan?](#q---how-do-you-define-a-component-scan)
+		- [Approach 1 : Spring Boot Project](#approach-1--spring-boot-project-2)
+		- [Detailed Example](#detailed-example)
+		- [Approach 2: Non Spring Boot Project](#approach-2-non-spring-boot-project-2)
+		- [Java Application Context](#java-application-context)
+		- [XML Application Context](#xml-application-context)
+	- [Q :  How do I solve Errors related to Component Scan?](#q---how-do-i-solve-errors-related-to-component-scan)
+		- [Solution](#solution)
+	- [Q :  What is the difference between @Component and @ComponentScan?](#q---what-is-the-difference-between-component-and-componentscan)
+	- [Q :  How do I choose between Spring and CDI?](#q---how-do-i-choose-between-spring-and-cdi)
+	- [Q :  Why do we write a lot of unit tests in the Spring Master Class course?](#q---why-do-we-write-a-lot-of-unit-tests-in-the-spring-master-class-course)
+	- [Q :  What is the use of an @Bean annotation?](#q---what-is-the-use-of-an-bean-annotation)
+	- [Q :  What is the difference between @Bean and @Component?](#q---what-is-the-difference-between-bean-and-component)
+	- [Q :  What is the difference between @Component, @Service and @Repository annotations?](#q---what-is-the-difference-between-component-service-and-repository-annotations)
+	- [Q :  Can we use @Component annotation instead of @Service for Business Services?](#q---can-we-use-component-annotation-instead-of-service-for-business-services)
+	- [Q :  What is the difference between web.xml and the Spring Context - servlet.xml?](#q---what-is-the-difference-between-webxml-and-the-spring-context---servletxml)
+	- [Q :  Should we use XML or Annotation based wiring?](#q---should-we-use-xml-or-annotation-based-wiring)
+	- [Q :  Can we do autowiring with Non Setter and Non Constructor Methods?](#q---can-we-do-autowiring-with-non-setter-and-non-constructor-methods)
+	- [Q :  Where should we use Checked Exceptions?](#q---where-should-we-use-checked-exceptions)
+	- [Q :  What is the difference between Cross Cutting Concerns and AOP?](#q---what-is-the-difference-between-cross-cutting-concerns-and-aop)
+	- [Q :  What is difference between IOC and Application Context?](#q---what-is-difference-between-ioc-and-application-context)
+	- [Q :  What is the difference between classPathXmlApplicationContext and annotationConfigApplicationContext ?](#q---what-is-the-difference-between-classpathxmlapplicationcontext-and-annotationconfigapplicationcontext-)
+	- [Q :  When @Around aspect is introduced the value returned by@AfterReturning is lost. Why is this happening?](#q---when-around-aspect-is-introduced-the-value-returned-byafterreturning-is-lost-why-is-this-happening)
+	- [Q :  How do you use which autowiring type to use - @Primary or @Qualifier?](#q---how-do-you-use-which-autowiring-type-to-use---primary-or-qualifier)
+	- [Q :  What are the New Features in Spring Framework 5.0?](#q---what-are-the-new-features-in-spring-framework-50)
+	- [Q :  What are the possible reasons of preDestroy not being called?](#q---what-are-the-possible-reasons-of-predestroy-not-being-called)
+	- [Q :  Compare Application Context vs IOC Container vs Web Container vs EJB Container](#q---compare-application-context-vs-ioc-container-vs-web-container-vs-ejb-container)
+	- [Notes :  Notes from Rodolfo](#notes---notes-from-rodolfo)
+	- [Q :  How do we inject different bean depending on the configuration in application.properties?](#q---how-do-we-inject-different-bean-depending-on-the-configuration-in-applicationproperties)
+	- [Error :  Log4j problems with Spring 5!](#error---log4j-problems-with-spring-5)
+	- [Q :  What is the minimum baseline Java Version for Spring Boot 2 and Spring 5?](#q---what-is-the-minimum-baseline-java-version-for-spring-boot-2-and-spring-5)
+	- [Error :  Getting SLF4J errors and not getting logger output in Lecture 41 - Step 19?](#error---getting-slf4j-errors-and-not-getting-logger-output-in-lecture-41---step-19)
+	- [Error : No Spring WebApplicationInitializer types detected on classpath](#error--no-spring-webapplicationinitializer-types-detected-on-classpath)
+- [JSP Servlets and Spring MVC](#jsp-servlets-and-spring-mvc)
+	- [Q :  What is the difference between @Controller and @RestController?](#q---what-is-the-difference-between-controller-and-restcontroller)
+	- [Q :  Why is there no context root in the request url for each web application?](#q---why-is-there-no-context-root-in-the-request-url-for-each-web-application)
+	- [Q :  What does tomcat7:run exactly mean?](#q---what-does-tomcat7run-exactly-mean)
+	- [Q :  How is the URL decided with Spring MVC?](#q---how-is-the-url-decided-with-spring-mvc)
+	- [Error : No plugin found for prefix 'tomcat7' in the current project](#error--no-plugin-found-for-prefix-tomcat7-in-the-current-project)
+	- [Q :  Is this kind of Tomcat server usage what is commonly referred to as "Embedded Tomcat Server" ?](#q---is-this-kind-of-tomcat-server-usage-what-is-commonly-referred-to-as-embedded-tomcat-server-)
+		- [Basic Spring MVC and JSP Servlet courses do not use embedded servers](#basic-spring-mvc-and-jsp-servlet-courses-do-not-use-embedded-servers)
+		- [All our Spring Boot courses use Embedded Servers](#all-our-spring-boot-courses-use-embedded-servers)
+	- [Q :  How do we handle errors to non existing URL Paths with Spring MVC?](#q---how-do-we-handle-errors-to-non-existing-url-paths-with-spring-mvc)
+	- [Q :  How do we configure a welcome page?](#q---how-do-we-configure-a-welcome-page)
+	- [Q :  Why do we teach JSP and Servlets in the first section of Spring MVC Course?](#q---why-do-we-teach-jsp-and-servlets-in-the-first-section-of-spring-mvc-course)
+	- [Q :  Why do we use  @ResponseBody sometimes and ResponseEntity some other times?](#q---why-do-we-use--responsebody-sometimes-and-responseentity-some-other-times)
+		- [Example 1](#example-1)
+		- [Example 2](#example-2)
+	- [Q :  What is difference between Spring 5 and Spring 4 in terms of developing web application in the course? Does it matter if a new version is used ?](#q---what-is-difference-between-spring-5-and-spring-4-in-terms-of-developing-web-application-in-the-course-does-it-matter-if-a-new-version-is-used-)
+	- [Q :  What is the difference between Filters, Listeners and Interceptors?](#q---what-is-the-difference-between-filters-listeners-and-interceptors)
+	- [Q :  What is the difference between ModelMap and ModelAndView?](#q---what-is-the-difference-between-modelmap-and-modelandview)
+	- [Q :  What is the difference between model.put\(\) and model.addAttribute\(\)?](#q---what-is-the-difference-between-modelput-and-modeladdattribute)
+	- [Q :  How do you pass values from Java Controller to JSP?](#q---how-do-you-pass-values-from-java-controller-to-jsp)
+	- [Q :  What is Form Binding?](#q---what-is-form-binding)
+	- [Q :  What is WEB-INF exactly? Why so we need it?](#q---what-is-web-inf-exactly-why-so-we-need-it)
+	- [Q :  Why do we use Hibernate Validator?](#q---why-do-we-use-hibernate-validator)
+	- [Q :  Are Model objects specific to a request?](#q---are-model-objects-specific-to-a-request)
+	- [Q :  The groupid for jstl jar is jstl and not javax.servlet](#q---the-groupid-for-jstl-jar-is-jstl-and-not-javaxservlet)
+	- [Q :  Why are we using request GET method for "delete-todo" request?](#q---why-are-we-using-request-get-method-for-delete-todo-request)
+	- [Q :  Why do we need xmlns hyperlinks? like http://www.springframework.org/schema/bean](#q---why-do-we-need-xmlns-hyperlinks-like-httpwwwspringframeworkorgschemabean)
+	- [Error : View is not resolving to a JSP](#error--view-is-not-resolving-to-a-jsp)
+	- [Q :  How to use own CSS with Spring MVC?](#q---how-to-use-own-css-with-spring-mvc)
+	- [Q :  Where should we place our static \(css, js, html\) resources in a Spring MVC application?](#q---where-should-we-place-our-static-css-js-html-resources-in-a-spring-mvc-application)
+	- [Q :  How to add a custom login page in Spring Security?](#q---how-to-add-a-custom-login-page-in-spring-security)
+	- [Q :  How can you authenticate by connecting to a database with Spring Security?](#q---how-can-you-authenticate-by-connecting-to-a-database-with-spring-security)
+	- [Q :  Why is request method POST recommended compared to GET for sensitive data?](#q---why-is-request-method-post-recommended-compared-to-get-for-sensitive-data)
+	- [Q :  We use ${todo.done} in JSP even though the name of the field in Todo.java is isDone. Shouldn't we be using ${todo.isDone}?](#q---we-use-tododone-in-jsp-even-though-the-name-of-the-field-in-todojava-is-isdone-shouldnt-we-be-using-todoisdone)
+	- [Error : After adding security dependencies - java.lang.NoSuchMethodError: org.springframework.aop.framework.autoproxy.AutoProxyUtils.determineTargetClass](#error--after-adding-security-dependencies---javalangnosuchmethoderror-orgspringframeworkaopframeworkautoproxyautoproxyutilsdeterminetargetclass)
+	- [Q :  How do I ensure that session attributes are not part of the request url?](#q---how-do-i-ensure-that-session-attributes-are-not-part-of-the-request-url)
+	- [Error :  Spring Security - java.lang.NoClassDefFoundError: org/springframework/web/cors/CorsConfigurationSource](#error---spring-security---javalangnoclassdeffounderror-orgspringframeworkwebcorscorsconfigurationsource)
+	- [Error :  Unable to find setter method for attribute commandName](#error---unable-to-find-setter-method-for-attribute-commandname)
+	- [Q :  Can I have multiple parameters with the same name in a request?](#q---can-i-have-multiple-parameters-with-the-same-name-in-a-request)
+	- [Error :  java.lang.IllegalStateException: Neither BindingResult nor plain target object for bean name 'todo' available as request attribute](#error---javalangillegalstateexception-neither-bindingresult-nor-plain-target-object-for-bean-name-todo-available-as-request-attribute)
+	- [Error :  Request processing failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate \[com.in28minutes.Todo.Todo\]: No default constructor found; nested exception is java.lang.NoSuchMethodException: com.in28minutes.Todo.Todo.\(\)](#error---request-processing-failed-nested-exception-is-orgspringframeworkbeansbeaninstantiationexception-failed-to-instantiate-comin28minutestodotodo-no-default-constructor-found-nested-exception-is-javalangnosuchmethodexception-comin28minutestodotodo)
+	- [Error :  Caused by: java.lang.IllegalArgumentException: The servlets named \[com.in28minutes.LoginServlet\] and \[webapp.LoginServlet\] are both mapped to the url-pattern \[/login.do\] which is not permitted](#error---caused-by-javalangillegalargumentexception-the-servlets-named-comin28minutesloginservlet-and-webapploginservlet-are-both-mapped-to-the-url-pattern-logindo-which-is-not-permitted)
+	- [Q :  How is server picking up index.html and index.jsp even when they are not configured in web.xml?](#q---how-is-server-picking-up-indexhtml-and-indexjsp-even-when-they-are-not-configured-in-webxml)
+	- [Q :  What is the benefit of using view resolver?](#q---what-is-the-benefit-of-using-view-resolver)
+		- [Why am I not able to see todo's list on screen?](#why-am-i-not-able-to-see-todos-list-on-screen)
+	- [Q :  What is @ControllerAdvice?](#q---what-is-controlleradvice)
+	- [Q :  What Request method should be used for updating user details?](#q---what-request-method-should-be-used-for-updating-user-details)
+	- [Q :  What is the difference between put and patch request methods?](#q---what-is-the-difference-between-put-and-patch-request-methods)
+- [Spring Boot](#spring-boot)
+	- [Q :  What should be the first things I read about Spring Boot?](#q---what-should-be-the-first-things-i-read-about-spring-boot)
+	- [What is the minimum baseline Java Version for Spring Boot 2 and Spring 5?](#what-is-the-minimum-baseline-java-version-for-spring-boot-2-and-spring-5)
+	- [Q :  Is Spring Initializr the only way to create Spring Boot Projects?](#q---is-spring-initializr-the-only-way-to-create-spring-boot-projects)
+		- [Setting up a maven project manually](#setting-up-a-maven-project-manually)
+	- [Q :  Why am I not seeing code completion when updating application.properties in Eclipse?](#q---why-am-i-not-seeing-code-completion-when-updating-applicationproperties-in-eclipse)
+	- [Q :  Why do we need spring-boot-maven-plugin?](#q---why-do-we-need-spring-boot-maven-plugin)
+	- [Q :  Devtools helps me to restart the server automatically. But, I have a problem. The browser page is not auto refreshed.](#q---devtools-helps-me-to-restart-the-server-automatically-but-i-have-a-problem-the-browser-page-is-not-auto-refreshed)
+	- [Q :  What and Why Embedded Servers?](#q---what-and-why-embedded-servers)
+	- [Q :  How can I add custom JS code with Spring Boot?](#q---how-can-i-add-custom-js-code-with-spring-boot)
+	- [Error :  HAL browser gives me unauthorized error - Full authentication is required to access this resource.](#error---hal-browser-gives-me-unauthorized-error---full-authentication-is-required-to-access-this-resource)
+		- [Option 1 : Disable security](#option-1--disable-security)
+		- [Option 2 : Search for password in the log and pass it in the request header](#option-2--search-for-password-in-the-log-and-pass-it-in-the-request-header)
+	- [Error :  Hal Browser and Spring Boot Actuator are not working](#error---hal-browser-and-spring-boot-actuator-are-not-working)
+	- [Q :  How does path="users", collectionResourceRel="users" work with Spring Data Rest?](#q---how-does-pathusers-collectionresourcerelusers-work-with-spring-data-rest)
+	- [Q :  What is importance of {id} in ServletUriComponentsBuilder.fromCurrentRequest\(\).path\("/{id}"\).buildAndExpand\(returnQuestion.getId(\)).toUri\(\);](#q---what-is-importance-of-id-in-servleturicomponentsbuilderfromcurrentrequestpathidbuildandexpandreturnquestiongetidtouri)
+	- [Error :  java.lang.ClassCastException: org.springframework.boot.context.event.ApplicationReadyEvent cannot be cast](#error---javalangclasscastexception-orgspringframeworkbootcontexteventapplicationreadyevent-cannot-be-cast)
+	- [Q :  What is difference between Spring 5 and Spring 4 in terms of developing web application in the course? Does it matter if a new version is used ?](#q---what-is-difference-between-spring-5-and-spring-4-in-terms-of-developing-web-application-in-the-course-does-it-matter-if-a-new-version-is-used--1)
+	- [Q :  Why am I seeing an extra dialogue asking me to "Select Java Application Type" when I launch a Spring Boot Application?](#q---why-am-i-seeing-an-extra-dialogue-asking-me-to-select-java-application-type-when-i-launch-a-spring-boot-application)
+	- [Q :  What happens in the background when a Spring Boot Application is "Run as Java Application"?](#q---what-happens-in-the-background-when-a-spring-boot-application-is-run-as-java-application)
+	- [Q :  Can we use jetty instead of tomcat in spring-boot-starter-web?](#q---can-we-use-jetty-instead-of-tomcat-in-spring-boot-starter-web)
+	- [Error :  Failure to transfer org.springframework.boot:spring-boot-starter-parent:pom:2.0.0.BUILD-SNAPSHOT from https://repo.spring.io/snapshot](#error---failure-to-transfer-orgspringframeworkbootspring-boot-starter-parentpom200build-snapshot-from-httpsrepospringiosnapshot)
+	- [Q :  Why do we configure Spring Snapshot and milestone repositories?](#q---why-do-we-configure-spring-snapshot-and-milestone-repositories)
+	- [Error :   java.lang.IllegalArgumentException: Sources must not be empty](#error----javalangillegalargumentexception-sources-must-not-be-empty)
+	- [Q :  Can i use spring boot dev tools for a non spring boot project?](#q---can-i-use-spring-boot-dev-tools-for-a-non-spring-boot-project)
+	- [Q :  What is the difference between Static and Dynamic filtering?](#q---what-is-the-difference-between-static-and-dynamic-filtering)
+	- [Error :  No message found under code 'good.morning.message' for locale 'us'.](#error---no-message-found-under-code-goodmorningmessage-for-locale-us)
+	- [Q :  How to generate a WAR file with Spring Boot?](#q---how-to-generate-a-war-file-with-spring-boot)
+	- [Q :  How to deploy to a different server with with Spring Boot?](#q---how-to-deploy-to-a-different-server-with-with-spring-boot)
+	- [Q :  What is the difference between RequestMapping and GetMapping?](#q---what-is-the-difference-between-requestmapping-and-getmapping)
+	- [Q :  Why do we recommend not to use Spring Data Rest in real world applications?](#q---why-do-we-recommend-not-to-use-spring-data-rest-in-real-world-applications)
+	- [Q :  How do I change the package name of a project in Spring Initializer?](#q---how-do-i-change-the-package-name-of-a-project-in-spring-initializer)
+	- [Q :  Where can I find the complete list of properties that can be configured in application.properties?](#q---where-can-i-find-the-complete-list-of-properties-that-can-be-configured-in-applicationproperties)
+- [Hibernate, JPA and In-memory Database](#hibernate-jpa-and-in-memory-database)
+	- [Q :  What is the difference between JPA and Hibernate?](#q---what-is-the-difference-between-jpa-and-hibernate)
+	- [Q :  Compare Entity Manager vs SessionFactory](#q---compare-entity-manager-vs-sessionfactory)
+	- [Q :  In which layer, should the boundary of a transaction start?](#q---in-which-layer-should-the-boundary-of-a-transaction-start)
+	- [Q :  HQL vs JPQL](#q---hql-vs-jpql)
+	- [Q :  What are the dependencies need to start up an in memory database H2 with Spring Boot?](#q---what-are-the-dependencies-need-to-start-up-an-in-memory-database-h2-with-spring-boot)
+	- [Q :  How is Hibernate chosen as the default implementation for JPA without any configuration?](#q---how-is-hibernate-chosen-as-the-default-implementation-for-jpa-without-any-configuration)
+	- [Q :  Why H2? And how does it work?](#q---why-h2-and-how-does-it-work)
+	- [Q :  Where is the database connection info specified? How does it know to automatically connect to H2?](#q---where-is-the-database-connection-info-specified-how-does-it-know-to-automatically-connect-to-h2)
+	- [Q :  How do we connect to a external database like MSSQL or oracle?](#q---how-do-we-connect-to-a-external-database-like-mssql-or-oracle)
+		- [Step 1 - Add dependency for mqsql connector to pom.xml](#step-1---add-dependency-for-mqsql-connector-to-pomxml)
+		- [Step 2 - Remove H2 Dependency from pom.xml](#step-2---remove-h2-dependency-from-pomxml)
+		- [Step 3 - Setup your My SQL Database](#step-3---setup-your-my-sql-database)
+		- [Step 4 - Configure your connection to My SQL Database](#step-4---configure-your-connection-to-my-sql-database)
+		- [Step 5 - Restart and You are ready!](#step-5---restart-and-you-are-ready)
+	- [Q :  What is the default h2 database name configured by Spring Boot? Why is the default database name testdb?](#q---what-is-the-default-h2-database-name-configured-by-spring-boot-why-is-the-default-database-name-testdb)
+	- [Q :  What happens if H2 is not in the classpath?](#q---what-happens-if-h2-is-not-in-the-classpath)
+	- [Q :  Why the data lost between restart?](#q---why-the-data-lost-between-restart)
+	- [Error :  Table is not created automatically in h2 embedded db or I'm unable to see the tables](#error---table-is-not-created-automatically-in-h2-embedded-db-or-im-unable-to-see-the-tables)
+	- [Error :  H2 Console is not Launched up?](#error---h2-console-is-not-launched-up)
+	- [Q :  How did the insert query from data.sql run at application startup?](#q---how-did-the-insert-query-from-datasql-run-at-application-startup)
+	- [Q :  How to define a Composite Primary Key or a Composite ID?](#q---how-to-define-a-composite-primary-key-or-a-composite-id)
+	- [Q :  Why should we annotate EntityManager with @PersistenceContext and not just @Autowired?](#q---why-should-we-annotate-entitymanager-with-persistencecontext-and-not-just-autowired)
+	- [Q :  How can we connect to Multiple Databases using Spring Boot?](#q---how-can-we-connect-to-multiple-databases-using-spring-boot)
+	- [Q :  How did JdbcTemplate achieve connection details?](#q---how-did-jdbctemplate-achieve-connection-details)
+	- [Q :  Can you give an example for ReadOnly as true in Transaction management?](#q---can-you-give-an-example-for-readonly-as-true-in-transaction-management)
+	- [Error :  org.hibernate.loader.MultipleBagFetchException](#error---orghibernateloadermultiplebagfetchexception)
+	- [Error :  BeanCreationException - java.lang.IllegalArgumentException: At least one JPA metamodel must be present](#error---beancreationexception---javalangillegalargumentexception-at-least-one-jpa-metamodel-must-be-present)
+	- [Q :  Is it mandatory to specify @Repository on a repository which is extending JPARepository?](#q---is-it-mandatory-to-specify-repository-on-a-repository-which-is-extending-jparepository)
+	- [Q :  JPA and Hibernate Course - Notes from Rodolfo](#q---jpa-and-hibernate-course---notes-from-rodolfo)
+	- [Q :  How can we use a mysql database for running the application and use inmemory database H2 for unit tests?](#q---how-can-we-use-a-mysql-database-for-running-the-application-and-use-inmemory-database-h2-for-unit-tests)
+	- [Q :  When is any primary or an id field annotated with @GeneratedValue autogenerated? Why are we passing the value for id in data.sql?](#q---when-is-any-primary-or-an-id-field-annotated-with-generatedvalue-autogenerated-why-are-we-passing-the-value-for-id-in-datasql)
+	- [Q :  Field dao in SpringRestController required a bean of type 'CustomerDAO' that could not be found. Consider defining a bean of type 'CustomerDAO' in your configuration.](#q---field-dao-in-springrestcontroller-required-a-bean-of-type-customerdao-that-could-not-be-found-consider-defining-a-bean-of-type-customerdao-in-your-configuration)
+	- [Error :  Detached object passed to persist](#error---detached-object-passed-to-persist)
+	- [Error :  java.lang.NoClassDefFoundError: javax/wsdl/extensions/ExtensibilityElement](#error---javalangnoclassdeffounderror-javaxwsdlextensionsextensibilityelement)
+	- [Q :  How do authentication with jwt to service REST??](#q---how-do-authentication-with-jwt-to-service-rest)
+- [Unit Testing](#unit-testing)
+	- [Q :  What is a mockito answer?](#q---what-is-a-mockito-answer)
+	- [Q :  How do you mock a private method that requires arguments?](#q---how-do-you-mock-a-private-method-that-requires-arguments)
+	- [Q :  How to make JUnit run at regular intervals of time?](#q---how-to-make-junit-run-at-regular-intervals-of-time)
+	- [Q :  Annotation Changes - JUnit 4 vs JUnit 5](#q---annotation-changes---junit-4-vs-junit-5)
+- [You and in28Minutes](#you-and-in28minutes)
+	- [Q :  What should you do to make the best use of our courses?](#q---what-should-you-do-to-make-the-best-use-of-our-courses)
+	- [Q :  Why should you learn from in28Minutes?](#q---why-should-you-learn-from-in28minutes)
+	- [Q :  What is the focus of each of your courses?](#q---what-is-the-focus-of-each-of-your-courses)
+	- [Q :  How to improve Logical Skills?](#q---how-to-improve-logical-skills)
+
+
 ## How to use this guide?
+
+### 1. Ensure You Have The Recommended Versions of Tools/Versions
+
+First of all - Make sure you are using the right versions. Here is the recommended versions and errors if you don't use them:
+
+| Recommended Version  | Possible Errors if you are using other versions | More Details |
+| -------------------- |:-----------------------------------------------:|--------------|
+| Java 8  | Unsupported major.minor version 52.0 |[Basics](#basics)|
+| Eclipse Java EE Oxygen | org.codehaus.plexus.archiver.jar.Manifest.write(java.io.PrintWriter)      |[Basics](#basics)|
+| Spring Boot 2.0.0.M3    | Maven download issues. Hal Browser and Spring Boot Actuator are not working!|[Configure 2.0.0.M3](#error---hal-browser-and-spring-boot-actuator-are-not-working)|
+
+
+### 2. Highly Probable Errors
+
+Problems a high proportionate of our learners face.
+
+| Error                | Solution Reference |
+| -------------------- |:-------------:|
+| Compilation failure [ERROR] No compiler is provided in this environment. Perhaps you are running on a JRE rather than a JDK?  |[Configure Eclipse to use JDK](#error---you-are-not-using-a-jdk) | 
+| Could not transfer artifact           |[Check Maven Configuration](#error--you-are-not-connected-to-internet-or-you-are-behind-a-proxy) |
+|Hal Browser and Spring Boot Actuator are not working   |[Configure Spring Boot Version 2.0.0.M3](#error---hal-browser-and-spring-boot-actuator-are-not-working)|
+|H2 Embedded Database - Cannot find tables |[Use the right database name](#error---table-is-not-created-automatically-in-h2-embedded-db-or-im-unable-to-see-the-tables) |
+| Failed to load class (or)Could not find or load main class or Failed to read Class-Path attribute from manifest    |[Redownload artifacts with Maven](#error--files-downloaded-by-maven-are-corrupt) |
+|java.net.BindException: Address already in use: JVM_Bind   |[Stop 8080 or Use Other Port](#q---what-should-i-do-when-some-other-application-is-using-default-port-8080) |
+|No mapping found for HTTP request   |[Check your component scan configuration](#q---how-do-i-solve-errors-related-to-component-scan) |
+|No qualifying bean of type   |[Check your component scan configuration](#q---how-do-i-solve-errors-related-to-component-scan) |
+|java.lang.NoClassDefFoundError: org/springframework/web/cors/CorsConfigurationSource|[Solution](#error---spring-security---javalangnoclassdeffounderror-orgspringframeworkwebcorscorsconfigurationsource) |
+|Unable to find setter method for attribute commandName   |[Use modelAttribute](#error---unable-to-find-setter-method-for-attribute-commandname) |
+
+### 3. Go for the complete list
 
 If you are facing a exception or an error
  - Try searching with complete exception text
@@ -23,269 +275,12 @@ This will be the best 20 minute investment you made in your programming career. 
 
 Happy Troubleshooting.
 
-- [Getting Started](#getting-started)
-	- [What should you do to make the best use of our courses?](#what-should-you-do-to-make-the-best-use-of-our-courses)
-	- [Why should you learn from in28Minutes?](#why-should-you-learn-from-in28minutes)
-- [Basics](#basics)
-	- [Ensure you have the right version of Java Installed](#ensure-you-have-the-right-version-of-java-installed)
-	- [Ensure you have the right version of Eclipse Installed](#ensure-you-have-the-right-version-of-eclipse-installed)
-	- [Troubleshooting Embedded Maven in Eclipse](#troubleshooting-embedded-maven-in-eclipse)
-	- [Error - You are not using a JDK](#error---you-are-not-using-a-jdk)
-	- [Error - You are not connected to internet or You are behind a proxy!](#error---you-are-not-connected-to-internet-or-you-are-behind-a-proxy)
-		- [Configuring a Proxy](#configuring-a-proxy)
-	- [Error - Files Downloaded by Maven are Corrupt](#error---files-downloaded-by-maven-are-corrupt)
-		- [Force Update of Snapshots/Release](#force-update-of-snapshotsrelease)
-		- [Purge Your Maven Repository](#purge-your-maven-repository)
-		- [Delete your local repository](#delete-your-local-repository)
-	- [You are using an old version of Eclipse without latest maven archiver pluings](#you-are-using-an-old-version-of-eclipse-without-latest-maven-archiver-pluings)
-	- [You are using an old version of JDK](#you-are-using-an-old-version-of-jdk)
-	- [Your Project Maven configuration is not configured to compile at Java 8](#your-project-maven-configuration-is-not-configured-to-compile-at-java-8)
-		- [Approach 1 : Spring Boot Project](#approach-1--spring-boot-project)
-		- [Approach 2: Non Spring Boot Project](#approach-2-non-spring-boot-project)
-	- [Other Problems](#other-problems)
-	- [On Maven > Update Project, Java 1.4 is auto selected](#on-maven--update-project-java-14-is-auto-selected)
-	- [Changes you made are not reflected](#changes-you-made-are-not-reflected)
-	- [Some other application is using default port 8080](#some-other-application-is-using-default-port-8080)
-		- [Option 1 - Kill](#option-1---kill)
-		- [Option 2 - Switch Port](#option-2---switch-port)
-		- [Option 1 - Kill](#option-1---kill-1)
-		- [Option 2 - Switch Port](#option-2---switch-port-1)
-	- [Do I need to install Tomcat seperately for this course?](#do-i-need-to-install-tomcat-seperately-for-this-course)
-	- [Why do we use this specific project structure in all our courses?](#why-do-we-use-this-specific-project-structure-in-all-our-courses)
-- [Maven](#maven)
-	- [Why Maven?](#why-maven)
-	- [What is ArtifactId and GroupId?](#what-is-artifactid-and-groupid)
-	- [How to know the exact string and name of a dependency and its artifactid etc.](#how-to-know-the-exact-string-and-name-of-a-dependency-and-its-artifactid-etc)
-	- [What's the difference between scope and phase?](#whats-the-difference-between-scope-and-phase)
-	- [Maven - How did a specific jar end up in our deployable?](#maven---how-did-a-specific-jar-end-up-in-our-deployable)
-	- [What is a SNAPSHOT as in 0.0.1-SNAPSHOT?](#what-is-a-snapshot-as-in-001-snapshot)
-	- [What is difference between runtime and provided scopes?](#what-is-difference-between-runtime-and-provided-scopes)
-	- [How can you always exclude a specific jar using Maven Exclusions?](#how-can-you-always-exclude-a-specific-jar-using-maven-exclusions)
-- [Example of a multi layered maven project](#example-of-a-multi-layered-maven-project)
-	- [Caused by: java.lang.ClassNotFoundException: org.springframework.beans.factory.config.BeanDefinitionCustomizer](#caused-by-javalangclassnotfoundexception-orgspringframeworkbeansfactoryconfigbeandefinitioncustomizer)
-	- [What about Gradle?](#what-about-gradle)
-- [Unit Testing](#unit-testing)
-	- [What is a mockito answer?](#what-is-a-mockito-answer)
-	- [How do you mock a private method that requires arguments?](#how-do-you-mock-a-private-method-that-requires-arguments)
-- [Eclipse](#eclipse)
-	- [How do I see the list of methods in a class?](#how-do-i-see-the-list-of-methods-in-a-class)
-	- [How do I become more efficient developer?](#how-do-i-become-more-efficient-developer)
-	- [How do you download source code to Eclipse so that you can see the code for frameworks?](#how-do-you-download-source-code-to-eclipse-so-that-you-can-see-the-code-for-frameworks)
-	- [What is the focus of each of the course?](#what-is-the-focus-of-each-of-the-course)
-	- [What software you use for Mind Maps?](#what-software-you-use-for-mind-maps)
-	- [How to debug the application?](#how-to-debug-the-application)
-	- [How do I configure auto restarting the server whenever source code changes?](#how-do-i-configure-auto-restarting-the-server-whenever-source-code-changes)
-		- [Approach 1 : Spring Boot Project](#approach-1--spring-boot-project-1)
-		- [Approach 2: Non Spring Boot Project](#approach-2-non-spring-boot-project-1)
-	- [Can I use jboss instead of tomcat server?](#can-i-use-jboss-instead-of-tomcat-server)
-	- [How to get it run in tomcat 8 or 9](#how-to-get-it-run-in-tomcat-8-or-9)
-	- [How to improve Logical Skills?](#how-to-improve-logical-skills)
-- [Mac](#mac)
-	- [Installing Maven on MAC OS X](#installing-maven-on-mac-os-x)
-- [Intellij](#intellij)
-	- [How do I import a Maven project into Intellij?](#how-do-i-import-a-maven-project-into-intellij)
-	- [How do I create and run unit tests \(JUnit\) with Intellij?](#how-do-i-create-and-run-unit-tests-junit-with-intellij)
-	- [I'm having a problem running jsps with Spring Boot in Intellij. What should I do?](#im-having-a-problem-running-jsps-with-spring-boot-in-intellij-what-should-i-do)
-	- [Why does Hot reload not work with Spring Boot DevTools and Intellij?](#why-does-hot-reload-not-work-with-spring-boot-devtools-and-intellij)
-- [Spring](#spring)
-	- [What is the need for a Component Scan?](#what-is-the-need-for-a-component-scan)
-	- [How do you define a Component Scan?](#how-do-you-define-a-component-scan)
-		- [Approach 1 : Spring Boot Project](#approach-1--spring-boot-project-2)
-		- [Detailed Example](#detailed-example)
-		- [Approach 2: Non Spring Boot Project](#approach-2-non-spring-boot-project-2)
-		- [Java Application Context](#java-application-context)
-		- [XML Application Context](#xml-application-context)
-	- [How do I solve Errors related to Component Scan?](#how-do-i-solve-errors-related-to-component-scan)
-		- [Solution](#solution)
-	- [What is the difference between @Component and @ComponentScan?](#what-is-the-difference-between-component-and-componentscan)
-	- [How do I choose between Spring and CDI?](#how-do-i-choose-between-spring-and-cdi)
-	- [Why do we write a lot of unit tests in the Spring Master Class course?](#why-do-we-write-a-lot-of-unit-tests-in-the-spring-master-class-course)
-	- [What is the use of an @Bean annotation?](#what-is-the-use-of-an-bean-annotation)
-	- [What is the difference between @Bean and @Component?](#what-is-the-difference-between-bean-and-component)
-	- [What is the difference between @Component, @Service and @Repository annotations?](#what-is-the-difference-between-component-service-and-repository-annotations)
-	- [Can we use @Component annotation instead of @Service for Business Services?](#can-we-use-component-annotation-instead-of-service-for-business-services)
-	- [What is the difference between web.xml and the Spring Context - servlet.xml?](#what-is-the-difference-between-webxml-and-the-spring-context---servletxml)
-	- [Should we use XML or Annotation based wiring?](#should-we-use-xml-or-annotation-based-wiring)
-	- [Can we do autowiring with Non Setter and Non Constructor Methods?](#can-we-do-autowiring-with-non-setter-and-non-constructor-methods)
-	- [Where should we use Checked Exceptions?](#where-should-we-use-checked-exceptions)
-	- [What is the difference between Cross Cutting Concerns and AOP?](#what-is-the-difference-between-cross-cutting-concerns-and-aop)
-	- [What is difference between IOC and Application Context?](#what-is-difference-between-ioc-and-application-context)
-	- [What is the difference between classPathXmlApplicationContext and annotationConfigApplicationContext ?](#what-is-the-difference-between-classpathxmlapplicationcontext-and-annotationconfigapplicationcontext-)
-	- [When @Around aspect is introduced the value returned by@AfterReturning is lost. Why is this happening?](#when-around-aspect-is-introduced-the-value-returned-byafterreturning-is-lost-why-is-this-happening)
-	- [How do you use which autowiring type to use - @Primary or @Qualifier?](#how-do-you-use-which-autowiring-type-to-use---primary-or-qualifier)
-	- [What are the New Features in Spring Framework 5.0?](#what-are-the-new-features-in-spring-framework-50)
-	- [What are the possible reasons of preDestroy not being called?](#what-are-the-possible-reasons-of-predestroy-not-being-called)
-	- [Compare Application Context vs IOC Container vs Web Container vs EJB Container](#compare-application-context-vs-ioc-container-vs-web-container-vs-ejb-container)
-	- [Notes from Rodolfo](#notes-from-rodolfo)
-	- [How do we inject different bean depending on the configuration in application.properties?](#how-do-we-inject-different-bean-depending-on-the-configuration-in-applicationproperties)
-	- [Log4j problems with Spring 5!](#log4j-problems-with-spring-5)
-	- [What is the minimum baseline Java Version for Spring Boot 2 and Spring 5?](#what-is-the-minimum-baseline-java-version-for-spring-boot-2-and-spring-5)
-	- [Getting SLF4J errors and not getting logger output in Lecture 41 - Step 19?](#SOLVED)
-	- [How do we solve the error? No Spring WebApplicationInitializer types detected on classpath](#how-do-we-solve-the-error-no-spring-webapplicationinitializer-types-detected-on-classpath)
-- [JSP Servlets and Spring MVC](#jsp-servlets-and-spring-mvc)
-	- [What is the difference between Filters, Listeners and Interceptors?](#what-is-the-difference-between-filters-listeners-and-interceptors)
-	- [What is the difference between ModelMap and ModelAndView?](#what-is-the-difference-between-modelmap-and-modelandview)
-	- [What is the difference between model.put\(\) and model.addAttribute\(\)?](#what-is-the-difference-between-modelput-and-modeladdattribute)
-	- [How do you pass values from Java Controller to JSP?](#how-do-you-pass-values-from-java-controller-to-jsp)
-	- [What is Form Binding?](#what-is-form-binding)
-	- [What is WEB-INF exactly? Why so we need it?](#what-is-web-inf-exactly-why-so-we-need-it)
-	- [Why do we use Hibernate Validator?](#why-do-we-use-hibernate-validator)
-	- [Are Model objects specific to a request?](#are-model-objects-specific-to-a-request)
-	- [What is the difference between @Controller and @RestController?](#what-is-the-difference-between-controller-and-restcontroller)
-	- [The groupid for jstl jar is jstl and not javax.servlet](#the-groupid-for-jstl-jar-is-jstl-and-not-javaxservlet)
-	- [Why is there no context root in the request url for each web application?](#why-is-there-no-context-root-in-the-request-url-for-each-web-application)
-	- [What does tomcat7:run exactly mean?](#what-does-tomcat7run-exactly-mean)
-	- [Error - No plugin found for prefix 'tomcat7' in the current project](#error---no-plugin-found-for-prefix-tomcat7-in-the-current-project)
-	- [Why are we using request GET method for "delete-todo" request?](#why-are-we-using-request-get-method-for-delete-todo-request)
-	- [Why do we need xmlns hyperlinks? like http://www.springframework.org/schema/bean](#why-do-we-need-xmlns-hyperlinks-like-httpwwwspringframeworkorgschemabean)
-	- [Error - View is not resolving to a JSP](#error---view-is-not-resolving-to-a-jsp)
-	- [How to use own CSS with Spring MVC?](#how-to-use-own-css-with-spring-mvc)
-	- [Where should we place our static \(css, js, html\) resources in a Spring MVC application?](#where-should-we-place-our-static-css-js-html-resources-in-a-spring-mvc-application)
-	- [How to add a custom login page in Spring Security?](#how-to-add-a-custom-login-page-in-spring-security)
-	- [How can you authenticate by connecting to a database with Spring Security?](#how-can-you-authenticate-by-connecting-to-a-database-with-spring-security)
-	- [Why is request method POST recommended compared to GET for sensitive data?](#why-is-request-method-post-recommended-compared-to-get-for-sensitive-data)
-	- [We use ${todo.done} in JSP even though the name of the field in Todo.java is isDone. Shouldn't we be using ${todo.isDone}?](#we-use-tododone-in-jsp-even-though-the-name-of-the-field-in-todojava-is-isdone-shouldnt-we-be-using-todoisdone)
-	- [How is the URL decided with Spring MVC?](#how-is-the-url-decided-with-spring-mvc)
-	- [Spring MVC - Error after adding security dependencies - java.lang.NoSuchMethodError: org.springframework.aop.framework.autoproxy.AutoProxyUtils.determineTargetClass](#spring-mvc---error-after-adding-security-dependencies---javalangnosuchmethoderror-orgspringframeworkaopframeworkautoproxyautoproxyutilsdeterminetargetclass)
-	- [How do I ensure that session attributes are not part of the request url?](#how-do-i-ensure-that-session-attributes-are-not-part-of-the-request-url)
-	- [Is this kind of Tomcat server usage what is commonly referred to as "Embedded Tomcat Server" ?](#is-this-kind-of-tomcat-server-usage-what-is-commonly-referred-to-as-embedded-tomcat-server-)
-		- [Basic Spring MVC and JSP Servlet courses do not use embedded servers](#basic-spring-mvc-and-jsp-servlet-courses-do-not-use-embedded-servers)
-		- [All our Spring Boot courses use Embedded Servers](#all-our-spring-boot-courses-use-embedded-servers)
-	- [How do we handle errors to non existing URL Paths with Spring MVC?](#how-do-we-handle-errors-to-non-existing-url-paths-with-spring-mvc)
-	- [How do we configure a welcome page?](#how-do-we-configure-a-welcome-page)
-	- [Why do we teach JSP and Servlets in the first section of Spring MVC Course?](#why-do-we-teach-jsp-and-servlets-in-the-first-section-of-spring-mvc-course)
-	- [Why do we use  @ResponseBody sometimes and ResponseEntity some other times?](#why-do-we-use--responsebody-sometimes-and-responseentity-some-other-times)
-		- [Example 1](#example-1)
-		- [Example 2](#example-2)
-	- [Error - Spring Security - java.lang.NoClassDefFoundError: org/springframework/web/cors/CorsConfigurationSource](#error---spring-security---javalangnoclassdeffounderror-orgspringframeworkwebcorscorsconfigurationsource)
-	- [Unable to find setter method for attribute commandName](#unable-to-find-setter-method-for-attribute-commandname)
-	- [What is difference between Spring 5 and Spring 4 in terms of developing web application in the course? Does it matter if a new version is used ?](#what-is-difference-between-spring-5-and-spring-4-in-terms-of-developing-web-application-in-the-course-does-it-matter-if-a-new-version-is-used-)
-	- [Can I have multiple parameters with the same name in a request?](#can-i-have-multiple-parameters-with-the-same-name-in-a-request)
-	- [Spring MVC - Problem with using ToDo instead of Todo](#spring-mvc---problem-with-using-todo-instead-of-todo)
-	- [Request processing failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate \[com.in28minutes.Todo.Todo\]: No default constructor found; nested exception is java.lang.NoSuchMethodException: com.in28minutes.Todo.Todo.\(\)](#request-processing-failed-nested-exception-is-orgspringframeworkbeansbeaninstantiationexception-failed-to-instantiate-comin28minutestodotodo-no-default-constructor-found-nested-exception-is-javalangnosuchmethodexception-comin28minutestodotodo)
-	- [Caused by: java.lang.IllegalArgumentException: The servlets named \[com.in28minutes.LoginServlet\] and \[webapp.LoginServlet\] are both mapped to the url-pattern \[/login.do\] which is not permitted](#caused-by-javalangillegalargumentexception-the-servlets-named-comin28minutesloginservlet-and-webapploginservlet-are-both-mapped-to-the-url-pattern-logindo-which-is-not-permitted)
-	- [How is server picking up index.html and index.jsp even when they are not configured in web.xml?](#how-is-server-picking-up-indexhtml-and-indexjsp-even-when-they-are-not-configured-in-webxml)
-	- [What is the benefit of using view resolver?](#what-is-the-benefit-of-using-view-resolver)
-		- [Why am I not able to see todo's list on screen?](#why-am-i-not-able-to-see-todos-list-on-screen)
-	- [What is @ControllerAdvice?](#what-is-controlleradvice)
-	- [What Request method should be used for updating user details?](#what-request-method-should-be-used-for-updating-user-details)
-	- [What is the difference between put and patch request methods?](#what-is-the-difference-between-put-and-patch-request-methods)
-- [Spring Boot](#spring-boot)
-	- [What should be the first things I read about Spring Boot?](#what-should-be-the-first-things-i-read-about-spring-boot)
-	- [How can I add custom JS code with Spring Boot?](#how-can-i-add-custom-js-code-with-spring-boot)
-	- [HAL browser gives me unauthorized error](#hal-browser-gives-me-unauthorized-error)
-		- [Option 1 : Disable security](#option-1--disable-security)
-		- [Option 2 : Search for password in the log and pass it in the request header](#option-2--search-for-password-in-the-log-and-pass-it-in-the-request-header)
-	- [Hal Browser and Spring Boot Actuator are not working](#hal-browser-and-spring-boot-actuator-are-not-working)
-	- [How does path="users", collectionResourceRel="users" work with Spring Data Rest?](#how-does-pathusers-collectionresourcerelusers-work-with-spring-data-rest)
-	- [What is importance of {id} in ServletUriComponentsBuilder.fromCurrentRequest\(\).path\("/{id}"\).buildAndExpand\(returnQuestion.getId(\)).toUri\(\);](#what-is-importance-of-id-in-servleturicomponentsbuilderfromcurrentrequestpathidbuildandexpandreturnquestiongetidtouri)
-	- [java.lang.ClassCastException: org.springframework.boot.context.event.ApplicationReadyEvent cannot be cast](#javalangclasscastexception-orgspringframeworkbootcontexteventapplicationreadyevent-cannot-be-cast)
-	- [What is difference between Spring 5 and Spring 4 in terms of developing web application in the course? Does it matter if a new version is used ?](#what-is-difference-between-spring-5-and-spring-4-in-terms-of-developing-web-application-in-the-course-does-it-matter-if-a-new-version-is-used--1)
-	- [Why am I seeing an extra dialogue asking me to "Select Java Application Type" when I launch a Spring Boot Application?](#why-am-i-seeing-an-extra-dialogue-asking-me-to-select-java-application-type-when-i-launch-a-spring-boot-application)
-	- [What happens in the background when a Spring Boot Application is "Run as Java Application"?](#what-happens-in-the-background-when-a-spring-boot-application-is-run-as-java-application)
-	- [Can we use jetty instead of tomcat in spring-boot-starter-web?](#can-we-use-jetty-instead-of-tomcat-in-spring-boot-starter-web)
-	- [Failure to transfer org.springframework.boot:spring-boot-starter-parent:pom:2.0.0.BUILD-SNAPSHOT from https://repo.spring.io/snapshot](#failure-to-transfer-orgspringframeworkbootspring-boot-starter-parentpom200build-snapshot-from-httpsrepospringiosnapshot)
-	- [Why do we configure Spring Snapshot and milestone repositories?](#why-do-we-configure-spring-snapshot-and-milestone-repositories)
-	- [Is Spring Initializr the only way to create Spring Boot Projects?](#is-spring-initializr-the-only-way-to-create-spring-boot-projects)
-		- [Setting up a maven project manually](#setting-up-a-maven-project-manually)
-	- [Error -  java.lang.IllegalArgumentException: Sources must not be empty](#error----javalangillegalargumentexception-sources-must-not-be-empty)
-	- [Can i use spring boot dev tools for a non spring boot project?](#can-i-use-spring-boot-dev-tools-for-a-non-spring-boot-project)
-	- [What is the difference between Static and Dynamic filtering?](#what-is-the-difference-between-static-and-dynamic-filtering)
-	- [Error - No message found under code 'good.morning.message' for locale 'us'.](#error---no-message-found-under-code-goodmorningmessage-for-locale-us)
-	- [How to generate a WAR file with Spring Boot?](#how-to-generate-a-war-file-with-spring-boot)
-	- [How to deploy to a different server with with Spring Boot?](#how-to-deploy-to-a-different-server-with-with-spring-boot)
-	- [What is the difference between RequestMapping and GetMapping?](#what-is-the-difference-between-requestmapping-and-getmapping)
-	- [Why do we recommend not to use Spring Data Rest in real world applications?](#why-do-we-recommend-not-to-use-spring-data-rest-in-real-world-applications)
-	- [How do I change the package name of a project in Spring Initializer?](#how-do-i-change-the-package-name-of-a-project-in-spring-initializer)
-	- [Where can I find the complete list of properties that can be configured in application.properties?](#where-can-i-find-the-complete-list-of-properties-that-can-be-configured-in-applicationproperties)
-	- [Why am I not seeing code completion when updating application.properties in Eclipse?](#why-am-i-not-seeing-code-completion-when-updating-applicationproperties-in-eclipse)
-	- [Why do we need spring-boot-maven-plugin?](#why-do-we-need-spring-boot-maven-plugin)
-	- [Devtools helps me to restart the server automatically. But, I have a problem. The browser page is not auto refreshed.](#devtools-helps-me-to-restart-the-server-automatically-but-i-have-a-problem-the-browser-page-is-not-auto-refreshed)
-- [What is the minimum baseline Java Version for Spring Boot 2 and Spring 5?](#what-is-the-minimum-baseline-java-version-for-spring-boot-2-and-spring-5-1)
-	- [What and Why Embedded Servers?](#what-and-why-embedded-servers)
-- [Hibernate, JPA and In-memory Database](#hibernate-jpa-and-in-memory-database)
-	- [What is the difference between JPA and Hibernate?](#what-is-the-difference-between-jpa-and-hibernate)
-	- [Compare Entity Manager vs SessionFactory](#compare-entity-manager-vs-sessionfactory)
-	- [In which layer, should the boundary of a transaction start?](#in-which-layer-should-the-boundary-of-a-transaction-start)
-	- [HQL vs JPQL](#hql-vs-jpql)
-	- [What are the dependencies need to start up an in memory database H2 with Spring Boot?](#what-are-the-dependencies-need-to-start-up-an-in-memory-database-h2-with-spring-boot)
-	- [How is Hibernate chosen as the default implementation for JPA without any configuration?](#how-is-hibernate-chosen-as-the-default-implementation-for-jpa-without-any-configuration)
-	- [Why H2? And how does it work?](#why-h2-and-how-does-it-work)
-	- [Where is the database connection info specified? How does it know to automatically connect to H2?](#where-is-the-database-connection-info-specified-how-does-it-know-to-automatically-connect-to-h2)
-	- [How do we connect to a external database like MSSQL or oracle?](#how-do-we-connect-to-a-external-database-like-mssql-or-oracle)
-		- [Step 1 - Add dependency for mqsql connector to pom.xml](#step-1---add-dependency-for-mqsql-connector-to-pomxml)
-		- [Step 2 - Remove H2 Dependency from pom.xml](#step-2---remove-h2-dependency-from-pomxml)
-		- [Step 3 - Setup your My SQL Database](#step-3---setup-your-my-sql-database)
-		- [Step 4 - Configure your connection to My SQL Database](#step-4---configure-your-connection-to-my-sql-database)
-		- [Step 5 - Restart and You are ready!](#step-5---restart-and-you-are-ready)
-	- [What is the default h2 database name configured by Spring Boot? Why is the default database name testdb?](#what-is-the-default-h2-database-name-configured-by-spring-boot-why-is-the-default-database-name-testdb)
-	- [What happens if H2 is not in the classpath?](#what-happens-if-h2-is-not-in-the-classpath)
-	- [Why the data lost between restart?](#why-the-data-lost-between-restart)
-	- [Table is not created automatically in h2 embedded db](#table-is-not-created-automatically-in-h2-embedded-db)
-	- [H2 Console is not Launched up?](#h2-console-is-not-launched-up)
-	- [How did the insert query from data.sql run at application startup?](#how-did-the-insert-query-from-datasql-run-at-application-startup)
-	- [How to define a Composite Primary Key or a Composite ID?](#how-to-define-a-composite-primary-key-or-a-composite-id)
-	- [Why should we annotate EntityManager with @PersistenceContext and not just @Autowired?](#why-should-we-annotate-entitymanager-with-persistencecontext-and-not-just-autowired)
-	- [How can we connect to Multiple Databases using Spring Boot?](#how-can-we-connect-to-multiple-databases-using-spring-boot)
-	- [How did JdbcTemplate achieve connection details?](#how-did-jdbctemplate-achieve-connection-details)
-	- [Can you give an example for ReadOnly as true in Transaction management?](#can-you-give-an-example-for-readonly-as-true-in-transaction-management)
-	- [How do I solve MultipleBagFetchException?](#how-do-i-solve-multiplebagfetchexception)
-	- [How do I solve BeanCreationException - java.lang.IllegalArgumentException: At least one JPA metamodel must be present](#how-do-i-solve-beancreationexception---javalangillegalargumentexception-at-least-one-jpa-metamodel-must-be-present)
-	- [Is it mandatory to specify @Repository on a repository which is extending JPARepository?](#is-it-mandatory-to-specify-repository-on-a-repository-which-is-extending-jparepository)
-	- [JPA and Hibernate Course - Notes from Rodolfo](#jpa-and-hibernate-course---notes-from-rodolfo)
-	- [How can we use a mysql database for running the application and use inmemory database H2 for unit tests?](#how-can-we-use-a-mysql-database-for-running-the-application-and-use-inmemory-database-h2-for-unit-tests)
-	- [When is any primary or an id field annotated with @GeneratedValue autogenerated? Why are we passing the value for id in data.sql?](#when-is-any-primary-or-an-id-field-annotated-with-generatedvalue-autogenerated-why-are-we-passing-the-value-for-id-in-datasql)
-	- [Field dao in SpringRestController required a bean of type 'CustomerDAO' that could not be found. Consider defining a bean of type 'CustomerDAO' in your configuration.](#field-dao-in-springrestcontroller-required-a-bean-of-type-customerdao-that-could-not-be-found-consider-defining-a-bean-of-type-customerdao-in-your-configuration)
-	- [Exception - Detached object passed to persist](#exception---detached-object-passed-to-persist)
-- [Others](#others)
-	- [java.lang.NoClassDefFoundError: javax/wsdl/extensions/ExtensibilityElement](#javalangnoclassdeffounderror-javaxwsdlextensionsextensibilityelement)
-	- [JUnit 4 and JUnit 5](#junit-4-and-junit-5)
-	- [How do authentication with jwt to service REST??](#how-do-authentication-with-jwt-to-service-rest)
-	- [How to make JUnit run at regular intervals of time?](#how-to-make-junit-run-at-regular-intervals-of-time)
-- [The End](#the-end)
-
-
-## Getting Started
-
-### Q :  What should you do to make the best use of our courses?
-
-What is the use of all these numbers?
-- 99000+ - Students!
-- 7000+ - 5 Star Reviews on our Courses
-- >100 - Hours of Course Content
-
-Not useful unless you make the best use of these.
-
-Learn something new for atleast half an hour every day! 
-
-If you do it for 100 days consecutively, it becomes a habit. Good Habits are great things to have.
-
-> If you are not able to commit time on the courses, then read this - "The in28Minutes Way" - https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-Way
-
-Open up your mobile and set a daily reminder now!
-
-### Q :  Why should you learn from in28Minutes?
-
-Read this - "The in28Minutes Way" - https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-Way
-
-Some facts
-- 75% - Percentage of New Java Projects/Microservices using Spring/Spring Boot
-- 300% - Increase in Microservices using Spring Boot in the last two years!
-- 70% - Percentage of Real World projects using Maven
-- 70% - Percentage of Real World Projects using Git as Version Control. Fork, Like and Play!
-- 10+ - We are in the world of Microservices. We create a number of small microservices. That means understand how to set up projects is a very important skill. We help you learn that by creating a number of small projects during this course.
-- 80/20 - Most Important Rule that dictates things for in28Minutes. 
-
-> Remember if you Listen, Watch, Do and Repeat. You Retain More of What you learn.
-
-Once you realize the importance of what you are learning, committing to your goal becomes easy. Think and find at least 28 minutes in your day for doing this. Good Luck. 
-
 
 ## Basics
 
 This video can help with simple troubleshooting - https://www.youtube.com/watch?v=ZZw8XNz5N-c&t=6s
 
-### Q :  Ensure you have the right version of Java Installed
+### Tip :  Ensure you have the right version of Java Installed
 
 Recommended Java Version
 - Do not use Java 9. My recent tests show a few compatibility issues with Spring Boot 2.0+. Let's wait for these get resolved
@@ -297,7 +292,7 @@ You can use JavaSE-1.8 to develop Java 8 and any lower version of Java applicati
 
 https://maven.apache.org/plugins/maven-compiler-plugin/examples/set-compiler-source-and-target.html
 
-### Q :  Ensure you have the right version of Eclipse Installed
+### Tip : Ensure you have the right version of Eclipse Installed
 
 > Recommended to use Eclipse Java EE version
 
@@ -305,7 +300,7 @@ Recommended Eclipse Version
 - Oxygen https://www.eclipse.org/downloads/packages/release/Oxygen/
 - Eclipse Java EE version
 
-### Q :  Troubleshooting Embedded Maven in Eclipse
+### Tip : Troubleshooting Embedded Maven in Eclipse
 
 This video is good start for your troubleshoot embedded maven issues in Eclipse - https://www.youtube.com/watch?v=ZZw8XNz5N-c&list=PLBBog2r6uMCSmMVTW_QmDLyASBvovyAO3&index=5
 
@@ -313,7 +308,7 @@ This video is good start for your troubleshoot embedded maven issues in Eclipse 
 
 There are typically 4 reasons for errors with Embedded Maven in Eclipse
 
-### Q :  Error - You are not using a JDK
+### Error :  You are not using a JDK
 ```
 Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.2:compile (default-compile) on project in28minutes-multi-module-model: Compilation failure [ERROR] No compiler is provided in this environment. Perhaps you are running on a JRE rather than a JDK?
 ```
@@ -327,7 +322,7 @@ Following links will help you if you have questions
 - http://stackoverflow.com/questions/19655184/no-compiler-is-provided-in-this-environment-perhaps-you-are-running-on-a-jre-ra
 - http://stackoverflow.com/questions/21099072/eclipse-maven-error-no-compiler-is-provided-in-this-environment
 
-### Q :  Error - You are not connected to internet or You are behind a proxy!
+### Error : You are not connected to internet or You are behind a proxy!
 
 Maven downloads the dependencies (i.e. frameworks and libraries(jars)) from the Maven repository (repo.maven.apache.org). 
 
@@ -391,7 +386,7 @@ Maven plugin uses a settings file where the configuration can be set. Its path i
 </settings>
 ```
 
-### Q :  Error - Files Downloaded by Maven are Corrupt
+### Error : Files Downloaded by Maven are Corrupt
 Typical Errors
 ```
 SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
@@ -429,14 +424,16 @@ This can be done in two ways
 ###### Delete your local repository
 This will be last resort
 
-### Q :  You are using an old version of Eclipse without latest maven archiver pluings
+### Error :  org.codehaus.plexus.archiver.jar.Manifest.write(java.io.PrintWriter)
+
+Reason - You are using an old version of Eclipse without the latest maven archiver plugin
 
 You get this error
 ```
 org.codehaus.plexus.archiver.jar.Manifest.write(java.io.PrintWriter)
 ```
 
-Actions to take
+Recommended Actions
 - Recommended - Download latest version of Eclipse
 - Other option - It might be a problem with your specific version of eclipse : https://github.com/tesla/m2eclipse-mavenarchiver/issues/9. You can try updating m2e.
    - Eclipse > Goto Intall New Software then input https://otto.takari.io/content/sites/m2e.extras/m2eclipse-mavenarchiver/0.17.0/N/LATEST/ and continue.
@@ -446,7 +443,9 @@ For more information read these
 - https://stackoverflow.com/questions/37936646/eclipse-2-0-2-and-maven-0-17-configuration
 - https://github.com/tesla/m2eclipse-mavenarchiver/issues/8
 
-### Q :  You are using an old version of JDK
+### Error : Unsupported major.minor version 52.0
+
+Reason - You are using an old version of JDK
 
 You would get this error
 ```
@@ -459,7 +458,7 @@ Fix
 - If you do not have JDK 8, go ahead an install it.
 - Configure Eclipse to use JDK 8. Refer to "You are not using a JDK" section to find out how to configure JDK 8
 
-### Q :  Your Project Maven configuration is not configured to compile at Java 8
+### Tip :  Your Project Maven configuration should be configured to compile at Java 8
 
 If you are using Spring Boot, check configuration in Approach 1.
 
@@ -502,14 +501,11 @@ In pom.xml, the source and target of maven-compiler-plugin should be set to 1.8
 </project>
 ```
 
-
-### Q :  Other Problems
-
-### Q :  On Maven > Update Project, Java 1.4 is auto selected
+### Error :  On Maven > Update Project, Java 1.4 is auto selected
 
 Ensure that you have the latest version of Eclipse and Java installed.
 
-### Q :  Changes you made are not reflected
+### Error :  Changes you made are not reflected
 
 - Did you restart the server?
 - Did you stop and start the server?
@@ -517,7 +513,7 @@ Ensure that you have the latest version of Eclipse and Java installed.
 
 Changes to configuration and web.xml are reflected only when you completely restart the server. 
 
-### Q :  Some other application is using default port 8080
+### Q :  What should I do when some other application is using default port 8080?
 
 ```
 Embedded servlet container failed to start. Port 8080 was already in use.
@@ -573,7 +569,7 @@ kill -9 <PID>
 
 ###### Option 2 - Switch Port
 
-Option 2a - hange pom.xml. port is changed to 8081.
+Option 2a - change pom.xml. port is changed to 8081.
 
 ```
  <plugin>
@@ -601,7 +597,69 @@ You don't need Tomcat installed on your system.
 
 ### Q :  Why do we use this specific project structure in all our courses?
 
-- We follow maven standard project structure. We recommend you spend sometime understanding this directory layout - https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html.
+We follow maven standard project structure. 
+
+We recommend you spend sometime understanding this directory layout 
+- https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html.
+
+### Q :  What software do you use for your diagrams or Mind Maps?
+
+Its called MindMup. https://www.mindmup.com/
+
+I loved the first version of it. And am finding it difficult to adapt to the second version. But as usual, we programmers find a way :)
+
+### Q :  How to debug the application?
+
+Instead of Run as -> Maven application, use Debug as -> Maven application. Add your breakpoints. You should be all set.
+
+If you are using Spring Boot and Running using Run as -> Java application, then you can use Debug as -> Java Application. Add your breakpoints. You should be all set.
+
+### Q :  How do I configure auto restarting the server whenever source code changes?
+
+If you are using Spring Boot, check configuration in Approach 1.
+
+If you are doing a JSP/Servlet or a Spring MVC course without using Spring Boot use Approach 2.
+
+###### Approach 1 : Spring Boot Project
+
+In pom.xml, add a dependency on devtools and restart the server. You are all set.
+
+> If you are using Intellij, there is one more configuration you need. Check out the intellij faq section.
+
+```
+<dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+```
+
+###### Approach 2: Non Spring Boot Project
+
+Use ```<contextReloadable>true</contextReloadable>``` in your pom.xml maven plugin configuration. Restart the server. You are all set.
+
+```
+<plugin>
+    <groupId>org.apache.tomcat.maven</groupId>
+    <artifactId>tomcat7-maven-plugin</artifactId>
+    <version>2.2</version>
+    <configuration>
+        <path>/</path>
+        <contextReloadable>true</contextReloadable>
+        <port>8080</port>
+    </configuration>
+</plugin>
+```
+
+### Q :  Can I use jboss instead of tomcat server?
+Yeah. You can find more details of how to use the jboss maven plugin at https://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html.
+
+### Q :  How to get the projects to run in Tomcat 8 or 9?
+I’ve done a quick search to find the plugins for tomcat 8 and tomcat 9. Here’s the best I could find 
+- http://jtuts.com/2016/09/14/run-embedded-tomcat8-maven/
+
+See also here: https://stackoverflow.com/questions/26883836/tomcat-8-maven-plugin-for-java-8
+
 
 ## Maven
 
@@ -637,7 +695,7 @@ You need to tell it by giving the details of the dependency.
 
 Just like you can identify a Java class with a class name and a package name, you can identify a maven artifact by a GroupId and an ArtifactId.
 
-### Q :  How to know the exact string and name of a dependency and its artifactid etc.
+### Q :  How to know the exact string and name of a dependency and its artifactid?
 
 You can either google or you can visit our Github repository.
 
@@ -724,12 +782,16 @@ Dependency exclusion is specific to the dependency where it is declared.
 
 You have to exclude a jar in all the dependencies where it is declared as a dependency.
 
-## Example of a multi layered maven project
+## Tip : Example of a multi layered maven project
 
 https://github.com/in28minutes/MavenIn28Minutes/tree/
 master/4.web-application-with-maven
 
-### Q :  Caused by: java.lang.ClassNotFoundException: org.springframework.beans.factory.config.BeanDefinitionCustomizer
+### Error : java.lang.ClassNotFoundException
+
+```
+Caused by: java.lang.ClassNotFoundException: org.springframework.beans.factory.config.BeanDefinitionCustomizer
+```
 
 When ever you get this kind of exception. Find out which jar this class belongs to by doing a google - org.springframework.beans.factory.config.BeanDefinitionCustomizer
 
@@ -743,7 +805,8 @@ In this example I'm missing spring-beans. So, find the right version and add it 
 </dependency>
 ```
 
-### Q :  What about Gradle?
+### Q :  Why are we not using Gradle?
+
 Gradle is awesome. 
 
 If Gradle came before Maven, that is what I would have used for this course :)
@@ -751,18 +814,6 @@ If Gradle came before Maven, that is what I would have used for this course :)
 Maven has the first mover advantage and has retained it and hence the choice for this course. But, if Gradle become more popular, I would be the first one to switch :)
 
 If you want to create a Spring Boot app with Gradle, this should help you get started - https://spring.io/guides/gs/gradle/
-
-## Unit Testing
-
-### Q :  What is a mockito answer?
-
-Here's a great starting point https://testing.googleblog.com/2014/03/whenhow-to-use-mockito-answer.html
-
-### Q :  How do you mock a private method that requires arguments?
-
-```
-PowerMockito.when(SomeClass.class, "somePrivateMethodName", argument1, argument2).thenReturn(returnValue);
-```
 
 ## Eclipse
 
@@ -784,140 +835,13 @@ Its easy. Three Options.
 - Right click on your project and go to Maven -> Download JavaDoc, you can also select Maven -> Download Sources
 - Windows->preferences->Maven and there you check the box with download sources and download javadoc as well.
 
-### Q :  What is the focus of each of the course?
 
-Here are the courses and their focus areas:
+## Intellij and/or Mac
 
-- Master Microservices with Spring Boot & Spring Cloud
-  - Expert - Microservices with Spring Cloud
-    - Setup Centralized Microservices Configuration with Spring Cloud Config Server
-    - Implement client side load balancing (Ribbon), Dynamic scaling(Eureka Naming Server) and an API Gateway (Zuul)
-    - Distributed tracing for microservices with Spring Cloud Sleuth and Zipkin
-    - Fault Tolerance for microservices with Hystrix
-  - Expert - RESTful API and Web Services with Spring Boot
-    - Best Practices in Designing RESTful web services
-    - Implement Exception Handling, Validation, HATEOAS and filtering for RESTful Web Services
-    - Version and Document (using Swagger) Your RESTful Web Services
-  - Introduction Modules 
-    - Spring Boot 
-    - JPA
-- Master Web Services and REST API with Spring Boot
-  - Expert - SOAP Web Services with Spring Boot
-    - Understand WSDL, SOAP Header, SOAP Body, SOAP Fault, XSD, JAXB and EndPoint
-    - Use Contract First Approach to Develop Web Services
-  - Expert - Design and Develop RESTful API and Web Services with Spring Boot
-    - Best Practices in Designing RESTful web services
-    - Implement Exception Handling, Validation, HATEOAS and filtering for RESTful Web Services
-    - Version and Document (using Swagger) Your RESTful Web Services
-    - Connect web services to JPA/Hibernate
-  - Introduction Modules 
-    - Spring Boot
-- Master Hibernate & JPA with Spring Boot in 100 Steps
-  - Expert - JPA & Hibernate with Spring Boot
-    - Fundametals - Entities, Relationships, Inheritance Mappings and Annotations
-    - Relationships in depth - One to One, Many to One and Many to Many
-    - Querying data - JPQL, Criteria API and Native Queries
-    - Caching - First Level Cache and Second Level Cache with EhCache
-    - Performance tuning your JPA application with Hibernate - Solve N+1 Queries Issue
-  - Introduction Modules 
-    - Spring, Spring Boot, Spring JDBC, Spring Data JPA and Spring Data REST
-- Learn Spring Boot in 100 Steps - Beginner to Expert
-  - Expert - Fundamentals of Spring Boot
-    - Magic of Spring Boot - Auto Configuration, Spring Initializr and Starter Projects
-    - Develop a Web Application connecting to JPA/Hibernate Step by Step with Spring MVC and Spring Boot
-    - Understand Spring MVC in depth - DispatcherServlet , Model, Controllers and ViewResolver
-    - Externalise application configuration using Spring Boot Profiles and Dynamic Configuration
-    - Monitoring
-    - Write great Unit and Integration tests using Spring Boot Starter Test
-    - Use a wide variety of Spring Boot Starter Projects - Spring Boot Web, Spring Boot Test, Spring Boot Data JPA, Spring Boot Data REST
-    - Explore the embedded servlet container options provided by Spring Boot - Tomcat, Jetty and Undertow
-    - Make best use of Spring Boot Actuator and Spring Boot Developer Tools
-  - Introduction Modules 
-    - Spring, JUnit and Mockito.
-- Spring Master Class - Beginner to Expert in 100 Steps
-  - Expert - Fundamentals of Spring Framework
-    - Dependency Injection, IOC Container, Application Context and Bean Factory.
-    - Spring Annotations - @Autowired, @Component, @Service, @Repository, @Configuration, @Primary
-    - Unit tests with XML, Java Application Contexts and Mockito
-  - Introduction Modules
-    - Maven, JUnit, Mockito and Spring Boot
+### Q :  How to install Maven on MAC OS X?
 
-### Q :  What software you use for Mind Maps?
-
-Its called MindMup. https://www.mindmup.com/
-
-I loved the first version of it. And am finding it difficult to adapt to the second version. But as usual, we programmers find a way :)
-
-### Q :  How to debug the application?
-
-Instead of Run as -> Maven application, use Debug as -> Maven application. Add your breakpoints. You should be all set.
-
-If you are using Spring Boot and Running using Run as -> Java application, then you can use Debug as -> Java Application. Add your breakpoints. You should be all set.
-
-### Q :  How do I configure auto restarting the server whenever source code changes?
-
-If you are using Spring Boot, check configuration in Approach 1.
-
-If you are doing a JSP/Servlet or a Spring MVC course without using Spring Boot use Approach 2.
-
-###### Approach 1 : Spring Boot Project
-
-In pom.xml, add a dependency on devtools and restart the server. You are all set.
-
-> If you are using Intellij, there is one more configuration you need. Check out the intellij faq section.
-
-```
-<dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-devtools</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-```
-
-###### Approach 2: Non Spring Boot Project
-
-Use ```<contextReloadable>true</contextReloadable>``` in your pom.xml maven plugin configuration. Restart the server. You are all set.
-
-```
-<plugin>
-    <groupId>org.apache.tomcat.maven</groupId>
-    <artifactId>tomcat7-maven-plugin</artifactId>
-    <version>2.2</version>
-    <configuration>
-        <path>/</path>
-        <contextReloadable>true</contextReloadable>
-        <port>8080</port>
-    </configuration>
-</plugin>
-```
-
-### Q :  Can I use jboss instead of tomcat server?
-Yeah. You can find more details of how to use the jboss maven plugin at https://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html.
-
-### Q :  How to get it run in tomcat 8 or 9
-I’ve done a quick search to find the plugins for tomcat 8 and tomcat 9. Here’s the best I could find 
-- http://jtuts.com/2016/09/14/run-embedded-tomcat8-maven/
-
-See also here: https://stackoverflow.com/questions/26883836/tomcat-8-maven-plugin-for-java-8
-
-### Q :  How to improve Logical Skills?
-Logical skills are difficult to acquire but are among the things which will help you through out your programming career.
-
-There are three ways - Practice, Practice and More Practice.
-
-I would suggest joining a programming contest like CodeChef or TopCoder for a start. Once you start being active there, you will understand everything else.
-
-## Mac
-
-### Q :  Installing Maven on MAC OS X
-
-Updating PATH environment variable
-
-https://www.mkyong.com/maven/install-maven-on-mac-osx/
-
-
-
-## Intellij
+Recommended Reading
+- Updating PATH environment variable - https://www.mkyong.com/maven/install-maven-on-mac-osx/
 
 ### Q :  How do I import a Maven project into Intellij?
 
@@ -937,7 +861,7 @@ Here's the complete guide
 This can be another option for setting up a unit test
 - https://stackoverflow.com/questions/19330832/setting-up-junit-with-intellij-idea
 
-### Q :  I'm having a problem running jsps with Spring Boot in Intellij. What should I do?
+### Error :  I'm having a problem running jsps with Spring Boot in Intellij. What should I do?
 
 Changed the scope of the embedded Tomcat dependency to required. Hope this helps anyone using IntelliJ.
 
@@ -1292,7 +1216,7 @@ Web Container & EJB Containers are part of the application/web servers - Tomcat,
 
 Spring Container is part of the application you are building - the jar or the war. It can run inside a web container, EJB container or even without them :) You can launch it as a java application or you can even run it in an embedded server.
 
-### Q :  Notes from Rodolfo
+### Notes :  Notes from Rodolfo
 Link to this file:
 https://s3.amazonaws.com/espanol-libros/AllLinks.rtf
 
@@ -1349,7 +1273,7 @@ public class WelcomeController {
 private GreeterService service1;
 ```
 
-### Q :  Log4j problems with Spring 5!
+### Error :  Log4j problems with Spring 5!
 - TODO
 
 ### Q :  What is the minimum baseline Java Version for Spring Boot 2 and Spring 5?
@@ -1359,7 +1283,7 @@ Spring 5.0 and Spring Boot 2.0 requires Java 8 or later. Java 6 and 7 are no lon
 Recommended Reading 
 - https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.0.0-M1-Release-Notes
 
-### Q :  Getting SLF4J errors and not getting logger output in Lecture 41 - Step 19? [SOLVED]
+### Error :  Getting SLF4J errors and not getting logger output in Lecture 41 - Step 19?
 
 TODO
 
@@ -1380,115 +1304,12 @@ log4j.appender.console.layout.ConversionPattern=%d [%t] %-5p %c - %m%n
 log4j.logger.com.in28minutes=DEBUG
 ```
 
-### Q :  How do we solve the error? No Spring WebApplicationInitializer types detected on classpath
+### Error : No Spring WebApplicationInitializer types detected on classpath
+
 It usually happens when you are having conflicts in Java and Spring versions.
 -  Please refer http://stackoverflow.com/questions/22938689/info-no-spring-webapplicationinitializer-types-detected-on-classpath. 
 
 ## JSP Servlets and Spring MVC
-
-### Q :  What is the difference between Filters, Listeners and Interceptors?
-
-Conceptually similar. Servlet filters can intercept only HTTPServlets. Listeners can intercept a few specific events. How do you intercept events which are neither of the above.
-
-Both filters and interceptors do the same things - They intercept something and do something before/after an action is performed.
-
-Java EE uses the term filter (in web.xml) and Spring calls them Interceptors.
-
-Thats where AOP comes in. You can intercept calls to any object with AOP. 
-
-More Reading
-- http://www.programering.com/a/MzM3EDNwATY.html
-
-### Q :  What is the difference between ModelMap and ModelAndView?
-
-Model is an interface while ModelMap is a class.
-
-ModelAndView is just a container for both a ModelMap and a View object. It allows a controller to return both as a single value.
-
-I usually like ModelAndView to return the model and view from a controller. However, there is an option where you can just add values to ModelMap and return viewname from the controller method. 
-
-More Reading
-- http://stackoverflow.com/questions/16951609/when-to-use-modelandview-vs-model-in-spring 
-
-### Q :  What is the difference between model.put() and model.addAttribute()? 
-
-Code for addAttribute method is listed below. It does an additional null check before calling a put. Doesn't really matter which one you use. 
-
-I like addAttribute because you are separated from underlying data structure (```put``` implies you are using a hashmap).
-
-/**
-     * Add the supplied attribute under the supplied name.
-     * @param attributeName the name of the model attribute (never <code>null</code>)
-     * @param attributeValue the model attribute value (can be <code>null</code>)
-     */
-    public ModelMap addAttribute(String attributeName, Object attributeValue) {
-        Assert.notNull(attributeName, "Model attribute name must not be null");
-        put(attributeName, attributeValue);
-        return this;
-    }
-
-One more difference is that addAttribute returns the ModelMap back. So, you can chain calls.
-
-model.addAttribute("attribute1","value1").addAttribute("attribute2","value2");
-
-### Q :  How do you pass values from Java Controller to JSP?
-
-This is done through Model. You put a value in the model object in your Controller. Spring MVC makes it available to the JSP. 
-
-Put a list with name "todos" in the model. Spring MVC makes it available with name "todos" in the JSP.  
-
-We can access the value in the JSP using ```${todos}```
-
-```<c:forEach items ="${todos}" var= "todo">``` - In this forEach var="todo" declares a variable todo. 
-
-You can think of it similar to Java Enhanced for loop - "for(Todo todo:todos)" ). 
-
-### Q :  What is Form Binding?
-We want to take values from screen and store them to the database. The value on the HTML form needs to be transferred to the bean on the Controller. 
-
-If you use the Spring MVC form tags, Spring MVC automatically takes care of the binding the values in the HTML form to the bean.
-- I would recommend you to do a View Source on the browser and see the html that is generated with the form tags
-
-You need a form to bind the value to a bean. 
-
-You can look up the documentation for Spring MVC Form Tags for more details.
-
-I would recommend you to start looking at each of the things thats happening in the browser. See the html that is generated (view source), look at what are the values in the request when you click the submit button on the screen (Look at the network tab : http://code.tutsplus.com/articles/chrome-dev-tools-networking-and-the-console--net-28167)
-
-Couple of Sources which might be useful for you
-- Spring MVC Documentation : http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#mvc
-- Spring MVC Code : https://github.com/spring-projects/spring-framework/tree/master/spring-webmvc/src
-
-### Q :  What is WEB-INF exactly? Why so we need it?
-
-From the specification " A special directory exists within the application hierarchy named WEB-INF. This directory contains all things related to the application that aren’t in the document root of the application. The WEB-INFnode is not part of the public document tree of the application. No file contained in the WEB-INF directory may be served directly to a client by the container. However, the contents of theWEB-INF directory are visible to servlet code using the getResource and getResourceAsStreammethod calls on the ServletContext, and may be exposed using the RequestDispatcher calls."
-
-More Reading
-- http://stackoverflow.com/questions/19786142/what-is-web-inf-used-for-in-a-java-ee-web-application
-
-### Q :  Why do we use Hibernate Validator?
-Hibernate Validator is not related to Database. It is a validation framework.
-
-Hibernate Validator 5.x is the reference implementation Bean Validation 1.1! 
-
-Actually, you can use any implementation of Bean Validation API.  However, there are really no other popular options.
-
-As you can see at http://beanvalidation.org/1.1/certified/, Hibernate Validator is the only one which is certified!
-
-### Q :  Are Model objects specific to a request?
-
-Yes. They are specific to a request.
-
-Model objects cannot be shared across requests. So, 2 different requests mean 2 different model objects.
-
-If you look at the jsp for a todo page, it shares the responsibility of creating a new todo and modifying an existing todo. And the todo object is binded to the form. 
-
-To display todo page for new todo, we need a model with no values. That's the first model object that's created.
-- This is used only for the display of new todo page. 
-
-Once the page is displayed, the first model does not exist anymore. 
-
-When user fills in the values and clicks submit, the values in the form gets bound to a new model object - the second one.
 
 ### Q :  What is the difference between @Controller and @RestController?
 
@@ -1509,14 +1330,6 @@ public class MyController { }
 @RestController
 public class MyRestController { }
 ```
-### Q :  The groupid for jstl jar is jstl and not javax.servlet
-Yeah. There seems to be some confusion around this. As I understand java.servlet is recommended.
-
-Recommended Reading
-- http://stackoverflow.com/questions/2276083/include-jstl-dependency-with-maven
-
-Its not a recommendation I give often, but feel free to use whatever works in this specific scenario
-
 ### Q :  Why is there no context root in the request url for each web application? 
 
 Great question. The magic is in path configuration of tomcat7 maven plugin. We use ```/``` as the path. Therefore, there is no need for a context root. You can configure a path of your choice and that becomes the context root for your web app.
@@ -1548,122 +1361,12 @@ We use a maven plugin for integrating with tomcat7. The plugin would take care o
 </plugin>
 ```
 
-
 You can find more documentation here 
 - http://tomcat.apache.org/maven-plugin-trunk/tomcat7-maven-plugin/plugin-info.html
 
 You can read more down here as well
 - http://stackoverflow.com/questions/7823346/mvn-tomcat7run-how-does-it-work
 - http://tomcat.apache.org/maven-plugin-trunk/tomcat7-maven-plugin/run-mojo.html
-
-### Q :  Error - No plugin found for prefix 'tomcat7' in the current project
-No plugin found for prefix 'tomcat7' in the current project and in the plugin groups [org.apache.maven.plugins, org.codehaus.mojo] when trying to run the application using run with Maven tomcat7:run
-
-First thing I would check is if maven plugin configured in your pom.xml as mentioned in https://github.com/in28minutes/SpringMvcStepByStep/blob/master/Step01.md
-
-```
-<plugin>
-    <groupId>org.apache.tomcat.maven</groupId>
-    <artifactId>tomcat7-maven-plugin</artifactId>
-    <version>2.2</version>
-    <configuration>
-        <path>/</path>
-        <contextReloadable>true</contextReloadable>
-    </configuration>
-</plugin>
-```
-
-If it is configured correctly then I would check these two links if they are of any use
-- http://stackoverflow.com/questions/24311383/maven-no-plugin-found-for-prefix-tomcat7-in-the-current-project-and-in-the-p
-- http://stackoverflow.com/questions/21073123/maven-no-plugin-found-for-prefix-tomcat7-in-the-current-project
-
-### Q :  Why are we using request GET method for "delete-todo" request? 
-
-> Question Continued - Shouldn't we be using DELETE request method? 
-
-The data we use to execute the DELETE is just an id. It is not sensitive information. We can add a check to see if the user has permission on the id to execute a delete before executing a delete. Changing it to POST does not give us any added advantages.
-
-However, when we create RESTful services, we should use DELETE. 
-
-### Q :  Why do we need xmlns hyperlinks? like http://www.springframework.org/schema/bean
-
-These are generic and would work with all version of Spring Framework. Otherwise we would need to change the version every time we upgrade Spring Framework.
-- http://stackoverflow.com/questions/11610790/what-difference-does-an-xmlns-definition-make-in-a-spring-configuration-file
-
-### Q :  Error - View is not resolving to a JSP
-In your web.xml, ensure your url-pattern is set to /spring-mvc/
-
-```
-<servlet-mapping>
-    <servlet-name>dispatcher</servlet-name>
-    <url-pattern>/spring-mvc/</url-pattern>
-</servlet-mapping>
-```
-
-> If you have /* dispatcher servlet would handle requests to the views as well. We don't want that!
-
-### Q :  How to use own CSS with Spring MVC?
-
-Spring Configuration XML
-<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" />
-
-JSP
-<link href="resources/css/main.css" rel="stylesheet">
-
-### Q :  Where should we place our static (css, js, html) resources in a Spring MVC application?
-
-For the Java script, I would have separate java script files and include them into your jsp.
-
-Here's a small discussion where static files should be located:
-- https://stackoverflow.com/questions/7836930/where-do-css-and-javascript-files-go-in-a-maven-web-app-project
-
-
-### Q :  How to add a custom login page in Spring Security?
-
-Complete example down here 
-- http://docs.spring.io/spring-security/site/docs/current/guides/html5/form-javaconfig.html
-
-Other Recommended Reading
-- https://docs.spring.io/spring-security/site/docs/3.2.0.RELEASE/guides/form.html
-- http://www.concretepage.com/spring-4/spring-4-mvc-security-custom-login-form-and-logout-example-with-csrf-protection-using-annotation-and-xml-configuration
-
-### Q :  How can you authenticate by connecting to a database with Spring Security?
-
-Complete example down here : 
-- https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-web-secure-jdbc
-
-### Q :  Why is request method POST recommended compared to GET for sensitive data?
-
-Following are the steps that happen when you interact with a web page
-- Browser : You enter the details
-- Browser : Creates a POST request where details are put into the request (and encrypted if you are using https)
-- Routers and Network : The POST request is sent through multiple routers before it reaches the destination
-
-In the case of a get request and post request, in steps a and b you can see the details on the browser. The real change is in step c. 
-
-> Important Question to ask is "What is going across the network?"
-
-In the case of GET request, your details are part of url and all routers can see those details. However, in the case of POST, the details are sent as part of the body of the request and hence more safe.
-
-### Q :  We use ${todo.done} in JSP even though the name of the field in Todo.java is isDone. Shouldn't we be using ${todo.isDone}?
-
-Isn't it tricky? Welcome to the fun of Java Beans. 
-
-You can try renaming the variable to done or what ever you want. The important thing is what is the name of getters and setters.
-
-Java Beans work based on the names of your getters and setters. The setter is named setDone. So, we use ${todo.done}.
-
-I would recommend playing with getters and setters to understand this further.
-
-```
-public boolean isDone() {
-    return isDone;
-}
-
-public void setDone(boolean isDone) {
-    this.isDone = isDone;
-}
-```
 
 ### Q :  How is the URL decided with Spring MVC?
 
@@ -1731,40 +1434,26 @@ public class TodoController {
     }
 ```
 
-### Q :  Spring MVC - Error after adding security dependencies - java.lang.NoSuchMethodError: org.springframework.aop.framework.autoproxy.AutoProxyUtils.determineTargetClass
+### Error : No plugin found for prefix 'tomcat7' in the current project
+No plugin found for prefix 'tomcat7' in the current project and in the plugin groups [org.apache.maven.plugins, org.codehaus.mojo] when trying to run the application using run with Maven tomcat7:run
 
-Error Details - When Spring Security is added in 
-```
-HTTP Status 500 - Servlet.init() for servlet dispatcher threw exception
-java.lang.NoSuchMethodError: org.springframework.aop.framework.autoproxy.AutoProxyUtils.determineTargetClass(Lorg/springframework/beans/factory/config/ConfigurableListableBeanFactory;Ljava/lang/String;)Ljava/lang/Class;
-at org.springframework.context.event.EventListenerMethodProcessor.afterSingletonsInstantiated(EventListenerMethodProcessor.java:78)
-```
-
-Its a compatibility issue between Hibernate Validator and Spring.
-
-Recommended Reading
-- http://stackoverflow.com/questions/34053170/spring-4-2-3-release-and-hibernate-5-0-4-final-compatibility-issue
-
-Solution - Change your 4.2.3.RELEASE dependency to 4.2.2.RELEASE and change Hibernate version 5.0.4.Final to 5.0.2.Final
-
-### Q :  How do I ensure that session attributes are not part of the request url?
-
-When we use model.put("name", name) and name is a session attribute, these parameters are shown in redirected page as parameters in url. 
-
-To avoid this, we can use flash attributes.
-
-An example below:
+First thing I would check is if maven plugin configured in your pom.xml as mentioned in https://github.com/in28minutes/SpringMvcStepByStep/blob/master/Step01.md
 
 ```
-@RequestMapping(value="/Login",method = RequestMethod.POST)
-public ModelAndView loginValidate(HttpServletRequest req, RedirectAttributes redir){
-...
- 
-    modelAndView.setViewName("redirect:welcome");
-    redir.addFlashAttribute("USERNAME",uname);
-    return modelAndView;
-}
+<plugin>
+    <groupId>org.apache.tomcat.maven</groupId>
+    <artifactId>tomcat7-maven-plugin</artifactId>
+    <version>2.2</version>
+    <configuration>
+        <path>/</path>
+        <contextReloadable>true</contextReloadable>
+    </configuration>
+</plugin>
 ```
+
+If it is configured correctly then I would check these two links if they are of any use
+- http://stackoverflow.com/questions/24311383/maven-no-plugin-found-for-prefix-tomcat7-in-the-current-project-and-in-the-p
+- http://stackoverflow.com/questions/21073123/maven-no-plugin-found-for-prefix-tomcat7-in-the-current-project
 
 ### Q :  Is this kind of Tomcat server usage what is commonly referred to as "Embedded Tomcat Server" ?
 
@@ -1862,7 +1551,267 @@ With @ResponseBody the only response type that goes out is SUCCESS (Example 1). 
 
 Let's say you are creating a resource. You would want to send a status of 201 CREATED. In this case, we use ResponseEntity as in Example 2.
 
-### Q :  Error - Spring Security - java.lang.NoClassDefFoundError: org/springframework/web/cors/CorsConfigurationSource
+### Q :  What is difference between Spring 5 and Spring 4 in terms of developing web application in the course? Does it matter if a new version is used ?
+
+There will be one problem you will face when you use Spring 5. 
+
+When you get to /src/main/webapp/WEB-INF/views/todo.jsp - You should use modelAttribute instead of commandName
+
+Instead of
+```
+<form:form method="post" commandName="todo">
+```
+Use
+```
+<form:form method="post" modelAttribute="todo">
+```
+You can read more about this here :
+
+https://stackoverflow.com/questions/21495616/difference-between-modelattribute-and-commandname-atributes-in-form-tag-in-sprin
+
+
+
+### Q :  What is the difference between Filters, Listeners and Interceptors?
+
+Conceptually similar. Servlet filters can intercept only HTTPServlets. Listeners can intercept a few specific events. How do you intercept events which are neither of the above.
+
+Both filters and interceptors do the same things - They intercept something and do something before/after an action is performed.
+
+Java EE uses the term filter (in web.xml) and Spring calls them Interceptors.
+
+Thats where AOP comes in. You can intercept calls to any object with AOP. 
+
+More Reading
+- http://www.programering.com/a/MzM3EDNwATY.html
+
+### Q :  What is the difference between ModelMap and ModelAndView?
+
+Model is an interface while ModelMap is a class.
+
+ModelAndView is just a container for both a ModelMap and a View object. It allows a controller to return both as a single value.
+
+I usually like ModelAndView to return the model and view from a controller. However, there is an option where you can just add values to ModelMap and return viewname from the controller method. 
+
+More Reading
+- http://stackoverflow.com/questions/16951609/when-to-use-modelandview-vs-model-in-spring 
+
+### Q :  What is the difference between model.put() and model.addAttribute()? 
+
+Code for addAttribute method is listed below. It does an additional null check before calling a put. Doesn't really matter which one you use. 
+
+I like addAttribute because you are separated from underlying data structure (```put``` implies you are using a hashmap).
+
+/**
+     * Add the supplied attribute under the supplied name.
+     * @param attributeName the name of the model attribute (never <code>null</code>)
+     * @param attributeValue the model attribute value (can be <code>null</code>)
+     */
+    public ModelMap addAttribute(String attributeName, Object attributeValue) {
+        Assert.notNull(attributeName, "Model attribute name must not be null");
+        put(attributeName, attributeValue);
+        return this;
+    }
+
+One more difference is that addAttribute returns the ModelMap back. So, you can chain calls.
+
+model.addAttribute("attribute1","value1").addAttribute("attribute2","value2");
+
+### Q :  How do you pass values from Java Controller to JSP?
+
+This is done through Model. You put a value in the model object in your Controller. Spring MVC makes it available to the JSP. 
+
+Put a list with name "todos" in the model. Spring MVC makes it available with name "todos" in the JSP.  
+
+We can access the value in the JSP using ```${todos}```
+
+```<c:forEach items ="${todos}" var= "todo">``` - In this forEach var="todo" declares a variable todo. 
+
+You can think of it similar to Java Enhanced for loop - "for(Todo todo:todos)" ). 
+
+### Q :  What is Form Binding?
+We want to take values from screen and store them to the database. The value on the HTML form needs to be transferred to the bean on the Controller. 
+
+If you use the Spring MVC form tags, Spring MVC automatically takes care of the binding the values in the HTML form to the bean.
+- I would recommend you to do a View Source on the browser and see the html that is generated with the form tags
+
+You need a form to bind the value to a bean. 
+
+You can look up the documentation for Spring MVC Form Tags for more details.
+
+I would recommend you to start looking at each of the things thats happening in the browser. See the html that is generated (view source), look at what are the values in the request when you click the submit button on the screen (Look at the network tab : http://code.tutsplus.com/articles/chrome-dev-tools-networking-and-the-console--net-28167)
+
+Couple of Sources which might be useful for you
+- Spring MVC Documentation : http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#mvc
+- Spring MVC Code : https://github.com/spring-projects/spring-framework/tree/master/spring-webmvc/src
+
+### Q :  What is WEB-INF exactly? Why so we need it?
+
+From the specification " A special directory exists within the application hierarchy named WEB-INF. This directory contains all things related to the application that aren’t in the document root of the application. The WEB-INFnode is not part of the public document tree of the application. No file contained in the WEB-INF directory may be served directly to a client by the container. However, the contents of theWEB-INF directory are visible to servlet code using the getResource and getResourceAsStreammethod calls on the ServletContext, and may be exposed using the RequestDispatcher calls."
+
+More Reading
+- http://stackoverflow.com/questions/19786142/what-is-web-inf-used-for-in-a-java-ee-web-application
+
+### Q :  Why do we use Hibernate Validator?
+
+Hibernate Validator is not related to Database. It is a validation framework.
+
+Hibernate Validator 5.x is the reference implementation Bean Validation 1.1! 
+
+Actually, you can use any implementation of Bean Validation API.  However, there are really no other popular options.
+
+As you can see at http://beanvalidation.org/1.1/certified/, Hibernate Validator is the only one which is certified!
+
+### Q :  Are Model objects specific to a request?
+
+Yes. They are specific to a request.
+
+Model objects cannot be shared across requests. So, 2 different requests mean 2 different model objects.
+
+If you look at the jsp for a todo page, it shares the responsibility of creating a new todo and modifying an existing todo. And the todo object is binded to the form. 
+
+To display todo page for new todo, we need a model with no values. That's the first model object that's created.
+- This is used only for the display of new todo page. 
+
+Once the page is displayed, the first model does not exist anymore. 
+
+When user fills in the values and clicks submit, the values in the form gets bound to a new model object - the second one.
+
+### Q :  The groupid for jstl jar is jstl and not javax.servlet
+
+Yeah. There seems to be some confusion around this. As I understand java.servlet is recommended.
+
+Recommended Reading
+- http://stackoverflow.com/questions/2276083/include-jstl-dependency-with-maven
+
+Its not a recommendation I give often, but feel free to use whatever works in this specific scenario
+
+
+### Q :  Why are we using request GET method for "delete-todo" request? 
+
+> Question Continued - Shouldn't we be using DELETE request method? 
+
+The data we use to execute the DELETE is just an id. It is not sensitive information. We can add a check to see if the user has permission on the id to execute a delete before executing a delete. Changing it to POST does not give us any added advantages.
+
+However, when we create RESTful services, we should use DELETE. 
+
+### Q :  Why do we need xmlns hyperlinks? like http://www.springframework.org/schema/bean
+
+These are generic and would work with all version of Spring Framework. Otherwise we would need to change the version every time we upgrade Spring Framework.
+- http://stackoverflow.com/questions/11610790/what-difference-does-an-xmlns-definition-make-in-a-spring-configuration-file
+
+### Error : View is not resolving to a JSP
+In your web.xml, ensure your url-pattern is set to /spring-mvc/
+
+```
+<servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/spring-mvc/</url-pattern>
+</servlet-mapping>
+```
+
+> If you have /* dispatcher servlet would handle requests to the views as well. We don't want that!
+
+### Q :  How to use own CSS with Spring MVC?
+
+Spring Configuration XML
+<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" />
+
+JSP
+<link href="resources/css/main.css" rel="stylesheet">
+
+### Q :  Where should we place our static (css, js, html) resources in a Spring MVC application?
+
+For the Java script, I would have separate java script files and include them into your jsp.
+
+Here's a small discussion where static files should be located:
+- https://stackoverflow.com/questions/7836930/where-do-css-and-javascript-files-go-in-a-maven-web-app-project
+
+
+### Q :  How to add a custom login page in Spring Security?
+
+Complete example down here 
+- http://docs.spring.io/spring-security/site/docs/current/guides/html5/form-javaconfig.html
+
+Other Recommended Reading
+- https://docs.spring.io/spring-security/site/docs/3.2.0.RELEASE/guides/form.html
+- http://www.concretepage.com/spring-4/spring-4-mvc-security-custom-login-form-and-logout-example-with-csrf-protection-using-annotation-and-xml-configuration
+
+### Q :  How can you authenticate by connecting to a database with Spring Security?
+
+Complete example down here : 
+- https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples/spring-boot-sample-web-secure-jdbc
+
+### Q :  Why is request method POST recommended compared to GET for sensitive data?
+
+Following are the steps that happen when you interact with a web page
+- Browser : You enter the details
+- Browser : Creates a POST request where details are put into the request (and encrypted if you are using https)
+- Routers and Network : The POST request is sent through multiple routers before it reaches the destination
+
+In the case of a get request and post request, in steps a and b you can see the details on the browser. The real change is in step c. 
+
+> Important Question to ask is "What is going across the network?"
+
+In the case of GET request, your details are part of url and all routers can see those details. However, in the case of POST, the details are sent as part of the body of the request and hence more safe.
+
+### Q :  We use ${todo.done} in JSP even though the name of the field in Todo.java is isDone. Shouldn't we be using ${todo.isDone}?
+
+Isn't it tricky? Welcome to the fun of Java Beans. 
+
+You can try renaming the variable to done or what ever you want. The important thing is what is the name of getters and setters.
+
+Java Beans work based on the names of your getters and setters. The setter is named setDone. So, we use ${todo.done}.
+
+I would recommend playing with getters and setters to understand this further.
+
+```
+public boolean isDone() {
+    return isDone;
+}
+
+public void setDone(boolean isDone) {
+    this.isDone = isDone;
+}
+```
+
+
+### Error : After adding security dependencies - java.lang.NoSuchMethodError: org.springframework.aop.framework.autoproxy.AutoProxyUtils.determineTargetClass
+
+```
+HTTP Status 500 - Servlet.init() for servlet dispatcher threw exception
+java.lang.NoSuchMethodError: org.springframework.aop.framework.autoproxy.AutoProxyUtils.determineTargetClass(Lorg/springframework/beans/factory/config/ConfigurableListableBeanFactory;Ljava/lang/String;)Ljava/lang/Class;
+at org.springframework.context.event.EventListenerMethodProcessor.afterSingletonsInstantiated(EventListenerMethodProcessor.java:78)
+```
+
+Its a compatibility issue between Hibernate Validator and Spring.
+
+Solution - Change your 4.2.3.RELEASE dependency to 4.2.2.RELEASE and change Hibernate version 5.0.4.Final to 5.0.2.Final
+
+Recommended Reading
+- http://stackoverflow.com/questions/34053170/spring-4-2-3-release-and-hibernate-5-0-4-final-compatibility-issue
+
+
+### Q :  How do I ensure that session attributes are not part of the request url?
+
+When we use model.put("name", name) and name is a session attribute, these parameters are shown in redirected page as parameters in url. 
+
+To avoid this, we can use flash attributes.
+
+An example below:
+
+```
+@RequestMapping(value="/Login",method = RequestMethod.POST)
+public ModelAndView loginValidate(HttpServletRequest req, RedirectAttributes redir){
+...
+ 
+    modelAndView.setViewName("redirect:welcome");
+    redir.addFlashAttribute("USERNAME",uname);
+    return modelAndView;
+}
+```
+
+
+### Error :  Spring Security - java.lang.NoClassDefFoundError: org/springframework/web/cors/CorsConfigurationSource
 
 Typically this happens because the schemas in your application context xml are referring to a different Spring Version
 
@@ -1884,7 +1833,7 @@ Solving the error - Recommendation is to use generic schema definitions.
 ```
 
 
-### Q :  Unable to find setter method for attribute commandName
+### Error :  Unable to find setter method for attribute commandName
 
 ```
 org.apache.jasper.JasperException: /WEB-INF/jsp/todo.jsp (line: [12], column: [1]) Unable to find setter method for attribute: [commandName]
@@ -1900,24 +1849,6 @@ All you have to do is modify the form line within todo.jsp (getting rid of comma
 
 This is further explained in the last step of Spring Boot course in section "Connecting to JPA" - Step 33: Upgrading to Spring Boot 2 and Spring 5
 
-
-### Q :  What is difference between Spring 5 and Spring 4 in terms of developing web application in the course? Does it matter if a new version is used ?
-
-There will be one problem you will face when you use Spring 5. 
-
-When you get to /src/main/webapp/WEB-INF/views/todo.jsp - You should use modelAttribute instead of commandName
-
-Instead of
-```
-<form:form method="post" commandName="todo">
-```
-Use
-```
-<form:form method="post" modelAttribute="todo">
-```
-You can read more about this here :
-
-https://stackoverflow.com/questions/21495616/difference-between-modelattribute-and-commandname-atributes-in-form-tag-in-sprin
 
 ### Q :  Can I have multiple parameters with the same name in a request?
 
@@ -1939,7 +1870,10 @@ public String method(@RequestParam(value="name") String[] names){
 }
 ```
 
-### Q :  Spring MVC - Problem with using ToDo instead of Todo
+### Error :  java.lang.IllegalStateException: Neither BindingResult nor plain target object for bean name 'todo' available as request attribute
+
+This is a problem with using ToDo as the bean class name instead of Todo.
+
 ```
 result.hasErrors()
 
@@ -1956,7 +1890,7 @@ public String addTodo(ModelMap model, @ModelAttribute("toDo") @Valid ToDo todo, 
 
 Spring MVC makes assumptions about your beans. If your class is ToDo, it expects the name of the object to be toDo. since, we are using todo as the name we need to add in a ModelAttribute annotation. 
 
-### Q :  Request processing failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.in28minutes.Todo.Todo]: No default constructor found; nested exception is java.lang.NoSuchMethodException: com.in28minutes.Todo.Todo.<init>()
+### Error :  Request processing failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.in28minutes.Todo.Todo]: No default constructor found; nested exception is java.lang.NoSuchMethodException: com.in28minutes.Todo.Todo.<init>()
 
 No default constructor found;
 
@@ -1964,7 +1898,7 @@ You would need a default constructor
 
 public void Todo() {} 
 
-### Q :  Caused by: java.lang.IllegalArgumentException: The servlets named [com.in28minutes.LoginServlet] and [webapp.LoginServlet] are both mapped to the url-pattern [/login.do] which is not permitted 
+### Error :  Caused by: java.lang.IllegalArgumentException: The servlets named [com.in28minutes.LoginServlet] and [webapp.LoginServlet] are both mapped to the url-pattern [/login.do] which is not permitted 
 
 Problem is because there are two servlets with same url pattern.
 
@@ -2025,6 +1959,75 @@ Here are a list of articles for you to get started with understanding Spring Boo
 - Web Application - [Create Basic Web Application with Spring Boot](http://www.springboottutorial.com/creating-web-application-with-spring-boot)
 - Spring Boot Starter Security - [Secure Your Rest Services with Spring Boot](http://www.springboottutorial.com/securing-rest-services-with-spring-boot-starter-security)
 
+### What is the minimum baseline Java Version for Spring Boot 2 and Spring 5?
+
+Spring Boot 2.0 requires Java 8 or later. Java 6 and 7 are no longer supported.
+
+Recommended Reading 
+- https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.0.0-M1-Release-Notes
+
+
+### Q :  Is Spring Initializr the only way to create Spring Boot Projects?
+
+No.
+
+Spring Initializr makes it easy to create Spring Boot Projects. But you can setup a maven project and add the right dependencies to start off. 
+
+In our Spring course, we use 2 approaches to create projects. 
+- The first one is start.spring.io. 
+- The other one - setting up a project manually is used in the Section titled - “Basic Web Application”
+
+###### Setting up a maven project manually
+
+Here are the important steps:
+- In Eclipse, Use File -> New Maven Project to create a new project.
+- Add dependencies.
+- Add the maven plugins!
+- Add the Spring Boot Application class
+
+You are ready to go!
+
+### Q :  Why am I not seeing code completion when updating application.properties in Eclipse?
+
+You would need to install the Spring Eclipse plugin. 
+- https://marketplace.eclipse.org/content/spring-ide#group-external-install-button
+
+### Q :  Why do we need spring-boot-maven-plugin?
+
+spring-boot-maven-plugin provides a few commands which enable you to package the code as a jar or run the application
+- spring-boot:run runs your Spring Boot application.
+- spring-boot:repackage repackages your jar/war to be executable.
+- spring-boot:start and spring-boot:stop to manage the lifecycle of your Spring Boot application (i.e. for integration tests).
+- spring-boot:build-info generates build information that can be used by the Actuator.
+
+### Q :  Devtools helps me to restart the server automatically. But, I have a problem. The browser page is not auto refreshed.
+
+Devtool helps the server pick up the change automatically. However, you have to refresh the page manually to execute a new request.
+
+If you would want to auto load the page as well, you can look at LiveReload 
+- http://www.logicbig.com/tutorials/spring-framework/spring-boot/boot-live-reload/.
+
+In my trials, we found LiveReload buggy. Do let us know if you have a better experience with it. 
+
+### Q :  What and Why Embedded Servers?
+
+Think about what you would need to be able to deploy your application (typically) on a virtual machine.
+- Step 1 : Install Java
+- Step 2 : Install the Web/Application Server (Tomcat/Websphere/Weblogic etc)
+- Step 3 : Deploy the application war
+
+What if we want to simplify this?
+
+How about making the server a part of the application? 
+
+> You would just need a virtual machine with Java installed and you would be able to directly deploy the application on the virtual machine. Isn't it cool?
+
+This idea is the genesis for Embedded Servers.
+
+When we create an application deployable, we would embed the server (for example, tomcat) inside the deployable. 
+> For example, for a Spring Boot Application, you can generate an application jar which contains Embedded Tomcat. You can run a web application as a normal Java application!
+
+Embedded server is when our deployable unit contains the binaries for the server (example, tomcat.jar).
 
 ### Q :  How can I add custom JS code with Spring Boot? 
 
@@ -2034,11 +2037,13 @@ For your example the path to myapp.js would be resources\static\js\myapp.js
 
 You can refer to it in jsp using
 
+```
 <script src="/js/myapp.js"></script>
+```
 
+### Error :  HAL browser gives me unauthorized error - Full authentication is required to access this resource.
 
-### Q :  HAL browser gives me unauthorized error
-
+```
 {
   "timestamp": 1488656019562,
   "status": 401,
@@ -2046,6 +2051,7 @@ You can refer to it in jsp using
   "message": "Full authentication is required to access this resource.",
   "path": "/beans"
 }
+```
 
 Two options
 
@@ -2057,17 +2063,21 @@ management.security.enabled: FALSE
 ```
 ###### Option 2 : Search for password in the log and pass it in the request header
 
-### Q :  Hal Browser and Spring Boot Actuator are not working
+### Error :  Hal Browser and Spring Boot Actuator are not working
+
 Question Continued - You can only json response. /application, /application/status and /application/info
 
 With 2.0.0.M4 Spring Boot is making a lot of changes to Actuator. 
 
-Recommmended Reading
-- https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.0.0-M4-Release-Notes
+> Do not use SNAPSHOT versions
 
 For now we recommend using 2.0.0.M3 with all courses. I will wait for the changes that are introduced with M4 to stabilize before incorporating into the course.
 
-Update your pom.xml
+Recommmended Reading
+- https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.0.0-M4-Release-Notes
+
+Solution : Update your pom.xml
+
 ```
 <parent>
 	<groupId>org.springframework.boot</groupId>
@@ -2075,6 +2085,47 @@ Update your pom.xml
 	<version>2.0.0.M3</version>
 	<relativePath /> <!-- lookup parent from repository -->
 </parent>
+```
+If you are using Milestone (M1, M2, M3...) or SNAPSHOT version you need this configuration
+
+```
+<repositories>
+		<repository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+ 
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 ```
 
 ### Q :  How does path="users", collectionResourceRel="users" work with Spring Data Rest?
@@ -2095,7 +2146,7 @@ The name of the variable in the path does not really matter.
 
 You can read more about UriComponentsBuilder here :  http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/util/UriComponentsBuilder
 
-### Q :  java.lang.ClassCastException: org.springframework.boot.context.event.ApplicationReadyEvent cannot be cast
+### Error :  java.lang.ClassCastException: org.springframework.boot.context.event.ApplicationReadyEvent cannot be cast
 ```
 s.c.e.SimpleApplicationEventMulticaster : Non-matching event type for listener: org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer$$Lambda$69/128359175@5e82df6a
 java.lang.ClassCastException: org.springframework.boot.context.event.ApplicationReadyEvent cannot be cast to org.springframework.boot.web.context.WebServerInitializedEvent
@@ -2185,7 +2236,7 @@ Remove the existing dependency on spring-boot-starter-web and add these in.
 </dependency>
 ```
 
-### Q :  Failure to transfer org.springframework.boot:spring-boot-starter-parent:pom:2.0.0.BUILD-SNAPSHOT from https://repo.spring.io/snapshot
+### Error :  Failure to transfer org.springframework.boot:spring-boot-starter-parent:pom:2.0.0.BUILD-SNAPSHOT from https://repo.spring.io/snapshot
 
 SNAPSHOT versions are versions under development. Of late, there are a few issues with some of the SNAPSHOT version of Spring Boot 2. We recommend using 2.0.0.M3 for now.
 
@@ -2199,9 +2250,7 @@ In you pom.xml, you can change the version in the parent as shown below:
 	<relativePath/> <!-- lookup parent from repository -->
 </parent>
 ```
-
-### Q :  Why do we configure Spring Snapshot and milestone repositories? 
-If you are using Milestone or SNAPSHOT version you need this configuration
+If you are using Milestone (M1, M2, M3...) or SNAPSHOT version you need this configuration
 
 ```
 <repositories>
@@ -2243,27 +2292,53 @@ If you are using Milestone or SNAPSHOT version you need this configuration
 	</pluginRepositories>
 ```
 
-### Q :  Is Spring Initializr the only way to create Spring Boot Projects?
 
-No.
+### Q :  Why do we configure Spring Snapshot and milestone repositories? 
 
-Spring Initializr makes it easy to create Spring Boot Projects. But you can setup a maven project and add the right dependencies to start off. 
+If you are using Milestone (M1, M2, M3...) or SNAPSHOT version you need this configuration
 
-In our Spring course, we use 2 approaches to create projects. 
-- The first one is start.spring.io. 
-- The other one - setting up a project manually is used in the Section titled - “Basic Web Application”
+```
+<repositories>
+		<repository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+ 
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+```
 
-###### Setting up a maven project manually
 
-Here are the important steps:
-- In Eclipse, Use File -> New Maven Project to create a new project.
-- Add dependencies.
-- Add the maven plugins!
-- Add the Spring Boot Application class
-
-You are ready to go!
-
-### Q :  Error -  java.lang.IllegalArgumentException: Sources must not be empty
+### Error :   java.lang.IllegalArgumentException: Sources must not be empty
 
 Make sure you are running the right Java class. Go to your class containing @SpringBootApplication and right click > Run as Java Application. 
 
@@ -2316,7 +2391,7 @@ return mapping;
 ```
 
 
-### Q :  Error - No message found under code 'good.morning.message' for locale 'us'.
+### Error :  No message found under code 'good.morning.message' for locale 'us'.
 
 Ensure that the name of ResourceBundleMessageSource is the same in both the files related to internationalization.
 - In the examples below, we use messageSource as the @Autowired bean name and the @Bean method name.
@@ -2380,53 +2455,6 @@ Good news is you can customise it. Click the link “Switch to the full version.
 Here’s the complete guide 
 - https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 
-### Q :  Why am I not seeing code completion when updating application.properties in Eclipse?
-You would need to install the Spring Eclipse plugin. 
-- https://marketplace.eclipse.org/content/spring-ide#group-external-install-button
-
-### Q :  Why do we need spring-boot-maven-plugin?
-
-spring-boot-maven-plugin provides a few commands which enable you to package the code as a jar or run the application
-- spring-boot:run runs your Spring Boot application.
-- spring-boot:repackage repackages your jar/war to be executable.
-- spring-boot:start and spring-boot:stop to manage the lifecycle of your Spring Boot application (i.e. for integration tests).
-- spring-boot:build-info generates build information that can be used by the Actuator.
-
-### Q :  Devtools helps me to restart the server automatically. But, I have a problem. The browser page is not auto refreshed.
-
-Devtool helps the server pick up the change automatically. However, you have to refresh the page manually to execute a new request.
-
-If you would want to auto load the page as well, you can look at LiveReload 
-- http://www.logicbig.com/tutorials/spring-framework/spring-boot/boot-live-reload/.
-
-In my trials, we found LiveReload buggy. Do let us know if you have a better experience with it. 
-
-## What is the minimum baseline Java Version for Spring Boot 2 and Spring 5?
-
-Spring Boot 2.0 requires Java 8 or later. Java 6 and 7 are no longer supported.
-
-Recommended Reading 
-- https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.0.0-M1-Release-Notes
-
-### Q :  What and Why Embedded Servers?
-
-Think about what you would need to be able to deploy your application (typically) on a virtual machine.
-- Step 1 : Install Java
-- Step 2 : Install the Web/Application Server (Tomcat/Websphere/Weblogic etc)
-- Step 3 : Deploy the application war
-
-What if we want to simplify this?
-
-How about making the server a part of the application? 
-
-> You would just need a virtual machine with Java installed and you would be able to directly deploy the application on the virtual machine. Isn't it cool?
-
-This idea is the genesis for Embedded Servers.
-
-When we create an application deployable, we would embed the server (for example, tomcat) inside the deployable. 
-> For example, for a Spring Boot Application, you can generate an application jar which contains Embedded Tomcat. You can run a web application as a normal Java application!
-
-Embedded server is when our deployable unit contains the binaries for the server (example, tomcat.jar).
 
 ## Hibernate, JPA and In-memory Database
 
@@ -2621,16 +2649,17 @@ spring.datasource.url=jdbc:h2:file:~/yourdbname;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=
 spring.jpa.hibernate.ddl-auto = update
 ```
 
-### Q :  Table is not created automatically in h2 embedded db
+### Error :  Table is not created automatically in h2 embedded db or I'm unable to see the tables
 
-Table is created but the url used in H2 GUI Console is wrong.
+Usually, the table's are created but the url used in H2 GUI Console is wrong.
 
 In the browser, change the database url to jdbc:h2:mem:testdb (Shown in the screen below).
 
 ![](images/h2-solution-image.png)
 
+You should be good to go!
 
-### Q :  H2 Console is not Launched up?
+### Error :  H2 Console is not Launched up?
 
 Try enabling it in the application.properties
 
@@ -2705,7 +2734,7 @@ It knows that you are using an inmemory database H2 and It knows the default url
 ### Q :  Can you give an example for ReadOnly as true in Transaction management?
 - When you read stuff from the database, user details or any other details, you wanna set read only on the transaction so that Hibernate does not need to check for changes to the entities. This is more efficient.
 
-### Q :  How do I solve MultipleBagFetchException?
+### Error :  org.hibernate.loader.MultipleBagFetchException
 ```
 Caused by: org.hibernate.loader.MultipleBagFetchException: cannot simultaneously fetch multiple bags: [com.mypackage.jpa.hibernate.jpahibernate.entity.Student.courses, com.mypackage.jpa.hibernate.jpahibernate.entity.Course.reviews]
 ```
@@ -2714,7 +2743,7 @@ It looks like this is a bug with Hibernate. Hibernate doesn't like two collectio
 
 This thread is a good start for more approaches - https://stackoverflow.com/questions/4334970/hibernate-cannot-simultaneously-fetch-multiple-bags
 
-### Q :  How do I solve BeanCreationException - java.lang.IllegalArgumentException: At least one JPA metamodel must be present
+### Error :  BeanCreationException - java.lang.IllegalArgumentException: At least one JPA metamodel must be present
 
 ```
 org.springframework.beans.factory.BeanCreationException: Error creating bean with name ' ': Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: At least one JPA metamodel must be present!
@@ -2722,7 +2751,8 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 
 This is because of conflicts with older version of Hibernate.
 
-Ensure you are using the latest recommended version of Spring Boot - 2.0.0.M3
+Ensure you are using the recommended version of Spring Boot - 2.0.0.M3
+
 
 ### Q :  Is it mandatory to specify @Repository on a repository which is extending JPARepository?
 
@@ -2818,7 +2848,7 @@ Two things that are typically a problem
 - Annotate repository class with @Repository
 - Try adding the annotation @EnableJpaRepositories(basePackageClasses = ...) with the right value for basePackageClasses next to @SpringBootApplication on the Spring Boot Application class.
 
-### Q :  Exception - Detached object passed to persist
+### Error :  Detached object passed to persist
 
 Consider the code
 ```
@@ -2832,9 +2862,7 @@ This is because an id on the Course is set - 200L.  To fix it you can create a n
 
 > Hibernate distinguishes between transient and detached objects and persist works only with transient objects. If persist concludes the object is detached (which it will because the ID is set), it will return the "detached object passed to persist”
 
-## Others
-
-### Q :  java.lang.NoClassDefFoundError: javax/wsdl/extensions/ExtensibilityElement
+### Error :  java.lang.NoClassDefFoundError: javax/wsdl/extensions/ExtensibilityElement
 
 ```
 SOAP Web Service - ationConfigEmbeddedWebApplicationContext
@@ -2850,7 +2878,32 @@ Make sure you have this dependency in the pom.xml
 </dependency>
 ```
 
-### Q :  JUnit 4 and JUnit 5
+### Q :  How do authentication with jwt to service REST??
+
+I’m working on a course for Full Stack Developer with REST APIs (on Spring Boot) connecting to a frontend (Angular and React) and this is exactly the stuff that needs attention.
+
+Here’s a good reference - https://medium.com/@nydiarra/secure-a-spring-boot-rest-api-with-json-web-token-reference-to-angular-integration-e57a25806c50
+
+
+## Unit Testing
+
+### Q :  What is a mockito answer?
+
+Here's a great starting point https://testing.googleblog.com/2014/03/whenhow-to-use-mockito-answer.html
+
+### Q :  How do you mock a private method that requires arguments?
+
+```
+PowerMockito.when(SomeClass.class, "somePrivateMethodName", argument1, argument2).thenReturn(returnValue);
+```
+
+### Q :  How to make JUnit run at regular intervals of time?
+
+I love Infinitest - https://infinitest.github.io/
+
+This keeps running your unit tests in the back ground. You can focus on your code.
+
+### Q :  Annotation Changes - JUnit 4 vs JUnit 5
 Annotation Changes in JUnit 5
 
 - @Before annotation is renamed to @BeforeEach
@@ -2859,18 +2912,106 @@ Annotation Changes in JUnit 5
 - @AfterClass annotation is renamed to @AfterAll
 - @Ignore annotation is renamed to @Disabled
 
-### Q :  How do authentication with jwt to service REST??
+## You and in28Minutes
 
-I’m working on a course for Full Stack Developer with REST APIs (on Spring Boot) connecting to a frontend (Angular and React) and this is exactly the stuff that needs attention.
+### Q :  What should you do to make the best use of our courses?
 
-Here’s a good reference - https://medium.com/@nydiarra/secure-a-spring-boot-rest-api-with-json-web-token-reference-to-angular-integration-e57a25806c50
+What is the use of all these numbers?
+- 99000+ - Students!
+- 7000+ - 5 Star Reviews on our Courses
+- >100 - Hours of Course Content
 
-### Q :  How to make JUnit run at regular intervals of time?
+Not useful unless you make the best use of these.
 
-I love Infinitest - https://infinitest.github.io/
+Learn something new for atleast half an hour every day! 
 
-This keeps running your unit tests in the back ground. You can focus on your code.
+If you do it for 100 days consecutively, it becomes a habit. Good Habits are great things to have.
 
-## The End
+> If you are not able to commit time on the courses, then read this - "The in28Minutes Way" - https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-Way
+
+Open up your mobile and set a daily reminder now!
+
+### Q :  Why should you learn from in28Minutes?
+
+Read this - "The in28Minutes Way" - https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-Way
+
+Some facts
+- 75% - Percentage of New Java Projects/Microservices using Spring/Spring Boot
+- 300% - Increase in Microservices using Spring Boot in the last two years!
+- 70% - Percentage of Real World projects using Maven
+- 70% - Percentage of Real World Projects using Git as Version Control. Fork, Like and Play!
+- 10+ - We are in the world of Microservices. We create a number of small microservices. That means understand how to set up projects is a very important skill. We help you learn that by creating a number of small projects during this course.
+- 80/20 - Most Important Rule that dictates things for in28Minutes. 
+
+> Remember if you Listen, Watch, Do and Repeat. You Retain More of What you learn.
+
+Once you realize the importance of what you are learning, committing to your goal becomes easy. Think and find at least 28 minutes in your day for doing this. Good Luck. 
+
+### Q :  What is the focus of each of your courses?
+
+Here are the courses and their focus areas:
+
+- Master Microservices with Spring Boot & Spring Cloud
+  - Expert - Microservices with Spring Cloud
+    - Setup Centralized Microservices Configuration with Spring Cloud Config Server
+    - Implement client side load balancing (Ribbon), Dynamic scaling(Eureka Naming Server) and an API Gateway (Zuul)
+    - Distributed tracing for microservices with Spring Cloud Sleuth and Zipkin
+    - Fault Tolerance for microservices with Hystrix
+  - Expert - RESTful API and Web Services with Spring Boot
+    - Best Practices in Designing RESTful web services
+    - Implement Exception Handling, Validation, HATEOAS and filtering for RESTful Web Services
+    - Version and Document (using Swagger) Your RESTful Web Services
+  - Introduction Modules 
+    - Spring Boot 
+    - JPA
+- Master Web Services and REST API with Spring Boot
+  - Expert - SOAP Web Services with Spring Boot
+    - Understand WSDL, SOAP Header, SOAP Body, SOAP Fault, XSD, JAXB and EndPoint
+    - Use Contract First Approach to Develop Web Services
+  - Expert - Design and Develop RESTful API and Web Services with Spring Boot
+    - Best Practices in Designing RESTful web services
+    - Implement Exception Handling, Validation, HATEOAS and filtering for RESTful Web Services
+    - Version and Document (using Swagger) Your RESTful Web Services
+    - Connect web services to JPA/Hibernate
+  - Introduction Modules 
+    - Spring Boot
+- Master Hibernate & JPA with Spring Boot in 100 Steps
+  - Expert - JPA & Hibernate with Spring Boot
+    - Fundametals - Entities, Relationships, Inheritance Mappings and Annotations
+    - Relationships in depth - One to One, Many to One and Many to Many
+    - Querying data - JPQL, Criteria API and Native Queries
+    - Caching - First Level Cache and Second Level Cache with EhCache
+    - Performance tuning your JPA application with Hibernate - Solve N+1 Queries Issue
+  - Introduction Modules 
+    - Spring, Spring Boot, Spring JDBC, Spring Data JPA and Spring Data REST
+- Learn Spring Boot in 100 Steps - Beginner to Expert
+  - Expert - Fundamentals of Spring Boot
+    - Magic of Spring Boot - Auto Configuration, Spring Initializr and Starter Projects
+    - Develop a Web Application connecting to JPA/Hibernate Step by Step with Spring MVC and Spring Boot
+    - Understand Spring MVC in depth - DispatcherServlet , Model, Controllers and ViewResolver
+    - Externalise application configuration using Spring Boot Profiles and Dynamic Configuration
+    - Monitoring
+    - Write great Unit and Integration tests using Spring Boot Starter Test
+    - Use a wide variety of Spring Boot Starter Projects - Spring Boot Web, Spring Boot Test, Spring Boot Data JPA, Spring Boot Data REST
+    - Explore the embedded servlet container options provided by Spring Boot - Tomcat, Jetty and Undertow
+    - Make best use of Spring Boot Actuator and Spring Boot Developer Tools
+  - Introduction Modules 
+    - Spring, JUnit and Mockito.
+- Spring Master Class - Beginner to Expert in 100 Steps
+  - Expert - Fundamentals of Spring Framework
+    - Dependency Injection, IOC Container, Application Context and Bean Factory.
+    - Spring Annotations - @Autowired, @Component, @Service, @Repository, @Configuration, @Primary
+    - Unit tests with XML, Java Application Contexts and Mockito
+  - Introduction Modules
+    - Maven, JUnit, Mockito and Spring Boot
+
+### Q :  How to improve Logical Skills?
+Logical skills are difficult to acquire but are among the things which will help you through out your programming career.
+
+There are three ways - Practice, Practice and More Practice.
+
+I would suggest joining a programming contest like CodeChef or TopCoder for a start. Once you start being active there, you will understand everything else.
+
+
 Wow! You are incredible! If you got here, you must be a 28Minuter and you should understand "The in28Minutes Way"
 - https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-Way

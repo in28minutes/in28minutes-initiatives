@@ -1,9 +1,9 @@
 # The in28Minutes initiatives
 
-Read abou
-- [The-in28Minutes-Way](The-in28Minutes-Way)
-- [The-in28Minutes-connect](in28Minutes-connect)
-- [The-in28Minutes-TroubleshootingGuide-And-FAQ](The-in28Minutes-TroubleshootingGuide-And-FAQ)
+Read about
+- Our Journey to 100,000 Students, Our Love and Beliefs - [The-in28Minutes-Way](The-in28Minutes-Way)
+- Establishing a connect between Experts and the Learners - [The-in28Minutes-connect](in28Minutes-connect)
+- in28Minutes Troubleshooting Guide and FAQ - [The-in28Minutes-TroubleshootingGuide-And-FAQ](The-in28Minutes-TroubleshootingGuide-And-FAQ)
 
 ## The End
 

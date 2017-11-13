@@ -3016,3 +3016,19 @@ I would suggest joining a programming contest like CodeChef or TopCoder for a st
 
 Wow! You are incredible! If you got here, you must be a 28Minuter and you should understand "The in28Minutes Way"
 - https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-Way
+
+## The End
+
+Wow! Wasn't it a wonderful read? We would love to hear your thoughts.  
+To find out more about our courses visit http://www.in28minutes.com
+
+Share on Twitter - https://twitter.com/home?status=Having%20a%20great%20time!%20%0A%20%23in28Minutes%20%23ImLearningIn28Minutes
+
+#in28Minutes #ImLearningIn28Minutes #ImLovingIn28Minutes 
+
+Good Luck and Keep Learning in28Minutes
+- Linked In : https://www.linkedin.com/in/rangakaranam/​
+- Facebook  : https://www.facebook.com/in28Minutes​
+- Twitter   : https://twitter.com/in28Minutes​
+- YouTube   : https://www.youtube.com/rithustutorials​
+​

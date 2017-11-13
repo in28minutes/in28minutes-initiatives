@@ -613,4 +613,14 @@ We want you to achieve what you want by making you experts and enjoy what you ar
 Wow! Wasn't it a wonderful read? We would love to hear your thoughts.  
 To find out more about our courses visit http://www.in28minutes.com
 
+Share on Twitter - https://twitter.com/home?status=Having%20a%20great%20time!%20%0A%20%23in28Minutes%20%23ImLearningIn28Minutes
+
+#in28Minutes #ImLearningIn28Minutes #ImLovingIn28Minutes 
+
+Good Luck and Keep Learning in28Minutes
+- Linked In : https://www.linkedin.com/in/rangakaranam/​
+- Facebook  : https://www.facebook.com/in28Minutes​
+- Twitter   : https://twitter.com/in28Minutes​
+- YouTube   : https://www.youtube.com/rithustutorials​
+​
 ![](images/udemy-courses.png)

@@ -389,9 +389,6 @@ Maven plugin uses a settings file where the configuration can be set. Its path i
 ### Error : Files Downloaded by Maven are Corrupt
 Typical Errors
 ```
-SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
-SLF4J: Defaulting to no-operation (NOP) logger implementation
-SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 Exception in thread "main" java.lang.NoClassDefFoundError: ch/qos/logback/classic/turbo/TurboFilter
 at java.lang.Class.getDeclaredConstructors0(Native Method)
 at java.lang.Class.privateGetDeclaredConstructors(Unknown Source)
@@ -1283,26 +1280,18 @@ Spring 5.0 and Spring Boot 2.0 requires Java 8 or later. Java 6 and 7 are no lon
 Recommended Reading 
 - https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.0.0-M1-Release-Notes
 
-### Error :  Getting SLF4J errors and not getting logger output in Lecture 41 - Step 19?
+### Error :  Getting SLF4J errors and not getting logger output in  Step 19?
 
-TODO
-
-If you're like me and you actually tried to update the remaining applications after this lecture to use only spring-core and spring-context, you will get some SLF4J errors (which are not very helpful) and you won't get any logger output.
-
-One way to fix this is to replace the dependency of slf4j-api with slf4j-log4j, then add the following log4j.properties file under src/main/resources:
-
---- log4j.properties ---
 ```
-log4j.rootLogger=INFO, console
-log4j.appender.console=org.apache.log4j.ConsoleAppender
-log4j.appender.console.layout=org.apache.log4j.PatternLayout
-
-# Print the date in ISO 8601 format
-log4j.appender.console.layout.ConversionPattern=%d [%t] %-5p %c - %m%n
-
-# make course classes have DEBUG level logging
-log4j.logger.com.in28minutes=DEBUG
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
 ```
+As we start removing Spring Boot and bringing in Spring core,in Step 19 of Spring In Depth Section, you would see 
+- A few SLF4J errors
+- Logging does not work
+
+Do not worry about them. We will fix them in the next step Step 20 by adding logback as the logging framework.
 
 ### Error : No Spring WebApplicationInitializer types detected on classpath
 

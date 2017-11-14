@@ -1,3 +1,48 @@
+* [Java Web Application in 25 Easy Steps](#java-web-application-in-25-easy-steps)
+  * [About in28Minutes](#about-in28minutes)
+  * [Github Repository](#github-repository)
+  * [Selection of the Wonderful 5-Star Reviews](#selection-of-the-wonderful-5-star-reviews)
+    + [Hands-on](#hands-on)
+    + [We don't teach frameworks. We teach building applications!](#we-don-t-teach-frameworks-we-teach-building-applications-)
+    + [Learn quickly](#learn-quickly)
+  * [Step By Step Overview](#step-by-step-overview)
+  * [Step By Step Details](#step-by-step-details)
+    + [Step 01 : Up and running with a Web Application in Tomcat](#step-01---up-and-running-with-a-web-application-in-tomcat)
+    + [Step 02 : First JSP](#step-02---first-jsp)
+      - [Notes](#notes)
+      - [Snippets](#snippets)
+    + [Step 03 : Adding a Get Parameter name](#step-03---adding-a-get-parameter-name)
+      - [Notes](#notes-1)
+      - [Snippets](#snippets-1)
+    + [Step 04 : Adding another Get Parameter Password](#step-04---adding-another-get-parameter-password)
+      - [Snippets](#snippets-2)
+    + [Step 05 : Let's add a form](#step-05---let-s-add-a-form)
+    + [Step 06 : New Form and doPost](#step-06---new-form-and-dopost)
+    + [Step 07 : Adding Password and Validation of User Id / Password combination](#step-07---adding-password-and-validation-of-user-id---password-combination)
+    + [Step 08 : Adding a TodoService and Todos to welcome page](#step-08---adding-a-todoservice-and-todos-to-welcome-page)
+    + [Step 09 : Bit of Refactoring - Packages](#step-09---bit-of-refactoring---packages)
+    + [Step 10 : Redirect from One Servlet to another - New TodoServlet.](#step-10---redirect-from-one-servlet-to-another---new-todoservlet)
+    + [Step 11 : First JSTL Tag : Using a Loop around todos](#step-11---first-jstl-tag---using-a-loop-around-todos)
+    + [Step 12 : Difference between Session and Request Scopes](#step-12---difference-between-session-and-request-scopes)
+    + [Step 13 : Add a New Todo](#step-13---add-a-new-todo)
+    + [Step 14 : Delete Todo with equals and hashcode methods](#step-14---delete-todo-with-equals-and-hashcode-methods)
+    + [Step 15 : Adding webjars for jquery and bootstrap](#step-15---adding-webjars-for-jquery-and-bootstrap)
+    + [Step 16 : Missing Step :) We want you to take a break. Nothing in here..](#step-16---missing-step----we-want-you-to-take-a-break-nothing-in-here)
+    + [Step 17 : Updating Bootstrap to 3.3.6](#step-17---updating-bootstrap-to-336)
+    + [Step 18 : More Refactoring](#step-18---more-refactoring)
+    + [Step 19 : Adding a Filter for More Security.](#step-19---adding-a-filter-for-more-security)
+    + [Step 20 : Logout](#step-20---logout)
+    + [Step 21 : Theory : Understand Maven and Tomcat](#step-21---theory---understand-maven-and-tomcat)
+    + [Step 22 : Theory : Servlet LifeCycle](#step-22---theory---servlet-lifecycle)
+    + [Step 23 : Theory : Model 1 and Model 2 MVC Architectures](#step-23---theory---model-1-and-model-2-mvc-architectures)
+    + [Step 24 : Moving Add Functionality to a New Page.](#step-24---moving-add-functionality-to-a-new-page)
+    + [Step 25 : Add Category Field](#step-25---add-category-field)
+    + [Step 26 : Format the JSPs better.](#step-26---format-the-jsps-better)
+    + [Step 27 : JSP Fragments](#step-27---jsp-fragments)
+- [More about in28Minutes](#more-about-in28minutes)
+        * [If you loved the course](#if-you-loved-the-course)
+
+
 ## Java Web Application in 25 Easy Steps
 
 Developing your first Java Web Application using JSP and Servlets is fun.
@@ -14,13 +59,11 @@ Read about what we love, why we create courses and our beliefs - [The in28Minute
 
 ![](images/udemy-total-students.png)
 
-![](images/in28Minutes-Java-Course-Roadmap.png)
-
 ## Github Repository
 
 - https://github.com/in28minutes/JavaWebApplicationStepByStep
 
-## Selection of the Wonderful 5-Star Reviews
+## Wonderful 5-Star Reviews
 
 ### Hands-on
 
@@ -614,8 +657,6 @@ Bootstrap Sample Page
 
 # More about in28Minutes
 
-To find out more about our courses visit http://www.in28minutes.com
-
 We would love to hear your thoughts.  
 
 ##### If you loved the course
@@ -624,10 +665,12 @@ We would love to hear your thoughts.
 
 Share on Twitter - https://twitter.com/home?status=Having%20a%20great%20time!%20%0A%20%23in28Minutes%20%23ImLearningIn28Minutes
 
+![](images/in28Minutes-Java-Course-Roadmap.png)
+
 Good Luck and Keep Learning in28Minutes
 - Linked In : https://www.linkedin.com/in/rangakaranam/​
 - Facebook  : https://www.facebook.com/in28Minutes​
 - Twitter   : https://twitter.com/in28Minutes​
 - YouTube   : https://www.youtube.com/rithustutorials​
 ​
-![](images/udemy-courses.png)
+To find out more about our courses and get special offers, visit http://www.in28minutes.com

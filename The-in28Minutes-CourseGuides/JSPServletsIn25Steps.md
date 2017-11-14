@@ -1,48 +1,3 @@
-* [Java Web Application in 25 Easy Steps](#java-web-application-in-25-easy-steps)
-  * [About in28Minutes](#about-in28minutes)
-  * [Github Repository](#github-repository)
-  * [Selection of the Wonderful 5-Star Reviews](#selection-of-the-wonderful-5-star-reviews)
-    + [Hands-on](#hands-on)
-    + [We don't teach frameworks. We teach building applications!](#we-don-t-teach-frameworks-we-teach-building-applications-)
-    + [Learn quickly](#learn-quickly)
-  * [Step By Step Overview](#step-by-step-overview)
-  * [Step By Step Details](#step-by-step-details)
-    + [Step 01 : Up and running with a Web Application in Tomcat](#step-01---up-and-running-with-a-web-application-in-tomcat)
-    + [Step 02 : First JSP](#step-02---first-jsp)
-      - [Notes](#notes)
-      - [Snippets](#snippets)
-    + [Step 03 : Adding a Get Parameter name](#step-03---adding-a-get-parameter-name)
-      - [Notes](#notes-1)
-      - [Snippets](#snippets-1)
-    + [Step 04 : Adding another Get Parameter Password](#step-04---adding-another-get-parameter-password)
-      - [Snippets](#snippets-2)
-    + [Step 05 : Let's add a form](#step-05---let-s-add-a-form)
-    + [Step 06 : New Form and doPost](#step-06---new-form-and-dopost)
-    + [Step 07 : Adding Password and Validation of User Id / Password combination](#step-07---adding-password-and-validation-of-user-id---password-combination)
-    + [Step 08 : Adding a TodoService and Todos to welcome page](#step-08---adding-a-todoservice-and-todos-to-welcome-page)
-    + [Step 09 : Bit of Refactoring - Packages](#step-09---bit-of-refactoring---packages)
-    + [Step 10 : Redirect from One Servlet to another - New TodoServlet.](#step-10---redirect-from-one-servlet-to-another---new-todoservlet)
-    + [Step 11 : First JSTL Tag : Using a Loop around todos](#step-11---first-jstl-tag---using-a-loop-around-todos)
-    + [Step 12 : Difference between Session and Request Scopes](#step-12---difference-between-session-and-request-scopes)
-    + [Step 13 : Add a New Todo](#step-13---add-a-new-todo)
-    + [Step 14 : Delete Todo with equals and hashcode methods](#step-14---delete-todo-with-equals-and-hashcode-methods)
-    + [Step 15 : Adding webjars for jquery and bootstrap](#step-15---adding-webjars-for-jquery-and-bootstrap)
-    + [Step 16 : Missing Step :) We want you to take a break. Nothing in here..](#step-16---missing-step----we-want-you-to-take-a-break-nothing-in-here)
-    + [Step 17 : Updating Bootstrap to 3.3.6](#step-17---updating-bootstrap-to-336)
-    + [Step 18 : More Refactoring](#step-18---more-refactoring)
-    + [Step 19 : Adding a Filter for More Security.](#step-19---adding-a-filter-for-more-security)
-    + [Step 20 : Logout](#step-20---logout)
-    + [Step 21 : Theory : Understand Maven and Tomcat](#step-21---theory---understand-maven-and-tomcat)
-    + [Step 22 : Theory : Servlet LifeCycle](#step-22---theory---servlet-lifecycle)
-    + [Step 23 : Theory : Model 1 and Model 2 MVC Architectures](#step-23---theory---model-1-and-model-2-mvc-architectures)
-    + [Step 24 : Moving Add Functionality to a New Page.](#step-24---moving-add-functionality-to-a-new-page)
-    + [Step 25 : Add Category Field](#step-25---add-category-field)
-    + [Step 26 : Format the JSPs better.](#step-26---format-the-jsps-better)
-    + [Step 27 : JSP Fragments](#step-27---jsp-fragments)
-- [More about in28Minutes](#more-about-in28minutes)
-        * [If you loved the course](#if-you-loved-the-course)
-
-
 ## Java Web Application in 25 Easy Steps
 
 Developing your first Java Web Application using JSP and Servlets is fun.
@@ -111,9 +66,27 @@ Read about what we love, why we create courses and our beliefs - [The in28Minute
 - Step 26 : Format the JSPs better.
 - Step 27 : JSP Fragments
 
+## Installation Guide
+
+### Installing Java, Eclipse & Embedded Maven
+
+- [Installation Video](https://www.youtube.com/playlist?list=PLBBog2r6uMCSmMVTW_QmDLyASBvovyAO3)
+- [GIT Repository For Installation](https://github.com/in28minutes/getting-started-in-5-steps)
+- [PDF](https://github.com/in28minutes/SpringIn28Minutes/blob/master/InstallationGuide-JavaEclipseAndMaven_v2.pdf)
+
+### Troubleshooting Guide
+
+- [A 50 page troubleshooting guide with more than 200 Questions answered](https://github.com/in28minutes/in28minutes-initiatives/blob/master/The-in28Minutes-TroubleshootingGuide-And-FAQ)
+
 ## Step By Step Details
 
 ### Step 01 : Up and running with a Web Application in Tomcat
+
+In this step, we will quickly setup a running web application.
+
+> Tip : This is one of the few steps where you copy code in! We would want to ensure that you have a running web application without any mistakes.
+
+You can run the project using Run as > Maven build > tomcat7:run.
 
 You can copy code from 
 - [Step 01 on Github Repository](https://github.com/in28minutes/JavaWebApplicationStepByStep/blob/master/Step01.md)
@@ -235,6 +208,8 @@ public class LoginServlet extends HttpServlet {
 
 ### Step 02 : First JSP
 
+[Complete code](https://github.com/in28minutes/JavaWebApplicationStepByStep/blob/master/Step02.md)
+
 #### Notes
 - Create LoginServlet again
 - Redirect to a view - JSP
@@ -260,6 +235,8 @@ My First JSP!!!
 
 ### Step 03 : Adding a Get Parameter name
 
+[Complete code](https://github.com/in28minutes/JavaWebApplicationStepByStep/blob/master/Step03.md)
+
 #### Notes
 - Passing a Request Parameter Name
 
@@ -275,6 +252,8 @@ My First JSP!!! My name is ${name}
 
 ### Step 04 : Adding another Get Parameter Password
 
+[Complete code](https://github.com/in28minutes/JavaWebApplicationStepByStep/blob/master/Step04.md)
+
 #### Snippets
 \src\main\java\webapp\LoginServlet.java
 ```
@@ -286,6 +265,11 @@ My First JSP!!! My name is ${name}
 My First JSP!!! My name is ${name} and password is ${password}
 ```
 ### Step 05 : Let's add a form
+
+[Complete code](https://github.com/in28minutes/JavaWebApplicationStepByStep/blob/master/Step05.md)
+
+#### Snippets
+
 \src\main\java\webapp\LoginServlet.java
 ```
 @Override
@@ -319,6 +303,10 @@ Welcome ${name}
 </html>
 ```
 ### Step 06 : New Form and doPost
+
+
+[Complete code](https://github.com/in28minutes/JavaWebApplicationStepByStep/blob/master/Step06.md)
+
 \src\main\java\webapp\LoginServlet.java
 ```
 @Override
@@ -341,10 +329,13 @@ Welcome ${name}
 ```
 
 ### Step 07 : Adding Password and Validation of User Id / Password combination
+
+[Complete code](https://github.com/in28minutes/JavaWebApplicationStepByStep/blob/master/Step07.md)
+
+#### Snippets
+
 \src\main\java\webapp\LoginService.java
 ```
-package webapp;
-
 public class LoginService {
 	public boolean validateUser(String user, String password) {
 		return user.equalsIgnoreCase("in28Minutes") && password.equals("dummy");
@@ -388,6 +379,11 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
 
 ### Step 08 : Adding a TodoService and Todos to welcome page
 
+
+[Complete code](https://github.com/in28minutes/JavaWebApplicationStepByStep/blob/master/Step08.md)
+
+#### Snippets
+
 \src\main\java\webapp\LoginServlet.java
 ```
 private LoginService service = new LoginService();
@@ -415,8 +411,6 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
 ```
 \src\main\java\webapp\todo\Todo.java
 ```
-package webapp.todo;
-
 public class Todo {
 
 	public Todo(String name) {
@@ -442,8 +436,6 @@ public class Todo {
 ```
 \src\main\java\webapp\todo\TodoService.java
 ```
-package webapp.todo;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -477,8 +469,17 @@ ${todos}
 </html>
 ```
 ### Step 09 : Bit of Refactoring - Packages
-- Basic Refactoring
+
+Basic Refactoring
+
+[Complete code](https://github.com/in28minutes/JavaWebApplicationStepByStep/blob/master/Step09.md)
+
 ### Step 10 : Redirect from One Servlet to another - New TodoServlet.
+
+
+[Complete code](https://github.com/in28minutes/JavaWebApplicationStepByStep/blob/master/Step10.md)
+
+#### Snippets
 
 src\main\java\in28minutes\login\LoginServlet.java
 ```
@@ -502,15 +503,6 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
 
 src\main\java\in28minutes\todo\TodoServlet.java
 ```
-package in28minutes.todo;
-
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns = "/todo.do")
 public class TodoServlet extends HttpServlet {
@@ -542,6 +534,11 @@ ${todos}
 </html>
 ```
 ### Step 11 : First JSTL Tag : Using a Loop around todos
+
+[Complete code](https://github.com/in28minutes/JavaWebApplicationStepByStep/blob/master/Step11.md)
+
+#### Snippets
+
 pom.xml
 ```
         <dependency>
@@ -583,10 +580,184 @@ Your Todos are
 > Recommendation : Clean up objects in session when they are not needed anymore.
 
 ### Step 13 : Add a New Todo
+
+[Complete code](https://github.com/in28minutes/JavaWebApplicationStepByStep/blob/master/Step13.md)
+
+#### Snippets
+
+src\main\java\in28minutes\todo\TodoService.java
+
+```
+public void addTodo(String todo) {
+	todos.add(new Todo(todo));
+}
+```
+src\main\java\in28minutes\todo\TodoServlet.java
+```
+
+@Override
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+		throws IOException, ServletException {
+	String todo = request.getParameter("todo");
+	if ("".equals(todo)) {
+		request.setAttribute("errorMessage", "Enter a valid todo");
+	} else {
+		todoService.addTodo(todo);
+	}
+	request.setAttribute("todos", todoService.retrieveTodos());
+	request.getRequestDispatcher("/WEB-INF/views/todo.jsp").forward(request, response);
+}
+
+```
+src\main\webapp\WEB-INF\views\todo.jsp
+```
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<html>
+<head>
+<title>Yahoo!!</title>
+</head>
+<body>
+<H1>Welcome ${name}</H2>
+<div>
+Your Todos are
+<ol>
+<c:forEach items="${todos}" var="todo">
+   <li>${todo.name}</li>
+</c:forEach>
+</ol>
+
+<p><font color="red">${errorMessage}</font></p>
+<form method="POST" action="/todo.do">
+New Todo : <input name="todo" type="text" /> <input name="add" type="submit" />
+</form>
+
+</div>
+</body>
+</html>
+```
+
 ### Step 14 : Delete Todo with equals and hashcode methods
+
+[Complete code](https://github.com/in28minutes/JavaWebApplicationStepByStep/blob/master/Step14.md)
+
+#### Snippets
+
+src\main\java\in28minutes\todo\DeleteTodoServlet.java
+```
+@WebServlet(urlPatterns = "/delete-todo.do")
+public class DeleteTodoServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+	private TodoService todoService = new TodoService();
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		todoService.deleteTodo(request.getParameter("todo"));
+		response.sendRedirect("/todo.do");
+	}
+}
+```
+src\main\java\in28minutes\todo\TodoService.java
+```
+public void deleteTodo(String todo) {
+	todos.remove(new Todo(todo));
+}
+```
+src\main\webapp\WEB-INF\views\todo.jsp
+```
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<html>
+<head>
+<title>Yahoo!!</title>
+</head>
+<body>
+<H1>Welcome ${name}</H2>
+<div>
+Your Todos are
+<ol>
+<c:forEach items="${todos}" var="todo">
+   <li>${todo.name} <a href="/deletetodo.do?todo=${todo.name}">Delete</a></li> 
+</c:forEach>
+</ol>
+
+<p><font color="red">${errorMessage}</font></p>
+<form method="POST" action="/todo.do">
+New Todo : <input name="todo" type="text" /> <input name="add" type="submit" />
+</form>
+</div>
+</body>
+</html>
+```
+
 ### Step 15 : Adding webjars for jquery and bootstrap
-### Step 16 : Missing Step :) We want you to take a break. Nothing in here..
+
+[Complete code](https://github.com/in28minutes/JavaWebApplicationStepByStep/blob/master/Step15.md)
+
+#### Snippets
+
+pom.xml
+
+```
+<dependency>
+	<groupId>org.webjars</groupId>
+	<artifactId>bootstrap</artifactId>
+	<version>3.3.6</version>
+</dependency>
+<dependency>
+	<groupId>org.webjars</groupId>
+	<artifactId>jquery</artifactId>
+	<version>1.9.1</version>
+</dependency>
+```
+
+src\main\webapp\WEB-INF\views\todo.jsp
+```
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Yahoo!!</title>
+<!-- Bootstrap core CSS -->
+<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+</head>
+<body>
+	<H1>Welcome ${name}</H1>
+	<div>
+		Your Todos are
+		<ol>
+			<c:forEach items="${todos}" var="todo">
+				<li>${todo.name} <a href="/deletetodo.do?todo=${todo.name}">Delete</a></li>
+			</c:forEach>
+		</ol>
+
+		<p>
+			<font color="red">${errorMessage}</font>
+		</p>
+		<form method="POST" action="/todo.do">
+			New Todo : <input name="todo" type="text" /> <input name="add"
+				type="submit" />
+		</form>
+	</div>
+	<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+	<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</body>
+</html>
+```
+
+### Step 16 : Missing Step :) 
+
+We want you to take a break. Nothing in here..
+
 ### Step 17 : Updating Bootstrap to 3.3.6
+
+- Let's use Bootstrap to make our todo's look better.
+- We will make improvements to reduce duplication in next steps.
+
+[Complete code](https://github.com/in28minutes/JavaWebApplicationStepByStep/blob/master/Step17.md)
+
+#### Snippets
 
 Bootstrap Sample Page
 ```
@@ -644,16 +815,377 @@ Bootstrap Sample Page
 </html>
 ```
 
+src\main\webapp\WEB-INF\views\todo.jsp
+```
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Yahoo!!</title>
+<!-- Bootstrap core CSS -->
+<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<style>
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+	background-color: #f5f5f5;
+}
+
+.footer .container {
+width: auto;
+max-width: 680px;
+padding: 0 15px;
+}
+</style>
+</head>
+
+<body>
+
+	<nav role="navigation" class="navbar navbar-default">
+
+		<div class="">
+			<a href="/" class="navbar-brand">Brand</a>
+		</div>
+
+		<div class="navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="/todo.do">Todos</a></li>
+				<li><a href="http://www.in28minutes.com">In28Minutes</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="/login.do">Login</a></li>
+			</ul>
+		</div>
+
+	</nav>
+
+	<div class="container">
+		<H1>Welcome ${name}</H1>
+
+		Your Todos are
+		<ol>
+			<c:forEach items="${todos}" var="todo">
+				<li>${todo.name}&nbsp;<a
+					href="/deletetodo.do?todo=${todo.name}">Delete</a></li>
+			</c:forEach>
+		</ol>
+
+		<p>
+			<font color="red">${errorMessage}</font>
+		</p>
+		<form method="POST" action="/todo.do">
+			New Todo : <input name="todo" type="text" /> <input name="add"
+				type="submit" />
+		</form>
+	</div>
+
+	<footer class="footer">
+		<div class="container">
+			<p>footer content</p>
+		</div>
+	</footer>
+
+	<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+	<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
+```
+
+
 ### Step 18 : More Refactoring
+
+> The Boy Scouts have a rule: "Always leave the campground cleaner than you found it." 
+
+Let's follow the boy scout rule by refactoring a little bit.
+
 ### Step 19 : Adding a Filter for More Security.
+
+Lets ensure that a user cannot get to todo's page without logging in!
+
+We do that by adding in a Filter to intercept all requests matching the pattern *.do.
+
+#### Snippets
+
+### src/main/java/com/in28minutes/filter/LoginRequiredFilter.java
+```
+package com.in28minutes.filter;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+
+@WebFilter(urlPatterns = "*.do")
+public class LoginRequiredFilter implements Filter {
+
+	@Override
+	public void destroy() {
+
+	}
+
+	@Override
+	public void doFilter(ServletRequest servletRequest,
+			ServletResponse servletResponse, FilterChain chain)
+			throws IOException, ServletException {
+		HttpServletRequest request = (HttpServletRequest) servletRequest;
+
+		if (request.getSession().getAttribute("name") != null) {
+			chain.doFilter(servletRequest, servletResponse);
+		} else {
+			request.getRequestDispatcher("/login.do").forward(servletRequest,
+					servletResponse);
+		}
+	}
+
+	@Override
+	public void init(FilterConfig arg0) throws ServletException {
+	}
+
+}
+```
 ### Step 20 : Logout
+
+- What's the use of an application without a logout?
+	- Add logout link to the todo page
+	- Add a Logout Servlet to handle the request
+
+#### Snippets
+
+### src/main/java/com/in28minutes/logout/LogoutServlet.java
+```
+package com.in28minutes.logout;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(urlPatterns = "/logout.do")
+public class LogoutServlet extends HttpServlet {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		request.getSession().invalidate();
+		request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(
+				request, response);
+	}
+}
+```
+### src/main/webapp/WEB-INF/views/todo.jsp
+
+```
+<nav class="navbar navbar-default">
+
+	<a href="/" class="navbar-brand">Brand</a>
+
+	<ul class="nav navbar-nav">
+		<li class="active"><a href="#">Home</a></li>
+		<li><a href="/todo.do">Todos</a></li>
+		<li><a href="http://www.in28minutes.com">In28Minutes</a></li>
+	</ul>
+
+	<ul class="nav navbar-nav navbar-right">
+		<li><a href="/logout.do">Logout</a></li>
+	</ul>
+
+</nav>
+```
+
 ### Step 21 : Theory : Understand Maven and Tomcat
+
+Maven is used to manage libraries/dependencies. You don't need to manually download the jars and build the project. Maven does that for you
+- [You can read more about Maven here] (https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-TroubleshootingGuide-And-FAQ#maven)
+
+We download Tomcat server using a Maven plugin and deploy the application war to the tomcat server. So, you would not need to install tomcat manually!
+
 ### Step 22 : Theory : Servlet LifeCycle
+
+HttpServlet methods
+- init() method 
+	- called only once. 
+- service() method
+	- called once per servlet invocation
+	- looks at the request method and call the appropriate method - doPost, doGet etc
+- destroy() method
+	- called only once 
+	- when the application is brought down
+
+JSPs are also servlets. They have all the 3 methods should above.
+
 ### Step 23 : Theory : Model 1 and Model 2 MVC Architectures
+
+Model 1 Architecture 
+- JSP
+	- JSP do everything.
+	- Very complex to maintain.
+
+Model 2 Architecture 
+- Servlet
+	- Controller 
+		- Control the flow. 
+		- Decides which view to show and what model is needed to display the view.
+- JSP
+	- View - Displays the model
+- Model
+	- Todo
+
+Front Controller
+- One Controller handles all the requests
+	- It would route the requests to other servlets
+	- Spring MVC
+		- Dispatcher Servlet
+
 ### Step 24 : Moving Add Functionality to a New Page.
+
+> The Boy Scouts have a rule: "Always leave the campground cleaner than you found it." 
+
+Let's follow the boy scout rule by refactoring a little bit.
+
 ### Step 25 : Add Category Field
+
+Let's add a category field to the todo page
+- We will start with add category to model Todo
+- We would need to add it to servlets and jsp pages
+
+[Complete code](https://github.com/in28minutes/JavaWebApplicationStepByStep/blob/master/Step27.md)
+
+#### Snippets
+
+### src/main/java/com/in28minutes/todo/AddTodoServlet.java
+```
+protected void doPost(HttpServletRequest request,
+		HttpServletResponse response) throws ServletException, IOException {
+	String newTodo = request.getParameter("todo");
+	String category = request.getParameter("category");
+	todoService.addTodo(new Todo(newTodo, category));
+	response.sendRedirect("/list-todos.do");
+}
+```
+### src/main/java/com/in28minutes/todo/DeleteTodoServlet.java
+```
+protected void doGet(HttpServletRequest request,
+		HttpServletResponse response) throws ServletException, IOException {
+	todoService.deleteTodo(new Todo(request.getParameter("todo"), request
+			.getParameter("category")));
+	response.sendRedirect("/list-todos.do");
+}
+```
+### src/main/java/com/in28minutes/todo/Todo.java
+```
+package com.in28minutes.todo;
+
+public class Todo {
+	private String name;
+	private String category;
+
+	public Todo(String name, String category) {
+		super();
+		this.name = name;
+		this.category = category;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("Todo [name=%s, category=%s]", name, category);
+	}
+
+	//hashcode and equals
+
+}
+```
+### src/main/java/com/in28minutes/todo/TodoService.java
+```
+package com.in28minutes.todo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class TodoService {
+	private static List<Todo> todos = new ArrayList<Todo>();
+	static {
+		todos.add(new Todo("Learn Web Application Development", "Study"));
+		todos.add(new Todo("Learn Spring MVC", "Study"));
+		todos.add(new Todo("Learn Spring Rest Services", "Study"));
+	}
+
+	public List<Todo> retrieveTodos() {
+		return todos;
+	}
+
+	public void addTodo(Todo todo) {
+		todos.add(todo);
+	}
+
+	public void deleteTodo(Todo todo) {
+		todos.remove(todo);
+	}
+
+}
+```
+### src/main/webapp/WEB-INF/views/add-todo.jsp
+```
+<div class="container">
+	Your New Action Item:
+	<form method="POST" action="/add-todo.do">
+		Description : <input name="todo" type="text" /> <BR/> 
+		Category : <input name="category" type="text" /> <BR/>
+		<input name="add"
+			type="submit" />
+	</form>
+</div>
+```
+### src/main/webapp/WEB-INF/views/list-todos.jsp
+```
+<ol>
+	<c:forEach items="${todos}" var="todo">
+		<li>${todo.name}&nbsp;${todo.category}&nbsp;<a
+			href="/delete-todo.do?todo=${todo.name}&category=${todo.category}">Delete</a></li>
+	</c:forEach>
+</ol>
+```
+
 ### Step 26 : Format the JSPs better.
+
+> The Boy Scouts have a rule: "Always leave the campground cleaner than you found it." 
+
+Let's follow the boy scout rule by refactoring a little bit.
+
 ### Step 27 : JSP Fragments
+
+[Complete code](https://github.com/in28minutes/JavaWebApplicationStepByStep/blob/master/Step27.md)
 
 # More about in28Minutes
 

@@ -1648,7 +1648,7 @@ Hibernate Validator 5.x is the reference implementation Bean Validation 1.1!
 
 Actually, you can use any implementation of Bean Validation API.  However, there are really no other popular options.
 
-As you can see at http://beanvalidation.org/1.1/certified/, Hibernate Validator is the only one which is certified!
+As you can see at http://beanvalidation.org/2.0/, Hibernate Validator is the only one which is certified!
 
 ### Q :  Are Model objects specific to a request?
 

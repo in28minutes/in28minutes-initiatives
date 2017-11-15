@@ -304,7 +304,7 @@ Recommended Eclipse Version
 
 This video is good start for your troubleshoot embedded maven issues in Eclipse - https://www.youtube.com/watch?v=ZZw8XNz5N-c&list=PLBBog2r6uMCSmMVTW_QmDLyASBvovyAO3&index=5
 
-> In Windows, use Windows -> Preferences for Preferences.
+> In Windows, use Window -> Preferences for Preferences.
 
 There are typically 4 reasons for errors with Embedded Maven in Eclipse
 
@@ -355,7 +355,7 @@ You need to talk to maven experts in your organization to figure out the right s
 - The section below shows how to configure a proxy in Eclipse
 
 ###### Configuring a Proxy 
-Maven plugin uses a settings file where the configuration can be set. Its path is available in Eclipse at Window|Preferences|Maven|User Settings. If the file doesn't exist, create it and put on something like the example below:
+Maven plugin uses a settings file where the configuration can be set. Its path is available in Eclipse at Window -> Preferences -> Maven -> User Settings. If the file doesn't exist, create it and put on something like the example below:
 
 ```
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
@@ -523,7 +523,7 @@ You have two options
 ###### Option 1 - Kill
 
 - In Eclipse console tab, on the right hand side, click the double cross icon (Kill all terminated launches). You should see the running program highlighted by a red terminate button. You can kill the red button to kill the running application.
-- In windows, Use ctrl shift esc to launch windows task manager. Kill all java.exe or javaw.exe
+- In windows, Use Ctrl + Shift + Esc to launch windows task manager. Kill all java.exe or javaw.exe
 - In Mac, You can use one of these commands to find the PID of process using 8080
 ```
 netstat -vanp tcp | grep 8080
@@ -553,7 +553,7 @@ You have two options
 ###### Option 1 - Kill
 
 - In Eclipse console tab, on the right hand side, click the double cross icon (Kill all terminated launches). You should see the running program highlighted by a red terminate button. You can kill the red button to kill the running application.
-- In windows, Use ctrl shift esc to launch windows task manager. Kill all java.exe or javaw.exe
+- In windows, Use Ctrl + Shift + Esc to launch windows task manager. Kill all java.exe or javaw.exe
 - In Mac, You can use one of these commands to find the PID of process using 8080
 ```
 netstat -vanp tcp | grep 8080
@@ -830,7 +830,7 @@ First Step. Use Keyboard Shortcuts :)
 Its easy. Three Options.
 - Ctrl + Click on the Class Name and see if the jar is auto downloaded. 
 - Right click on your project and go to Maven -> Download JavaDoc, you can also select Maven -> Download Sources
-- Windows->preferences->Maven and there you check the box with download sources and download javadoc as well.
+- In Eclipse menus, open Window -> Preferences -> Maven and there you check the box with download sources and download javadoc as well.
 
 
 ## Intellij and/or Mac
@@ -1635,7 +1635,7 @@ Couple of Sources which might be useful for you
 
 ### Q :  What is WEB-INF exactly? Why so we need it?
 
-From the specification " A special directory exists within the application hierarchy named WEB-INF. This directory contains all things related to the application that aren’t in the document root of the application. The WEB-INFnode is not part of the public document tree of the application. No file contained in the WEB-INF directory may be served directly to a client by the container. However, the contents of theWEB-INF directory are visible to servlet code using the getResource and getResourceAsStreammethod calls on the ServletContext, and may be exposed using the RequestDispatcher calls."
+From the specification, "A special directory exists within the application hierarchy named WEB-INF. This directory contains all things related to the application that aren’t in the document root of the application. The WEB-INF node is not part of the public document tree of the application. No file contained in the WEB-INF directory may be served directly to a client by the container. However, the contents of the WEB-INF directory are visible to servlet code using the getResource and getResourceAsStream method calls on the ServletContext, and may be exposed using the RequestDispatcher calls."
 
 More Reading
 - http://stackoverflow.com/questions/19786142/what-is-web-inf-used-for-in-a-java-ee-web-application
@@ -2054,7 +2054,7 @@ management.security.enabled: FALSE
 
 ### Error :  Hal Browser and Spring Boot Actuator are not working
 
-Question Continued - You can only json response. /application, /application/status and /application/info
+Question Continued - You can only get a json response. /application, /application/status and /application/info
 
 With 2.0.0.M4 Spring Boot is making a lot of changes to Actuator. 
 

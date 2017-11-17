@@ -2,150 +2,9 @@
 ## Complete Code Example
 
 
-### /1.presentation/css/theme/README.md
-
-```
-## Dependencies
-
-Themes are written using Sass to keep things modular and reduce the need for repeated selectors across files. Make sure that you have the reveal.js development environment including the Grunt dependencies installed before proceeding: https://github.com/hakimel/reveal.js#full-setup
-
-## Creating a Theme
-
-To create your own theme, start by duplicating a ```.scss``` file in [/css/theme/source](https://github.com/hakimel/reveal.js/blob/master/css/theme/source). It will be automatically compiled by Grunt from Sass to CSS (see the [Gruntfile](https://github.com/hakimel/reveal.js/blob/master/Gruntfile.js)) when you run `grunt css-themes`.
-
-Each theme file does four things in the following order:
-
-1. **Include [/css/theme/template/mixins.scss](https://github.com/hakimel/reveal.js/blob/master/css/theme/template/mixins.scss)**
-Shared utility functions.
-
-2. **Include [/css/theme/template/settings.scss](https://github.com/hakimel/reveal.js/blob/master/css/theme/template/settings.scss)**
-Declares a set of custom variables that the template file (step 4) expects. Can be overridden in step 3.
-
-3. **Override**
-This is where you override the default theme. Either by specifying variables (see [settings.scss](https://github.com/hakimel/reveal.js/blob/master/css/theme/template/settings.scss) for reference) or by adding any selectors and styles you please.
-
-4. **Include [/css/theme/template/theme.scss](https://github.com/hakimel/reveal.js/blob/master/css/theme/template/theme.scss)**
-The template theme file which will generate final CSS output based on the currently defined variables.
-```
----
-
-### /1.presentation/plugin/markdown/example.md
-
-```
-# Markdown Demo
+### notes.md
 
 
-
-## External 1.1
-
-Content 1.1
-
-Note: This will only appear in the speaker notes window.
-
-
-## External 1.2
-
-Content 1.2
-
-
-
-## External 2
-
-Content 2.1
-
-
-
-## External 3.1
-
-Content 3.1
-
-
-## External 3.2
-
-Content 3.2
-```
----
-
-### /1.presentation/test/simple.md
-
-```
-## Slide 1.1
-
-```js
-var a = 1;
-```
-
-
-## Slide 1.2
-
-
-
-## Slide 2
-```
----
-
-### /2.spring-in-10-steps/readme.md
-
-```
-# How to run this
-- Choose the Spring Boot Application file (search for file with @SpringBootApplication)
-- Right Click on the file and Run as Java Application
-- You are all Set
-
-```
----
-
-### /3.spring-mvc/readme.md
-
-```
-# How to run this
-- Choose the Project in Eclipse
-- Right Click on Project and Choose Run as Maven Build
-- Type in tomcat7:run and press enter
-
-- Goto http://localhost:8080
-  - use in28Minutes/dummy
-  - User id/ password combination is case sensitive
-
-```
----
-
-### /4.springboot-in-10-steps/readme.md
-
-```
-# How to run this
-- Choose the Spring Boot Application file (search for file with @SpringBootApplication)
-- Right Click on the file and Run as Java Application
-- You are all Set
-
-```
----
-
-### /5.soap-web-services/readme.md
-
-```
-# How to run this
-- Choose the Spring Boot Application file (search for file with @SpringBootApplication)
-- Right Click on the file and Run as Java Application
-- You are all Set
-
-```
----
-
-### /6.restful-web-services/readme.md
-
-```
-# How to run this
-- Choose the Spring Boot Application file (search for file with @SpringBootApplication)
-- Right Click on the file and Run as Java Application
-- You are all Set
-
-```
----
-
-### /notes.md
-
-```
 ## Spring
 
 Video 1
@@ -519,12 +378,10 @@ Video 5
 "SpringInterviewGuide_August2017_7","11:24","12:28","901-Conclusion To  Spring Interview Guide"
 
 ```
-```
----
 
-### /readme.md
+### readme.md
 
-```
+
 # Spring Interview Guide - 200+ Questions and Answers
 
 Spring Framework is the most popular Java Framework ever. It continues to evolve with changing architectures. Spring Boot is one of the most popular Spring projects. Spring Boot is the most used Java framework to develop RESTful Services and Microservices.
@@ -838,5 +695,152 @@ List of questions discussed about each topic is listed below.
 - [Facebook](http://facebook.com/in28minutes)
 - [Twitter](http://twitter.com/in28minutes)
 - [Google Plus](https://plus.google.com/u/3/110861829188024231119)
+
+### 1.presentation/css/theme/README.md
+
+
+## Dependencies
+
+Themes are written using Sass to keep things modular and reduce the need for repeated selectors across files. Make sure that you have the reveal.js development environment including the Grunt dependencies installed before proceeding: https://github.com/hakimel/reveal.js#full-setup
+
+## Creating a Theme
+
+To create your own theme, start by duplicating a ```.scss``` file in [/css/theme/source](https://github.com/hakimel/reveal.js/blob/master/css/theme/source). It will be automatically compiled by Grunt from Sass to CSS (see the [Gruntfile](https://github.com/hakimel/reveal.js/blob/master/Gruntfile.js)) when you run `grunt css-themes`.
+
+Each theme file does four things in the following order:
+
+1. **Include [/css/theme/template/mixins.scss](https://github.com/hakimel/reveal.js/blob/master/css/theme/template/mixins.scss)**
+Shared utility functions.
+
+2. **Include [/css/theme/template/settings.scss](https://github.com/hakimel/reveal.js/blob/master/css/theme/template/settings.scss)**
+Declares a set of custom variables that the template file (step 4) expects. Can be overridden in step 3.
+
+3. **Override**
+This is where you override the default theme. Either by specifying variables (see [settings.scss](https://github.com/hakimel/reveal.js/blob/master/css/theme/template/settings.scss) for reference) or by adding any selectors and styles you please.
+
+4. **Include [/css/theme/template/theme.scss](https://github.com/hakimel/reveal.js/blob/master/css/theme/template/theme.scss)**
+The template theme file which will generate final CSS output based on the currently defined variables.
+
+### 1.presentation/plugin/markdown/example.md
+
+
+# Markdown Demo
+
+
+
+## External 1.1
+
+Content 1.1
+
+Note: This will only appear in the speaker notes window.
+
+
+## External 1.2
+
+Content 1.2
+
+
+
+## External 2
+
+Content 2.1
+
+
+
+## External 3.1
+
+Content 3.1
+
+
+## External 3.2
+
+Content 3.2
+
+### 1.presentation/test/simple.md
+
+
+## Slide 1.1
+
+```js
+var a = 1;
 ```
----
+
+
+## Slide 1.2
+
+
+
+## Slide 2
+# 2.spring-in-10-steps
+
+### 2.spring-in-10-steps/readme.md
+
+
+# How to run this
+- Choose the Spring Boot Application file (search for file with @SpringBootApplication)
+- Right Click on the file and Run as Java Application
+- You are all Set
+
+
+### 2.spring-in-10-steps/src/main/resources/log.txt
+
+
+Searching directory [/in28Minutes/git/getting-started-in-5-steps/spring-in-5-steps/target/classes/com/in28minutes/spring/basics/springin5steps] for files matching pattern [/in28Minutes/git/getting-started-in-5-steps/spring-in-5-steps/target/classes/com/in28minutes/spring/basics/springin5steps/**/*.class]
+Identified candidate component class: file [/in28Minutes/git/getting-started-in-5-steps/spring-in-5-steps/target/classes/com/in28minutes/spring/basics/springin5steps/BinarySearchImpl.class]
+Identified candidate component class: file [/in28Minutes/git/getting-started-in-5-steps/spring-in-5-steps/target/classes/com/in28minutes/spring/basics/springin5steps/BubbleSortAlgorithm.class]
+
+Creating instance of bean 'binarySearchImpl'
+Creating instance of bean 'bubbleSortAlgorithm'
+Finished creating instance of bean 'bubbleSortAlgorithm'
+
+Constuctor - Autowiring by type from bean name 'binarySearchImpl' via constructor 
+to bean named 'bubbleSortAlgorithm'
+Setter -  Autowiring by type from bean name 'binarySearchImpl' to bean named 'bubbleSortAlgorithm'
+No Setter or Constructor - Autowiring by type from bean name 'binarySearchImpl' to bean named 'bubbleSortAlgorithm'
+
+
+Finished creating instance of bean 'binarySearchImpl'
+# 3.spring-mvc
+
+### 3.spring-mvc/readme.md
+
+
+# How to run this
+- Choose the Project in Eclipse
+- Right Click on Project and Choose Run as Maven Build
+- Type in tomcat7:run and press enter
+
+- Goto http://localhost:8080
+  - use in28Minutes/dummy
+  - User id/ password combination is case sensitive
+
+# 4.springboot-in-10-steps
+
+### 4.springboot-in-10-steps/readme.md
+
+
+# How to run this
+- Choose the Spring Boot Application file (search for file with @SpringBootApplication)
+- Right Click on the file and Run as Java Application
+- You are all Set
+
+# 5.soap-web-services
+
+### 5.soap-web-services/readme.md
+
+
+# How to run this
+- Choose the Spring Boot Application file (search for file with @SpringBootApplication)
+- Right Click on the file and Run as Java Application
+- You are all Set
+
+# 6.restful-web-services
+
+### 6.restful-web-services/readme.md
+
+
+# How to run this
+- Choose the Spring Boot Application file (search for file with @SpringBootApplication)
+- Right Click on the file and Run as Java Application
+- You are all Set
+

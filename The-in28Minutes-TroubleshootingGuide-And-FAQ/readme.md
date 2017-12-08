@@ -781,8 +781,7 @@ You have to exclude a jar in all the dependencies where it is declared as a depe
 
 ## Tip : Example of a multi layered maven project
 
-https://github.com/in28minutes/MavenIn28Minutes/tree/
-master/4.web-application-with-maven
+https://github.com/in28minutes/MavenIn28Minutes/tree/master/4.web-application-with-maven
 
 ### Error : java.lang.ClassNotFoundException
 
@@ -1359,7 +1358,7 @@ You can read more down here as well
 
 ### Q :  How is the URL decided with Spring MVC?
 
-First things are the port and the context root. We use the default port - 8080 and we set path to /. So, the initial url is http://localhost:8080.
+First things are the port and the context root. We use the default port - 8080 and we set path to /. So, the initial url is `http://localhost:8080`.
 
 pom.xml
 ```
@@ -1374,7 +1373,7 @@ pom.xml
 </plugin>
 ```
 
-We configured dispatcher servlet with a url-pattern /. So, it handles all request to http://localhost:8080
+We configured dispatcher servlet with a url-pattern /. So, it handles all request to `http://localhost:8080`.
 
 web.xml
 ```
@@ -1396,7 +1395,7 @@ web.xml
 </servlet-mapping>
 ```
 
-The ```showWelcomePage``` method is mapped with a path of "/". So, a request to http://localhost:8080 will be handled by this method.
+The ```showWelcomePage``` method is mapped with a path of "/". So, a request to `http://localhost:8080` will be handled by this method.
 
 ```
 @Controller
@@ -1409,7 +1408,7 @@ public class WelcomeController {
     }
 ```
 
-```TodoController``` ```showTodosList``` method is used to display the list of todos. The uri configured is /list-todos. So, it handles requests to http://localhost:8080/list-todos.
+```TodoController``` ```showTodosList``` method is used to display the list of todos. The uri configured is /list-todos. So, it handles requests to `http://localhost:8080/list-todos`.
 
 ```
 @Controller
@@ -1490,7 +1489,7 @@ You can add an error page for 404 in your web.xml.
 
 ### Q :  How do we configure a welcome page?
 
-Let's say your Login Controller is mapped to login.do and you would want that to be default page to be rendered when you type in http://localhost:8080.
+Let's say your Login Controller is mapped to login.do and you would want that to be default page to be rendered when you type in `http://localhost:8080`.
 
 This can be achieved by having a welcome file list configured in the web.xml.
 
@@ -1683,7 +1682,7 @@ The data we use to execute the DELETE is just an id. It is not sensitive informa
 
 However, when we create RESTful services, we should use DELETE. 
 
-### Q :  Why do we need xmlns hyperlinks? like http://www.springframework.org/schema/bean
+### Q :  Why do we need xmlns hyperlinks? like `http://www.springframework.org/schema/beans`
 
 These are generic and would work with all version of Spring Framework. Otherwise we would need to change the version every time we upgrade Spring Framework.
 - http://stackoverflow.com/questions/11610790/what-difference-does-an-xmlns-definition-make-in-a-spring-configuration-file
@@ -1719,7 +1718,7 @@ Here's a small discussion where static files should be located:
 ### Q :  How to add a custom login page in Spring Security?
 
 Complete example down here 
-- http://docs.spring.io/spring-security/site/docs/current/guides/html5/form-javaconfig.html
+- https://docs.spring.io/spring-security/site/docs/4.2.3.RELEASE/guides/html5/form-javaconfig.html
 
 Other Recommended Reading
 - https://docs.spring.io/spring-security/site/docs/3.2.0.RELEASE/guides/form.html
@@ -1843,7 +1842,7 @@ This is further explained in the last step of Spring Boot course in section "Con
 
 Let's take an example
 
-http://localhost:8080/login?name=Ranga&name=Ravi&name=Sathish
+`http://localhost:8080/login?name=Ranga&name=Ravi&name=Sathish`
 
 You can accept all values using an array in the controller method.
 
@@ -2133,7 +2132,7 @@ PagingAndSortingRepository<User, Long>
 
 The name of the variable in the path does not really matter. 
 
-You can read more about UriComponentsBuilder here :  http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/util/UriComponentsBuilder
+You can read more about UriComponentsBuilder here :  https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/web/util/UriComponentsBuilder.html
 
 ### Error :  java.lang.ClassCastException: org.springframework.boot.context.event.ApplicationReadyEvent cannot be cast
 ```

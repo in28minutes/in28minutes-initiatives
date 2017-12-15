@@ -9980,10 +9980,10 @@ List of questions discussed about each topic is listed below.
 - How do you implement Versioning for RESTful Web Services?
 
 ## Getting Started
-- Eclipse - https://www.youtube.com/watch?v=s4ShbtOHMCA
-- Maven - https://www.youtube.com/watch?v=0CFWeVgzsqY
-- JUnit - https://www.youtube.com/watch?v=o5k9NOR9lrI
-- Mockito - https://www.youtube.com/watch?v=d2KwvXQgQx4
+- Eclipse - https://courses.in28minutes.com/p/eclipse-tutorial-for-beginners
+- Maven - https://courses.in28minutes.com/p/maven-tutorial-for-beginners-in-5-steps
+- JUnit - https://courses.in28minutes.com/p/junit-tutorial-for-beginners
+- Mockito - https://courses.in28minutes.com/p/mockito-for-beginner-in-5-steps
 
 ## Installing Tools
 - Installation Video : https://www.youtube.com/playlist?list=PLBBog2r6uMCSmMVTW_QmDLyASBvovyAO3
@@ -10507,7 +10507,7 @@ Mockito is the most famous mocking framework in Java.
 - Git Repository - https://github.com/in28minutes/getting-started-in-5-steps
 - Pre-requisites 
     - Java & Eclipse - https://www.youtube.com/playlist?list=PLBBog2r6uMCSmMVTW_QmDLyASBvovyAO3
-    - JUnit - https://www.youtube.com/watch?v=AN4NCnc4eZg
+    - JUnit - https://courses.in28minutes.com/p/junit-tutorial-for-beginners
 - Easier Static Imports
   - Window > Preferences > Java > Editor > Content Assist > Favorites
     - org.junit.Assert

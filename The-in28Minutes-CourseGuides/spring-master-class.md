@@ -1729,7 +1729,7 @@ Refer each section
 
 ### Other Courses
 
-- [Most Watched Courses on YouTube - 30,000 Subscribers](https://www.youtube.com/watch?v=bNFoN956P2A&list=PLBBog2r6uMCQhZaQ9vUT5zJWXzz-f49k1)
+- [Check out all our courses with 100,000 Students](https://courses.in28minutes.com/courses)
 - [25 Videos and Articles for Beginners on Spring Boot](http://www.springboottutorial.com/spring-boot-tutorials-for-beginners)
 - Our Best Courses with 66,000 Students and 4,000 5-Star Ratings
   * [Java Interview Guide : 200+ Interview Questions and Answers](https://www.udemy.com/java-interview-questions-and-answers/?couponCode=JAVA_INTER_GIT)
@@ -2738,7 +2738,7 @@ Mockito is the most famous mocking framework in Java.
 - Git Repository - https://github.com/in28minutes/getting-started-in-5-steps
 - Pre-requisites 
     - Java & Eclipse - https://www.youtube.com/playlist?list=PLBBog2r6uMCSmMVTW_QmDLyASBvovyAO3
-    - JUnit - https://www.youtube.com/watch?v=AN4NCnc4eZg
+    - JUnit - https://courses.in28minutes.com/p/junit-tutorial-for-beginners
 - Easier Static Imports
   - Window > Preferences > Java > Editor > Content Assist > Favorites
     - org.junit.Assert
@@ -11262,3 +11262,8 @@ THE SOFTWARE.
 # in28minutes-services-springmvc
 # in28minutes-web-common
 # in28minutes-web-springmvc
+
+
+#### Can you explain using merge for both insert and update?
+
+I realize this is just an introduction to JPA, but it might be good for you to explain the difference between the persist and merge methods of entityManger as well as for the "save" pattern that is found in many JPA projects.  Using merge for both insert and update may not fit the semantics of the application design where you want a failure to occur if you are trying to insert an entity that already exists.  Also, for updates, you may want a failure if the entity does not exist.

@@ -437,7 +437,7 @@ We created a number of videos on our YouTube channel about these practices.
 - How to become a good programmer? - https://www.youtube.com/watch?v=iJe1Ru4bJQo
 - TDD - https://www.youtube.com/watch?v=45T32_ImO2c&list=PLBBog2r6uMCSa9_mNISSpTcbTcKlMAe6t
 - Static Code Analysis - Best Practices - https://www.youtube.com/watch?v=rB_BaftN3nE
-- JUnit - https://www.youtube.com/watch?v=AN4NCnc4eZg&list=PL83C941BB0D27A6AF
+- JUnit - https://courses.in28minutes.com/p/junit-tutorial-for-beginners&list=PL83C941BB0D27A6AF
 - Introduction to Coding Standards - https://www.youtube.com/watch?v=XRKDpQ3b27M
 - Introduction to Code Quality - https://www.youtube.com/watch?v=M4Ip6joERv4
 - Code Review Best Practices - https://www.youtube.com/watch?v=hVJGu0xdXII

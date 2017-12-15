@@ -1,32 +1,26 @@
+ JPA and Hibernate in 10 Steps with H2
 
-## Complete Code Example
+### Steps
+- Step 0 : JPA with Spring Boot in 10 Steps - Section Introduction
+- Step 1 : Object Relational Impedence Mismatch - Understanding the problem that JPA solves
+- Step 2 : World before JPA - JDBC, Spring JDBC and myBatis
+- Step 3 : Introduction to JPA
+- Step 4 : Creating a JPA Project using Spring Initializr
+- Step 5 : Defining a JPA Entity - User
+- Step 6 : Defining a Service to manage the Entity - UserService and EntityManager
+- Step 7 : Using a Command Line Runner to save the User to Database
+- Step 8 : Magic of Spring Boot and In Memory Database H2
+- Step 9 : Introduction to Spring Data JPA
+- Step 10 : More JPA Repository : findById and findAll
 
-# jpa-in-10-steps
-## jpa-in-10-steps-all-code.md
-## Complete Code Example
-### /notes.txt
-
-```
-Questions
-- Where is the database created?
-- What schema is used to create the tables?
-- Where are the tables created?
-- Can I see the data in the database?
-- Where is Hibernate coming in from?
-- How is a datasource created?
-
-Magic of Spring Boot and in Memory Database
-- Zero project setup or infrastructure
-- Zero Configuration
-- Zero Maintainance
-- Easy to use for Learning and Unit Tests
-- Simple Configuration to switch to a real database
-
-# Restrictions of using in-memory database
+#### Restrictions of using in-memory database
 - Data is not persisted between restarts
 
+#### Notes
 Spring Boot chooses a default value for you based on whether it thinks your database is embedded (default create-drop) or not (default none). 
 
+log
+```
 HibernateJpaAutoConfiguration matched:
  - @ConditionalOnClass found required classes 'org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean', 'javax.persistence.EntityManager'; @ConditionalOnMissingClass did not find unwanted class (OnClassCondition)
  - HibernateEntityManager found class 'org.hibernate.ejb.HibernateEntityManager' (HibernateJpaAutoConfiguration.HibernateEntityManagerCondition)
@@ -41,6 +35,7 @@ JpaBaseConfiguration#transactionManager matched:
  - @ConditionalOnMissingBean (types: org.springframework.transaction.PlatformTransactionManager; SearchStrategy: all) did not find any beans (OnBeanCondition)
 ```
 ---
+## Complete Code
 
 ### /pom.xml
 
@@ -61,7 +56,7 @@ JpaBaseConfiguration#transactionManager matched:
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.0.BUILD-SNAPSHOT</version>
+		<version>2.0.0.M3</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -861,22 +856,5 @@ public class JpaIn10StepsApplicationTests {
 	}
 
 }
-```
----
-
-### /step-completed.sh
-
-```
-java -cp /ProgrammingExcellence/Workspaces/Rithus.com/ListDirectoryContentInGitFormat/bin test.ListDirectoryContentInGitFormat $PWD >> $1.md
-zip -r $1.zip . -x "target/*" -x ".*/*" -x ".*" -x "*.md" -x "mvn*" -x "*.zip"
-git add *; git commit -m "$1"; git push;
-```
----
-
-### /take-step-backup.sh
-
-```
-java -cp /ProgrammingExcellence/Workspaces/Rithus.com/ListDirectoryContentInGitFormat/bin test.ListDirectoryContentInGitFormat $PWD >> $1.md
-zip -r $1.zip . -x "target/*" -x ".*/*" -x ".*" -x "*.md" -x "mvn*" -x "*.zip"
 ```
 ---

@@ -3431,10 +3431,10 @@ An exception occurred! Please contact Support!
 			<scope>runtime</scope>
 		</dependency>
 
-		<!--<dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>-->
+		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -4435,10 +4435,10 @@ VALUES(10003, 'Learn SOAP Web Services', false, sysdate(),'in28Minutes')
 			<scope>runtime</scope>
 		</dependency>
 
-		<!--<dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>-->
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -5408,10 +5408,10 @@ spring.datasource.password=YOUR_PASSWORD
 			<scope>runtime</scope>
 		</dependency>
 
-		<!--<dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>-->
+		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>

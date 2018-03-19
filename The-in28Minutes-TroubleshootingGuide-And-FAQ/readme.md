@@ -166,7 +166,7 @@ This 50 page troubleshooting guide and faq is our way of thanking you for choosi
 	- [Q :  Why am I seeing an extra dialogue asking me to "Select Java Application Type" when I launch a Spring Boot Application?](#q---why-am-i-seeing-an-extra-dialogue-asking-me-to-select-java-application-type-when-i-launch-a-spring-boot-application)
 	- [Q :  What happens in the background when a Spring Boot Application is "Run as Java Application"?](#q---what-happens-in-the-background-when-a-spring-boot-application-is-run-as-java-application)
 	- [Q :  Can we use jetty instead of tomcat in spring-boot-starter-web?](#q---can-we-use-jetty-instead-of-tomcat-in-spring-boot-starter-web)
-	- [Error :  Failure to transfer org.springframework.boot:spring-boot-starter-parent:pom:2.0.0.BUILD-SNAPSHOT from https://repo.spring.io/snapshot](#error---failure-to-transfer-orgspringframeworkbootspring-boot-starter-parentpom200build-snapshot-from-httpsrepospringiosnapshot)
+	- [Error :  Failure to transfer org.springframework.boot:spring-boot-starter-parent:pom:2.0.0.RELEASE from https://repo.spring.io/snapshot](#error---failure-to-transfer-orgspringframeworkbootspring-boot-starter-parentpom200build-snapshot-from-httpsrepospringiosnapshot)
 	- [Q :  Why do we configure Spring Snapshot and milestone repositories?](#q---why-do-we-configure-spring-snapshot-and-milestone-repositories)
 	- [Error :   java.lang.IllegalArgumentException: Sources must not be empty](#error----javalangillegalargumentexception-sources-must-not-be-empty)
 	- [Q :  Can i use spring boot dev tools for a non spring boot project?](#q---can-i-use-spring-boot-dev-tools-for-a-non-spring-boot-project)
@@ -236,7 +236,7 @@ First of all - Make sure you are using the right versions. Here is the recommend
 | -------------------- |:-----------------------------------------------:|--------------|
 | Java 8  | Unsupported major.minor version 52.0 |[Basics](#basics)|
 | Eclipse Java EE Oxygen | org.codehaus.plexus.archiver.jar.Manifest.write(java.io.PrintWriter)      |[Basics](#basics)|
-| Spring Boot 2.0.0.M3    | Maven download issues. Hal Browser and Spring Boot Actuator are not working!|[Configure 2.0.0.M3](#error---hal-browser-and-spring-boot-actuator-are-not-working)|
+| Spring Boot 2.0.0.RELEASE    | Maven download issues. Hal Browser and Spring Boot Actuator are not working!|[Configure 2.0.0.RELEASE](#error---hal-browser-and-spring-boot-actuator-are-not-working)|
 
 
 ### 2. Highly Probable Errors
@@ -247,7 +247,7 @@ Problems a high proportionate of our learners face.
 | -------------------- |:-------------:|
 | Compilation failure [ERROR] No compiler is provided in this environment. Perhaps you are running on a JRE rather than a JDK?  |[Configure Eclipse to use JDK](#error---you-are-not-using-a-jdk) | 
 | Could not transfer artifact           |[Check Maven Configuration](#error--you-are-not-connected-to-internet-or-you-are-behind-a-proxy) |
-|Hal Browser and Spring Boot Actuator are not working   |[Configure Spring Boot Version 2.0.0.M3](#error---hal-browser-and-spring-boot-actuator-are-not-working)|
+|Hal Browser and Spring Boot Actuator are not working   |[Configure Spring Boot Version 2.0.0.RELEASE](#error---hal-browser-and-spring-boot-actuator-are-not-working)|
 |H2 Embedded Database - Cannot find tables |[Use the right database name](#error---table-is-not-created-automatically-in-h2-embedded-db-or-im-unable-to-see-the-tables) |
 | Failed to load class (or)Could not find or load main class or Failed to read Class-Path attribute from manifest    |[Redownload artifacts with Maven](#error--files-downloaded-by-maven-are-corrupt) |
 |java.net.BindException: Address already in use: JVM_Bind   |[Stop 8080 or Use Other Port](#q---what-should-i-do-when-some-other-application-is-using-default-port-8080) |
@@ -2059,7 +2059,7 @@ With 2.0.0.M4 Spring Boot is making a lot of changes to Actuator.
 
 > Do not use SNAPSHOT versions
 
-For now we recommend using 2.0.0.M3 with all courses. I will wait for the changes that are introduced with M4 to stabilize before incorporating into the course.
+For now we recommend using 2.0.0.RELEASE with all courses. I will wait for the changes that are introduced with M4 to stabilize before incorporating into the course.
 
 Recommmended Reading
 - https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.0.0-M4-Release-Notes
@@ -2070,7 +2070,7 @@ Solution : Update your pom.xml
 <parent>
 	<groupId>org.springframework.boot</groupId>
 	<artifactId>spring-boot-starter-parent</artifactId>
-	<version>2.0.0.M3</version>
+	<version>2.0.0.RELEASE</version>
 	<relativePath /> <!-- lookup parent from repository -->
 </parent>
 ```
@@ -2224,9 +2224,9 @@ Remove the existing dependency on spring-boot-starter-web and add these in.
 </dependency>
 ```
 
-### Error :  Failure to transfer org.springframework.boot:spring-boot-starter-parent:pom:2.0.0.BUILD-SNAPSHOT from https://repo.spring.io/snapshot
+### Error :  Failure to transfer org.springframework.boot:spring-boot-starter-parent:pom:2.0.0.RELEASE from https://repo.spring.io/snapshot
 
-SNAPSHOT versions are versions under development. Of late, there are a few issues with some of the SNAPSHOT version of Spring Boot 2. We recommend using 2.0.0.M3 for now.
+SNAPSHOT versions are versions under development. Of late, there are a few issues with some of the SNAPSHOT version of Spring Boot 2. We recommend using 2.0.0.RELEASE for now.
 
 In you pom.xml, you can change the version in the parent as shown below:
 
@@ -2234,7 +2234,7 @@ In you pom.xml, you can change the version in the parent as shown below:
 <parent>
 	<groupId>org.springframework.boot</groupId>
 	<artifactId>spring-boot-starter-parent</artifactId>
-	<version>2.0.0.M3</version>
+	<version>2.0.0.RELEASE</version>
 	<relativePath/> <!-- lookup parent from repository -->
 </parent>
 ```
@@ -2739,7 +2739,7 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 
 This is because of conflicts with older version of Hibernate.
 
-Ensure you are using the recommended version of Spring Boot - 2.0.0.M3
+Ensure you are using the recommended version of Spring Boot - 2.0.0.RELEASE
 
 
 ### Q :  Is it mandatory to specify @Repository on a repository which is extending JPARepository?

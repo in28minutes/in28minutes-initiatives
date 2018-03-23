@@ -4,22 +4,6 @@ We do not want you to get stuck because of a simple error.
 
 This 50 page troubleshooting guide and faq is our way of thanking you for choosing to learn from in28Minutes. 
 
-### Recommended Versions
-
-Use Spring Cloud - Finchley.M8 and Spring Boot - 2.0.0.RELEASE. 
-
-Change 1
-<parent>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-starter-parent</artifactId>
-<version>2.0.0.RELEASE</version>
-<relativePath/> <!-- lookup parent from repository -->
-</parent>
-
-Change 2
-<spring-cloud.version>Finchley.M8</spring-cloud.version>
-
-
 If you do not find a good answer here, post a question with the following details:
 - What are you trying to do?
 - What was the last working state?
@@ -32,6 +16,187 @@ If you do not find a good answer here, post a question with the following detail
 	- Properties files
 	- Log
 	- Stack Trace
+
+### Recommended Versions
+
+Use Spring Cloud - Finchley.M8 and Spring Boot - 2.0.0.RELEASE. 
+
+Change 1
+```
+<parent>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-parent</artifactId>
+<version>2.0.0.RELEASE</version>
+<relativePath/> <!-- lookup parent from repository -->
+</parent>
+```
+
+Change 2
+```
+<spring-cloud.version>Finchley.M8</spring-cloud.version>
+```
+
+## Spring 2.0.0.RELEASE Upgrades
+
+Video - https://www.youtube.com/watch?v=e2J4NfJ1Mns
+
+### Actuator
+
+Replace old url - http://localhost:8080/application
+New URL - http://localhost:8080/actuator
+
+application.properties
+
+```
+management.endpoints.web.exposure.include=*
+```
+
+In HAL Browser, enter the actuator URL to browse.
+
+### Spring Security
+
+```
+#security.user.name=username
+#security.user.password=password
+spring.security.user.name=username
+spring.security.user.password=password
+spring.security.filter.dispatcher-types=request
+```
+
+```
++        auth.inMemoryAuthentication()
++            .passwordEncoder(NoOpPasswordEncoder.getInstance())
++           .withUser("in28Minutes").password("dummy")
+```
+
+### Internationalization!
+
+```java
+    @GetMapping("/hello")
+    public String helloWorld() {
+        return msgSource.getMessage("msg.hello", null, "Whoops!", LocaleContextHolder.getLocale());
+    }
+```
+
+```java
+    @Bean
+    public LocaleResolver localeResolver() {
+        AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
+        localeResolver.setDefaultLocale(Locale.US);
+        return localeResolver;
+    }
+```
+
+```properties
+spring.jackson.serialization.write-dates-as-timestamps=false
+spring.messages.basename=messages
+
+```
+
+### Spring Cloud Artifact/Code Changes
+```xml
+-     <artifactId>spring-cloud-starter-zuul</artifactId>
++     <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+
+-     <artifactId>spring-cloud-starter-feign</artifactId>
++     <artifactId>spring-cloud-starter-openfeign</artifactId>
+
+-     <artifactId>spring-cloud-starter-eureka</artifactId>
++     <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+
+-     <artifactId>spring-cloud-starter-eureka-server</artifactId>
++     <artifactId>spring-cloud-starter-netflix-eureka-server</
+
+-     <artifactId>spring-cloud-starter-ribbon</artifactId>
++     <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+
+-     <artifactId>spring-cloud-starter-hystrix</artifactId>
++     <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+```
+
+```java
+- public AlwaysSampler defaultSampler() {
+-   return new AlwaysSampler();
++ public Sampler defaultSampler() {
++   return Sampler.ALWAYS_SAMPLE;
+```
+
+#### New Installation Approach for Zipkin
+
+Quick Start Page
+- https://zipkin.io/pages/quickstart
+
+Downloading Zipkin Jar
+- https://search.maven.org/remote_content?g=io.zipkin.java&a=zipkin-server&v=LATEST&c=exec
+
+Command to run
+
+```
+RABBIT_URI=amqp://localhost java -jar zipkin-server-2.5.2-exec.jar
+```
+
+### command " RABBIT_URL=amqp://localhost java -jar zipkin-server-2.6.1-exec.jar" doesn't work in windows 
+
+```
+SET RABBIT_URI=amqp://localhost 
+java -jar zipkin-server-2.5.2-exec.jar
+```
+### Java 9
+You can upgrade to Java 9 by making this change in pom.xml
+
+```
+<java.version>9</java.version>
+```
+
+You might face this exception
+
+```
+Caused by: java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+Caused by: java.lang.ClassNotFoundException: javax.xml.bind.JAXBException
+java.lang.NoClassDefFoundError: javax/transaction/SystemException
+Caused by: java.lang.ClassNotFoundException: javax.transaction.SystemException
+
+```
+
+Solution
+```
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <dependency> <!-- Needed if you use Java 9 --> <!-- Make sure you do Maven -> Update Project and Restart -->
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+    </dependency>
+```
+
+The other problem we found is when we run tests using `mvn test`.
+
+```
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration><!-- https://issues.apache.org/jira/browse/SUREFIRE-1424 -->
+          <argLine>--add-modules java.base</argLine>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+```
+
+References
+- https://stackoverflow.com/questions/46515230/hibernate-java-9-and-systemexception
+- https://stackoverflow.com/questions/44385846/hibernate-5-issue-with-jdk-9
+- https://issues.apache.org/jira/browse/SUREFIRE-1424
+
+
 
 - [How to use this guide?](#how-to-use-this-guide)
 	- [1. Ensure You Have The Recommended Versions of Tools/Versions](#1-ensure-you-have-the-recommended-versions-of-toolsversions)
@@ -414,138 +579,8 @@ Maven plugin uses a settings file where the configuration can be set. Its path i
 </settings>
 ```
 
-## Spring 2.0.0.RELEASE Upgrades
-
-Video - https://www.youtube.com/watch?v=e2J4NfJ1Mns
-
-### Actuator
-
-Replace old url - http://localhost:8080/application
-New URL - http://localhost:8080/actuator
-
-application.properties
-
-```
-management.endpoints.web.exposure.include=*
-```
-
-In HAL Browser, enter the actuator URL to browse.
-
-### Spring Security
-
-```
-#security.user.name=username
-#security.user.password=password
-spring.security.user.name=username
-spring.security.user.password=password
-spring.security.filter.dispatcher-types=request
-```
-
-```
-+        auth.inMemoryAuthentication()
-+            .passwordEncoder(NoOpPasswordEncoder.getInstance())
-+           .withUser("in28Minutes").password("dummy")
-```
-
-### Internationalization!
-
-```java
-    @GetMapping("/hello")
-    public String helloWorld() {
-        return msgSource.getMessage("msg.hello", null, "Whoops!", LocaleContextHolder.getLocale());
-    }
-```
-
-```java
-    @Bean
-    public LocaleResolver localeResolver() {
-        AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
-        localeResolver.setDefaultLocale(Locale.US);
-        return localeResolver;
-    }
-```
-
-```properties
-spring.jackson.serialization.write-dates-as-timestamps=false
-spring.messages.basename=messages
-
-```
-
-### Spring Cloud Artifact/Code Changes
-```xml
--     <artifactId>spring-cloud-starter-zuul</artifactId>
-+     <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
-
--     <artifactId>spring-cloud-starter-feign</artifactId>
-+     <artifactId>spring-cloud-starter-openfeign</artifactId>
-
--     <artifactId>spring-cloud-starter-eureka</artifactId>
-+     <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-
--     <artifactId>spring-cloud-starter-eureka-server</artifactId>
-+     <artifactId>spring-cloud-starter-netflix-eureka-server</
-
--     <artifactId>spring-cloud-starter-ribbon</artifactId>
-+     <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
-
--     <artifactId>spring-cloud-starter-hystrix</artifactId>
-+     <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-```
-
-```java
-- public AlwaysSampler defaultSampler() {
--   return new AlwaysSampler();
-+ public Sampler defaultSampler() {
-+   return Sampler.ALWAYS_SAMPLE;
-```
-
-### Java 9
-
-```
-Caused by: java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
-Caused by: java.lang.ClassNotFoundException: javax.xml.bind.JAXBException
-java.lang.NoClassDefFoundError: javax/transaction/SystemException
-Caused by: java.lang.ClassNotFoundException: javax.transaction.SystemException
-
-```
-
-Solution
-```
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-
-    <dependency> <!-- Needed if you use Java 9 --> <!-- Make sure you do Maven -> Update Project and Restart -->
-      <groupId>javax.xml.bind</groupId>
-      <artifactId>jaxb-api</artifactId>
-    </dependency>
-
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration><!-- https://issues.apache.org/jira/browse/SUREFIRE-1424 -->
-          <argLine>--add-modules java.base</argLine>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-```
-
-References
-- https://stackoverflow.com/questions/46515230/hibernate-java-9-and-systemexception
-- https://stackoverflow.com/questions/44385846/hibernate-5-issue-with-jdk-9
-- https://issues.apache.org/jira/browse/SUREFIRE-1424
-
-
 ### Error : Files Downloaded by Maven are Corrupt
+
 Typical Errors
 ```
 Exception in thread "main" java.lang.NoClassDefFoundError: ch/qos/logback/classic/turbo/TurboFilter

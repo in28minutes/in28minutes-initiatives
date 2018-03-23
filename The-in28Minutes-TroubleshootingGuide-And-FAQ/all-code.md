@@ -1,3 +1,109 @@
+# Spring 2.0.0.RELEASE Upgrades
+
+## REST Web Services
+
+### Actuator
+
+Replace old url - http://localhost:8080/application
+New URL - http://localhost:8080/actuator
+
+application.properties
+
+```
+management.endpoints.web.exposure.include=*
+```
+
+In HAL Browser, enter the actuator URL to browse.
+
+### Spring Security
+
+```
+#security.user.name=username
+#security.user.password=password
+spring.security.user.name=username
+spring.security.user.password=password
+spring.security.filter.dispatcher-types=request
+```
+
+```
++        auth.inMemoryAuthentication()
++            .passwordEncoder(NoOpPasswordEncoder.getInstance())
++           .withUser("in28Minutes").password("dummy")
+```
+
+### Internationalization!
+
+```java
+    @GetMapping("/hello")
+    public String helloWorld() {
+        return msgSource.getMessage("msg.hello", null, "Whoops!", LocaleContextHolder.getLocale());
+    }
+```
+
+```java
+    @Bean
+    public LocaleResolver localeResolver() {
+        AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
+        localeResolver.setDefaultLocale(Locale.US);
+        return localeResolver;
+    }
+```
+
+```properties
+spring.jackson.serialization.write-dates-as-timestamps=false
+spring.messages.basename=messages
+
+```
+## Spring Cloud Microservices
+
+### Artifact/Code Changes
+```xml
+-     <artifactId>spring-cloud-starter-zuul</artifactId>
++     <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+
+-     <artifactId>spring-cloud-starter-feign</artifactId>
++     <artifactId>spring-cloud-starter-openfeign</artifactId>
+
+-     <artifactId>spring-cloud-starter-eureka</artifactId>
++     <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+
+-     <artifactId>spring-cloud-starter-eureka-server</artifactId>
++     <artifactId>spring-cloud-starter-netflix-eureka-server</
+
+-     <artifactId>spring-cloud-starter-ribbon</artifactId>
++     <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+
+-     <artifactId>spring-cloud-starter-hystrix</artifactId>
++     <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+```
+
+```java
+- public AlwaysSampler defaultSampler() {
+-   return new AlwaysSampler();
++ public Sampler defaultSampler() {
++   return Sampler.ALWAYS_SAMPLE;
+```
+
+### ZipkinUi, ZipkinStream, StreamRabbit Not Available
+
+Not available on spring.io for current version of spring boot.
+
+#### New Installation Approach for Zipkin
+
+Quick Start Page
+- https://zipkin.io/pages/quickstart
+
+Downloading Zipkin Jar
+- https://search.maven.org/remote_content?g=io.zipkin.java&a=zipkin-server&v=LATEST&c=exec
+
+Command to run
+
+```
+RABBIT_URI=amqp://localhost java -jar zipkin-server-2.5.2-exec.jar
+```
+
+
+
 # All Code Examples From our Courses
 
 - [Your First Web Application with Spring Boot](#your-first-web-application-with-spring-boot)

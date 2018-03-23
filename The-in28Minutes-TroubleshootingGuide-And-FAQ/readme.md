@@ -4,6 +4,35 @@ We do not want you to get stuck because of a simple error.
 
 This 50 page troubleshooting guide and faq is our way of thanking you for choosing to learn from in28Minutes. 
 
+### Recommended Versions
+
+Use Spring Cloud - Finchley.M8 and Spring Boot - 2.0.0.RELEASE. 
+
+Change 1
+<parent>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-parent</artifactId>
+<version>2.0.0.RELEASE</version>
+<relativePath/> <!-- lookup parent from repository -->
+</parent>
+
+Change 2
+<spring-cloud.version>Finchley.M8</spring-cloud.version>
+
+
+If you do not find a good answer here, post a question with the following details:
+- What are you trying to do?
+- What was the last working state?
+- What changes did you make?
+- What did you try to fix the issue?
+- What do you observe?
+- Include 
+	- Code snippets
+	- Code Zip (if possible)
+	- Properties files
+	- Log
+	- Stack Trace
+
 - [How to use this guide?](#how-to-use-this-guide)
 	- [1. Ensure You Have The Recommended Versions of Tools/Versions](#1-ensure-you-have-the-recommended-versions-of-toolsversions)
 	- [2. Highly Probable Errors](#2-highly-probable-errors)
@@ -283,7 +312,6 @@ This video can help with simple troubleshooting - https://www.youtube.com/watch?
 ### Tip :  Ensure you have the right version of Java Installed
 
 Recommended Java Version
-- Do not use Java 9. My recent tests show a few compatibility issues with Spring Boot 2.0+. Let's wait for these get resolved
 - Java 8 for Spring Boot 2.0+ or Spring 5.0+
 - Java 7/Java 8 for earlier versions
 
@@ -385,6 +413,137 @@ Maven plugin uses a settings file where the configuration can be set. Its path i
   <activeProfiles/>
 </settings>
 ```
+
+## Spring 2.0.0.RELEASE Upgrades
+
+Video - https://www.youtube.com/watch?v=e2J4NfJ1Mns
+
+### Actuator
+
+Replace old url - http://localhost:8080/application
+New URL - http://localhost:8080/actuator
+
+application.properties
+
+```
+management.endpoints.web.exposure.include=*
+```
+
+In HAL Browser, enter the actuator URL to browse.
+
+### Spring Security
+
+```
+#security.user.name=username
+#security.user.password=password
+spring.security.user.name=username
+spring.security.user.password=password
+spring.security.filter.dispatcher-types=request
+```
+
+```
++        auth.inMemoryAuthentication()
++            .passwordEncoder(NoOpPasswordEncoder.getInstance())
++           .withUser("in28Minutes").password("dummy")
+```
+
+### Internationalization!
+
+```java
+    @GetMapping("/hello")
+    public String helloWorld() {
+        return msgSource.getMessage("msg.hello", null, "Whoops!", LocaleContextHolder.getLocale());
+    }
+```
+
+```java
+    @Bean
+    public LocaleResolver localeResolver() {
+        AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
+        localeResolver.setDefaultLocale(Locale.US);
+        return localeResolver;
+    }
+```
+
+```properties
+spring.jackson.serialization.write-dates-as-timestamps=false
+spring.messages.basename=messages
+
+```
+
+### Spring Cloud Artifact/Code Changes
+```xml
+-     <artifactId>spring-cloud-starter-zuul</artifactId>
++     <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+
+-     <artifactId>spring-cloud-starter-feign</artifactId>
++     <artifactId>spring-cloud-starter-openfeign</artifactId>
+
+-     <artifactId>spring-cloud-starter-eureka</artifactId>
++     <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+
+-     <artifactId>spring-cloud-starter-eureka-server</artifactId>
++     <artifactId>spring-cloud-starter-netflix-eureka-server</
+
+-     <artifactId>spring-cloud-starter-ribbon</artifactId>
++     <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+
+-     <artifactId>spring-cloud-starter-hystrix</artifactId>
++     <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+```
+
+```java
+- public AlwaysSampler defaultSampler() {
+-   return new AlwaysSampler();
++ public Sampler defaultSampler() {
++   return Sampler.ALWAYS_SAMPLE;
+```
+
+### Java 9
+
+```
+Caused by: java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+Caused by: java.lang.ClassNotFoundException: javax.xml.bind.JAXBException
+java.lang.NoClassDefFoundError: javax/transaction/SystemException
+Caused by: java.lang.ClassNotFoundException: javax.transaction.SystemException
+
+```
+
+Solution
+```
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <dependency> <!-- Needed if you use Java 9 --> <!-- Make sure you do Maven -> Update Project and Restart -->
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+    </dependency>
+
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration><!-- https://issues.apache.org/jira/browse/SUREFIRE-1424 -->
+          <argLine>--add-modules java.base</argLine>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+```
+
+References
+- https://stackoverflow.com/questions/46515230/hibernate-java-9-and-systemexception
+- https://stackoverflow.com/questions/44385846/hibernate-5-issue-with-jdk-9
+- https://issues.apache.org/jira/browse/SUREFIRE-1424
+
 
 ### Error : Files Downloaded by Maven are Corrupt
 Typical Errors
@@ -813,6 +972,15 @@ If you want to create a Spring Boot app with Gradle, this should help you get st
 
 ## Eclipse
 
+### Bug in Eclipse when generating toString?
+
+https://bugs.eclipse.org/bugs/show_bug.cgi?id=521995​
+
+Will be fixed only in Photon 4.8 - Verified for 4.8 M6 with build I20180306-2000.
+​
+Until then write it manually :)
+
+
 ### Q :  How do I see the list of methods in a class?
 
 Its called outline. Short cut is Ctrl + O.
@@ -1141,6 +1309,15 @@ In all other scenarios where there is nothing a programmer can do - other than s
 I love keeping exception handling code to a bare minimum!
 
 That's what Spring enables by converting most Checked exceptions into Runtime (also called Unchecked) exceptions.
+
+### Why is @PreDestroy not called on a prototype bean?
+
+That's the design.
+
+https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-factory-scopes-prototype
+
+In contrast to the other scopes, Spring does not manage the complete lifecycle of a prototype bean: the container instantiates, configures, and otherwise assembles a prototype object, and hands it to the client, with no further record of that prototype instance. Thus, although initialization lifecycle callback methods are called on all objects regardless of scope, in the case of prototypes, configured destruction lifecycle callbacks are not called. The client code must clean up prototype-scoped objects and release expensive resources that the prototype bean(s) are holding. To get the Spring container to release resources held by prototype-scoped beans, try using a custom bean post-processor, which holds a reference to beans that need to be cleaned up.
+
 
 ### Q :  What is the difference between Cross Cutting Concerns and AOP?
 
@@ -1935,9 +2112,143 @@ You would  need to use a PUT method for updating a user. You can use a @PutMappi
 - PUT : When you update the entire resource - when you want to update all/most of the fields of a resource.
 - PATCH: When you want to update specific details of the resource. All other details remain unchanged. 
 
+### Which annotations have higher priority? Qualifier or Primary?
+
+Priority Order
+@Qualifier > @Primary  > Autowiring by Name
+
+```
+package com.springbasics;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+
+@SpringBootApplication
+public class SpringbasicsApplication {
+
+public static void main(String[] args) {
+//System.out.println("Spring Application");
+
+ApplicationContext applicationContext = 
+SpringApplication.run(SpringbasicsApplication.class, args);
+BinarySearchImpl binarySearch = 
+applicationContext.getBean(BinarySearchImpl.class);
+int result = 
+binarySearch.binarySearch(new int[] { 12, 4, 6 }, 3);
+System.out.println("Result:"+result);
+
+}
+}
+```
+
+```
+package com.springbasics;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
+
+public class BinarySearchImpl {
+
+@Autowired
+@Qualifier("bubbleSortAlgorithm")
+private SortAlgorithm radixSortAlgorithm;
+
+public int binarySearch(int[] numbers, int numberToSearchFor) {
+
+int[] sortedNumbers = radixSortAlgorithm.sort(numbers);
+System.out.println(radixSortAlgorithm);
+// Search the array
+return 3;
+}
+
+}
+```
+
+```
+package com.springbasics;
+
+public interface SortAlgorithm {
+public int[] sort(int[] numbers);
+}
+```
+
+```
+package com.springbasics;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class BubbleSortAlgorithm implements SortAlgorithm {
+public int[] sort(int[] numbers) {
+// Logic for Bubble Sort
+return numbers;
+}
+}
+```
+
+```
+package com.springbasics;
+
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
+
+@Component
+@Primary
+public class QuickSortAlgorithm implements SortAlgorithm {
+public int[] sort(int[] numbers) {
+// Logic for Quick Sort
+return numbers;
+}
+}
+
+package com.springbasics;
+
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
+
+@Component
+public class RadixSortAlgorithm implements SortAlgorithm {
+public int[] sort(int[] numbers) {
+// Logic for Quick Sort
+return numbers;
+}
+}
+```
+
+## How can I accept a list of items for a Rest Service?
+
+The way I recommend is to post this as a JSON
+
+{"items":["item1","item2"]}
+
+You'll have to create wrapper object:
+
+public class ItemsWrapper{
+
+    List<String> items;
+
+    //getter
+    //setter
+}
+
+@RequestMapping(value = "/items", method = RequestMethod.POST, 
+    consumes = "application/json")
+@ResponseBody
+public Result saveItems(@RequestBody ItemWrapper items){
+...
+}
+
+
 ## Spring Boot
 
 Spring Boot is the best Java framework for microservices We recommend you to become an expert at Spring Boot!
+
+## Reducing Start Time from 15s to 2s
+http://blog.noizwaves.io/2017/09/02/slow-spring-boot-startup.html
 
 ### Q :  What should be the first things I read about Spring Boot?
 Here are a list of articles for you to get started with understanding Spring Boot.
@@ -2463,6 +2774,11 @@ Notes
 
 We recommend using pure JPA  i.e. EntityManager. You would not want to be tied to Hibernate as the JPA implementation - Hence avoid SessionFactory. 
 
+### Q : What is the difference between EntityManager and PersistenceContext?
+
+Each EntityManager instance is associated with a persistence context. Within thepersistence context, the entity instances and their lifecycle are managed.
+
+
 ### Q :  In which layer, should the boundary of a transaction start?
 
 We recommend managing transactions in the Service layer. Logic for business transactions is in the business/service layer and you would want to enforce transaction management at that level.
@@ -2545,6 +2861,34 @@ From https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-a
 
 More Reading
 - http://www.springboottutorial.com/spring-boot-auto-configuration
+
+
+###### Question
+In the Student Passport One to One Mapping sample i have tried inserting records in student table with same passport id fk and yet the db allows this insert, isn't this breaking the relationship, can you explain why this is happening??, should something more be done to prevent this besides the @OnetoOne annotation in  the students table
+
+###### Answer
+
+You can add following annotation on Passport property to overcome this in student entity class .
+
+@JoinColumn(unique=true) ensures this constraint is enforced, the fetch  strategy is for the fetch only and the property @Id ensures the column in the other table is unique
+
+@OneToOne(fetch=FetchType.LAZY)
+ @JoinColumn(unique=true)
+ private Passport passport;
+
+and this in passport entity class .
+
+ @Column(unique=true)
+ private String number;
+
+JPA will throw following error if anyone try to violate this .
+
+Caused by: org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint ["UK_7CDIWCPDXFO85N8KWT6GLUQVN_INDEX_B ON PUBLIC.STUDENT(PASSPORT_ID) VALUES (1001, 10002)"; SQL statement:
+
+#### Can you explain using merge for both insert and update?
+
+I realize this is just an introduction to JPA, but it might be good for you to explain the difference between the persist and merge methods of entityManger as well as for the "save" pattern that is found in many JPA projects.  Using merge for both insert and update may not fit the semantics of the application design where you want a failure to occur if you are trying to insert an entity that already exists.  Also, for updates, you may want a failure if the entity does not exist.
+
 
 ### Q :  How do we connect to a external database like MSSQL or oracle? 
 
@@ -3020,3 +3364,19 @@ Good Luck and Keep Learning in28Minutes
 - Twitter   : https://twitter.com/in28Minutes​
 - YouTube   : https://www.youtube.com/rithustutorials​
 ​
+##### Udemy Support
+
+I’m so sorry about this issue! Its not fun when things like this happen.
+
+Did you try switching your browser?
+
+I’m so sorry about this issue!  Send an email over to Udemy Support (support@udemy.com) and they’ll help troubleshoot your issue
+
+Keep Learning Every Day
+
+
+#### Offline Viewing
+
+Do you know that you can download the course for offline viewing in the iphone and the android udemy apps. Good Luck.
+- https://support.udemy.com/hc/en-us/articles/115006973308-Save-Lectures-for-Offline-Viewing-on-the-Android-App
+- https://support.udemy.com/hc/en-us/articles/229603928-Save-Lectures-for-Offline-Viewing-on-the-iOS-App

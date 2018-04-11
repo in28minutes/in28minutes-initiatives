@@ -12,6 +12,9 @@ ClassNotFoundException or any other bean not found exception
 Changes made for Spring Boot 2.0.0.RELEASE 
 - https://www.youtube.com/watch?v=e2J4NfJ1Mns
 
+Complete Troubleshooting Guide with 200 FAQ
+- https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-TroubleshootingGuide-And-FAQ
+
 ## FAQ
 
 What is the importance of Component Scan? 

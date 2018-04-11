@@ -1,3 +1,5 @@
+> Bookmark this page to find solution to most problems you face during the course!
+
 ## Top 4 Troubleshooting Tips
 
 Java 9 - Two Problems 
@@ -26,3 +28,18 @@ What is the importance of Component Scan?
 ## Complete Troubleshooting Guide with 200 FAQ
 
 https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-TroubleshootingGuide-And-FAQ
+
+## If you do not find a good answer in troubleshooting guide
+
+Post a question with the following details:
+- What are you trying to do?
+- What was the last working state?
+- What changes did you make?
+- What did you try to fix the issue?
+- What do you observe?
+- Include 
+	- Code snippets
+	- Code Zip (if possible)
+	- Properties files
+	- Log
+	- Stack Trace

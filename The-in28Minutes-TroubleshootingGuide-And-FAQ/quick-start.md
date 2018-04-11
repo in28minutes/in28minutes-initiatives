@@ -1,4 +1,4 @@
-> Bookmark this page to find solution to most problems you face during the course!
+> [Quick Tip] - Bookmark this page to find solution to most problems you face during the course!
 
 ## Top 4 Troubleshooting Tips
 

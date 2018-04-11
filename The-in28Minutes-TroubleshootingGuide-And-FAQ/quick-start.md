@@ -1,4 +1,4 @@
-## Top 5 Troubleshooting Tips
+## Top 4 Troubleshooting Tips
 
 Java 9 - Two Problems 
 - https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-TroubleshootingGuide-And-FAQ#java-9
@@ -12,9 +12,6 @@ ClassNotFoundException or any other bean not found exception
 Changes made for Spring Boot 2.0.0.RELEASE 
 - https://www.youtube.com/watch?v=e2J4NfJ1Mns
 
-Complete Troubleshooting Guide with 200 FAQ
-- https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-TroubleshootingGuide-And-FAQ
-
 ## Top 3 FAQ
 
 What is the importance of Component Scan? 
@@ -25,3 +22,7 @@ What is the importance of Component Scan?
 
 10 Things you should know about JPA, Spring Boot and Hibernate Combination 
 - https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-TroubleshootingGuide-And-FAQ#q---what-are-the-dependencies-need-to-start-up-an-in-memory-database-h2-with-spring-boot
+
+## Complete Troubleshooting Guide with 200 FAQ
+
+https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-TroubleshootingGuide-And-FAQ

@@ -1,4 +1,4 @@
-## Troubleshooting
+## Top 5 Troubleshooting Tips
 
 Java 9 - Two Problems 
 - https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-TroubleshootingGuide-And-FAQ#java-9
@@ -15,7 +15,7 @@ Changes made for Spring Boot 2.0.0.RELEASE
 Complete Troubleshooting Guide with 200 FAQ
 - https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-TroubleshootingGuide-And-FAQ
 
-## FAQ
+## Top 3 FAQ
 
 What is the importance of Component Scan? 
 - https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-TroubleshootingGuide-And-FAQ#q---what-is-the-need-for-a-component-scan

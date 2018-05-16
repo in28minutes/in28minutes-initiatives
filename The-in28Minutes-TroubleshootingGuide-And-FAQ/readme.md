@@ -1074,8 +1074,11 @@ Changed the scope of the embedded Tomcat dependency to required. Hope this helps
 
 Here's a quick summary of what you have to do
 - Settings --> Build-Execution-Deployment --> Compiler --> enable "Make Project Automatically".
-- Press ctrl+shift+A and search for the registry. Enable following configuration ```compiler.automake.allow.when.app.running```
 - Restart IntelliJ.
+
+In earlier version of IntelliJ
+- Press ctrl+shift+A and search for the registry. Enable following configuration ```compiler.automake.allow.when.app.running```
+
 
 Recommended Reading
 - https://dzone.com/articles/spring-boot-application-live-reload-hot-swap-with
@@ -3415,3 +3418,9 @@ Keep Learning Every Day
 Do you know that you can download the course for offline viewing in the iphone and the android udemy apps. Good Luck.
 - https://support.udemy.com/hc/en-us/articles/115006973308-Save-Lectures-for-Offline-Viewing-on-the-Android-App
 - https://support.udemy.com/hc/en-us/articles/229603928-Save-Lectures-for-Offline-Viewing-on-the-iOS-App
+
+#### Path for Spring Cloud Config Server on Windows
+Working format
+```
+file:///C:/microservices/micro services projects/git-localconfig-repo 
+```

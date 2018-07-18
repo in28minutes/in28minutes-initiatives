@@ -1093,6 +1093,14 @@ Recommended Reading
 
 ## Spring
 
+### Problem with Component Scan
+
+Typically this is due to improper use of component scan. You can read more about component scan here (read the 2 questions fully :) )
+
+https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-TroubleshootingGuide-And-FAQ#q---what-is-the-need-for-a-component-scan
+
+Simplest way to fix this is to identify the packages of the SpringBootApplication class and move all the components into that package or sub-packages of it. Good Luck.
+
 ### Q :  What is the need for a Component Scan?
 
 > If you understand component scan, you understand Spring.
@@ -1847,6 +1855,13 @@ Couple of Sources which might be useful for you
 - Spring MVC Documentation : http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#mvc
 - Spring MVC Code : https://github.com/spring-projects/spring-framework/tree/master/spring-webmvc/src
 
+### RestController vs RestControllerAdvice
+
+@RestController (because of @ResponseBody) indicates that return value of method will be the response returned for the request. However, since Java object cannot be part of a HTTP response, the object is transformed to the request response format using format converters. 
+
+A better option is to use @RestControllerAdvice instead of both @RestController and @ControllerAdvice.
+
+
 ### Q :  What is WEB-INF exactly? Why so we need it?
 
 From the specification, "A special directory exists within the application hierarchy named WEB-INF. This directory contains all things related to the application that aren’t in the document root of the application. The WEB-INF node is not part of the public document tree of the application. No file contained in the WEB-INF directory may be served directly to a client by the container. However, the contents of the WEB-INF directory are visible to servlet code using the getResource and getResourceAsStream method calls on the ServletContext, and may be exposed using the RequestDispatcher calls."
@@ -2400,6 +2415,136 @@ management.security.enabled: FALSE
 ```
 ###### Option 2 : Search for password in the log and pass it in the request header
 
+### Getting an error when security is enabled and doing a POST. How to fix it?
+
+With Spring 2.0.0.RELEASE, CSRF is enabled by default. We would need to disable it.
+
+
+```java
+package com.in28minutes.rest.webservices.restfulwebservices;
+ 
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+ 
+@Configuration
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
+    }
+}
+```
+
+Just ran the application with following pom.xml and was successfully able to send a POST request to 
+
+
+### Auto Completion for application.properties
+
+You would need to install the Spring Eclipse plugin.
+
+https://marketplace.eclipse.org/content/spring-ide#group-external-install-button
+
+
+### Unable to access http://localhost:8080/actuator/refresh
+
+Add the following in bootstrap.properties or in limits-service properties and commit it to GIT
+
+```
+management.endpoints.web.exposure.include=*
+```
+
+# How do you define url-pattern common to all controllers in Spring Boot?
+
+There is no need for web.xml if we use jar deployment with Spring Boot.
+
+You can use following property to define context path
+```
+server.contextPath = /what-ever-you-want
+```
+
+### What is Spring Data JPA?
+
+Spring Data JPA is a layer on top of JPA. 
+
+Typically this is the kind of code you need to write if you use Hibernate
+
+```
+@Repository
+@Transactional
+public class PersonJpaRepository {
+ 
+  // connect to the database
+  @PersistenceContext
+  EntityManager entityManager;
+ 
+  public Person findById(int id) {
+    return entityManager.find(Person.class, id);// JPA
+  }
+ 
+  public Person update(Person person) {
+    return entityManager.merge(person);
+  }
+ 
+  public Person insert(Person person) {
+    return entityManager.merge(person);
+  }
+ 
+  public void deleteById(int id) {
+    Person person = findById(id);
+    entityManager.remove(person);
+  }
+ 
+}
+```
+
+With Spring Data JPA, all that you need to do is this
+
+```
+public interface TodoRepository extends JpaRepository<Todo, Integer>{
+```
+
+More about it here
+
+https://projects.spring.io/spring-data-jpa/
+
+### Jackson Databind clash with LazyFetch - When I return an entity in a rest controller, the controller seems to ignore lazy fetch and will forcibly call the getter through jpa to get the data. Is there a way to avoid this?
+
+The solution is to use Entity Graphs.
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.entity-graph​​
+More details down here - https://stackoverflow.com/questions/29602386/how-does-the-fetchmode-work-in-spring-data-jpa​
+Good Luck.
+
+### JSON Viewer
+
+JSON Viewer -  https://github.com/teocci/JSONViewer-for-Chrome
+
+### How do you decide what is a Spring dependency and what is not?
+
+
+### If Devtools doesn't seem to work in Eclipse/STS
+
+I have encountered this problem myself. The changes to codes weren't getting detected by the Spring boot devtools. The reason behind this was that "Build Automatically" was unchecked in my STS. Just enabling it from the top menu (Project  >>  Build Automatically) resolved this issue.
+
+If the issue still persists, 
+
+1. Try to perform a forced update of maven artifacts. Right click on project -->maven->update->check force update.
+
+If the above doesn't resolve your issue, then probably, you'll need to check if your downloaded artifacts are ok or not. there are chances for the downloaded artifacts to get corrupted. Maven can do this job for you.
+
+2. Open a command prompt window. Navigate to the project directory on your local file system. example : default location(unless you have changed it) is C:\Users\<username>\workspace\application1
+
+Once you are inside your project directory, you need to run below command : 
+
+mvn dependency:purge-local-repository 
+
+E.g:  C:\Users\<username>\workspace\application1> mvn dependency:purge-local-repository 
+
+Maven will try to resolve any conflicts for all the required dependencies and will download them all again. This solution must work in most cases. Hopefully, this should resolve your problem. 
+
+This purge command can be used whenever you feel like there's problem with the downloaded artifacts.
+
+
 ### Error :  Hal Browser and Spring Boot Actuator are not working
 
 Question Continued - You can only get a json response. /application, /application/status and /application/info
@@ -2551,6 +2696,7 @@ If you are using Eclipse IDE, Eclipse maven plugin ensures that as soon as you a
 
 When you launch the java application, then the spring boot auto configuration magic kicks in. 
 - It launches up tomcat when it sees that you are developing a web application!
+
 
 ### Q :  Can we use jetty instead of tomcat in spring-boot-starter-web?
 
@@ -3218,6 +3364,55 @@ Two things that are typically a problem
 - Annotate repository class with @Repository
 - Try adding the annotation @EnableJpaRepositories(basePackageClasses = ...) with the right value for basePackageClasses next to @SpringBootApplication on the Spring Boot Application class.
 
+### How do you cache specific query based data using Spring Caching?
+
+In public interface CourseSpringDataRepository
+
+
+```java
+import org.springframework.cache.annotation.Cacheable;
+​
+​@Cacheable("courses")
+List<Course> findAll();
+```
+
+In, DemoApplication add @EnableCaching
+
+```java
+@SpringBootApplication
+@EnableCaching
+public class DemoApplication implements CommandLineRunner {
+```
+
+Execute findAll twice in DemoApplication and you would see that the second time data is fetched from the cache. 
+
+```java
+@Override
+public void run(String... arg0) throws Exception {
+logger.info("Courses -> {} ", courseRepository.findAll());
+logger.info("Courses -> {} ", courseRepository.findAll());
+```
+
+To get the http://localhost:8080/courses​ cached, I added @Cacheable on all the methods related to findAll as I was unable to quickly figure which method Spring Data Rest is using.
+
+```
+import org.springframework.cache.annotation.Cacheable;
+​
+​@Cacheable("courses")
+    List<Course> findAll();
+    @Cacheable("courses")
+    Page<Course> findAll(Pageable page);
+    @Cacheable("courses")
+    List<Course> findAll(Sort sort);
+    @Cacheable("courses")
+    <S extends Course> List<S> findAll(Example<S> example);
+    @Cacheable("courses")
+    public Page<Course> findAll(@Nullable Specification<Course> spec, Pageable pageable);
+    @Cacheable("courses")
+    public Page<Course> findAll(@Nullable Specification<Course> spec);
+```
+
+
 ### Error :  Detached object passed to persist
 
 Consider the code
@@ -3281,6 +3476,185 @@ Annotation Changes in JUnit 5
 - @BeforeClass annotation is renamed to @BeforeAll
 - @AfterClass annotation is renamed to @AfterAll
 - @Ignore annotation is renamed to @Disabled
+
+### @MockBean vs @Mock vs @InjectMocks
+
+@MockBean is a Spring Based Annotation. When you want to inject a mock into the Spring Context, we use @MockBean.
+@Mock and @InjectMocks are for unit tests using pure Mockito. No Spring Context.
+
+
+## Microservices
+
+### How can you connect to Rabbit MQ on a different Port?
+
+I found answer by myself. Adding the following properties to each of the microservices' application.properties file
+
+```
+spring.rabbitmq.host=
+spring.rabbitmq.password=
+spring.rabbitmq.username=
+```
+
+### How can you connect to Rabbit MQ from Zipkin on Windows?
+
+```
+SET RABBIT_URI=amqp://localhost 
+java -jar zipkin-server-2.5.2-exec.jar
+```
+
+### Unable to get Zuul API Gate way to work
+
+Here's the checklist
+1) Make sure you stop all the servers
+2) Make sure you import step34 versions of all the four components - currency-conversion-service, currency-exchange-service, netflix-eureka-naming-server, netflix-zuul-api-gateway-server 
+3) Make sure you start the services in this order
+  a)netflix-eureka-naming-server
+  b)netflix-zuul-api-gateway-server
+  c)currency-exchange-service
+  d)currency-conversion-service
+4) Make sure all the components are registered with naming server.
+5) Give a minute of warm up time!
+6) If you get an error once, execute it again after a minute
+7) If you still get an error, post the logs of the each of the components to understand what's happening in the background!
+
+
+
+
+
+### ZUUL API Gateway is not working. What can I check?
+
+Cool. the url looks good.
+​http://localhost:8765/currency-exchange-service/currency-exchange/from/EUR/to/INR​
+You can try the following!
+a) Make sure that all the applications are up and running.
+b) Compare the code against the code here - https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-10-16-spring-micro-services.md#step-34---setting-up-zuul-api-gateway-between-microservice-invocations​
+c) Post the details requested below if you are unable to resolve it.
+Details
+
+a) Log that you see
+b) the code from ​CurrencyExchangeServiceProxy.java, ZuulLoggingFilter ,NetflixZuulApiGatewayServerApplication, CurrencyConversionController, /netflix-zuul-api-gateway-server/src/main/resources/application.properties
+
+
+### Cloud Config Server Configuring path to local GIT Repo on Windows
+
+```
+ file:\\C:/WORKSPACE/GIT/git-localconfig-repo
+ file:///C:/microservices/git-localconfig-repo
+file:///C:/Users/Gautham/Documents/workspace-sts-3.9.4.RELEASE/git-localconfig-repo
+file:\\C:/Users/Gautham/Documents/workspace-sts-3.9.4.RELEASE/git-localconfig-repo
+```
+
+### Microservices and Transaction Management
+
+Microservices - Check out this article - great start for thinking about transaction management.  
+
+https://www.nginx.com/blog/event-driven-data-management-microservices/
+
+### Microservices and Bounded Context
+
+The scope of the microservice is the most difficult choice you have to make. There is no one good answer to it.
+
+One thing I can confirm is that all operations (insert, update, delete) should be part of the same micro service.
+
+However, should Employee be a micro service on its own? Can I combine with Department? These are things that we will not be able to answer unless we know the business domain, how they would evolve, how dependent these are and what are the relative sizes?
+
+A good starting point is to understand Bounded Context. https://martinfowler.com/bliki/BoundedContext.html
+
+Use that as the starting point but be flexible to allow evolution of it.
+
+### Verifying Limits Service 
+
+Here's the checklist
+1) Make sure that you have the right code - Compare against the code here - https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-10-16-spring-micro-services.md#step-01---part-2---setting-up-limits-microservice​
+2) If you are on windows make sure you have your configuration of local git repo right. These two formats work on windows
+file:\\C:/git-localconfig-repo
+file:///C:/git-localconfig-repo
+3) Make sure that you have committed all the code to GIT Local Repo
+4) Stop all the servers
+5) Launch Config Server First
+6) Launch Limits Service
+
+You should be good to go
+
+
+### Zipkin doesn't get anything
+
+Here's the checklist
+1) Make sure that you have updated the poms for all the three applications involved. A complete list here - https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-10-16-spring-micro-services.md#step-40---connecting-microservices-to-zipkin
+
+2) Stop and Rebuild all Applications
+
+3) Start them in the order - Naming Server, Distributed Tracing Server, API Gateway, Calculation Service, Exchange Service
+
+
+### How are each microservices deployed in production? Do we use Tomcat? Do we use Websphere or Weblogic?
+I’ve worked with clients where we use tomcat in production to manage millions of users. That exactly what most micro service deployments use.
+
+### How are microservices instances are created and managed , also where and how production grade application with microservices deployed ?
+
+Typically you containerize with Docker and manage it with a Kubernetes cluster.
+
+
+
+### Feign is not working
+
+Can you make sure you have the following pieces of code right?
+
+```
+<dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-openfeign</artifactId>
+    </dependency>
+```
+
+```
+      @GetMapping("/currency-converter-feign/from/{from}/to/{to}/quantity/{quantity}")
+  public CurrencyConversionBean convertCurrencyFeign(@PathVariable String from, @PathVariable String to,
+      @PathVariable BigDecimal quantity) {
+
+    CurrencyConversionBean response = proxy.retrieveExchangeValue(from, to);
+
+    return new CurrencyConversionBean(response.getId(), from, to, response.getConversionMultiple(), quantity,
+        quantity.multiply(response.getConversionMultiple()), response.getPort());
+  }
+```
+
+```
+@SpringBootApplication
+@EnableFeignClients("com.in28minutes.microservices.currencyconversionservice")
+public class CurrencyConversionServiceApplication {
+```
+
+```
+@FeignClient(name="currency-exchange-service", url="localhost:8000")
+public interface CurrencyExchangeServiceProxy {
+  @GetMapping("/currency-exchange/from/{from}/to/{to}")
+  public CurrencyConversionBean retrieveExchangeValue
+    (@PathVariable("from") String from, @PathVariable("to") String to);
+}
+```
+
+
+## Python
+
+###  Python Course 
+Think I’ve to explicitly include videos for dir and help somewhere at the start. Good Luck.
+
+### Tab does not work in Windows - Python Shell
+
+The builtin completion relies on the gnu readline library.
+
+You may be able to get completion working by installing this package on windows
+
+```
+python -m pip install pyreadline
+```
+
+### How to do setters and getters method in python by using pycarm.If you give any suggestion it will be very useful to us.Thanks in advance
+
+The thing is you do not really use a lot of getters and setters in Python. 
+
+You can read more about it here - https://www.python-course.eu/python3_properties.php
 
 ## You and in28Minutes
 

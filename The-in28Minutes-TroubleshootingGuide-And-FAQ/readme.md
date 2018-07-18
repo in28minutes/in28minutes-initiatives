@@ -4,7 +4,7 @@ We do not want you to get stuck because of a simple error.
 
 This 50 page troubleshooting guide and faq is our way of thanking you for choosing to learn from in28Minutes. 
 
-If you do not find a good answer here, post a question with the following details:
+If you do not find a good answer here, I would request you post the following details in the question:
 - What are you trying to do?
 - What was the last working state?
 - What changes did you make?

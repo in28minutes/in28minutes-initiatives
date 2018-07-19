@@ -1522,6 +1522,14 @@ It usually happens when you are having conflicts in Java and Spring versions.
 
 ## JSP Servlets and Spring MVC
 
+### I'm having problem getting the initial application running. How can I troubleshoot?
+Do not worry. 
+
+This link is a good starting point - 
+https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-11-18-JavaWebApplicationStepByStep-JSP-Servlets.md
+
+This video would help you - TODO
+
 ### Q :  What is the difference between @Controller and @RestController?
 
 @RestController = @Controller + @ResponseBody

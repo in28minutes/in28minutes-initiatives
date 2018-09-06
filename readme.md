@@ -5,9 +5,8 @@ Read about
 - Establishing a connect between Experts and the Learners - [The-in28Minutes-connect](in28Minutes-connect)
 - in28Minutes Troubleshooting Guide and FAQ - [The-in28Minutes-TroubleshootingGuide-And-FAQ](The-in28Minutes-TroubleshootingGuide-And-FAQ)
 
-## The End
-
-To find out more about our courses visit http://www.in28minutes.com
+### More Courses and Videos From in28Minutes
+- https://github.com/in28minutes/learn
 
 We would love to hear your thoughts.  
 

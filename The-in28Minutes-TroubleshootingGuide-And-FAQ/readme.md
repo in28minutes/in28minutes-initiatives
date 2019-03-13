@@ -36,6 +36,64 @@ Change 2
 <spring-cloud.version>Finchley.M8</spring-cloud.version>
 ```
 
+## Recent Course Updates
+
+### Using Java 9+ => 9 , 10 & 11
+
+You can upgrade to Java 9+ (10, 11, ... ) by making this change in pom.xml
+
+```
+<java.version>9</java.version> <!-- 10 or 11 or ..-->
+```
+
+You might face this exception
+
+```
+Caused by: java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+Caused by: java.lang.ClassNotFoundException: javax.xml.bind.JAXBException
+java.lang.NoClassDefFoundError: javax/transaction/SystemException
+Caused by: java.lang.ClassNotFoundException: javax.transaction.SystemException
+
+```
+
+Solution
+```
+   <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <version>2.3.0</version>
+   </dependency>
+   <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <version>2.3.0</version>
+   </dependency>
+   <dependency>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>jaxb-runtime</artifactId>
+      <version>2.3.0</version>
+   </dependency>
+   <dependency>
+      <groupId>javax.activation</groupId>
+      <artifactId>activation</artifactId>
+      <version>1.1.1</version>
+   </dependency>
+```
+
+### Hateoas
+
+There are a few modifications of HATEOAS  in the latest release of Spring HATEOAS 1.0.0:
+
+If you have compilation errors using ControllerLinkBuilder or Resource, Use the imports below:
+
+```
+import org.springframework.hateoas.EntityModel;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+EntityModel<User> model = new EntityModel<>(user.get());
+WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllUsers());
+model.add(linkTo.withRel("all-users"));
+```
+
 ## Spring 2.0.0.RELEASE Upgrades
 
 Video - https://www.youtube.com/watch?v=e2J4NfJ1Mns
@@ -140,35 +198,6 @@ RABBIT_URI=amqp://localhost java -jar zipkin-server-2.5.2-exec.jar
 ```
 SET RABBIT_URI=amqp://localhost 
 java -jar zipkin-server-2.5.2-exec.jar
-```
-### Java 9
-You can upgrade to Java 9 by making this change in pom.xml
-
-```
-<java.version>9</java.version>
-```
-
-You might face this exception
-
-```
-Caused by: java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
-Caused by: java.lang.ClassNotFoundException: javax.xml.bind.JAXBException
-java.lang.NoClassDefFoundError: javax/transaction/SystemException
-Caused by: java.lang.ClassNotFoundException: javax.transaction.SystemException
-
-```
-
-Solution
-```
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-
-    <dependency> <!-- Needed if you use Java 9 --> <!-- Make sure you do Maven -> Update Project and Restart -->
-      <groupId>javax.xml.bind</groupId>
-      <artifactId>jaxb-api</artifactId>
-    </dependency>
 ```
 
 The other problem we found is when we run tests using `mvn test`.

@@ -60,4 +60,3 @@ Learn Spring Boot and Microservices
 - Spring Boot Tutorials for Beginners	http://www.springboottutorial.com/spring-boot-tutorials-for-beginners
 - 20+ Spring Boot Projects with Code Examples	http://www.springboottutorial.com/spring-boot-projects-with-code-examples
 
-

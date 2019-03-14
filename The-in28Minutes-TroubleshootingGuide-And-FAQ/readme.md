@@ -3539,6 +3539,18 @@ SET RABBIT_URI=amqp://localhost
 java -jar zipkin-server-2.5.2-exec.jar
 ```
 
+### Zipkin is not showing the traces
+
+Spring Boot 2.1.3.RELEASE
+
+Try to add these configurations to all 4 projects using Sleuth to their application.properties:
+
+```
+#Sleuth
+spring.sleuth.sampler.percentage=1.0
+#Zipkin
+spring.zipkin.sender.type=web
+```
 ### Unable to get Zuul API Gate way to work
 
 Here's the checklist
@@ -3692,6 +3704,15 @@ python -m pip install pyreadline
 The thing is you do not really use a lot of getters and setters in Python. 
 
 You can read more about it here - https://www.python-course.eu/python3_properties.php
+
+## Angular Full Stack
+
+### When I display the dates, they show a day before.
+Could be because of the timezones
+
+```
+<td>{‌{todo.targetDate | date :'yyyy-MM-dd':'utc'}}</td>
+```
 
 ## You and in28Minutes
 

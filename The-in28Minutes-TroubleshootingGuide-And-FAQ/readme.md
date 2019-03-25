@@ -84,7 +84,9 @@ Solution
 
 There are a few modifications of HATEOAS  in the latest release of Spring HATEOAS 1.0.0:
 
-If you have compilation errors using ControllerLinkBuilder or Resource, Use the imports below:
+One of these should work
+
+#### Option 1 : Latest SNAPSHOT releases
 
 ```
 import org.springframework.hateoas.EntityModel;
@@ -92,6 +94,20 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 EntityModel<User> model = new EntityModel<>(user.get());
 WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllUsers());
 model.add(linkTo.withRel("all-users"));
+```
+
+#### Option 2: Older versions
+
+```
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+ 
+Resource<User> resource = new Resource<User>(user.get());
+ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllUsers());
+resource.add(linkTo.withRel("all-users"));
+return resource;
 ```
 
 ## Spring 2.0.0.RELEASE Upgrades

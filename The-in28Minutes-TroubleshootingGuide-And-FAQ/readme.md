@@ -19,21 +19,57 @@ If you do not find a good answer here, I would request you post the following de
 
 ### Recommended Versions
 
-Use Spring Cloud - Finchley.M8 and Spring Boot - 2.0.0.RELEASE. 
+#### Java  Path Variable Windows
+
+You would need to set PATH variable in Windows.
+
+Instructions here - https://github.com/in28minutes/java-a-course-for-beginners/blob/master/00-02-java-eclipse-installation.md#setting-path-environment-variable-in-windows
+
+
+Can you post the following details?
+
+Where is your JDK installed? Can you post a screenshot of it?
+
+What is in your PATH variable? Can you post a screenshot of it?
+
+What error do you see when you type jshell in command prompt? Can you post a screenshot of it?
+
+
+
+#### Use Latest Version of Eclipse
+
+I downloaded a project from spring initializr but when I see the pom.xml showing errors on parent tag.
+
+https://stackoverflow.com/questions/56154266/why-does-change-from-spring-boot-version-2-1-4-to-2-1-5-gives-unknown-configurat
+
+Add the following entry to your pom to fix that issue. 
+
+```
+<properties>
+
+    <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+
+</properties>
+
+```
+
+Other option is to use 2.1.1.RELEASE.
+
+#### Use Spring Cloud - Greenwich.RC2 and Spring Boot - 2.1.1.RELEASE.
 
 Change 1
 ```
 <parent>
 <groupId>org.springframework.boot</groupId>
 <artifactId>spring-boot-starter-parent</artifactId>
-<version>2.0.0.RELEASE</version>
+<version>2.1.1.RELEASE</version>
 <relativePath/> <!-- lookup parent from repository -->
 </parent>
 ```
 
 Change 2
 ```
-<spring-cloud.version>Finchley.M8</spring-cloud.version>
+<spring-cloud.version>Greenwich.RC2</spring-cloud.version>
 ```
 
 ## Recent Course Updates
@@ -850,11 +886,39 @@ Instead of Run as -> Maven application, use Debug as -> Maven application. Add y
 
 If you are using Spring Boot and Running using Run as -> Java application, then you can use Debug as -> Java Application. Add your breakpoints. You should be all set.
 
+
+### Spring MVC Context Root
+
+Two Options: Either remove context path or add context path to all urls
+
+Adding Context Path to All Buttons
+
+Do this in all pages
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<a type="button" class="btn btn-primary" 
+    href="${contextPath}/update-todo?id=${todo.id}">Edit</a>
+Removing Context Path
+
+In Your web.xml set an url pattern of / to dispatcher servlet!
+
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+
+If these dont work for you - can you post your pom.xml, dispatcher servlet.xml and web.xml along with a sample jsp with button?
+
+Good Luck
+
+
 ### Q :  How do I configure auto restarting the server whenever source code changes?
 
 If you are using Spring Boot, check configuration in Approach 1.
 
 If you are doing a JSP/Servlet or a Spring MVC course without using Spring Boot use Approach 2.
+
 
 ###### Approach 1 : Spring Boot Project
 
@@ -1350,6 +1414,10 @@ In addition, these can be used at later point to add additional behaviour using 
 - For example, in case of @Repository, Spring automatically wires in JDBC Exception translation features.
 
 By using a specific annotation, you are giving more information to the framework about your intentions.
+
+###  Spring - what is a dependency and what is not?
+
+Here's a quick video to get you going - https://www.youtube.com/watch?v=4VajgnSHwOw
 
 ### Q :  Can we use @Component annotation instead of @Service for Business Services?
 
@@ -2523,6 +2591,15 @@ You can use following property to define context path
 server.contextPath = /what-ever-you-want
 ```
 
+### Default Implementation of JpaRepository
+
+hi Ranga. I notice that we are using just an interface that uses JpaRepository<T,Id>. Where are the methods inside this Interface Implemented ? I mean there has be some default implementation.
+
+One of the basic implementations is
+
+https://github.com/spring-projects/spring-data-jpa/blob/master/src/main/java/org/springframework/data/jpa/repository/support/SimpleJpaRepository.java
+
+
 ### What is Spring Data JPA?
 
 Spring Data JPA is a layer on top of JPA. 
@@ -2574,6 +2651,23 @@ The solution is to use Entity Graphs.
 https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.entity-graph​​
 More details down here - https://stackoverflow.com/questions/29602386/how-does-the-fetchmode-work-in-spring-data-jpa​
 Good Luck.
+
+### Java Bean - Jackson - Binding
+
+Awesome. Great Question.
+
+Question is : Who converts the Bean to JSON and maps JSON to the bean?
+
+Its done by Jackson framework (configured by Spring Boot Auto Configuration)
+
+How does Jackson framework work?
+
+It uses something called Java Beans API Specification.
+
+1) A JavaBean is just a standard
+2) All properties private 
+3) Have getters/setters
+4) A public no-argument constructor
 
 ### JSON Viewer
 
@@ -3174,6 +3268,43 @@ spring.datasource.password=YOUR_PASSWORD
 ###### Step 5 - Restart and You are ready!
 That's it
 
+
+### Connecting to Sybase
+
+In pom.xml file it needs the following dependencys:
+
+```
+        <dependency>
+
+            <groupId>org.springframework.boot</groupId>
+
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+
+        </dependency>
+
+<dependency>
+
+    <groupId>com.sybase</groupId>
+
+    <artifactId>jconn4</artifactId>
+
+    <version>7.07</version>
+
+</dependency>
+```
+
+In application.properties:
+
+```
+***REMOVED***
+***REMOVED***
+***REMOVED***
+spring.datasource.driverClassName=com.sybase.jdbc4.jdbc.SybDriver
+```
+
+Make sure the maven .m2 repository has the com.sybase.jconn4.7.07 directory with jconn4-7.07.jar file downloaded there.
+
+
 ### Q :  What is the default h2 database name configured by Spring Boot? Why is the default database name testdb?
 
 This is where all the default values in application.properties are listed
@@ -3510,6 +3641,12 @@ I’m working on a course for Full Stack Developer with REST APIs (on Spring Boo
 Here’s a good reference - https://medium.com/@nydiarra/secure-a-spring-boot-rest-api-with-json-web-token-reference-to-angular-integration-e57a25806c50
 
 
+### Filter URLS in Swagger Documentation
+
+```
+new Docket(DocumentationType.SWAGGER_2).paths(PathSelectors.ant("/order/**"))
+```
+
 ## Unit Testing
 
 ### Q :  What is a mockito answer?
@@ -3545,6 +3682,50 @@ Annotation Changes in JUnit 5
 
 ## Microservices
 
+### ERROR feign.RetryableException 
+
+connect timed out executing GET http://currency-exchange-service/currency-exchange/from/USD/to/INR] with root cause
+java.net.SocketTimeoutException: connect timed out
+
+Configure this on the component where you have the feign interface and dependency defined:
+
+```
+feign.client.config.default.connectTimeout: 160000000
+feign.client.config.default.readTimeout: 160000000
+```
+
+Other configuration if you get timeouts from other components include:
+
+```
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=60000
+ribbon:
+  ConnectTimeout: 120000
+   ReadTimeout: 120000
+```
+
+```
+zuul.routes.currency-exchange-service.url=http://localhost:8000/
+```
+
+### Eureka Check List with Ribbon
+
+Here's the checklist
+
+Make sure you stop all the servers
+
+Compare code changes for Steps 26 to 28 with the code down here -  https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-10-16-spring-micro-services.md#step-26---connecting-currency-conversion-microservice-to-eureka
+
+Make sure you start the services in this order a)netflix-eureka-naming-server  b)currency-exchange-service c)currency-conversion-service
+
+Make sure all the components are registered with naming server.
+
+Give a minute of warm up time!
+
+If you get an error once, execute it again after a minute
+
+If you still get an error, post the logs of the each of the components to understand what's happening in the background!
+
+
 ### How can you connect to Rabbit MQ on a different Port?
 
 I found answer by myself. Adding the following properties to each of the microservices' application.properties file
@@ -3574,6 +3755,62 @@ spring.sleuth.sampler.percentage=1.0
 #Zipkin
 spring.zipkin.sender.type=web
 ```
+
+### Zipkin
+Make sure that you have updated the poms for all the three applications involved. A complete list here.
+- Stop and Rebuild all Applications
+- Start them in the order - Naming Server, Distributed Tracing Server, API Gateway, Calculation Service, Exchange Service
+- Execute the currency conversion service
+- Check the Zipkin UI
+
+Dependencies
+> If you are using Spring Boot Release >= 2.1.*, you would need to use spring-cloud-starter-zipkin and spring-rabbit instead of spring-cloud-sleuth-zipkin and spring-cloud-starter-bus-amqp.
+
+You would need to make this change in THREE pom.xmls - in currency-conversion-service, currency-exchange-service and zuul-api-gateway projects
+
+New Dependencies
+
+```
+    <dependency>
+
+      <groupId>org.springframework.cloud</groupId>
+
+      <artifactId>spring-cloud-starter-zipkin</artifactId>
+
+    </dependency>
+
+    <dependency>
+
+      <groupId>org.springframework.amqp</groupId>
+
+      <artifactId>spring-rabbit</artifactId>
+
+    </dependency>
+```
+
+OLD Dependencies to be Replaced
+```
+
+    <dependency>
+
+      <groupId>org.springframework.cloud</groupId>
+
+      <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+
+    </dependency>
+
+ 
+
+    <dependency>
+
+      <groupId>org.springframework.cloud</groupId>
+
+      <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+
+    </dependency>
+
+```
+
 ### Unable to get Zuul API Gate way to work
 
 Here's the checklist
@@ -3736,6 +3973,52 @@ Could be because of the timezones
 ```
 <td>{‌{todo.targetDate | date :'yyyy-MM-dd':'utc'}}</td>
 ```
+
+### CORS
+
+I was still getting CORS policy error after adding .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().
+
+I have to add antMatchers(HttpMethod.GET, "/**").permitAll() as well in order to get it working instead of just permitting for OPTIONS http method.
+
+
+### Angular - Date is not working
+
+I got a solution for this in the web and its working as expected . 
+
+ i just did a small change in  tsconfig.json  
+
+```
+    "lib": [
+        "es2018",
+        "dom"
+    ],
+```
+changed to 
+```
+    "lib": [
+        "es6",
+        "dom"
+    ],
+```
+
+
+
+## React Full Stack
+
+### Header is not refreshing
+
+```
+import { withRouter } from 'react-router';
+ 
+class HeaderComponent extends Component {
+ 
+{/*...Header component code ....*/}
+ 
+}
+ 
+export default withRouter(HeaderComponent);
+```
+
 
 ## You and in28Minutes
 

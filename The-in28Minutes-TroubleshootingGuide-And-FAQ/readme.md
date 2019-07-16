@@ -2393,6 +2393,21 @@ return numbers;
 }
 ```
 
+### How can you send error response as both XML and JSON based on accept header - content negotiation?
+
+Add two annotations for the error response class.
+
+```
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import ....
+ 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class UserErrorResponse {
+
+```
+
 ## How can I accept a list of items for a Rest Service?
 
 The way I recommend is to post this as a JSON

@@ -5,17 +5,17 @@ We do not want you to get stuck because of a simple error.
 This 50 page troubleshooting guide and faq is our way of thanking you for choosing to learn from in28Minutes. 
 
 If you do not find a good answer here, I would request you post the following details in the question:
-- What are you trying to do?
+
+```
+Can you post more details with screenshots?
 - What was the last working state?
-- What changes did you make?
+- What changes did you make? Can you be specific and put the code changes etc?
+- What do you expect to happen? Can you be specific and put the code changes, screenshots etc?
 - What did you try to fix the issue?
 - What do you observe?
-- Include 
-	- Code snippets
-	- Code Zip (if possible)
-	- Properties files
-	- Log
-	- Stack Trace
+- Include Code snippets, Properties files, pom.xml, Log, Stack Trace etc
+```
+
 
 ### Recommended Versions
 
@@ -3828,6 +3828,7 @@ OLD Dependencies to be Replaced
 
 ### Unable to get Zuul API Gate way to work
 
+```
 Here's the checklist
 1) Make sure you stop all the servers
 2) Make sure you import step34 versions of all the four components - currency-conversion-service, currency-exchange-service, netflix-eureka-naming-server, netflix-zuul-api-gateway-server 
@@ -3840,7 +3841,7 @@ Here's the checklist
 5) Give a minute of warm up time!
 6) If you get an error once, execute it again after a minute
 7) If you still get an error, post the logs of the each of the components to understand what's happening in the background!
-
+```
 
 
 
@@ -3888,6 +3889,7 @@ Use that as the starting point but be flexible to allow evolution of it.
 
 ### Verifying Limits Service 
 
+```
 Here's the checklist
 1) Make sure that you have the right code - Compare against the code here - https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-10-16-spring-micro-services.md#step-01---part-2---setting-up-limits-microservice​
 2) If you are on windows make sure you have your configuration of local git repo right. These two formats work on windows
@@ -3899,17 +3901,18 @@ file:///C:/git-localconfig-repo
 6) Launch Limits Service
 
 You should be good to go
-
+```
 
 ### Zipkin doesn't get anything
 
+```
 Here's the checklist
 1) Make sure that you have updated the poms for all the three applications involved. A complete list here - https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-10-16-spring-micro-services.md#step-40---connecting-microservices-to-zipkin
 
 2) Stop and Rebuild all Applications
 
 3) Start them in the order - Naming Server, Distributed Tracing Server, API Gateway, Calculation Service, Exchange Service
-
+```
 
 ### How are each microservices deployed in production? Do we use Tomcat? Do we use Websphere or Weblogic?
 I’ve worked with clients where we use tomcat in production to manage millions of users. That exactly what most micro service deployments use.

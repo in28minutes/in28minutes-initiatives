@@ -3985,6 +3985,148 @@ You can read more about it here - https://www.python-course.eu/python3_propertie
 
 ## Angular Full Stack
 
+### Connect to database for users
+
+Here are the important files involved.
+
+##### /src/main/java/com/in28minutes/todoservices/jwt/User.java
+
+```java
+package com.in28minutes.todoservices.jwt;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name = "USER")
+public class User {
+
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+    @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
+    private Long id;
+
+    @Column(name = "USERNAME", length = 50, unique = true)
+    @NotNull
+    @Size(min = 4, max = 50)
+    private String username;
+
+    @Column(name = "PASSWORD", length = 100)
+    @Size(min = 4, max = 100)
+    @NotNull
+    private String password;
+
+    @Column(name = "ROLE", length = 100)
+    @Size(min = 4, max = 100)
+    @NotNull
+    private String role;
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+    
+ 
+}
+```
+---
+
+##### /src/main/java/com/in28minutes/todoservices/jwt/UserRepository.java
+
+```java
+package com.in28minutes.todoservices.jwt;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+	User findByUsername(String username);
+}
+```
+
+---
+##### /src/main/java/com/in28minutes/todoservices/jwt/JwtUserDetailsService.java
+
+```java
+package com.in28minutes.todoservices.jwt;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+@Service
+public class JwtUserDetailsService implements UserDetailsService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+
+        if (user == null) {
+            throw new UsernameNotFoundException(String.format("USER_NOT_FOUND '%s'.", username));
+        } else {
+            return create(user);
+        }
+    }
+
+    public static JwtUserDetails create(User user) {
+        List<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
+        roles.add(new SimpleGrantedAuthority(user.getRole()));
+        return new JwtUserDetails(user.getId(), user.getUsername(), user.getPassword(), roles);
+    }
+}
+```
+---
+
+##### /src/main/resources/data.sql
+
+```
+INSERT INTO USER (ID, USERNAME, PASSWORD, ROLE) VALUES (1, 'in28minutes', '$2a$10$3zHzb.Npv1hfZbLEU5qsdOju/tk2je6W6PnNnY.c1ujWPcZh4PL6e','ROLE_USER');
+```
+---
+
 ### When I display the dates, they show a day before.
 Could be because of the timezones
 

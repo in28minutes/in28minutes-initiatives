@@ -16,6 +16,42 @@ Can you post more details with screenshots?
 - Include Code snippets, Properties files, pom.xml, Log, Stack Trace etc
 ```
 
+### Debugging Full Stack Course Problems
+
+```
+Following questions would be great to think about:
+- What debugging steps did you take?
+- Were you able to identify which line of Front code is throwing this error?
+- Which scenario are you executing?
+- Are you having the same problem with other requests? Or is it just this request you are facing a problem with?
+- Was there a HTTP Call going to backend?
+- Do you see other errors in console?
+- What request/response is going to the REST API? Can you get the Request Content and Header from Network Tab? Can you get the Response Content and Response Headers from the Network Tab?
+- Are you able to use the request from network tab to execute the request  from Restlet client? Can you post a screenshot?
+- Can you log all the things from the frontend - URL, header and use them to execute the request? You can do a console.log of all the details in the request.
+- Can you enable debug logging and monitor the messages in the console on the server side? It should give you a clue.
+logging.level.org.springframework = debug
+
+Here are some of the things that could cause problems
+- Is code from basic.auth package active?
+- SpringSecurityConfigurationBasicAuth class should be in Component Scan. You can watch this video about Component Scan - https://youtu.be/L1Y5pwy09Vw?t=24
+- Check if @CrossOrigin is enabled on HelloWorldController, BasicAuthenticationController and TodoResource.
+- Extra / in the URL. Ex: http://localhost:8080//hello-world/path-variable/in28minutes
+- Is the url for the REST API called from the frontend right? Does it match the mapping in controller?
+- Is the Authorization header name right? `Authorization` - Check the exact case as well.
+- Is the Authorization header value right? `Bearer ${data.token}` for JWT and 'Basic ' + window.btoa(username + ':' + password) for Basic Authentication.
+
+
+If you've checked all the things above, post the following details
+- Can you post your hello world controller and the code changes you made to add JWT Header in frontend?
+- Can you post a screenshot of executing the request and the request details and headers?
+- Can you post a screenshot of your package structure showing individual classes?
+- Can you post the request headers from the browser network tab?
+- Can you execute the request from REST API Client using the request headers coming from the browser network tab?
+- Can you post the frontend code to execute the request?
+- Can you post the code changes you made in this step?
+```
+
 
 ### Recommended Versions
 
@@ -24,7 +60,6 @@ Can you post more details with screenshots?
 You would need to set PATH variable in Windows.
 
 Instructions here - https://github.com/in28minutes/java-a-course-for-beginners/blob/master/00-02-java-eclipse-installation.md#setting-path-environment-variable-in-windows
-
 
 Can you post the following details?
 
@@ -38,22 +73,35 @@ What error do you see when you type jshell in command prompt? Can you post a scr
 
 #### Use Latest Version of Eclipse
 
+Correct the classpath of your application so that it contains a single, compatible version of org.springframework.plugin.core.PluginRegistry
+
 I downloaded a project from spring initializr but when I see the pom.xml showing errors on parent tag.
 
 https://stackoverflow.com/questions/56154266/why-does-change-from-spring-boot-version-2-1-4-to-2-1-5-gives-unknown-configurat
 
-Add the following entry to your pom to fix that issue. 
+Add the following entry `<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>` to your pom to fix that issue. 
 
 ```
 <properties>
+	...
+	...
+	...
 
     <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-
 </properties>
 
 ```
 
-Other option is to use 2.1.1.RELEASE.
+Other option is to use 2.1.3.RELEASE.
+
+```
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.3.RELEASE</version>
+    <relativePath/> <!-- lookup parent from repository -->
+</parent>
+```
 
 #### Use Spring Cloud - Greenwich.RC2 and Spring Boot - 2.1.1.RELEASE.
 
@@ -75,6 +123,8 @@ Change 2
 ## Recent Course Updates
 
 ### Using Java 9+ => 9 , 10 & 11
+
+You are using Java 9+. Here's a great read - https://www.jesperdj.com/2018/09/30/jaxb-on-java-9-10-11-and-beyond/
 
 You can upgrade to Java 9+ (10, 11, ... ) by making this change in pom.xml
 
@@ -127,7 +177,7 @@ One of these should work
 ```
 import org.springframework.hateoas.EntityModel;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
-EntityModel<User> model = new EntityModel<>(user.get());
+EntityModel<User> model = new EntityModel<>(user);
 WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllUsers());
 model.add(linkTo.withRel("all-users"));
 ```
@@ -140,7 +190,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
  
-Resource<User> resource = new Resource<User>(user.get());
+Resource<User> resource = new Resource<User>(user);
 ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllUsers());
 resource.add(linkTo.withRel("all-users"));
 return resource;
@@ -730,6 +780,13 @@ Fix
 - If you do not have JDK 8, go ahead an install it.
 - Configure Eclipse to use JDK 8. Refer to "You are not using a JDK" section to find out how to configure JDK 8
 
+### Should we use Eclipse IDE for Java Developers or Eclipse IDE for Java EE Developers?
+
+Here is a quick summary:
+- Eclipse IDE for Java Developers - Used to develop Java applications.
+- Eclipse IDE for Java EE Developers - Used to develop web application, Java EE application, web services and micro services with Java
+
+
 ### Tip :  Your Project Maven configuration should be configured to compile at Java 8
 
 If you are using Spring Boot, check configuration in Approach 1.
@@ -1114,7 +1171,93 @@ Maven has the first mover advantage and has retained it and hence the choice for
 
 If you want to create a Spring Boot app with Gradle, this should help you get started - https://spring.io/guides/gs/gradle/
 
+### Architecture - 
+What is the popular of view that people are using? Velocity, JSF, Freemarker, or JSP/EL/JSTL?
+
+Actually, we are moving toward javascript frameworks like Angular and React consuming API exposed from backend.
+
+
+###  I have normal prop file and a Yaml prop file, which one take priority ? 
+
+
+It is expected that you use either YAML or properties.
+
+If you use both, a merge of both is used with a preference for values in the properties file.
+
+For complete order of preference, refer this
+
+https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html
+
+
+### What about Gradle?
+
+### Is it mandatory to use Spring Initializr?
+
+Nope. It is not mandatory.
+
+Here is an example article creating it manually step by step - https://spring.io/guides/gs/spring-boot/
+
+I’m not aware of any popular maven archetypes for Spring Boot.
+
+### Are all starter versions snapshots or not are good?
+
+
+SNAPSHOT versions are versions under development. Of late, some of the SNAPSHOT version of Spring Boot 2 are having a few issues.
+
+So, we are advising not use SNAPSHOT version.
+
+
+A project in development uses a snapshot version. Once you have completed developing a version you would release it as 0.0.1 or 0.0.1-RELEASE.
+
+The next version in development will be 0.0.2-SNAPSHOT.
+
+Versioning convention is MAJOR.MINOR.FIX
+
+Spring Boot SNAPSHOTs are more reliable than other frameworks but you are right we would like to use Released versions as much as possible.
+
+
+### Existing Maven Projects
+
+Here are the steps to import existing maven projects:
+- Click File > Import.
+- Type Maven in the search box under Select an import source:
+- Select Existing Maven Projects.
+- Click Next.
+- Click Browse and select the folder that is the root of the Maven project(probably contains the pom.xml file)
+- Click Next.
+- Click Finish.
+
+### Using Maven for jstl
+
+The absolute uri: java.sun.com/jsp/jstl/core cannot be resolved in either web.xml or the jar files deployed with this application
+
+solution was: 
+
+```
+    <dependency>
+      <groupId>jstl</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+```
+which works
+
+
 ## Eclipse
+
+### Package Presentation > Hierarchical
+
+Yeah, I figured it out. I just needed to Package Presentation > Hierarchical on Eclipse. 
+
+It’s called hierarchical package representation.
+
+```
+Package Explorer / View Menu / Package Presentation... / Hierarchical
+```
+
+The "View Menu" can be opened with Ctrl + F10, or the small arrow-down icon in the top-right corner of the Package Explorer.
+
+From - https://stackoverflow.com/questions/3915961/how-to-view-hierarchical-package-structure-in-eclipse-package-explorer
 
 ### Bug in Eclipse when generating toString?
 
@@ -1173,11 +1316,13 @@ This can be another option for setting up a unit test
 
 Changed the scope of the embedded Tomcat dependency to required. Hope this helps anyone using IntelliJ.
 
+```
 <dependency>
     <groupId>org.apache.tomcat.embed</groupId>
     <artifactId>tomcat-embed-jasper</artifactId>
     <scope>required</scope> <!-- 'provided' for Eclipse, 'required' for IntelliJ -->
 </dependency>
+```
 
 ### Q :  Why does Hot reload not work with Spring Boot DevTools and Intellij?
 
@@ -1201,6 +1346,183 @@ Recommended Reading
 ```
 
 ## Spring
+
+
+### What's so bad about instantiating beans manually?
+
+In general, the answer is Loose Coupling. Think why do we need Interfaces in Java? You can write code without interfaces but most of the times we use interfaces.
+
+You might wonder : Why should code be loosely coupled?
+
+Let's consider the example of  Unit Testing. If you directly instantiate objects, think how you would write unit tests for them.
+
+The core feature of Spring is dependency injection. And if we use Dependency Injection properly then we would be able to write unit tests for our code very easily. Spring has a really good integration frameworks like Junit and Mockito and it enables us to write good unit tests very quickly.
+
+And to build on top of it, Spring has awesome modules and projects to make various facets of application development simpler.
+
+
+### Spring vs Interface
+
+what is special about loose coupling of spring?Interface implementation provides the same?
+
+//loose coupling via interface
+```
+ public interface Vehicle {
+        void start();
+   }
+         
+   public class Car implements Vehicle {
+        @Override
+        public void start() {
+              System.out.println("Travel by Car");
+        }
+   }
+
+   public class Bike implements Vehicle {
+         @Override 
+         public void start() {
+               System.out.println("Travel by Bike");
+         }
+   }
+             
+    // create main class Journey
+   public class Journey {
+         public static void main(String[] args) {
+               Vehicle v = new Car();
+               v.start();
+         }
+   } 
+```
+
+
+In Journey class, You have hardcode
+
+```
+Vehicle v = new Car(); 
+```
+With spring the Journey class does not need to know about the specific instance of Vehicle.
+
+Based on your configuration, Spring would identify the appropriate Vehicle implementation and auto wire it into Journey class.
+
+This will help you to unit test the Journey class with different Vehicle implementations without changing the Journey class.
+
+
+
+### If BubbleSortAlgorithm is the @Primary @Component and QuickSortAlgorithm just another @Component How is QuickSortAlgorithm used?  How is the method accessed?
+
+If you want to select a bean at runtime, thats business logic - Not auto wiring.
+
+You would need to create a separate class for Selector which has both the sorting algorithms auto wired. It should have the business logic to choose the appropriate algorithm.
+
+
+```
+@Component 
+class SortAlgorithmSelector {
+     @Autowired
+      SortAlgorithm quickSortAlgorithm;
+
+     @Autowired
+      SortAlgorithm binarySortAlgorithm;
+
+      public SortAlgorithm chooseTheRightAlgorithm(Data data) {
+             //Logic to choose the algorithm and return it.
+      }
+
+}
+```
+
+
+### @Bean and @Autowired
+
+
+@Bean is used in Spring Configuration Files and Classes. It is used to directly instantiate or configure spring beans.
+
+@Autowired can be used with methods also. Spring would find a matching bean for AuthenticationManagerBuilder and call the method once the bean is created.
+
+### Why Dependency Injection?
+
+You said without dependency injection, it makes unit tests much harder. I don't understand why.
+
+I'm explaining myself :
+
+Let's say your controller depends from a service. You want to test it with a fake service.
+
+In fact instead of having Service service = new Service() (your real service), you just have to replace by : Service service = new FakeBackEndService();
+
+It's just one line of code changing, I don't understand why DI is so good for unit tests, it seems without it isn't much longer (just changing one line fo code)
+
+`Answer`
+
+
+Think about this
+
+You need to change code when you want to run unit tests. Let’s say you have a big application with 500 Component classes. Would it be possible to change all the classes when we run unit tests?
+
+
+### How BinarySearchImpl is tightly coupled with BubbleSort?
+
+Question you need to ask is if you would need to change the algorithm to use - let's say QuickSort - do you need to make a change in BinarySearchImpl?
+
+### @Configuration vs @Bean
+
+You use @Configuration to define the Spring Context configuration in a Java File.
+
+```
+@ComponentScan("com.in28minutes")
+@Configuration
+public class SpringConfiguration {
+```
+
+Within a Spring Configuration Class , @Bean is used to define beans with custom configuration. You define the beans to be created!
+
+Here’s an example
+```
+@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+
+	public static final Contact DEFAULT_CONTACT = new Contact(
+			"Ranga Karanam", "http://www.in28minutes.com", "in28minutes@gmail.com");
+	
+	public static final ApiInfo DEFAULT_API_INFO = new ApiInfo(
+			"Awesome API Title", "Awesome API Description", "1.0",
+			"urn:tos", DEFAULT_CONTACT, 
+			"Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0");
+
+	private static final Set<String> DEFAULT_PRODUCES_AND_CONSUMES = 
+			new HashSet<String>(Arrays.asList("application/json",
+					"application/xml"));
+
+	@Bean
+	public Docket api() {
+		return new Docket(DocumentationType.SWAGGER_2)
+				.apiInfo(DEFAULT_API_INFO)
+				.produces(DEFAULT_PRODUCES_AND_CONSUMES)
+				.consumes(DEFAULT_PRODUCES_AND_CONSUMES);
+	}
+}
+```
+
+### Difference between Unit testing and Integration testing
+
+The difference is the scope of what is being tested.
+
+Unit Test only tests the class/method - the unit - that is being tested.
+
+An integration test launches up the entire application. Multiple layers/classes/methods are tested together.
+
+### Spring Team recommends: "Always use constructor based dependency injection in your beans. Always use assertions for mandatory dependencies". Could you explain what is at stake?
+
+This article is a great starting point - https://spring.io/blog/2007/07/11/setter-injection-versus-constructor-injection-and-the-use-of-required/
+
+### @ControllerAdvice
+
+@ControllerAdvice is common to all the controllers.
+
+All logic that is common to all the controllers is implemented in Controller Advice classes.
+
+Exception handling etc.
+
 
 ### Problem with Component Scan
 
@@ -1375,7 +1697,113 @@ The interesting part of the equation is Hibernate vs JPA brings up the same ques
 
 > Summary : There is no choice which is perfect. This is a 55-45 choice. Evaluate what your needs are and make a choice. The good thing is you cannot go wrong with either of the choices.
 
+### Exception Handling
 
+Think about this scenario. Let’s say your database call is throwing an exception. What can you do about it? The best you can do is log all error details, show a great error page to the user.
+
+If you used JDBC, you need to handle the exceptions in your database call method and have global exception handling to show error page.
+
+Why not make it easy for yourselves?
+
+- Step I : Have global exception handling in place.
+- Step II : Only handle exceptions you can do something about.
+
+Thats what Spring Enables.
+
+### DI vs IOC
+
+Both essentially mean the same.
+- Inversion of Control - Instead of the programmer injecting dependencies, the framework takes the responsibility of auto wiring.
+- Dependency Injection - The framework identifies dependencies and injects them into other beans where they are needed.
+
+Inversion of Control is the result of Dependency Injection.
+
+However, You can implement Inversion of Control even without Dependency Injection.
+
+### Singleton vs Prototype
+
+Here is a quick analysis:
+- Singleton - Same bean is reused for all requests. You cannot have state (request information) in a singleton as it is shared between requests.
+- Prototype - For every request, a new bean is created. If your bean has state (request specific information), you cannot reuse it between requests. So, you go for prototype.
+
+### What is a dependency in Spring?
+
+Think this way!
+
+Who is creating instances of the Data Bean? We do, using a constructor.
+
+Who is creating things which are annotated with @Component. Spring Framework does.
+
+Here's a great video to watch - https://www.youtube.com/watch?v=4VajgnSHwOw
+
+### @Configuration
+
+Typically @Configuration is used on file where you are manually defining Spring Beans .  We are creating api bean manually in the example below.
+
+```
+@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+
+    public static final Contact DEFAULT_CONTACT = new Contact(
+            "Ranga Karanam", "http://www.in28minutes.com", "in28minutes@gmail.com");
+    
+    public static final ApiInfo DEFAULT_API_INFO = new ApiInfo(
+            "Awesome API Title", "Awesome API Description", "1.0",
+            "urn:tos", DEFAULT_CONTACT, 
+            "Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0");
+
+    private static final Set<String> DEFAULT_PRODUCES_AND_CONSUMES = 
+            new HashSet<String>(Arrays.asList("application/json",
+                    "application/xml"));
+
+    @Bean
+    public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(DEFAULT_API_INFO)
+                .produces(DEFAULT_PRODUCES_AND_CONSUMES)
+                .consumes(DEFAULT_PRODUCES_AND_CONSUMES);
+    }
+}
+```
+
+However, we are using Configuration in AOP examples to indicate that the file contains AOP Configuration. In this context, it is not strictly necessary because even @Component should do the job. 
+
+```
+@Aspect
+@Configuration
+public class AfterAopAspect {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @AfterReturning(value = "com.in28minutes.spring.aop.springaop.aspect.CommonJoinPointConfig.businessLayerExecution()", 
+            returning = "result")
+    public void afterReturning(JoinPoint joinPoint, Object result) {
+        logger.info("{} returned with value {}", joinPoint, result);
+    }
+    
+    @After(value = "com.in28minutes.spring.aop.springaop.aspect.CommonJoinPointConfig.businessLayerExecution()")
+    public void after(JoinPoint joinPoint) {
+        logger.info("after execution of {}", joinPoint);
+    }
+}
+@Aspect
+@Configuration
+public class MethodExecutionCalculationAspect {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Around("com.in28minutes.spring.aop.springaop.aspect.CommonJoinPointConfig.trackTimeAnnotation()")
+    public void around(ProceedingJoinPoint joinPoint) throws Throwable {
+        long startTime = System.currentTimeMillis();
+
+        joinPoint.proceed();
+
+        long timeTaken = System.currentTimeMillis() - startTime;
+        logger.info("Time Taken by {} is {}", joinPoint, timeTaken);
+    }
+}
+```
 ### Q :  Why do we write a lot of unit tests in the Spring Master Class course?
 
 Think it this way. Functionally, does Spring allow you to do anything that you were not able to do earlier? The answer is NO. Almost everything that we are doing with Spring today could have been done without Spring 10 years back. So, what does Spring really bring to the table?
@@ -1424,6 +1852,75 @@ Here's a quick video to get you going - https://www.youtube.com/watch?v=4VajgnSH
 Heres an extract from spring documentation. Since we were creating a business layer service, we used @Service. 
 
 > "@Component serves as a generic stereotype for any Spring-managed component; whereas, @Repository, @Service, and @Controller serve as specializations of @Component for more specific use cases (e.g., in the persistence, service, and presentation layers, respectively). What this means is that you can annotate your component classes with @Component, but by annotating them with @Repository, @Service, or @Controller instead, your classes are more properly suited for processing by tools or associating with aspects. For example, these stereotype annotations make ideal targets for pointcuts. Of course, it is also possible that @Repository, @Service, and @Controller may carry additional semantics in future releases of the Spring Framework. Thus, if you are making a decision between using @Component or @Service for your service layer, @Service is clearly the better choice. Similarly, as stated above, @Repository is already supported as a marker for automatic exception translation in your persistence layer."
+
+### @Autowired and @Qualifier with Constructor
+
+```
+@Autowired
+public AnimalService(@Qualifier("deer") Animal animal, Zoo zoo){
+ this.animal = animal;
+ this.zoo = zoo;
+} 
+```
+### Log4j2
+
+For spring 5 I modified pom.xml to log4j2 and change the properties file to log4j2.properties:
+
+pom.xml
+```
+<dependency>
+  <groupId>org.apache.logging.log4j</groupId>
+  <artifactId>log4j-api</artifactId>
+  <version>2.6.1</version>
+</dependency>
+<dependency>
+  <groupId>org.apache.logging.log4j</groupId>
+  <artifactId>log4j-core</artifactId>
+  <version>2.6.1</version>
+</dependency>
+```
+
+log4j2.properties
+```
+appender.console.type = Console
+appender.console.name = STDOUT
+appender.console.layout.type = PatternLayout
+appender.console.layout.pattern = %-7p %d [%t] %c %x - %m%n
+
+rootLogger.level = trace
+rootLogger.appenderRef.stdout.ref = STDOUT
+```
+
+### Video Editing - Returning value of @AfterReturning
+
+With the introduction of @Around the aspect @AfterReturning has lost the returning value, indeed the log says is "null"
+
+@Around("com.in28minutes.spring.aop.springaop.aspect.CommonJoinPointConfig.trackTimeAnnotation()")
+public Object around(ProceedingJoinPoint joinPoint) throws Throwable{
+    long startTime = System.currentTimeMillis();
+
+    Object retVal = joinPoint.proceed();
+
+    long timeTaken = System.currentTimeMillis() - startTime;
+    logger.info("Time taken by {} is equal to {}",joinPoint, timeTaken);
+
+    return retVal;
+}
+
+
+
+### When it comes to remaining ORM tools,does spring  throws same exceptions for all ORM tools or it throws irrespective of each ORM tool?
+
+The hierarchy of talking to database is 
+
+Spring -> ORM -> Database
+
+So, if there is something wrong with the database, the ORM tool throws an exception. These exceptions can be of different types for different ORMs. 
+
+Spring converts a variety of different ORM exceptions to a consistent exception format. Persistence Exception Translation is the process of converting low level persistence exceptions into high level Spring exceptions
+
+When we are Integrating spring with ORMs,if something goes wrong ,spring will convert those ORM related exceptions into it's(Spring's) exceptions. and generates those Translated exceptions . 
+
 
 ### Q :  What is the difference between web.xml and the Spring Context - servlet.xml?
 
@@ -1900,8 +2397,6 @@ Use
 You can read more about this here :
 
 https://stackoverflow.com/questions/21495616/difference-between-modelattribute-and-commandname-atributes-in-form-tag-in-sprin
-
-
 
 ### Q :  What is the difference between Filters, Listeners and Interceptors?
 
@@ -2436,6 +2931,692 @@ public Result saveItems(@RequestBody ItemWrapper items){
 
 Spring Boot is the best Java framework for microservices We recommend you to become an expert at Spring Boot!
 
+### Spring Snapshot and Milestone Repositories
+```
+  <repositories>
+
+    <repository>
+
+      <id>spring-snapshots</id>
+
+      <name>Spring Snapshots</name>
+
+      <url>https://repo.spring.io/snapshot</url>
+
+      <snapshots>
+
+        <enabled>true</enabled>
+
+      </snapshots>
+
+    </repository>
+
+    <repository>
+
+      <id>spring-milestones</id>
+
+      <name>Spring Milestones</name>
+
+      <url>https://repo.spring.io/milestone</url>
+
+      <snapshots>
+
+        <enabled>false</enabled>
+
+      </snapshots>
+
+    </repository>
+
+  </repositories>
+
+ 
+
+  <pluginRepositories>
+
+    <pluginRepository>
+
+      <id>spring-snapshots</id>
+
+      <name>Spring Snapshots</name>
+
+      <url>https://repo.spring.io/snapshot</url>
+
+      <snapshots>
+
+        <enabled>true</enabled>
+
+      </snapshots>
+
+    </pluginRepository>
+
+    <pluginRepository>
+
+      <id>spring-milestones</id>
+
+      <name>Spring Milestones</name>
+
+      <url>https://repo.spring.io/milestone</url>
+
+      <snapshots>
+
+        <enabled>false</enabled>
+
+      </snapshots>
+
+    </pluginRepository>
+
+  </pluginRepositories>
+```
+
+
+### How to add headers in my webservice through code?
+
+```
+public ResponseEntity method() {
+
+    HttpHeaders headers = new HttpHeaders();
+
+    headers.add(HttpHeaders.CONTENT_TYPE, "application/xml; charset=UTF-8");
+
+
+    return ResponseEntity.ok()
+
+            .headers(headers)
+
+            .body(data);
+
+}
+```
+
+
+### Spring Logging Changes
+
+
+There are extensive changes related to logging in recent versions of Spring Boot. Here's what you can do to enable all logging.
+
+`logging.level.org.springframework=DEBUG`
+
+
+### Externalizing configuration in Spring Boot
+
+Two important things I would consider:
+
+1. The problem with @Value is that you would have your configuration values distributed through out your application.
+
+2. @ConfigurationProperties is type safe. If you configure any property with a value of an invalid type, the application fails at startup.
+
+Typically I recommend using @ConfigurationProperties
+
+
+### Why do we transactions at service layer level?
+
+We recommend managing transactions in the Service layer. Logic for business transactions is in the business/service layer and you would want to enforce transaction management at that level.
+
+Think at a higher level. Let’s say you are executing a Shopping order request.
+
+Service has 3 steps
+
+a) Get Payment DAO
+
+b) Save Order DAO
+
+c) Send Email DAO
+
+Let’s say step b failed. If you have transaction management at DAO level, you cannot reverse part a of the transaction because it would be committed at the end of the transaction. 
+
+
+
+### Architecture - Synchronous vs Async
+
+The simple question you need to ask is -
+
+Is it important that the activity is done right then and there?
+
+If it is, Synchronous. If it is not, it can be Asynchronous.
+
+If you are processing an order, check inventory should be done right then and there. So, you would prefer synchronous.
+
+If you are sending an email, it might not really matter if the email is delayed a few minutes. It can be asynchronous.
+
+
+### Internationalization Alternatives
+
+Autowire MessageSource in our RestController ;)
+
+```
+
+
+# Comma-separated list of basenames, each following the ResourceBundle convention.
+spring.messages.basename=messages
+
+# Loaded resource bundle files cache expiration, in seconds. When set to -1, bundles are cached forever. 
+spring.messages.cache-seconds=-1
+
+# Message bundles encoding.
+spring.messages.encoding=UTF-8
+
+# Set whether to fall back to the system Locale if no files for a specific Locale have been found.
+spring.messages.fallback-to-system-locale=true
+```
+
+### PUT VS PATCH
+
+
+PUT : When you update the entire resource - when you want to update all/most of the fields of a resource.
+
+PATCH: When you want to update specific details of the resource. All other details remain unchanged. 
+
+eg ----> PUT -----> EDIT PROFILE DETAILS OF A USER [dob weight height  ....]
+
+eg----->PATCH ----->BLOCK USER  [change boolean status of concerned field as per needed] PASSWORD 
+
+### Why insert query ran at app startup?
+
+Thats the magic of Spring Boot Autoconfiguration again. You can read more here. https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html
+
+### Web Services - Can user create/delete users in bulk, lots of users in one go. would there be changes needed in the exception handling and in other things?
+
+Web services can accept multiple requests in parallel. I guess, you question is about the content of the request. Should you use web services to send thousands of user details at the same time?
+
+
+
+Question to ask:
+
+Is it a one time need? Or is it a regular application requirement?
+
+
+
+If its a one time need - I would go with a batch job!
+
+
+
+If its a regular application requirement - we would need to further analyse before deciding on choosing a web service approach. 
+
+What is the maximum size of the request? 
+
+Will all systems/applications/frameworks be able to handle that size?
+
+Should it be online or can it be a feed through other means (file share, for example?
+
+
+### Could you elaborate more about why do we need to add a prefix xs?
+
+Consider the example below:
+
+```
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://in28minutes.com/courses" xmlns:tns="http://in28minutes.com/courses"
+    elementFormDefault="qualified">
+
+    <xs:element name="GetCourseDetailsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:int" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+```
+
+element has a name attribute and complexType element as child. These restriction are defined in the schema.
+
+`http://www.w3.org/2001/XMLSchema` We are giving this schema a short cut name 
+
+`xmlns:xs="http://www.w3.org/2001/XMLSchema"` After that we use the short cut to refer to the schema
+
+```
+    <xs:element name="GetCourseDetailsRequest">
+        <xs:complexType>
+            <xs:sequence>
+```
+
+You can visit https://www.w3.org/2001/XMLSchema for more details about this schema.
+
+xs, tns are aliases for http://www.w3.org/2001/XMLSchema and http://in28minutes.com/courses respectively.
+
+```
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://in28minutes.com/courses" xmlns:tns="http://in28minutes.com/courses"
+    elementFormDefault="qualified">
+```
+
+We want to use string from http://www.w3.org/2001/XMLSchema namespace. We use xs:string.
+
+```
+<xs:restriction base="xs:string">
+```
+
+
+We want to refer to Status from http://in28minutes.com/courses namespace. We use tns:Status
+```
+<xs:element name="status" type="tns:Status" />
+```
+
+### HATEOS
+
+HATEOAS stands for “Hypermedia as the engine of application state”
+
+Its a complicated acronym. Let’s decode it for you.
+
+
+
+What do you see when you visit a web page?
+
+The data that you would want to see. Is that all? You would also see links and buttons to see related data.
+
+
+
+For example, if you go to a student page, you will see
+
+- Student profile
+
+- Links to Edit and Delete Student details
+
+- Links to see details of other students
+
+- Link to see details of the courses and grades of the student
+
+
+
+HATEOAS brings the same concepts to RESTful Web Services.
+
+
+
+When some details of a resource are requested, you will provide the resource details as well as details of related resources and the possible actions you can perform on the resource. For example, when requesting information about a facebook user, a REST service can return the following
+
+- User details
+
+- Links to get his recent posts
+
+- Links to get his recent comments
+
+- Links to retrieve his friend’s list.
+
+
+You can customize which ever method you would want to send the link for here -
+
+ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllUsers());
+
+Instead of retreiveAllUsers, you can use other methods in the controller.
+
+### Swagger with latest versions
+ java.lang.ClassNotFoundException: com.google.common.collect.Maps$EntryTransformer
+
+<dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.4.0</version>
+        </dependency> 
+
+
+<dependency>
+    <groupId>com.google.guava</groupId>
+    <artifactId>guava</artifactId>
+    <version>28.0-jre</version>
+</dependency>
+
+
+### Actuator
+
+
+management.endpoints.web.exposure.include=*
+
+### Is there any way to avoid @ComponentScan - but still read all packages?
+
+The first step of defining Spring Beans is by adding the right annotation - @Component or @Service or @Repository.
+
+However, Spring does not know about the bean unless it knows where to search for it. This part of "telling Spring where to search" is called a Component Scan. You define the packages that have to be scanned.
+
+Once you define a Component Scan for a package, Spring would search the package and all its sub packages for components.
+
+Defining a Component Scan
+
+If you are using Spring Boot, check configuration in Approach 1.
+If you are doing a JSP/Servlet or a Spring MVC course without using Spring Boot use Approach 2.
+Approach 1 : Spring Boot Project
+
+Executive Summary
+
+If your other packages hierarchies are below your main app with the @SpringBootApplication annotation, you're covered by implicit components scan.
+if the other packages do not reside under the main package, you should manually add them as @ComponentScan
+Detailed Example
+
+Consider the class below:
+
+```
+package com.in28minutes.springboot.basics.springbootin10steps;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+
+@SpringBootApplication
+public class SpringbootIn10StepsApplication {
+
+    public static void main(String[] args) {
+        ApplicationContext applicationContext = 
+                SpringApplication.run(SpringbootIn10StepsApplication.class, args);
+        
+        for (String name : applicationContext.getBeanDefinitionNames()) {
+            System.out.println(name);
+        }
+    }
+}
+```
+
+@SpringBootApplication is defined on SpringbootIn10StepsApplication class which is package com.in28minutes.springboot.basics.springbootin10steps.
+
+@SpringBootApplication defines an automatic component scan on package com.in28minutes.springboot.basics.springbootin10steps.
+
+You are fine if all your components are defined in the above package or a sub-package.
+
+However, let's say one of the components is defined in a package com.in28minutes.springboot.somethingelse
+
+In this case, you would need add the new package into component scan.
+
+Two Options
+
+1) Define @ComponentScan(“com.in28minutes.springboot”) - This would scan the entire parent tree of com.in28minutes.springboot.
+2) Or Define two specific Component Scans by using an array.
+@ComponentScan({"com.in28minutes.springboot.basics.springbootin10steps","com.in28minutes.springboot.somethingelse"})
+Option 1
+```
+@ComponentScan(“com.in28minutes.springboot”)
+@SpringBootApplication
+public class SpringbootIn10StepsApplication {
+```
+
+Option 2
+```
+@ComponentScan({"com.in28minutes.springboot.basics.springbootin10steps","com.in28minutes.springboot.somethingelse"})
+@SpringBootApplication
+public class SpringbootIn10StepsApplication {
+```
+Approach 2: Non Spring Boot Project
+
+In a non Spring Boot Project, we would typically define the component scan explicitly in an XML application context or a Java Application Context.
+
+Java Application Context
+
+Option 1
+
+@ComponentScan(“com.in28minutes)
+@Configuration
+public class SpringConfiguration {
+Option 2
+
+@ComponentScan({"com.in28minutes.package1","com.in28minutes.package2"})
+@Configuration
+public class SpringConfiguration {
+XML Application Context
+
+<context:component-scan base-package="com.in28minutes" />
+or Specific Multiple Packages
+
+<context:component-scan base-package="com.in28minutes.package1, com.in28minutes.package2" />
+
+### @PutMapping Example
+
+@PutMapping("/students/{id}")
+public ResponseEntity<Object> updateStudent(@RequestBody Student student, @PathVariable long id) {
+
+Optional<Student> studentOptional = studentRepository.findById(id);
+
+if (!studentOptional.isPresent())
+return ResponseEntity.notFound().build();
+
+student.setId(id);
+
+studentRepository.save(student);
+
+return ResponseEntity.noContent().build();
+}
+
+### jaxb2-maven-plugin not working in Java 11+
+
+Can you use 2.5.0 version of the plugin?
+
+
+
+<dependency>
+
+    <groupId>org.codehaus.mojo</groupId>
+
+    <artifactId>jaxb2-maven-plugin</artifactId>
+
+    <version>2.5.0</version>
+
+</dependency>
+
+### HATEOAS
+
+Delete .get()
+
+### Why JPA expect a default constructor?
+
+JPA expects entity to be a Java Bean. Java Bean should have a no argument constructor.
+
+The specifications are a bit complex. So, pointing to a good answer - https://stackoverflow.com/questions/3295496/what-is-a-javabean-exactly
+
+### SOAP vs REST
+
+
+REST vs SOAP are not really comparable. REST is an architectural style. SOAP is a message exchange format.
+
+Let’s compare the popular implementations of REST and SOAP styles.
+
+1) RESTful Sample Implementation : JSON over HTTP
+
+2) SOAP Sample Implementation : XML over SOAP over HTTP
+
+Following are the important things to consider:
+
+1) REST is built over simple HTTP protocol. SOAP services are more complex to implement and more complex to consume.
+
+2) REST has better performance and scalability. REST reads can be cached, SOAP based reads cannot be cached.
+
+3) REST permits many different data formats (JSON is the most popular choice) where as SOAP only permits XML.
+
+4) SOAP services have well defined structure and interface (WSDL) and has a set of well defined standards (WS-Security, WS-AtomicTransaction and WS-ReliableMessaging). Documentation standards with REST are evolving(We will use Swagger in this course).
+
+5) REST is the industry trend
+
+To be really frank, I do not mind using either REST or SOAP as long as your underlying services are awesome.
+
+Today, the way thing are in the industry, we favour REST as it has less ceremony around it.
+
+### Is sending resource location necessary when creating new user ?
+
+REST is just a set of guidelines! Make best use of HTTP. So, everything else is matter of interpretation.
+
+You would want to give as much information as possible (without breaking security) to your consumer. 
+
+If you have a reason why you should not return the URI, thats cool! 
+
+But, I would love to see services I consume provide the URI of created resource in some form!
+
+### ORACLE Database
+
+Switching over to Oracle database when using Spring Boot and Hibernate is easy.
+
+Step 1 - Add dependency for oracle jdbc connector to pom.xml
+
+Read first answer to this - https://stackoverflow.com/questions/1074869/find-oracle-jdbc-driver-in-maven-repository
+
+Unfortunately due the binary license there is no public repository with the Oracle Driver JAR. This happens with many dependencies but is not Maven's fault. If you happen to find a public repository containing the JAR you can be sure that is illegal.
+
+You would need to do a few things to add ojdbc7 library to your maven repo.
+
+More reading - https://www.mkyong.com/maven/how-to-add-oracle-jdbc-driver-in-your-maven-local-repository/
+
+<dependency>
+<groupId>com.oracle</groupId>
+<artifactId>ojdbc14</artifactId>
+<version>10.2.0.3.0</version>
+</dependency>
+
+
+Step 2 - Remove H2 Dependency from pom.xml
+
+Or atleast make its scope as test
+
+<!--
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>test</scope>
+</dependency>
+-->
+Step 3 - Setup your Oracle Database
+
+For more check out - https://github.com/in28minutes/jpa-with-hibernate#installing-and-setting-up-mysql
+
+Step 4 - Configure your connection to Oracle Database
+
+Configure application.properties
+
+spring.jpa.hibernate.ddl-auto=none
+spring.datasource.url=jdbc:oracle:thin:@localhost:1522:orcl
+spring.datasource.username=todouser
+spring.datasource.password=YOUR_PASSWORD
+spring.datasource.driver.class=oracle.jdbc.driver.OracleDriver
+
+
+Step 5 - Restart and You are ready!
+
+That's it
+
+
+### Where is Spring Boot Auto Configuration implemented?
+
+All auto configuration logic is implemented in spring-boot-autoconfigure.jar. All auto configuration logic for mvc, data, jms and other frameworks is present in a single jar.
+
+Image
+
+Other important file inside spring-boot-autoconfigure.jar is /META-INF/spring.factories. This file lists all the auto configuration classes that should be enabled under the EnableAutoConfiguration key. A few of the important auto configurations are listed below.
+
+```
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.springframework.boot.autoconfigure.aop.AopAutoConfiguration,\
+org.springframework.boot.autoconfigure.MessageSourceAutoConfiguration,\
+org.springframework.boot.autoconfigure.PropertyPlaceholderAutoConfiguration,\
+org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration,\
+org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,\
+org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration,\
+org.springframework.boot.autoconfigure.jdbc.JndiDataSourceAutoConfiguration,\
+org.springframework.boot.autoconfigure.jdbc.XADataSourceAutoConfiguration,\
+org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,\
+org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration,\
+org.springframework.boot.autoconfigure.security.SecurityFilterAutoConfiguration,\
+org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration,\
+org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration,\
+org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration,\
+```
+
+Example Auto Configuration
+
+We will take a look at DataSourceAutoConfiguration.
+
+Typically all Auto Configuration classes look at other classes available in the classpath. If specific classes are available in the classpath, then configuration for that functionality is enabled through auto configuration. Annotations like @ConditionalOnClass, @ConditionalOnMissingBean help in providing these features!
+
+@ConditionalOnClass({ DataSource.class, EmbeddedDatabaseType.class }) : This configuration is enabled only when these classes are available in the classpath.
+
+```
+@Configuration
+@ConditionalOnClass({ DataSource.class, EmbeddedDatabaseType.class })
+@EnableConfigurationProperties(DataSourceProperties.class)
+@Import({ Registrar.class, DataSourcePoolMetadataProvidersConfiguration.class })
+public class DataSourceAutoConfiguration {
+```
+@ConditionalOnMissingBean : This bean is configured only if there is no other bean configured with the same name.
+
+```
+@Bean
+@ConditionalOnMissingBean
+public DataSourceInitializer dataSourceInitializer() {
+    return new DataSourceInitializer();
+}
+```
+Embedded Database is configured only if there are no beans of type DataSource.class or XADataSource.class already configured.
+
+```
+@Conditional(EmbeddedDatabaseCondition.class)
+@ConditionalOnMissingBean({ DataSource.class, XADataSource.class })
+@Import(EmbeddedDataSourceConfiguration.class)
+protected static class EmbeddedDatabaseConfiguration {
+}
+```
+
+### Add CSS For Date Picker
+
+Date picker is not styled!
+
+```
+<link href="webjars/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" rel="stylesheet">
+```
+
+### Can we use SessionFactory instead of EntityManager?
+
+SessionFactory is Hibernate specific. So, it is not recommended. When you use JPA, you use Entity Manager. 
+
+### Where is the class actually implementing the UserRepository Interface?
+
+Here is one of the default implementations - https://github.com/spring-projects/spring-data-jpa/blob/master/src/main/java/org/springframework/data/jpa/repository/support/SimpleJpaRepository.java
+
+### If we are using JpaRepository Interface then can we say it is using Hibernate internally?
+
+Yes. JPARepository is Spring Data Interface. And it depends on JPA implementation - in our case we are using Hibernate.
+
+### Consuming REST API
+
+HEre’s a great starting point for calling REST API - https://spring.io/guides/gs/consuming-rest/
+
+
+### In JSP Based Web Application : I would like to understand why we are using a RequestMethod.GET instead of RequestMethod.DELETE to delete a todo? I tried with the DELETE method but I get a 405 method not allowed.
+
+QUICK SUMMARY - You can use DELETE method only in the case of REST APIs. What we are creating here is a web application. Web Application uses Forms. Forms have only two methods - GET and POST.
+
+First thing is you are developing a web application. We are using HTML. 
+
+https://www.w3schools.com/tags/att_form_method.asp
+
+HTML form has only two methods - GET and POST
+
+That’s how web applications are designed - for the most part.
+
+A great read!
+
+https://softwareengineering.stackexchange.com/questions/114156/why-are-there-are-no-put-and-delete-methods-on-html-forms
+
+### Add JS code from my own script - how can I add JavaScript source file in a different way than from webjar?
+
+You can have them under src/main/webapp/javascript, and accesses them in JSPs like this:
+
+```
+<script type="text/javascript" src="javascript/YOUR-JS.js"></script>
+```
+
+### There is no PasswordEncoder mapped for the id "null"
+
+Use this
+```
+        auth.inMemoryAuthentication()
+            .passwordEncoder(NoOpPasswordEncoder.getInstance())
+           .withUser("in28Minutes").password("dummy")
+```
+OR
+```
+        auth.inMemoryAuthentication()
+           .withUser("in28Minutes").password("{noop}dummy")
+```
+
+
 ## Reducing Start Time from 15s to 2s
 http://blog.noizwaves.io/2017/09/02/slow-spring-boot-startup.html
 
@@ -2517,7 +3698,7 @@ When we create an application deployable, we would embed the server (for example
 
 Embedded server is when our deployable unit contains the binaries for the server (example, tomcat.jar).
 
-### Q :  How can I add custom JS code with Spring Boot? 
+### Q :  How can I add custom JS or CSS code with Spring Boot? 
 
 Create a folder called static under resources folder. You can put your static content in that folder.
 
@@ -2529,6 +3710,13 @@ You can refer to it in jsp using
 <script src="/js/myapp.js"></script>
 ```
 
+For your example the path to main.css would be resources\static\main.css
+
+You can refer to it in jsp using
+
+```
+<script src=“/main.css"></script>
+```
 ### Error :  HAL browser gives me unauthorized error - Full authentication is required to access this resource.
 
 ```
@@ -2660,6 +3848,41 @@ More about it here
 
 https://projects.spring.io/spring-data-jpa/
 
+### Query Methods - Spring Data JPA
+
+There are rules around how you can name custom methods with Spring Data.
+
+Here is more information:
+
+You can find all rules about query methods here
+
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods
+
+A few examples
+
+```
+public interface TodoRepository extends JpaRepository<Todo, Integer>{
+    List<Todo> findByUser(String user);
+
+public interface ExchangeValueRepository extends 
+        JpaRepository<ExchangeValue, Long>{
+    ExchangeValue findByFromAndTo(String from, String to);
+```
+
+```
+public interface CourseSpringDataRepository extends JpaRepository<Course, Long> {
+    List<Course> findByNameAndId(String name, Long id);
+
+    List<Course> findByName(String name);
+
+    List<Course> countByName(String name);
+
+    List<Course> findByNameOrderByIdDesc(String name);
+
+    List<Course> deleteByName(String name);
+```
+
+
 ### Jackson Databind clash with LazyFetch - When I return an entity in a rest controller, the controller seems to ignore lazy fetch and will forcibly call the getter through jpa to get the data. Is there a way to avoid this?
 
 The solution is to use Entity Graphs.
@@ -2671,9 +3894,34 @@ Good Luck.
 
 Awesome. Great Question.
 
+Java Bean is a standard
+
+- private properties
+
+- getters and setters
+
+- no argument constructor
+
+- serializable
+
+Here are couple of references:
+
+https://stackoverflow.com/questions/3295496/what-is-a-javabean-exactly
+
+https://www.oracle.com/technetwork/articles/javaee/spec-136004.html
+
 Question is : Who converts the Bean to JSON and maps JSON to the bean?
 
-Its done by Jackson framework (configured by Spring Boot Auto Configuration)
+There are two types of conversion
+- Bean -> JSON 
+- JSON -> Bean
+
+
+Spring Boot autoconfigures Jackson framework to take care of these.
+
+You can customize it further:
+
+https://docs.spring.io/spring-boot/docs/current/reference/html/howto-spring-mvc.html#howto-customize-the-jackson-objectmapper
 
 How does Jackson framework work?
 
@@ -3110,6 +4358,199 @@ Here’s the complete guide
 
 ## Hibernate, JPA and In-memory Database
 
+### Custom Queries with JPA and Hibernate
+
+The following repository shows how you can do custom SQL queries.
+
+
+```
+@RepositoryRestResource(path="courses")
+public interface CourseSpringDataRepository extends JpaRepository<Course, Long> {
+    List<Course> findByNameAndId(String name, Long id);
+
+    List<Course> findByName(String name);
+
+    List<Course> countByName(String name);
+
+    List<Course> findByNameOrderByIdDesc(String name);
+
+    List<Course> deleteByName(String name);
+
+    @Query("Select  c  From Course c where name like '%100 Steps'")
+    List<Course> courseWith100StepsInName();
+
+    @Query(value = "Select  *  From Course c where name like '%100 Steps'", nativeQuery = true)
+    List<Course> courseWith100StepsInNameUsingNativeQuery();
+
+    @Query(name = "query_get_100_Step_courses")
+    List<Course> courseWith100StepsInNameUsingNamedQuery();
+}
+```
+
+### Hibernate without using Spring Boot
+
+Hibernate with Spring Framework without using Spring Boot - Manual Configuration
+
+https://github.com/in28minutes/HibernateJPAStepByStep/blob/master/WorkInProgress.md
+
+
+### How are the method implementations of UserDaoService are being accessed by userRepository in UserJPAResource ? How are they connected ?
+
+They are not connected.
+```
+@Repository
+public interface UserRepository extends JpaRepository<User, Integer>{
+
+}
+```
+
+JpaRepository
+
+JpaRepository (Defined in Spring Data JPA) is the JPA specific Repository interface.
+
+```
+public interface JpaRepository<T, ID extends Serializable>
+        extends PagingAndSortingRepository<T, ID>, QueryByExampleExecutor<T> {
+```
+
+JpaRepository extends PagingAndSortingRepository which in turn extends CrudRepository interface. So, JpaRepository inherits all the methods from the two interfaces shown below.
+
+PagingAndSortingRepository
+
+```
+public abstract interface PagingAndSortingRepository extends CrudRepository {
+  
+  public abstract Iterable findAll(Sort arg0);
+  
+  public abstract Page findAll(Pageable arg0);
+
+}
+```
+CrudRepository
+```
+public interface CrudRepository<T, ID extends Serializable>
+    extends Repository<T, ID> {
+
+    <S extends T> S save(S entity);
+
+    T findOne(ID primaryKey);       
+
+    Iterable<T> findAll();          
+
+    Long count();                   
+
+    void delete(T entity);          
+
+    boolean exists(ID primaryKey);  
+
+    // â€¦ more functionality omitted.
+}
+
+```
+
+
+### If we persist an entity, if we update an entity attribute , it will be updated in the DB automatically unless we do a detach. why we are doing another persist after assigning course to student, is this not updated automatically?
+
+To persist relationships, we need to persist both entities  ,  then set relationships , and then persist entity again
+
+And to update attributes ,  we can persist entity and then update attributes and we are done.
+
+### Converting a Project using JDBC (Using complex MYSQL Querries) to Hibernate
+
+
+Generally speaking any OLTP system can be designed using Hibernate.
+
+Important thing to consider when architecting systems is : Where do you want the business logic of the system to be? In the data layer or the business layer. The more complex queries you use, the more you are shifting the responsibility to the data layer.
+
+There would always be complex needs in certain parts of the system, which can be done using queries - these should be exceptions.
+
+I know that in systems designed with plain JDBC before JPA, the tendency among developers was to write complex queries. 
+
+If you are able to make the mind shift, it should not be difficult to use Hibernate.
+
+Important thing to understand is for Batch and Reporting kind of systems, Hibernate might not be the best choice typically.
+
+### HQL vs JPQL
+
+JPQL is a Java EE Standard. Once you use JPQL you can switch between any JPA implementation - Hibernate or Toplink or …  
+
+HQL is specific to Hibernate. If you use HQL, you are tied to Hibernate for your lifetime.
+
+While this might seem not to be such a important choice now, what if there is a more popular JPA implementation in 5 years and you want to switch away from Hibernate. Applications using JPQL will be easier to migrate than those using HQL.
+
+### Difference between EntityManager and CrudRepository
+
+Key Difference  : EntityManager is the most important JPA concept. You can use EntityManager with JPA and wrappers build around it - Spring Data JPA. CrudRepository is a Spring Data JPA concept.
+
+If you use JPA you write code like this to talk to your EntityManager
+
+
+```
+@PersistenceContext
+    private EntityManager entityManager;
+    
+    public Passport getPassport(final long id) {
+        return entityManager.find(Passport.class, id);
+    }
+
+    public Passport createPassport(Passport passport) {
+        return entityManager.merge(passport);
+    }
+
+
+With Spring Data JPA and CrudRepository, you just need to define an interface
+
+
+
+    public interface PassportRepository extends CrudRepository<Passport, Long> {
+        //...
+    }
+```
+
+And you get all the methods for free:
+
+```
+public interface Crudrepository<T, ID> extends Repository<T, ID> {
+        <S extends T> S save(Entity s);
+        Optional<T> findById(ID id);
+        boolean existsById(ID id);
+        Iterable<T> findAll();
+        void deleteById(ID id);
+        long count();
+        //Other methods
+    }
+```
+### Jdbc Template vs Data Source
+
+They have different purposes.
+
+Data Source is used to configure connection to your database.
+
+JDBC Template uses the Data Source to send queries to your database.
+
+### When do you use JPA?
+
+When your application is performance intensive, you would want to do it as near to the database as possible. And preferably as a batch program.
+
+If you use Stored Procedures, you are tied to the database vendor. If that is fine with your enterprise, Stored Procedures are a great option. Other problem with stored procedure is that the limit of scaling is the power of your database.
+
+Otherwise, you can use a framework combination like Spring Batch and iBatis. iBatis provides great templating around SQL queries.
+
+### @Transactional - JPA vs Spring
+
+
+@Transactional from JPA only manage transactions for JPA related resources i.e. database related transactions.
+
+However, you might want to involve other resources - queues, jms communication - in your transaction.
+
+Spring @Transactional would help you manage transactions across multiple types of resources.
+
+### JDBC > Spring JDBC > JPA > Spring Data > Spring Data JPA
+
+This should take you through the journey JDBC > Spring JDBC > JPA > Spring Data > Spring Data JPA
+
+https://github.com/in28minutes/in28minutes.github.io/blob/master/_posts/2017-07-05-introduction-to-jpa-with-spring-boot.md#other-approaches-before-jpa---jdbc-spring-jdbc--mybatis
+
 ### Q :  What is the difference between JPA and Hibernate?
 
 Short Story
@@ -3192,6 +4633,106 @@ The Starter spring-boot-starter-data-jpa has a transitive dependency on Hibernat
 
 When Spring Boot sees Hibernate in the class path, it auto configures it as the default JPA Implementation.
 
+### H2 Database - Persist Data - Everytime I add a change to my code and restart my application I need to recreate the table and data. Is there a way to make sure the data is always there?
+
+Can you try this configuration in application.properties?
+
+```
+spring.datasource.url=jdbc:h2:file:~/testdb
+spring.datasource.username=sa
+spring.datasource.password=
+spring.datasource.driver-class-name=org.h2.Driver
+spring.jpa.hibernate.ddl-auto=update
+```
+
+When using H2 console, use `jdbc:h2:file:~/testdb` as JDBC URL.
+
+
+Here's another example:
+
+```
+spring.datasource.name=japodb
+spring.datasource.driverClassName=org.h2.Driver
+
+spring.datasource.initialize=false
+spring.datasource.url=jdbc:h2:file:~/japodb;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=TRUE;DB_CLOSE_DELAY=-1;
+spring.jpa.hibernate.ddl-auto = update
+```
+
+
+### JPA vs Hibernate
+
+Short Story
+
+JPA is a specification/Interface
+Hibernate is one of JPA implementations
+When we use JPA, we use the annotation and interfaces from javax.persistence package, without using the hibernate import packages.
+
+We recommend using JPA annotations as we are not tied to Hibernate as implementation. Later (I know - <1% Chance), we can use another JPA implementation.
+
+If you are using JPA annotations, you would be using JPA + Hibernate.
+
+If you are directly using hibernate annotations, you are only using Hibernate.
+
+### H2 is Not Working
+
+Step 1
+
+Remove all configuration related to h2 and datasource from application. properties
+
+Step 2
+
+In the browser, change the database url to jdbc:h2:mem:testdb.
+
+You should be good to go!
+
+### JUnit 5
+
+Updated JUnit getting started sections in all courses.
+
+You're using JUnit4, and I used JUnit5. In JUnit5 the annotations @Before, @After, @BeforeClass, @AfterClass become @BeforeEach, @AfterEach, @BeforeAll, @AfterAll
+
+Note that the methods used for @BeforeAll and the @AfterAll must be static, otherwise the junit tests will not run.
+
+### connection pooling
+
+HikariCP is  a “zero-overhead” production ready JDBC connection pool.  Two reasons allow making a decision:  the first – the library is very light, the second – the bench test shows that it is the fastest connection pool for today.
+
+Reference: HikariCP ->
+https://brettwooldridge.github.io/HikariCP/
+
+### Transactional on read only methods
+
+ "The purpose of Transactional is as you said, to commit all the changes or nothing“
+
+Another reason for transactions is to prevent reading of stale data - for example, data being currently modified in another transaction.
+
+Imagine a situation where user row 21 is being modified in Transaction A. Transaction B is read only and want to read user row 21. Thats where transactions around read only becomes important. If you are ok with stale data, you do not need transactions. But if you are not ok with stale data, you need transactions around read only stuff as well.
+
+As I said, it is not an easy answer because the correct approach depends on your business scenario. Your business and needs dictate how flexible you are with stale data.
+
+### When to use @PersistenceContext
+
+
+While @Autowired works,it is actually recommended to use @PersistenceContext. It is a JPA Specific Specialization.
+
+You can read more here
+
+https://docs.oracle.com/javaee/7/api/javax/persistence/PersistenceContext.html
+
+### Entities vs Tables 
+
+Java uses camel case to seperate words - updatedTime
+
+In Databases, we use underscores to seperate words - updated_time
+
+### Spring Transactional
+
+Spring takes care of it. 
+
+Here’s a great starting point - https://dzone.com/articles/how-does-spring-transactional
+
+
 ### Q :  Why H2? And how does it work?
 
 First and most important thing - Spring Boot is intelligent.
@@ -3214,6 +4755,17 @@ From https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-a
 
 More Reading
 - http://www.springboottutorial.com/spring-boot-auto-configuration
+
+This is where all the default values in application.properties are listed
+- https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+
+Look for the property below
+```
+spring.datasource.name=testdb # Name of the datasource.
+```
+
+If you are using an H2 in-memory database, thats exactly the name that Spring Boot uses to setup your H2 database.
+
 
 
 ###### Question
@@ -3320,25 +4872,13 @@ spring.datasource.driverClassName=com.sybase.jdbc4.jdbc.SybDriver
 Make sure the maven .m2 repository has the com.sybase.jconn4.7.07 directory with jconn4-7.07.jar file downloaded there.
 
 
-### Q :  What is the default h2 database name configured by Spring Boot? Why is the default database name testdb?
-
-This is where all the default values in application.properties are listed
-- https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
-
-Look for the property below
-```
-spring.datasource.name=testdb # Name of the datasource.
-```
-
-If you are using an H2 in-memory database, thats exactly the name that Spring Boot uses to setup your H2 database.
-
-
 ### Q :  What happens if H2 is not in the classpath?
 
 You get this error
+
 ```
 Cannot determine embedded database driver class for database type NONE
-````
+```
 
 Add H2 to the pom.xml and Restart your server
 ```
@@ -3664,6 +5204,223 @@ new Docket(DocumentationType.SWAGGER_2).paths(PathSelectors.ant("/order/**"))
 
 ## Unit Testing
 
+### MockBean vs InjectMocks
+
+@MockBean is a Spring Based Annotation. When you want to inject a mock into the Spring Context, we use @MockBean.
+
+@Mock and @InjectMocks are for unit tests using pure Mockito. No Spring Context.
+
+
+When you are using @RunWith(SpringRunner.class), you are running a Spring Context - use @MockBean.
+
+When you are using @RunWith(MockitoJUnitRunner.class), you are running a plain Mockito test - use @Mock, @InjectMocks.
+
+### What if we have multiple arguments in a single method call?
+
+
+Similar to method with single argument you can include the other arguments too. Example, when(mock).methodToMock(any(Customer.class), any(String.class)).thenReturn("Return value");
+
+### Unit testing scenarios for REST API's to validate Token based authentication 
+
+Its important to have your test cases decoupled.
+
+1) Typically I would disable security for all my unit tests for REST API.
+
+2) But, I would add in seperate tests to check just for Security.
+
+This keeps your tests decoupled and clean
+
+### Deep Stubs
+
+Here's a great starting point - https://static.javadoc.io/org.mockito/mockito-core/2.6.9/org/mockito/Mockito.html#RETURNS_DEEP_STUBS
+
+WARNING: This feature should rarely be required for regular clean code! Leave it for legacy code. Mocking a mock to return a mock, to return a mock, (...), to return something meaningful hints at violation of Law of Demeter or mocking a value object (a well known anti-pattern).
+
+Good quote I've seen one day on the web: every time a mock returns a mock a fairy dies.
+
+
+### Why don't we directly test interface implementation rather creating mocks?
+
+Imagine you want to test with 5 variations of data.
+- How would your tests with Mock look like?
+- How would your tests with Dummy implementation look like?
+
+In my experience, as you create more test scenarios, mocks help you write more readable and maintainable tests.
+
+### How to compare objects using assert?
+
+One option is to implement equals method in the class that you would want to compare.
+
+Other option is to define a custom method.
+
+```
+private void assertAmount(Amount actual, Amount expected) {
+ assertEquals(expected.getCurrency(), actual.getCurrency()); 
+assertEquals(expected.getValue(), actual.getValue()); 
+}
+```
+
+### Is that possible to use "if statements" inside a test?
+
+It1s possible. But NOT RECOMMENDED.
+
+If you have logic in your test, who is going to test it?
+
+Who shall guard the guards?
+
+http://www.mrbizzwizz.com/cour/accounting/accounting/who-guards-the-guards
+
+### @InjectMocks
+
+```
+@RunWith(MockitoJUnitRunner.class)
+public class SomeBusinessMockAnnotationsTest {
+
+	@Mock
+	DataService dataServiceMock;
+
+	@InjectMocks
+	SomeBusinessImpl businessImpl;
+```
+
+Consider the code above:
+- @Mock DataService dataServiceMock; - Create a mock for DataService.
+- @InjectMocks SomeBusinessImpl businessImpl; - Inject the mocks as dependencies into businessImpl.
+
+In this example an real instance of SomeBusinessImpl is created and it will be auto wired with the mock of the  DataService - dataServiceMock. 
+
+### Need more Examples for Capture Aruments
+
+Here’s the complete example used:
+
+```
+@Test
+    public void captureArgument() {
+        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
+
+        TodoService todoService = mock(TodoService.class);
+
+        List<String> allTodos = Arrays.asList("Learn Spring MVC", "Learn Spring", "Learn to Dance");
+        Mockito.when(todoService.retrieveTodos("Ranga")).thenReturn(allTodos);
+
+        TodoBusinessImpl todoBusinessImpl = new TodoBusinessImpl(todoService);
+        todoBusinessImpl.deleteTodosNotRelatedToSpring("Ranga");
+        Mockito.verify(todoService).deleteTodo(argumentCaptor.capture());
+
+        assertEquals("Learn to Dance", argumentCaptor.getValue());
+    }
+```
+
+Here are a few other examples
+- https://static.javadoc.io/org.mockito/mockito-core/2.18.3/org/mockito/Mockito.html#argument_matchers
+- https://gist.github.com/searls/864224
+
+### How can we test void methods?
+
+Void methods can be tested by testing for side effects. You would check if a specific update to database was made or to check if a specific method is called.
+
+### How do we have @InjectMocks with @Mock create new instances for each test case to isolate testing?
+
+That's automatically done with every test. You can try setting something in a test and see if it is available in the next test.
+
+### Unit Testing - Should I concern about each line of that method or only consider about inputs to the method and whether it generates the required output?
+
+I think you should think about both.
+
+Unit testing is white box - in the sense that you know the code you are testing.
+- You should think about each line of code.
+- You should think about all variations in inputs and outputs.
+
+To test if else conditions, you would need to pass in different variation of inputs that trigger the if and else parts of your code.
+
+### Can you show how to mock a private method that requires arguments?
+
+```
+PowerMockito.when(SomeClass.class, "somePrivateMethodName", argument1, argument2).thenReturn(returnValue);
+```
+
+### Can't we use @Mock instead of @InjectMocks?
+
+```
+@Mock
+DataService dataServiceMock;
+
+@InjectMocks
+SomeBusinessImpl businessImpl;
+```
+
+@Mock - Create a mock for DataService
+
+@InjectMocks - Create an instance of SomeBusinessImpl with all the mocks populated.
+
+### Where is stub method implemented - 
+stub(productDO.getAllProducts(anyInt())).toReturn(products)?
+
+You have this at the top of the class - This is a static import importing the stub method from Mockito class.
+
+```
+import static org.mockito.Mockito.stub;
+```
+
+Once you have a static import, you can say
+
+`stub(productDO.getAllProducts(anyInt())).toReturn(products); `
+
+instead of 
+
+`Mockito.stub(productDO.getAllProducts(anyInt())).toReturn(products); `
+
+### Need some detail discussion on @Rule
+
+```
+public class TodoBusinessImplMockitoRulesTest {
+
+	@Rule
+	public MockitoRule mockitoRule = MockitoJUnit.rule();
+
+	@Mock
+	TodoService todoService;
+
+	@InjectMocks
+	TodoBusinessImpl todoBusinessImpl;
+
+	@Captor
+	ArgumentCaptor<String> stringArgumentCaptor;
+
+	@Test
+	public void usingMockito() {
+		List<String> allTodos = Arrays.asList("Learn Spring MVC",
+				"Learn Spring", "Learn to Dance");
+
+		when(todoService.retrieveTodos("Ranga")).thenReturn(allTodos);
+
+		List<String> todos = todoBusinessImpl
+				.retrieveTodosRelatedToSpring("Ranga");
+		assertEquals(2, todos.size());
+	}
+```
+
+
+### No way to import Mockito.mock automatically.
+
+Make sure you configure these in Eclipse :)
+
+```
+Window > Preferences > Java > Editor > Content Assist > Favorites
+
+org.junit.Assert
+org.mockito.BDDMockito
+org.mockito.Mockito
+org.assertj.core.api.Assertions
+org.hamcrest.Matchers
+org.hamcrest.CoreMatchers
+org.hamcrest.MatcherAssert
+```
+
+If above instruction do not work, check this out - 
+ https://codeyarns.com/2015/05/28/eclipse-content-assist-not-working/
+
+
 ### Q :  What is a mockito answer?
 
 Here's a great starting point https://testing.googleblog.com/2014/03/whenhow-to-use-mockito-answer.html
@@ -3985,13 +5742,126 @@ You can read more about it here - https://www.python-course.eu/python3_propertie
 
 ## Angular Full Stack
 
-### Connect to database for users
+### Checking user and password values against the backend
+
+I am having trouble figuring out how the application is checking for valid user/password? There are no values in the database...
+
+This is the class which plays a crucial role:
+
+```
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+@Service
+public class JwtInMemoryUserDetailsService implements UserDetailsService {
+
+	static List<JwtUserDetails> inMemoryUserList = new ArrayList<>();
+
+	static {
+		inMemoryUserList.add(new JwtUserDetails(1L, "in28minutes",
+				"$2a$10$3zHzb.Npv1hfZbLEU5qsdOju/tk2je6W6PnNnY.c1ujWPcZh4PL6e", "ROLE_USER_2"));
+		inMemoryUserList.add(new JwtUserDetails(2L, "ranga",
+				"$2a$10$IetbreuU5KihCkDB6/r1DOJO0VyU9lSiBcrMDT.biU7FOt2oqZDPm", "ROLE_USER_2"));
+		
+		//$2a$10$IetbreuU5KihCkDB6/r1DOJO0VyU9lSiBcrMDT.biU7FOt2oqZDPm
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Optional<JwtUserDetails> findFirst = inMemoryUserList.stream()
+				.filter(user -> user.getUsername().equals(username)).findFirst();
+
+		if (!findFirst.isPresent()) {
+			throw new UsernameNotFoundException(String.format("USER_NOT_FOUND '%s'.", username));
+		}
+
+		return findFirst.get();
+	}
+
+}
+```
+
+To understand how it works
+
+Angular Course
+```
+Step 89 - Understanding JWT Spring Security Framework Setup
+Step 90 - Creating a New User with Encoded Password
+```
+React Course
+```
+Step 70 - Understanding JWT Spring Security Framework Setup
+Step 71 - Creating a New User with Encoded Password
+```
+
+
+### Problem with installing angular cli
+
+Try uninstalling and re-installing.
+
+```
+npm uninstall -g angular-cli
+npm cache verify
+npm install -g @angular/cli@7.0.3
+```
+
+A few other options
+
+```
+npm cache clean --force
+npm install -g @angular/cli@7.0.3
+```
+
+https://stackoverflow.com/questions/17990647/npm-install-errors-with-error-enoent-chmod
+
+### Access Modifiers is mandatory for Constructor Arguments? If I miss to add Access Modifier either public or private for constructor arguments, member variables are not valid is it?
+
+Yes. You would need to have public.
+
+Here is a great read about this topic - https://kendaleiv.com/typescript-constructor-assignment-public-and-private-keywords/
+
+### Difference between Web Service and an API
+
+Every web service is an API. Every API is not a web service.
+
+An API represents something that provides a functionality - a method or a service or anything. Every API has an input, output and some logic.
+
+An API which is offered on web (http) is a web service.
+
+Here are a couple of great reads
+- https://medium.com/@programmerasi/difference-between-api-and-web-service-73c873573c9d
+- https://www.quora.com/What-is-the-difference-between-web-services-and-API
+
+### Why cant we use href?
+
+In a Single Page Application, You would want to refresh only the specific component and not the whole page!
+
+If we use
+
+```<a href="todos">here</a>``` in place of  ```<a routerLink="/todos">here</a>```
+
+what difference does it make?
+
+- With href, the entire page is reloaded again. 
+- With routerLink only the specific part of the page is refreshed.
+
+### This tutorial implements JwtInMemoryUserDetailsService I was curious what if we want to save the username and login details in database. How would we do this?
 
 Here are the important files involved.
+- User.java - Changed to a JPA Entity
+- UserRepository.java - A Spring Data JPA repository to manage User Entity
+- JwtUserDetailsService.java - Updated to use UserRepository to fetch user details.
+- JwtInMemoryUserDetailsService - Delete this class
 
-##### /src/main/java/com/in28minutes/todoservices/jwt/User.java
+/src/main/java/com/in28minutes/todoservices/jwt/User.java
 
-```java
+```
 package com.in28minutes.todoservices.jwt;
 
 import javax.persistence.Column;
@@ -4064,11 +5934,9 @@ public class User {
  
 }
 ```
----
+/src/main/java/com/in28minutes/todoservices/jwt/UserRepository.java
 
-##### /src/main/java/com/in28minutes/todoservices/jwt/UserRepository.java
-
-```java
+```
 package com.in28minutes.todoservices.jwt;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -4078,10 +5946,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 }
 ```
 
----
-##### /src/main/java/com/in28minutes/todoservices/jwt/JwtUserDetailsService.java
-
-```java
+/src/main/java/com/in28minutes/todoservices/jwt/JwtUserDetailsService.java
+```
 package com.in28minutes.todoservices.jwt;
 
 import java.util.ArrayList;
@@ -4118,14 +5984,243 @@ public class JwtUserDetailsService implements UserDetailsService {
     }
 }
 ```
----
 
-##### /src/main/resources/data.sql
+/src/main/resources/data.sql
 
 ```
 INSERT INTO USER (ID, USERNAME, PASSWORD, ROLE) VALUES (1, 'in28minutes', '$2a$10$3zHzb.Npv1hfZbLEU5qsdOju/tk2je6W6PnNnY.c1ujWPcZh4PL6e','ROLE_USER');
 ```
----
+
+### Why should you move code out of basic.auth package?
+
+basic auth package has a spring security configuration file - SpringSecurityConfigurationBasicAuth
+
+JWT has its own spring security config file.
+
+If you have both configurations active, they conflict with each other.
+
+### How can you globally enable CORS with Spring Boot?
+
+```
+@Configuration
+@EnableWebMvc
+public class WebConfiguration implements WebMvcConfigurer {
+
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**").allowedOrigins("*");
+	}
+}
+```
+
+### Adding bootstrap 4 through npm
+
+step 1: npm install bootstrap jquery
+
+step 2 : in angular.json added "node_modules/bootstrap/dist/css/bootstrap.min.css" for styles property and it worked after restart
+```
+"styles": [
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ],
+```
+
+### How to deploy such application? I know there are couple ways of doing that, by separating client and server or deploy app as a single unit. Could you recommend any useful, step by step tutorial on this topic?
+
+I would recommend deploying each part on its own - seperating client and server.
+
+
+Building for production
+- https://angular.io/guide/deployment
+- https://stackoverflow.com/questions/35539622/how-do-you-deploy-angular-apps
+- https://www.devglan.com/spring-boot/spring-boot-angular-deployment
+
+
+Seperate Deployment
+1) Run ng build  2) deploy from "/dist" to your web server 
+
+Combined Deployment
+How to setup Angular inside a maven based java war project - https://stackoverflow.com/questions/45915379/how-to-setup-angular-4-inside-a-maven-based-java-war-project
+
+### Stateful vs Stateless
+
+In this course, we build stateless backend.
+
+What does that mean? 
+- That means your backend does not store any information about what users are logged in and what they are doing currently.
+
+Why is it important? 
+- Let's consider a scenario where we are having 10 backend instances. If the backend instance stores state, then only that specific instance of the backend can be used to serve next requests from that specific user. If I do not store state, it does not matter. Any of the instances can be used.
+
+Here's more on the topic - https://nordicapis.com/defining-stateful-vs-stateless-web-services/
+
+### basic auth and jwt auth
+
+JWT is the preferred approach.
+
+Basic Auth needs you to send encoded userid and password along with the request. Thats not safe. If it is intercepted once, the hacker can reuse it again and again.
+
+With JWT, you use userid and password only with the first request. It's the token which is transferred there after. The token has an expiry time. So, even if it is intercepted, the hacker can use it only for limited time. And the algorithms used to encrypt the token are much better.
+
+### Security - Storing Token
+
+HTTP is stateless.
+
+How does a client authenticate with the server?
+
+It needs something.That something in our example is JWT.
+
+Here are some of the other factors to consider
+- In production, you would use HTTPS. 
+- You would keep your tokens expiry time low.
+- sessionStorage or localStorage can only be accessed by the web site that put it in. You can delete all token from it at logout.
+
+However, this is a question with no perfect answer 
+- Sicce, HTTP is stateless - You need something on the client side - You cannot keep asking user for credentials. 
+- JWT Token has been the best solution that the industry could come up with until now.
+
+### I'm really not happy with the java package structure
+
+Typically, the two options for organizing packages are
+
+1) By Feature
+
+2) By role played by class
+
+I found beginners find 1 easy at the start. But, I agree, you should find the right mix of 1 and 2 as the project grows.
+
+
+### CROS for Multiple Origins
+
+Typically, in enterprise scenarios, we use Gateways infront of our REST API. 
+
+The Gateways would  be configurable and be responsible to check the cross origin requests.
+
+This would ensure that all the other REST API can focus on the business logic.
+
+### let vs var
+
+Here's a great explanation - https://codeburst.io/difference-between-let-and-var-in-javascript-537410b2d707
+
+### == vs ===
+
+Changed "this.id ===  -1" to "this.id == -1" and it works.
+
+Here's a great article to read - https://codeburst.io/javascript-double-equals-vs-triple-equals-61d4ce5a121a
+
+### SPA vs MPA
+
+Angular works like a SPA.
+
+When you route, you are not refreshing the entire page. You only refresh the specific part of the page.
+
+### Spring Security - Getting Started
+
+I would recommend getting started with Spring Security to understand this stuff. The link is to an older version of Spring Security documentation which I love. Its much better than current documentation which is adapted for Spring Boot.
+
+https://docs.spring.io/spring-security/site/docs/3.0.x/reference/security-filter-chain.html
+
+I'm sure it is some small typo causing the error.
+
+
+### Code below is not working
+ 
+@Component is a decorator for the class ListTodosComponent. You can think of it like a Java Annotation. Annotations should be declared at the top of the class. Similar to that decorators should be defined at the top of TypeScript class.
+
+#### Problem
+
+```
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-list-todos',
+  templateUrl: './list-todos.component.html',
+  styleUrls: ['./list-todos.component.css']
+})
+
+export class ToDo{
+  constructor(public id:number,public description:String,public done:boolean,public targetDate:Date){
+
+  }
+}
+
+export class ListTodosComponent implements OnInit {
+
+//code
+}
+constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+#### Solution
+
+```
+import { Component, OnInit } from '@angular/core';
+
+export class ToDo{
+  constructor(public id:number,public description:String,public done:boolean,public targetDate:Date){
+
+  }
+}
+
+@Component({
+  selector: 'app-list-todos',
+  templateUrl: './list-todos.component.html',
+  styleUrls: ['./list-todos.component.css']
+})
+export class ListTodosComponent implements OnInit {
+
+//code
+}
+constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+### Why should the Bean Structures in frontend and API match?
+
+What we are doing is match the fields in response to fields in frontend. Having same names makes things easy.
+
+ this.todoService.retrieveTodo('in28minutes', this.id)
+          .subscribe (
+            data => this.todo = data
+          )
+
+Method above is depending on data (i.e. the response from backend) and todo to have same structure.
+
+You can also write it in a different way.
+
+this.todo = new Todo(this.id,'',false,new Date());
+
+this.todoService.retrieveTodo('in28minutes', this.id)
+          .subscribe (
+            data => {
+                this.todo.id = data.id;
+                this.todo.desc = data.description;
+                this.todo.whatever = data.whateverelse;
+            }
+          )
+
+
+### Creating Custom User Id and Password - How can I create a new user?
+
+If you want to create a new user id, you can follow 
+
+Angular Course
+```
+Step 90 - Creating a New User with Encoded Password
+```
+React Course
+```
+Step 71 - Creating a New User with Encoded Password
+```
 
 ### When I display the dates, they show a day before.
 Could be because of the timezones
@@ -4165,19 +6260,72 @@ changed to
 
 ## React Full Stack
 
-### Header is not refreshing
+
+### Header Menus are not updated
+
+We would need to wrap HeaderComponent with a call to withRouter. You can add the import as shown below. This would ensure that the header menus are updated whenever the router is called.
 
 ```
 import { withRouter } from 'react-router';
- 
+
 class HeaderComponent extends Component {
- 
+
 {/*...Header component code ....*/}
- 
+
 }
- 
-export default withRouter(HeaderComponent);
+
+export default withRouter(HeaderCom ponent);
 ```
+
+### Deploy App to Cloud
+
+You would need to deploy your react app to a public web server or cloud.
+
+Here's how you can deploy to google cloud
+
+https://medium.com/tech-tajawal/deploying-react-app-to-google-app-engine-a6ea0d5af132
+
+### Can a React Component be imported and reused in React-Native Mobile App?
+
+Here's a great read - https://codeburst.io/reusing-code-between-react-js-and-react-native-effectively-12bb4fbf7a70
+
+### Why setState in React? 
+
+Consider the complete method.
+
+```
+increment(by) {
+        //console.log(`increment from child - ${by}`)
+        this.setState(
+            (prevState) => {
+                return { counter: prevState.counter + by }
+            }
+        );
+    }
+```
+
+When increment method is called, we would want to increment counter in state by 1.
+
+However, in react you cannot directly update state. You cannot say state.counter = state.counter + 1.
+
+We need to call the setState method and pass a method which would update the state. When react is ready to update the state, it would call the method which is passed to setState.
+
+
+Code below has the logic of method to update state. Take the previous state and increment the counter by a specified value.
+```
+            (prevState) => {
+                return { counter: prevState.counter + by }
+            }
+```
+
+Here's more about it : https://reactjs.org/docs/react-component.html#setstate
+
+### I want to learn advanced things on React.
+
+I would recommend to complete the course and then refer to the React Advanced Guides - https://reactjs.org/docs/accessibility.html
+
+You will see a number of topics on the right side navigation 
+- Accessibility, Code-Splitting, Context, Error Boundaries , Forwarding Refs, Fragments, Higher-Order Components etc.
 
 
 ## You and in28Minutes
@@ -4322,3 +6470,285 @@ Working format
 ```
 file:///C:/microservices/micro services projects/git-localconfig-repo 
 ```
+
+# Deploy Java Spring Boot Apps to AWS with Elastic Beanstalk
+
+### Could not understand how BeanStalk created those variables with exact same names as used in application.properties
+
+Great question. As you can read below, we configure application.properties based on how we knew BeanStalk would create environment variables.
+
+Source : https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.managing.db.html
+
+Adding a DB instance takes about 10 minutes. When the environment update is complete, the DB instance's hostname and other connection information are available to your application through the following environment properties:
+
+- RDS_HOSTNAME – The hostname of the DB instance.
+- RDS_PORT – The port on which the DB instance accepts connections. The default value varies among DB engines.
+- RDS_DB_NAME – The database name, ebdb.
+- RDS_USERNAME – The user name that you configured for your database.
+- RDS_PASSWORD – The password that you configured for your database.
+
+### Is it possible to use another git repository like GitLab or Bitbucket?
+
+Here's a guide - 
+https://aws.amazon.com/blogs/devops/integrating-git-with-aws-codepipeline/
+
+### Can we deploy two application versions on one enviromnent ?
+
+No
+
+Source - https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.html
+
+> An environment is a collection of AWS resources running an application version. Each environment runs only one application version at a time, however, you can run the same application version or different application versions in many environments simultaneously. When you create an environment, Elastic Beanstalk provisions the resources needed to run the application version you specified.
+
+### Does this course cover microservices?
+
+This course is focused on Elastic Beanstalk. 
+
+Elastic Beanstalk is awesome for simple application architectures.
+
+However, it becomes cumbersome when it comes to microservices. If you would want to focus on Microservices, you should look at using ECS or EKS.
+
+We have other courses where we focus on Microservices in the cloud.
+
+### Automatic EC2 instance restart after stop
+
+Great question. Here's the best option : https://jun711.github.io/aws/how-to-pause-or-stop-elastic-beanstalk-environment-from-running/
+
+### I got below issue when I run "docker run mysql:5.7" . I am using windows 10 pro and windows container
+
+Switch from windows container to Linux container.
+
+### Problem in Starting React APP
+
+I was facing issue while starting NPM. 
+
+package.json 
+
+Use `SET PORT=4200` INSTEAD of `PORT=4200`
+
+https://github.com/facebook/create-react-app/issues/1083
+
+### Why are we spending so much time in exploring the APIs here?
+
+As explained in video "Step 02 - Quick Tip - Use Artifacts from build artifacts folder" of "Section 4: Deploying Java Spring Boot Hello World REST API to AWS Elastic Beanstalk", you can choose to skip the parts where we test the APIs.
+
+We have also made the build artifacts available in the build-artifacts-backup folder.
+
+### What is difference between elastic beanstalk and EC2?
+
+EC2 is a service to create virtual servers.
+
+Elastic beanstalk automatically uses EC2 to create our virtual server instances. No configuration needed.
+
+### Is elastic beanstalk does the same job as kubernetes orchestration?
+
+Elastic Beanstalk is not really related to Kubernetes Orchestration. EKS would be the AWS choice.
+
+We are working on more courses on AWS. Will keep you posted :)
+
+### Deploying jar vs war?
+
+WAR is a Java EE Standard. To deploy WARs you need a Java EE compliant web server. Tomcat is one of the Java EE compliant web servers and it is supported by AWS.  Hence we use Tomcat for our WAR deployment.
+
+
+# Deploy Spring Boot Microservices to AWS - ECS & AWS Fargate
+
+### With Fargate do we have to manually install Docker on EC2 instances, or is pre-installed and pre-configured.
+
+With Fargate, You guessed it right. It comes pre-installed and ready.
+
+With EC2 instances, you will take control.
+
+However, if you use one of the ECS optimized images, Docker comes pre-built and ready.
+
+https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
+
+### How AWS determines which docker registry provider you are using? for example if I want to user another container registry like ECR, Gitlab, etc. How can specify that?
+
+By default if you do not specify anything it is Docker Hub.
+
+`docker run in28min/todo-rest-api-h2:1.0.0.RELEASE`
+
+For others you need to specify the url as in the example below
+
+`docker pull aws_account_id.dkr.ecr.us-west-2.amazonaws.com/amazonlinux:latest`
+
+
+
+### Cross Cutting vs AOP
+
+Cross Cutting Concerns are features or functionality that you would need in multiple layers - logging, performance management, security etc.
+
+AOP is one of the preferred approaches to implement Cross Cutting Concerns
+
+### Interceptor Filter vs Servlet Filters
+
+Interceptors is a generic concept. You can apply it to any type of components. When you are trying to intercept calls to a servlet, these are called Servlet filters.
+
+### When we will do serialization? in realtime?
+
+Let's say you are design a game. You want to allow storing the state of the game at different times in the game. The player can go back to a pre-saved state. This might be one example where we can use serialisation.
+
+If you want to transfer data to other applications, ideally we need to expose services - nowadays, rest web services.
+
+### Threads - where do we use Runnable interface ? where do we use Thread class?
+
+Basic OOPS principle : Code to an interface.
+
+Always prefer Runnable. 
+
+Cannot think of a situation where extending Thread class is preferable!
+
+### Why StringBuffer is thread safe?
+
+You can look at this implementation of StringBuffer
+
+http://developer.classpath.org/doc/java/lang/StringBuffer-source.html
+
+Here's an example method
+
+public synchronized int length()
+ 183:   {
+ 184:     return count;
+ 185:   }
+
+
+As you can see, the String Buffer methods are synchronized. Hence, they are thread safe.
+
+### Where to use Checked Exception and where to use unchecked exception?
+
+I've a simple philosophy!
+
+If you can do something about an Exception other than showing an error page to the user, then consider Checked Exceptions. You want the consumer of the method to do something about that exception!
+
+In all other scenarios where there is nothing a programmer can do - other than showing an error page - use Unchecked exceptions. 
+
+I love keeping exception handling code to a bare minimum!
+
+# Java Programming for Complete Beginners - Learn in 250 Steps
+
+### What is ClassPath?
+
+Java application are built up of classes. All classes might not be present directly in the project.
+
+You make use of a number of frameworks. These frameworks are packaged as jars.
+
+How does the application find these frameworks? You specify the folders where here Jars are present in CLASS PATH.
+
+Read more about it here - https://en.wikipedia.org/wiki/Classpath_(Java)
+
+### Don't see sql file type while trying to create the data.sql file
+
+Can you try this?
+
+- File > New Untitled Text File
+
+- Write Your queries
+
+- File > Save As > data.sql
+
+### What is a dependency? How to identify one?
+
+Here's a great starting point - https://youtu.be/4VajgnSHwOw?t=21
+
+### why you used @override vs @ExceptionHandler?
+
+Yeah. It could be confusing.
+
+We are using an API which is defined by Spring.
+
+Here’s the relevant documentation from Spring Documentation - https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-ann-rest-exceptions
+
+REST API exceptions
+A common requirement for REST services is to include error details in the body of the response. The Spring Framework does not automatically do this because the representation of error details in the response body is application specific. However a @RestController may use @ExceptionHandler methods with a ResponseEntity return value to set the status and the body of the response. Such methods may also be declared in @ControllerAdvice classes to apply them globally.
+
+
+### What is difference between reference and object??
+
+Difference between reference and an object can be compared to difference between the address of an house and the house itself.
+
+You can store address in multiple forms called references. All those point to the same object - the house.
+
+Reference Example
+
+```
+House myHouse1;
+
+House myHouse2;
+```
+
+When you do `new House()`, you create the real house.
+
+```
+House myHouse1 = new House();
+
+myHouse2 = myHouse1
+```
+
+myHouse1 and myHouse2 are references.
+
+### Why do you use two class at a time for writing a program(runner and the other class). What if code is written in the same class with main type in  it ?
+
+As you grow as a programmer, you would realize that its better to do one thing in a class at a time. This is called Single Responsibility Principle (SRP).
+
+I would want all programmers to get into that habit from their first programs.
+
+### Abstract class vs Interface
+
+First of all, Great question. This is a topic on which there is a great debate. Do you know? A few other languages don't even have a concept of interface?
+
+Thought Process 1
+- Use abstract classes  when there is an element of Known and Unknown. Unknown are treated as abstract methods  and left for the consumer. 
+- Use Interfaces when you want to define contract  and defer the implementation choice to the consumer.
+
+Thought Process 2
+- Interface represents common things that you can do with multiple objects . Interface represents common actions. The interface of a TV remote represents what you can do with it - press on/off, switch channel and so on.
+- Abstract Class is used to have the common implementations (common code) between multiple classes.
+
+### Copy Constructor
+
+Method 1 is not a copy constructor. Method 2 is!
+
+```
+MotorBike(int speed){ // another constructor that calls in the member variable
+this.speed = speed;
+}// end example method.
+
+MotorBike(MotorBike newBike){ // another constructor that calls in the member variable
+this.speed = newBikespeed;
+}// end example method.
+```
+
+### Encapsulation vs Abstraction
+
+Encapsulation is an object oriented concept.  It is to prevent other classes in your project misusing data from your class. You make your variables private or protected to encapsulate stuff. 
+
+Abstraction is a very generic concept. Your computer only understands 1 and 0. This is binary or assembly or machine language. But we do not write code in assembly language. We write it in Java. The conversion from Java to machine language is abstracted away from us.
+
+### Can't using switch option in Jshell
+
+You can exit out of jshell and login again using
+
+```
+jshell --enable-preview
+```
+
+### CAREER PLAN
+
+Check out this link - https://trends.google.com/trends/explore?date=today%205-y&q=j2ee,spring%20framework,java%20ee,spring%20boot
+
+You will understand how demand for Spring Boot is booming in the last 3 years. Thats why we use Spring Boot to teach Spring in this course.
+
+As always, there are other technologies going up too - big data, analytics, front end (angular, react). You need to decide what you would want to focus on.
+
+
+### Thoughts
+What I believe in is to make sure that you question everything that is done and understand why, what, when and how. 
+
+Other important thing is to be interested in what’s happening in the industry with respect to your areas of interest.
+
+Over a period of time, you would gain expertise to be called an expert.
+
+If you are uncomfortable in something do it 100 times
+
+Don't worry about it. Spring framework has been working on trimming the log in the last couple of releases. Good Luck.

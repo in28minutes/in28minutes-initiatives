@@ -52,7 +52,6 @@ If you've checked all the things above, post the following details
 - Can you post the code changes you made in this step?
 ```
 
-
 ### Recommended Versions
 
 #### Java  Path Variable Windows
@@ -68,8 +67,6 @@ Where is your JDK installed? Can you post a screenshot of it?
 What is in your PATH variable? Can you post a screenshot of it?
 
 What error do you see when you type jshell in command prompt? Can you post a screenshot of it?
-
-
 
 #### Use Latest Version of Eclipse
 
@@ -327,230 +324,6 @@ References
 - https://stackoverflow.com/questions/44385846/hibernate-5-issue-with-jdk-9
 - https://issues.apache.org/jira/browse/SUREFIRE-1424
 
-
-
-- [How to use this guide?](#how-to-use-this-guide)
-	- [1. Ensure You Have The Recommended Versions of Tools/Versions](#1-ensure-you-have-the-recommended-versions-of-toolsversions)
-	- [2. Highly Probable Errors](#2-highly-probable-errors)
-	- [3. Go for the complete list](#3-go-for-the-complete-list)
-- [Basics](#basics)
-	- [Tip :  Ensure you have the right version of Java Installed](#tip---ensure-you-have-the-right-version-of-java-installed)
-	- [Tip : Ensure you have the right version of Eclipse Installed](#tip--ensure-you-have-the-right-version-of-eclipse-installed)
-	- [Tip : Troubleshooting Embedded Maven in Eclipse](#tip--troubleshooting-embedded-maven-in-eclipse)
-	- [Error :  You are not using a JDK](#error---you-are-not-using-a-jdk)
-	- [Error : You are not connected to internet or You are behind a proxy!](#error--you-are-not-connected-to-internet-or-you-are-behind-a-proxy)
-		- [Configuring a Proxy](#configuring-a-proxy)
-	- [Error : Files Downloaded by Maven are Corrupt](#error--files-downloaded-by-maven-are-corrupt)
-		- [Force Update of Snapshots/Release](#force-update-of-snapshotsrelease)
-		- [Purge Your Maven Repository](#purge-your-maven-repository)
-		- [Delete your local repository](#delete-your-local-repository)
-	- [Error :  org.codehaus.plexus.archiver.jar.Manifest.write\(java.io.PrintWriter\)](#error---orgcodehausplexusarchiverjarmanifestwritejavaioprintwriter)
-	- [Error : Unsupported major.minor version 52.0](#error--unsupported-majorminor-version-520)
-	- [Tip :  Your Project Maven configuration should be configured to compile at Java 8](#tip---your-project-maven-configuration-should-be-configured-to-compile-at-java-8)
-		- [Approach 1 : Spring Boot Project](#approach-1--spring-boot-project)
-		- [Approach 2: Non Spring Boot Project](#approach-2-non-spring-boot-project)
-	- [Error :  On Maven > Update Project, Java 1.4 is auto selected](#error---on-maven--update-project-java-14-is-auto-selected)
-	- [Error :  Changes you made are not reflected](#error---changes-you-made-are-not-reflected)
-	- [Q :  What should I do when some other application is using default port 8080?](#q---what-should-i-do-when-some-other-application-is-using-default-port-8080)
-		- [Option 1 - Kill](#option-1---kill)
-		- [Option 2 - Switch Port](#option-2---switch-port)
-		- [Option 1 - Kill](#option-1---kill-1)
-		- [Option 2 - Switch Port](#option-2---switch-port-1)
-	- [Q :  Do I need to install Tomcat seperately for this course?](#q---do-i-need-to-install-tomcat-seperately-for-this-course)
-	- [Q :  Why do we use this specific project structure in all our courses?](#q---why-do-we-use-this-specific-project-structure-in-all-our-courses)
-	- [Q :  What software do you use for your diagrams or Mind Maps?](#q---what-software-do-you-use-for-your-diagrams-or-mind-maps)
-	- [Q :  How to debug the application?](#q---how-to-debug-the-application)
-	- [Q :  How do I configure auto restarting the server whenever source code changes?](#q---how-do-i-configure-auto-restarting-the-server-whenever-source-code-changes)
-		- [Approach 1 : Spring Boot Project](#approach-1--spring-boot-project-1)
-		- [Approach 2: Non Spring Boot Project](#approach-2-non-spring-boot-project-1)
-	- [Q :  Can I use jboss instead of tomcat server?](#q---can-i-use-jboss-instead-of-tomcat-server)
-	- [Q :  How to get the projects to run in Tomcat 8 or 9?](#q---how-to-get-the-projects-to-run-in-tomcat-8-or-9)
-- [Maven](#maven)
-	- [Q :  Why Maven?](#q---why-maven)
-	- [Q :  What is ArtifactId and GroupId?](#q---what-is-artifactid-and-groupid)
-	- [Q :  How to know the exact string and name of a dependency and its artifactid?](#q---how-to-know-the-exact-string-and-name-of-a-dependency-and-its-artifactid)
-	- [Q :  What's the difference between scope and phase?](#q---whats-the-difference-between-scope-and-phase)
-	- [Q :  Maven - How did a specific jar end up in our deployable?](#q---maven---how-did-a-specific-jar-end-up-in-our-deployable)
-	- [Q :  What is a SNAPSHOT as in 0.0.1-SNAPSHOT?](#q---what-is-a-snapshot-as-in-001-snapshot)
-	- [Q :  What is difference between runtime and provided scopes?](#q---what-is-difference-between-runtime-and-provided-scopes)
-	- [Q :  How can you always exclude a specific jar using Maven Exclusions?](#q---how-can-you-always-exclude-a-specific-jar-using-maven-exclusions)
-- [Tip : Example of a multi layered maven project](#tip--example-of-a-multi-layered-maven-project)
-	- [Error : java.lang.ClassNotFoundException](#error--javalangclassnotfoundexception)
-	- [Q :  Why are we not using Gradle?](#q---why-are-we-not-using-gradle)
-- [Eclipse](#eclipse)
-	- [Q :  How do I see the list of methods in a class?](#q---how-do-i-see-the-list-of-methods-in-a-class)
-	- [Q :  How do I become more efficient developer?](#q---how-do-i-become-more-efficient-developer)
-	- [Q :  How do you download source code to Eclipse so that you can see the code for frameworks?](#q---how-do-you-download-source-code-to-eclipse-so-that-you-can-see-the-code-for-frameworks)
-- [Intellij and/or Mac](#intellij-andor-mac)
-	- [Q :  How to install Maven on MAC OS X?](#q---how-to-install-maven-on-mac-os-x)
-	- [Q :  How do I import a Maven project into Intellij?](#q---how-do-i-import-a-maven-project-into-intellij)
-	- [Q :  How do I create and run unit tests \(JUnit\) with Intellij?](#q---how-do-i-create-and-run-unit-tests-junit-with-intellij)
-	- [Error :  I'm having a problem running jsps with Spring Boot in Intellij. What should I do?](#error---im-having-a-problem-running-jsps-with-spring-boot-in-intellij-what-should-i-do)
-	- [Q :  Why does Hot reload not work with Spring Boot DevTools and Intellij?](#q---why-does-hot-reload-not-work-with-spring-boot-devtools-and-intellij)
-- [Spring](#spring)
-	- [Q :  What is the need for a Component Scan?](#q---what-is-the-need-for-a-component-scan)
-	- [Q :  How do you define a Component Scan?](#q---how-do-you-define-a-component-scan)
-		- [Approach 1 : Spring Boot Project](#approach-1--spring-boot-project-2)
-		- [Detailed Example](#detailed-example)
-		- [Approach 2: Non Spring Boot Project](#approach-2-non-spring-boot-project-2)
-		- [Java Application Context](#java-application-context)
-		- [XML Application Context](#xml-application-context)
-	- [Q :  How do I solve Errors related to Component Scan?](#q---how-do-i-solve-errors-related-to-component-scan)
-		- [Solution](#solution)
-	- [Q :  What is the difference between @Component and @ComponentScan?](#q---what-is-the-difference-between-component-and-componentscan)
-	- [Q :  How do I choose between Spring and CDI?](#q---how-do-i-choose-between-spring-and-cdi)
-	- [Q :  Why do we write a lot of unit tests in the Spring Master Class course?](#q---why-do-we-write-a-lot-of-unit-tests-in-the-spring-master-class-course)
-	- [Q :  What is the use of an @Bean annotation?](#q---what-is-the-use-of-an-bean-annotation)
-	- [Q :  What is the difference between @Bean and @Component?](#q---what-is-the-difference-between-bean-and-component)
-	- [Q :  What is the difference between @Component, @Service and @Repository annotations?](#q---what-is-the-difference-between-component-service-and-repository-annotations)
-	- [Q :  Can we use @Component annotation instead of @Service for Business Services?](#q---can-we-use-component-annotation-instead-of-service-for-business-services)
-	- [Q :  What is the difference between web.xml and the Spring Context - servlet.xml?](#q---what-is-the-difference-between-webxml-and-the-spring-context---servletxml)
-	- [Q :  Should we use XML or Annotation based wiring?](#q---should-we-use-xml-or-annotation-based-wiring)
-	- [Q :  Can we do autowiring with Non Setter and Non Constructor Methods?](#q---can-we-do-autowiring-with-non-setter-and-non-constructor-methods)
-	- [Q :  Where should we use Checked Exceptions?](#q---where-should-we-use-checked-exceptions)
-	- [Q :  What is the difference between Cross Cutting Concerns and AOP?](#q---what-is-the-difference-between-cross-cutting-concerns-and-aop)
-	- [Q :  What is difference between IOC and Application Context?](#q---what-is-difference-between-ioc-and-application-context)
-	- [Q :  What is the difference between classPathXmlApplicationContext and annotationConfigApplicationContext ?](#q---what-is-the-difference-between-classpathxmlapplicationcontext-and-annotationconfigapplicationcontext-)
-	- [Q :  When @Around aspect is introduced the value returned by@AfterReturning is lost. Why is this happening?](#q---when-around-aspect-is-introduced-the-value-returned-byafterreturning-is-lost-why-is-this-happening)
-	- [Q :  How do you use which autowiring type to use - @Primary or @Qualifier?](#q---how-do-you-use-which-autowiring-type-to-use---primary-or-qualifier)
-	- [Q :  What are the New Features in Spring Framework 5.0?](#q---what-are-the-new-features-in-spring-framework-50)
-	- [Q :  What are the possible reasons of preDestroy not being called?](#q---what-are-the-possible-reasons-of-predestroy-not-being-called)
-	- [Q :  Compare Application Context vs IOC Container vs Web Container vs EJB Container](#q---compare-application-context-vs-ioc-container-vs-web-container-vs-ejb-container)
-	- [Notes :  Notes from Rodolfo](#notes---notes-from-rodolfo)
-	- [Q :  How do we inject different bean depending on the configuration in application.properties?](#q---how-do-we-inject-different-bean-depending-on-the-configuration-in-applicationproperties)
-	- [Error :  Log4j problems with Spring 5!](#error---log4j-problems-with-spring-5)
-	- [Q :  What is the minimum baseline Java Version for Spring Boot 2 and Spring 5?](#q---what-is-the-minimum-baseline-java-version-for-spring-boot-2-and-spring-5)
-	- [Error :  Getting SLF4J errors and not getting logger output in Lecture 41 - Step 19?](#error---getting-slf4j-errors-and-not-getting-logger-output-in-lecture-41---step-19)
-	- [Error : No Spring WebApplicationInitializer types detected on classpath](#error--no-spring-webapplicationinitializer-types-detected-on-classpath)
-- [JSP Servlets and Spring MVC](#jsp-servlets-and-spring-mvc)
-	- [Q :  What is the difference between @Controller and @RestController?](#q---what-is-the-difference-between-controller-and-restcontroller)
-	- [Q :  Why is there no context root in the request url for each web application?](#q---why-is-there-no-context-root-in-the-request-url-for-each-web-application)
-	- [Q :  What does tomcat7:run exactly mean?](#q---what-does-tomcat7run-exactly-mean)
-	- [Q :  How is the URL decided with Spring MVC?](#q---how-is-the-url-decided-with-spring-mvc)
-	- [Error : No plugin found for prefix 'tomcat7' in the current project](#error--no-plugin-found-for-prefix-tomcat7-in-the-current-project)
-	- [Q :  Is this kind of Tomcat server usage what is commonly referred to as "Embedded Tomcat Server" ?](#q---is-this-kind-of-tomcat-server-usage-what-is-commonly-referred-to-as-embedded-tomcat-server-)
-		- [Basic Spring MVC and JSP Servlet courses do not use embedded servers](#basic-spring-mvc-and-jsp-servlet-courses-do-not-use-embedded-servers)
-		- [All our Spring Boot courses use Embedded Servers](#all-our-spring-boot-courses-use-embedded-servers)
-	- [Q :  How do we handle errors to non existing URL Paths with Spring MVC?](#q---how-do-we-handle-errors-to-non-existing-url-paths-with-spring-mvc)
-	- [Q :  How do we configure a welcome page?](#q---how-do-we-configure-a-welcome-page)
-	- [Q :  Why do we teach JSP and Servlets in the first section of Spring MVC Course?](#q---why-do-we-teach-jsp-and-servlets-in-the-first-section-of-spring-mvc-course)
-	- [Q :  Why do we use  @ResponseBody sometimes and ResponseEntity some other times?](#q---why-do-we-use--responsebody-sometimes-and-responseentity-some-other-times)
-		- [Example 1](#example-1)
-		- [Example 2](#example-2)
-	- [Q :  What is difference between Spring 5 and Spring 4 in terms of developing web application in the course? Does it matter if a new version is used ?](#q---what-is-difference-between-spring-5-and-spring-4-in-terms-of-developing-web-application-in-the-course-does-it-matter-if-a-new-version-is-used-)
-	- [Q :  What is the difference between Filters, Listeners and Interceptors?](#q---what-is-the-difference-between-filters-listeners-and-interceptors)
-	- [Q :  What is the difference between ModelMap and ModelAndView?](#q---what-is-the-difference-between-modelmap-and-modelandview)
-	- [Q :  What is the difference between model.put\(\) and model.addAttribute\(\)?](#q---what-is-the-difference-between-modelput-and-modeladdattribute)
-	- [Q :  How do you pass values from Java Controller to JSP?](#q---how-do-you-pass-values-from-java-controller-to-jsp)
-	- [Q :  What is Form Binding?](#q---what-is-form-binding)
-	- [Q :  What is WEB-INF exactly? Why so we need it?](#q---what-is-web-inf-exactly-why-so-we-need-it)
-	- [Q :  Why do we use Hibernate Validator?](#q---why-do-we-use-hibernate-validator)
-	- [Q :  Are Model objects specific to a request?](#q---are-model-objects-specific-to-a-request)
-	- [Q :  The groupid for jstl jar is jstl and not javax.servlet](#q---the-groupid-for-jstl-jar-is-jstl-and-not-javaxservlet)
-	- [Q :  Why are we using request GET method for "delete-todo" request?](#q---why-are-we-using-request-get-method-for-delete-todo-request)
-	- [Q :  Why do we need xmlns hyperlinks? like http://www.springframework.org/schema/bean](#q---why-do-we-need-xmlns-hyperlinks-like-httpwwwspringframeworkorgschemabean)
-	- [Error : View is not resolving to a JSP](#error--view-is-not-resolving-to-a-jsp)
-	- [Q :  How to use own CSS with Spring MVC?](#q---how-to-use-own-css-with-spring-mvc)
-	- [Q :  Where should we place our static \(css, js, html\) resources in a Spring MVC application?](#q---where-should-we-place-our-static-css-js-html-resources-in-a-spring-mvc-application)
-	- [Q :  How to add a custom login page in Spring Security?](#q---how-to-add-a-custom-login-page-in-spring-security)
-	- [Q :  How can you authenticate by connecting to a database with Spring Security?](#q---how-can-you-authenticate-by-connecting-to-a-database-with-spring-security)
-	- [Q :  Why is request method POST recommended compared to GET for sensitive data?](#q---why-is-request-method-post-recommended-compared-to-get-for-sensitive-data)
-	- [Q :  We use ${todo.done} in JSP even though the name of the field in Todo.java is isDone. Shouldn't we be using ${todo.isDone}?](#q---we-use-tododone-in-jsp-even-though-the-name-of-the-field-in-todojava-is-isdone-shouldnt-we-be-using-todoisdone)
-	- [Error : After adding security dependencies - java.lang.NoSuchMethodError: org.springframework.aop.framework.autoproxy.AutoProxyUtils.determineTargetClass](#error--after-adding-security-dependencies---javalangnosuchmethoderror-orgspringframeworkaopframeworkautoproxyautoproxyutilsdeterminetargetclass)
-	- [Q :  How do I ensure that session attributes are not part of the request url?](#q---how-do-i-ensure-that-session-attributes-are-not-part-of-the-request-url)
-	- [Error :  Spring Security - java.lang.NoClassDefFoundError: org/springframework/web/cors/CorsConfigurationSource](#error---spring-security---javalangnoclassdeffounderror-orgspringframeworkwebcorscorsconfigurationsource)
-	- [Error :  Unable to find setter method for attribute commandName](#error---unable-to-find-setter-method-for-attribute-commandname)
-	- [Q :  Can I have multiple parameters with the same name in a request?](#q---can-i-have-multiple-parameters-with-the-same-name-in-a-request)
-	- [Error :  java.lang.IllegalStateException: Neither BindingResult nor plain target object for bean name 'todo' available as request attribute](#error---javalangillegalstateexception-neither-bindingresult-nor-plain-target-object-for-bean-name-todo-available-as-request-attribute)
-	- [Error :  Request processing failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate \[com.in28minutes.Todo.Todo\]: No default constructor found; nested exception is java.lang.NoSuchMethodException: com.in28minutes.Todo.Todo.\(\)](#error---request-processing-failed-nested-exception-is-orgspringframeworkbeansbeaninstantiationexception-failed-to-instantiate-comin28minutestodotodo-no-default-constructor-found-nested-exception-is-javalangnosuchmethodexception-comin28minutestodotodo)
-	- [Error :  Caused by: java.lang.IllegalArgumentException: The servlets named \[com.in28minutes.LoginServlet\] and \[webapp.LoginServlet\] are both mapped to the url-pattern \[/login.do\] which is not permitted](#error---caused-by-javalangillegalargumentexception-the-servlets-named-comin28minutesloginservlet-and-webapploginservlet-are-both-mapped-to-the-url-pattern-logindo-which-is-not-permitted)
-	- [Q :  How is server picking up index.html and index.jsp even when they are not configured in web.xml?](#q---how-is-server-picking-up-indexhtml-and-indexjsp-even-when-they-are-not-configured-in-webxml)
-	- [Q :  What is the benefit of using view resolver?](#q---what-is-the-benefit-of-using-view-resolver)
-		- [Why am I not able to see todo's list on screen?](#why-am-i-not-able-to-see-todos-list-on-screen)
-	- [Q :  What is @ControllerAdvice?](#q---what-is-controlleradvice)
-	- [Q :  What Request method should be used for updating user details?](#q---what-request-method-should-be-used-for-updating-user-details)
-	- [Q :  What is the difference between put and patch request methods?](#q---what-is-the-difference-between-put-and-patch-request-methods)
-- [Spring Boot](#spring-boot)
-	- [Q :  What should be the first things I read about Spring Boot?](#q---what-should-be-the-first-things-i-read-about-spring-boot)
-	- [What is the minimum baseline Java Version for Spring Boot 2 and Spring 5?](#what-is-the-minimum-baseline-java-version-for-spring-boot-2-and-spring-5)
-	- [Q :  Is Spring Initializr the only way to create Spring Boot Projects?](#q---is-spring-initializr-the-only-way-to-create-spring-boot-projects)
-		- [Setting up a maven project manually](#setting-up-a-maven-project-manually)
-	- [Q :  Why am I not seeing code completion when updating application.properties in Eclipse?](#q---why-am-i-not-seeing-code-completion-when-updating-applicationproperties-in-eclipse)
-	- [Q :  Why do we need spring-boot-maven-plugin?](#q---why-do-we-need-spring-boot-maven-plugin)
-	- [Q :  Devtools helps me to restart the server automatically. But, I have a problem. The browser page is not auto refreshed.](#q---devtools-helps-me-to-restart-the-server-automatically-but-i-have-a-problem-the-browser-page-is-not-auto-refreshed)
-	- [Q :  What and Why Embedded Servers?](#q---what-and-why-embedded-servers)
-	- [Q :  How can I add custom JS code with Spring Boot?](#q---how-can-i-add-custom-js-code-with-spring-boot)
-	- [Error :  HAL browser gives me unauthorized error - Full authentication is required to access this resource.](#error---hal-browser-gives-me-unauthorized-error---full-authentication-is-required-to-access-this-resource)
-		- [Option 1 : Disable security](#option-1--disable-security)
-		- [Option 2 : Search for password in the log and pass it in the request header](#option-2--search-for-password-in-the-log-and-pass-it-in-the-request-header)
-	- [Error :  Hal Browser and Spring Boot Actuator are not working](#error---hal-browser-and-spring-boot-actuator-are-not-working)
-	- [Q :  How does path="users", collectionResourceRel="users" work with Spring Data Rest?](#q---how-does-pathusers-collectionresourcerelusers-work-with-spring-data-rest)
-	- [Q :  What is importance of {id} in ServletUriComponentsBuilder.fromCurrentRequest\(\).path\("/{id}"\).buildAndExpand\(returnQuestion.getId(\)).toUri\(\);](#q---what-is-importance-of-id-in-servleturicomponentsbuilderfromcurrentrequestpathidbuildandexpandreturnquestiongetidtouri)
-	- [Error :  java.lang.ClassCastException: org.springframework.boot.context.event.ApplicationReadyEvent cannot be cast](#error---javalangclasscastexception-orgspringframeworkbootcontexteventapplicationreadyevent-cannot-be-cast)
-	- [Q :  What is difference between Spring 5 and Spring 4 in terms of developing web application in the course? Does it matter if a new version is used ?](#q---what-is-difference-between-spring-5-and-spring-4-in-terms-of-developing-web-application-in-the-course-does-it-matter-if-a-new-version-is-used--1)
-	- [Q :  Why am I seeing an extra dialogue asking me to "Select Java Application Type" when I launch a Spring Boot Application?](#q---why-am-i-seeing-an-extra-dialogue-asking-me-to-select-java-application-type-when-i-launch-a-spring-boot-application)
-	- [Q :  What happens in the background when a Spring Boot Application is "Run as Java Application"?](#q---what-happens-in-the-background-when-a-spring-boot-application-is-run-as-java-application)
-	- [Q :  Can we use jetty instead of tomcat in spring-boot-starter-web?](#q---can-we-use-jetty-instead-of-tomcat-in-spring-boot-starter-web)
-	- [Error :  Failure to transfer org.springframework.boot:spring-boot-starter-parent:pom:2.0.0.RELEASE from https://repo.spring.io/snapshot](#error---failure-to-transfer-orgspringframeworkbootspring-boot-starter-parentpom200build-snapshot-from-httpsrepospringiosnapshot)
-	- [Q :  Why do we configure Spring Snapshot and milestone repositories?](#q---why-do-we-configure-spring-snapshot-and-milestone-repositories)
-	- [Error :   java.lang.IllegalArgumentException: Sources must not be empty](#error----javalangillegalargumentexception-sources-must-not-be-empty)
-	- [Q :  Can i use spring boot dev tools for a non spring boot project?](#q---can-i-use-spring-boot-dev-tools-for-a-non-spring-boot-project)
-	- [Q :  What is the difference between Static and Dynamic filtering?](#q---what-is-the-difference-between-static-and-dynamic-filtering)
-	- [Error :  No message found under code 'good.morning.message' for locale 'us'.](#error---no-message-found-under-code-goodmorningmessage-for-locale-us)
-	- [Q :  How to generate a WAR file with Spring Boot?](#q---how-to-generate-a-war-file-with-spring-boot)
-	- [Q :  How to deploy to a different server with with Spring Boot?](#q---how-to-deploy-to-a-different-server-with-with-spring-boot)
-	- [Q :  What is the difference between RequestMapping and GetMapping?](#q---what-is-the-difference-between-requestmapping-and-getmapping)
-	- [Q :  Why do we recommend not to use Spring Data Rest in real world applications?](#q---why-do-we-recommend-not-to-use-spring-data-rest-in-real-world-applications)
-	- [Q :  How do I change the package name of a project in Spring Initializer?](#q---how-do-i-change-the-package-name-of-a-project-in-spring-initializer)
-	- [Q :  Where can I find the complete list of properties that can be configured in application.properties?](#q---where-can-i-find-the-complete-list-of-properties-that-can-be-configured-in-applicationproperties)
-- [Hibernate, JPA and In-memory Database](#hibernate-jpa-and-in-memory-database)
-	- [Q :  What is the difference between JPA and Hibernate?](#q---what-is-the-difference-between-jpa-and-hibernate)
-	- [Q :  Compare Entity Manager vs SessionFactory](#q---compare-entity-manager-vs-sessionfactory)
-	- [Q :  In which layer, should the boundary of a transaction start?](#q---in-which-layer-should-the-boundary-of-a-transaction-start)
-	- [Q :  HQL vs JPQL](#q---hql-vs-jpql)
-	- [Q :  What are the dependencies need to start up an in memory database H2 with Spring Boot?](#q---what-are-the-dependencies-need-to-start-up-an-in-memory-database-h2-with-spring-boot)
-	- [Q :  How is Hibernate chosen as the default implementation for JPA without any configuration?](#q---how-is-hibernate-chosen-as-the-default-implementation-for-jpa-without-any-configuration)
-	- [Q :  Why H2? And how does it work?](#q---why-h2-and-how-does-it-work)
-	- [Q :  Where is the database connection info specified? How does it know to automatically connect to H2?](#q---where-is-the-database-connection-info-specified-how-does-it-know-to-automatically-connect-to-h2)
-	- [Q :  How do we connect to a external database like MSSQL or oracle?](#q---how-do-we-connect-to-a-external-database-like-mssql-or-oracle)
-		- [Step 1 - Add dependency for mqsql connector to pom.xml](#step-1---add-dependency-for-mqsql-connector-to-pomxml)
-		- [Step 2 - Remove H2 Dependency from pom.xml](#step-2---remove-h2-dependency-from-pomxml)
-		- [Step 3 - Setup your My SQL Database](#step-3---setup-your-my-sql-database)
-		- [Step 4 - Configure your connection to My SQL Database](#step-4---configure-your-connection-to-my-sql-database)
-		- [Step 5 - Restart and You are ready!](#step-5---restart-and-you-are-ready)
-	- [Q :  What is the default h2 database name configured by Spring Boot? Why is the default database name testdb?](#q---what-is-the-default-h2-database-name-configured-by-spring-boot-why-is-the-default-database-name-testdb)
-	- [Q :  What happens if H2 is not in the classpath?](#q---what-happens-if-h2-is-not-in-the-classpath)
-	- [Q :  Why the data lost between restart?](#q---why-the-data-lost-between-restart)
-	- [Error :  Table is not created automatically in h2 embedded db or I'm unable to see the tables](#error---table-is-not-created-automatically-in-h2-embedded-db-or-im-unable-to-see-the-tables)
-	- [Error :  H2 Console is not Launched up?](#error---h2-console-is-not-launched-up)
-	- [Q :  How did the insert query from data.sql run at application startup?](#q---how-did-the-insert-query-from-datasql-run-at-application-startup)
-	- [Q :  How to define a Composite Primary Key or a Composite ID?](#q---how-to-define-a-composite-primary-key-or-a-composite-id)
-	- [Q :  Why should we annotate EntityManager with @PersistenceContext and not just @Autowired?](#q---why-should-we-annotate-entitymanager-with-persistencecontext-and-not-just-autowired)
-	- [Q :  How can we connect to Multiple Databases using Spring Boot?](#q---how-can-we-connect-to-multiple-databases-using-spring-boot)
-	- [Q :  How did JdbcTemplate achieve connection details?](#q---how-did-jdbctemplate-achieve-connection-details)
-	- [Q :  Can you give an example for ReadOnly as true in Transaction management?](#q---can-you-give-an-example-for-readonly-as-true-in-transaction-management)
-	- [Error :  org.hibernate.loader.MultipleBagFetchException](#error---orghibernateloadermultiplebagfetchexception)
-	- [Error :  BeanCreationException - java.lang.IllegalArgumentException: At least one JPA metamodel must be present](#error---beancreationexception---javalangillegalargumentexception-at-least-one-jpa-metamodel-must-be-present)
-	- [Q :  Is it mandatory to specify @Repository on a repository which is extending JPARepository?](#q---is-it-mandatory-to-specify-repository-on-a-repository-which-is-extending-jparepository)
-	- [Q :  JPA and Hibernate Course - Notes from Rodolfo](#q---jpa-and-hibernate-course---notes-from-rodolfo)
-	- [Q :  How can we use a mysql database for running the application and use inmemory database H2 for unit tests?](#q---how-can-we-use-a-mysql-database-for-running-the-application-and-use-inmemory-database-h2-for-unit-tests)
-	- [Q :  When is any primary or an id field annotated with @GeneratedValue autogenerated? Why are we passing the value for id in data.sql?](#q---when-is-any-primary-or-an-id-field-annotated-with-generatedvalue-autogenerated-why-are-we-passing-the-value-for-id-in-datasql)
-	- [Q :  Field dao in SpringRestController required a bean of type 'CustomerDAO' that could not be found. Consider defining a bean of type 'CustomerDAO' in your configuration.](#q---field-dao-in-springrestcontroller-required-a-bean-of-type-customerdao-that-could-not-be-found-consider-defining-a-bean-of-type-customerdao-in-your-configuration)
-	- [Error :  Detached object passed to persist](#error---detached-object-passed-to-persist)
-	- [Error :  java.lang.NoClassDefFoundError: javax/wsdl/extensions/ExtensibilityElement](#error---javalangnoclassdeffounderror-javaxwsdlextensionsextensibilityelement)
-	- [Q :  How do authentication with jwt to service REST??](#q---how-do-authentication-with-jwt-to-service-rest)
-- [Unit Testing](#unit-testing)
-	- [Q :  What is a mockito answer?](#q---what-is-a-mockito-answer)
-	- [Q :  How do you mock a private method that requires arguments?](#q---how-do-you-mock-a-private-method-that-requires-arguments)
-	- [Q :  How to make JUnit run at regular intervals of time?](#q---how-to-make-junit-run-at-regular-intervals-of-time)
-	- [Q :  Annotation Changes - JUnit 4 vs JUnit 5](#q---annotation-changes---junit-4-vs-junit-5)
-- [You and in28Minutes](#you-and-in28minutes)
-	- [Q :  What should you do to make the best use of our courses?](#q---what-should-you-do-to-make-the-best-use-of-our-courses)
-	- [Q :  Why should you learn from in28Minutes?](#q---why-should-you-learn-from-in28minutes)
-	- [Q :  What is the focus of each of your courses?](#q---what-is-the-focus-of-each-of-your-courses)
-	- [Q :  How to improve Logical Skills?](#q---how-to-improve-logical-skills)
-
-
 ## How to use this guide?
 
 ### 1. Ensure You Have The Recommended Versions of Tools/Versions
@@ -679,6 +452,7 @@ You need to talk to maven experts in your organization to figure out the right s
 - The section below shows how to configure a proxy in Eclipse
 
 ###### Configuring a Proxy 
+
 Maven plugin uses a settings file where the configuration can be set. Its path is available in Eclipse at Window -> Preferences -> Maven -> User Settings. If the file doesn't exist, create it and put on something like the example below:
 
 ```
@@ -879,8 +653,8 @@ java.net.BindException: Address already in use: JVM_Bind <null>:8080.
 ```
 
 You have two options
-- Option 1 - Identify and stop the process that's listening on port 8080 or
-- Option 2 - Configure this application to listen on another port.
+1) Option 1 - Identify and stop the process that's listening on port 8080 or
+2) Option 2 - Configure this application to listen on another port.
 
 ###### Option 1 - Kill
 
@@ -1171,50 +945,17 @@ Maven has the first mover advantage and has retained it and hence the choice for
 
 If you want to create a Spring Boot app with Gradle, this should help you get started - https://spring.io/guides/gs/gradle/
 
-### Architecture - 
-What is the popular of view that people are using? Velocity, JSF, Freemarker, or JSP/EL/JSTL?
-
-Actually, we are moving toward javascript frameworks like Angular and React consuming API exposed from backend.
-
-
-###  I have normal prop file and a Yaml prop file, which one take priority ? 
-
-
-It is expected that you use either YAML or properties.
-
-If you use both, a merge of both is used with a preference for values in the properties file.
-
-For complete order of preference, refer this
-
-https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html
-
-
-### What about Gradle?
-
-### Is it mandatory to use Spring Initializr?
-
-Nope. It is not mandatory.
-
-Here is an example article creating it manually step by step - https://spring.io/guides/gs/spring-boot/
-
-I’m not aware of any popular maven archetypes for Spring Boot.
-
-### Are all starter versions snapshots or not are good?
-
+### What is SNAPSHOT Version? Are all starter versions snapshots or not are good?
 
 SNAPSHOT versions are versions under development. Of late, some of the SNAPSHOT version of Spring Boot 2 are having a few issues.
 
-So, we are advising not use SNAPSHOT version.
-
-
-A project in development uses a snapshot version. Once you have completed developing a version you would release it as 0.0.1 or 0.0.1-RELEASE.
-
-The next version in development will be 0.0.2-SNAPSHOT.
-
-Versioning convention is MAJOR.MINOR.FIX
+> A project in development uses a snapshot version. Once you have completed developing a version you would release it as 0.0.1 or 0.0.1-RELEASE. The next version in development will be 0.0.2-SNAPSHOT.
 
 Spring Boot SNAPSHOTs are more reliable than other frameworks but you are right we would like to use Released versions as much as possible.
 
+So, we are advising not use SNAPSHOT version.
+
+Versioning convention is MAJOR.MINOR.FIX
 
 ### Existing Maven Projects
 
@@ -1347,7 +1088,6 @@ Recommended Reading
 
 ## Spring
 
-
 ### What's so bad about instantiating beans manually?
 
 In general, the answer is Loose Coupling. Think why do we need Interfaces in Java? You can write code without interfaces but most of the times we use interfaces.
@@ -1359,7 +1099,6 @@ Let's consider the example of  Unit Testing. If you directly instantiate objects
 The core feature of Spring is dependency injection. And if we use Dependency Injection properly then we would be able to write unit tests for our code very easily. Spring has a really good integration frameworks like Junit and Mockito and it enables us to write good unit tests very quickly.
 
 And to build on top of it, Spring has awesome modules and projects to make various facets of application development simpler.
-
 
 ### Spring vs Interface
 
@@ -1405,32 +1144,6 @@ With spring the Journey class does not need to know about the specific instance 
 Based on your configuration, Spring would identify the appropriate Vehicle implementation and auto wire it into Journey class.
 
 This will help you to unit test the Journey class with different Vehicle implementations without changing the Journey class.
-
-
-
-### If BubbleSortAlgorithm is the @Primary @Component and QuickSortAlgorithm just another @Component How is QuickSortAlgorithm used?  How is the method accessed?
-
-If you want to select a bean at runtime, thats business logic - Not auto wiring.
-
-You would need to create a separate class for Selector which has both the sorting algorithms auto wired. It should have the business logic to choose the appropriate algorithm.
-
-
-```
-@Component 
-class SortAlgorithmSelector {
-     @Autowired
-      SortAlgorithm quickSortAlgorithm;
-
-     @Autowired
-      SortAlgorithm binarySortAlgorithm;
-
-      public SortAlgorithm chooseTheRightAlgorithm(Data data) {
-             //Logic to choose the algorithm and return it.
-      }
-
-}
-```
-
 
 ### @Bean and @Autowired
 
@@ -1503,13 +1216,29 @@ public class SwaggerConfig {
 }
 ```
 
-### Difference between Unit testing and Integration testing
 
-The difference is the scope of what is being tested.
+### If BubbleSortAlgorithm is the @Primary @Component and QuickSortAlgorithm just another @Component How is QuickSortAlgorithm used?  How is the method accessed?
 
-Unit Test only tests the class/method - the unit - that is being tested.
+If you want to select a bean at runtime, thats business logic - Not auto wiring.
 
-An integration test launches up the entire application. Multiple layers/classes/methods are tested together.
+You would need to create a separate class for Selector which has both the sorting algorithms auto wired. It should have the business logic to choose the appropriate algorithm.
+
+
+```
+@Component 
+class SortAlgorithmSelector {
+     @Autowired
+      SortAlgorithm quickSortAlgorithm;
+
+     @Autowired
+      SortAlgorithm binarySortAlgorithm;
+
+      public SortAlgorithm chooseTheRightAlgorithm(Data data) {
+             //Logic to choose the algorithm and return it.
+      }
+
+}
+```
 
 ### Spring Team recommends: "Always use constructor based dependency injection in your beans. Always use assertions for mandatory dependencies". Could you explain what is at stake?
 
@@ -1726,16 +1455,6 @@ Here is a quick analysis:
 - Singleton - Same bean is reused for all requests. You cannot have state (request information) in a singleton as it is shared between requests.
 - Prototype - For every request, a new bean is created. If your bean has state (request specific information), you cannot reuse it between requests. So, you go for prototype.
 
-### What is a dependency in Spring?
-
-Think this way!
-
-Who is creating instances of the Data Bean? We do, using a constructor.
-
-Who is creating things which are annotated with @Component. Spring Framework does.
-
-Here's a great video to watch - https://www.youtube.com/watch?v=4VajgnSHwOw
-
 ### @Configuration
 
 Typically @Configuration is used on file where you are manually defining Spring Beans .  We are creating api bean manually in the example below.
@@ -1813,6 +1532,7 @@ Answer is better Design and Testability through Dependency Injection.
 To get into the right mindset with Spring, you need to think Testability and Loose Coupling.
 
 ### Q :  What is the use of an @Bean annotation?
+
 Within a Spring Configuration Class , @Bean is used to define beans with custom configuration. You define the beans to be created!
 
 ### Q :  What is the difference between @Bean and @Component?
@@ -1830,6 +1550,20 @@ An Extract
 - @Component (and @Service and @Repository) are used to auto-detect and auto-configure beans using classpath scanning. There's an implicit one-to-one mapping between the annotated class and the bean (i.e. one bean per class). Control of wiring is quite limited with this approach, since it's purely declarative.
 - @Bean is used to explicitly declare a single bean, rather than letting Spring do it automatically as above. It decouples the declaration of the bean from the class definition, and lets you create and configure beans exactly how you choose
 
+### Q :  How do you use which autowiring type to use - @Primary or @Qualifier?
+
+If there is a default bean (a bean you prefer over all others) that you want to use most of the times, then go for @Primary and use @Qualifier for non-default scenarios.
+
+If all of the beans have same priority, we would go with @Qualifier always.
+
+If you want to select a bean at runtime, thats business logic - Not auto wiring.
+
+You would need to create a separate class for Selector which has both the sorting algorithms auto wired. It should have the business logic to choose the appropriate algorithm.
+
+### @ConfigurationProperties vs @Value
+
+Here's a great article I wrote up about this a while ago - https://github.com/in28minutes/in28minutes.github.io/blob/master/_posts/2017-12-18-spring-boot-application-configuration.md#application-configuration-using-value
+
 ### Q :  What is the difference between @Component, @Service and @Repository annotations?
 
 At the core, all of these define spring beans. However, you can further classify them based on the layer you are using them. 
@@ -1842,16 +1576,6 @@ In addition, these can be used at later point to add additional behaviour using 
 - For example, in case of @Repository, Spring automatically wires in JDBC Exception translation features.
 
 By using a specific annotation, you are giving more information to the framework about your intentions.
-
-###  Spring - what is a dependency and what is not?
-
-Here's a quick video to get you going - https://www.youtube.com/watch?v=4VajgnSHwOw
-
-### Q :  Can we use @Component annotation instead of @Service for Business Services?
-
-Heres an extract from spring documentation. Since we were creating a business layer service, we used @Service. 
-
-> "@Component serves as a generic stereotype for any Spring-managed component; whereas, @Repository, @Service, and @Controller serve as specializations of @Component for more specific use cases (e.g., in the persistence, service, and presentation layers, respectively). What this means is that you can annotate your component classes with @Component, but by annotating them with @Repository, @Service, or @Controller instead, your classes are more properly suited for processing by tools or associating with aspects. For example, these stereotype annotations make ideal targets for pointcuts. Of course, it is also possible that @Repository, @Service, and @Controller may carry additional semantics in future releases of the Spring Framework. Thus, if you are making a decision between using @Component or @Service for your service layer, @Service is clearly the better choice. Similarly, as stated above, @Repository is already supported as a marker for automatic exception translation in your persistence layer."
 
 ### @Autowired and @Qualifier with Constructor
 
@@ -2013,15 +1737,30 @@ public Object around(ProceedingJoinPoint joinPoint) throws Throwable{
     return retVal;
 }
 ```
-### Q :  How do you use which autowiring type to use - @Primary or @Qualifier?
 
-If there is a default bean (a bean you prefer over all others) that you want to use most of the times, then go for @Primary and use @Qualifier for non-default scenarios.
+### springloaded vs devtools
 
-If all of the beans have same priority, we would go with @Qualifier always.
+Dev tools restarts server on code change
+```
+<dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+```
 
-If you want to select a bean at runtime, thats business logic - Not auto wiring.
+Spring Loaded is a more advanced version :) Doesn’t even restart the context. 
+```
+            <dependency>
 
-You would need to create a separate class for Selector which has both the sorting algorithms auto wired. It should have the business logic to choose the appropriate algorithm.
+                    <groupId>org.springframework</groupId>
+
+                    <artifactId>springloaded</artifactId>
+
+             </dependency>
+```
+
+More reading - https://docs.spring.io/spring-boot/docs/current/reference/html/howto-hotswapping.html#howto-reload-fast-restart
 
 
 ### Q :  What are the New Features in Spring Framework 5.0?
@@ -2102,8 +1841,41 @@ public class WelcomeController {
 private GreeterService service1;
 ```
 
+
+### @PropertySource vs @ConfigurationProperties
+
+ConfigurationProperties provide type checking and matching to a specific bean directly with the name as attribute. 
+
+```
+@ConfigurationProperties("limits-service")
+public class Configuration {
+    
+    private int minimum;
+    private int maximum;
+```
+
+@PropertySource needs more configuration
+
+```
+@Configuration
+@PropertySource("classpath:app.properties")
+public class DAOConfig {
+    @Value( "${txn.dbhost}" ) private String txnDbHost;
+    @Value( "${txn.dbport}" ) private Integer txnDbPort;
+    @Value( "${txn.dbservice}" ) private String txnDbService;
+    @Value( "${txn.dbuser}" ) private String txnDbUser;
+    @Value( "${txn.dbpwd}" ) private String txnDbPwd;
+
+    @Value( "${rpt.dbhost}" ) private String rptDbHost;
+    @Value( "${rpt.dbport}" ) private Integer rptDbPort;
+    @Value( "${rpt.dbservice}" ) private String rptDbService;
+    @Value( "${rpt.dbuser}" ) private String rptDbUser;
+    @Value( "${rpt.dbpwd}" ) private String rptDbPwd;
+```
+
 ### Error :  Log4j problems with Spring 5!
-- TODO
+
+We will fix it in the next step!
 
 ### Q :  What is the minimum baseline Java Version for Spring Boot 2 and Spring 5?
 
@@ -2907,10 +2679,11 @@ public class UserErrorResponse {
 
 The way I recommend is to post this as a JSON
 
+```
 {"items":["item1","item2"]}
-
+```
 You'll have to create wrapper object:
-
+```
 public class ItemsWrapper{
 
     List<String> items;
@@ -2925,11 +2698,298 @@ public class ItemsWrapper{
 public Result saveItems(@RequestBody ItemWrapper items){
 ...
 }
+```
 
+### ResponseEntity vs Resource
+
+Quick Answer - You use ResponseEntity when you want to customize the Response Status. In all other situations, we use @ResponseBody.
+
+Example 1
+
+
+```
+@GetMapping(value="/resource") @ResponseBody public Resource sayHello() { return resource; }
+```
+Example 2
+```
+@PostMapping(value="/resource") public ResponseEntity createResource() { .... .... return ResponseEntity.created(resource).build(); }
+```
+
+There are a variety of HTTP Response Status Codes that you can return with your response.
+
+- 200 - SUCCESS
+- 201 - CREATED
+- 404 - RESOURCE NOT FOUND
+- 400 - BAD REQUEST
+- 401 - UNAUTHORIZED
+- 500 - SERVER ERROR
+
+With @ResponseBody the only response type that goes out is SUCCESS (Example 1). (or 500 if a server error happens)
+
+Let's say you are creating a resource. You would want to send a status of 201 CREATED. In this case, we use ResponseEntity as in Example 2.
 
 ## Spring Boot
 
 Spring Boot is the best Java framework for microservices We recommend you to become an expert at Spring Boot!
+
+
+
+### Spring Boot Dependencies
+
+Spring Boot does not manage dependency versions for everything.
+
+You can find the dependencies which are managed through Spring Boot here : https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot-dependencies/pom.xml
+
+### Static vs Dynamic Filtering
+
+Imagine the same bean being used in two different services. And these two services want to send out different fields. 
+
+If we add the JsonIgnoreProperties annotation on the bean, then we cannot achieve this requirement. Thats why this is static. 
+
+However with dynamic filtering, shown below, you can create two request methods, each having different attributes being sent.
+
+```
+SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("field1", "field2");
+
+        FilterProvider filters = new SimpleFilterProvider().addFilter("SomeBeanFilter", filter);
+
+        MappingJacksonValue mapping = new MappingJacksonValue(someBean);
+
+        mapping.setFilters(filters);
+
+        return mapping;
+```
+
+JSON Views can be an option. Recommended Reading - https://spring.io/blog/2014/12/02/latest-jackson-integration-improvements-in-spring
+
+The biggest advantage of @JsonView is that there is no hardcoding of field names to filter.
+
+If a solution is implementable with @JsonView without a lot of duplication, I can find no reason why one should not use @JsonView.
+
+
+Mixins can be option. Recommended Reading - https://stackoverflow.com/questions/44671154/jackson-filtering-out-fields-without-annotations/44673223#44673223
+
+
+### Swagger
+
+Here are set of latest dependencies working well.
+
+```
+<parent>
+
+<groupId>org.springframework.boot</groupId>
+
+<artifactId>spring-boot-starter-parent</artifactId>
+
+<version>2.1.3.RELEASE</version>
+
+<relativePath/> <!-- lookup parent from repository -->
+
+</parent>
+```
+
+```
+<dependency>
+
+    <groupId>io.springfox</groupId>
+
+    <artifactId>springfox-swagger2</artifactId>
+
+    <version>2.9.2</version>
+
+</dependency>
+
+<dependency>
+
+    <groupId>io.springfox</groupId>
+
+    <artifactId>springfox-swagger-ui</artifactId>
+
+    <version>2.9.2</version>
+
+</dependency>
+```
+
+### How to deploy Spring Boot Application to unix server ? JAR vs WAR
+
+You will create a jar of the project.
+
+You can run it as a java application
+
+`java -jar name-of-jar.jar`
+
+
+WAR - Needs a Java EE compliant server (Tomcat, Websphere etc) to deploy the application
+JAR - Needs just Java JDK.
+
+Deploying JAR's is easier than WARs. Hence, a preference towards JAR's  in the container world of recent times.
+
+
+### Video Update : com.citytranso.microservices.limitsservice.Configuration is annotated with @ConfigurationProperties and @Component. This may cause the @ConfigurationProperties bean to be registered twice.
+
+https://github.com/spring-projects/spring-boot/issues/16580
+
+You can remove @Component from the file. You should not face a problem.
+
+Remove @Component from com.microservices.limitsservice.Configuration or consider disabling automatic @ConfigurationProperties scanning.
+
+
+
+### YAML VS Properties
+
+Here is a great read about it - https://medium.com/@thammarath014/yml-vs-properties-1cd895e80f62
+
+### Internationationalization Configuration Simplified
+```
+spring.mvc.locale=en_us
+spring.mvc.locale-resolver=accept-header
+spring.messages.basename=messages
+```
+
+
+###  difference between idempotent and non-idempotent?
+
+Idempotent : Same result for multiple calls. example : GET
+
+POST is not idempotent. A new resource is created for every call. even if it has same data.
+
+POST : Should create new resource. Ideally return JSON with link to newly created resource. Same return codes as get possible. In addition : Return code 201 (CREATED) is possible.
+PUT : Update a known resource. ex: update client details. Possible Return Codes : 200(OK)
+
+
+
+### Trace instead of path
+
+You can disable stack trace.
+
+https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/autoconfigure/web/ErrorProperties.IncludeStacktrace.html
+
+server.error.include-stacktrace=never
+
+According to doc
+
+static ErrorProperties.IncludeStacktracevalueOf(String name)Returns the enum constant of this type with the specified name.
+
+server.error.include-stacktrace=false   i.e in place of boolean value it should be some string.
+
+
+ALWAYS Always add stacktrace information.
+
+NEVER Never add stacktrace information.
+
+ON_TRACE_PARAMAdd stacktrace information when the "trace" request parameter is "true".
+
+
+### Accept vs Content-Type
+
+Accept - what type of response are you expecting?
+
+Content-Type - what type of content does the body of your request contain?
+
+### Can we use @RequestParam instead of @PathVariable to bind the parameter?
+
+Even though both @RequestParam and @PathVariable is used to extract values from the HTTP request, there is a subtle difference between them.
+
+@RequestParam - is used to get the request parameters from URL, also known as query parameters, whereas
+
+@PathVariable- extracts values from URI.
+
+@RequestParam and @PathVariable are both used to extract values from the URL, their usage is largely determined by how a web site has been designed.
+
+The @PathVariable annotation is used for data passed in the URI in REST webservices while @RequestParam annotation is used to extract the data found in query parameters
+
+@PathParam is a JAX-RS annotation that is equivalent to @PathVariable in Spring
+
+For example:
+
+http://localhost:8080/orders?id=100
+
+```
+@RequestMapping("/orders")
+
+@ResponseBody
+
+public  String getOrder(@RequesParam(value = "id", required=true) String id) {
+
+     return "Order ID: "+id;
+
+}
+```
+
+http://localhost:8080/orders/100
+
+```
+@RequestMapping("/orders/{id})
+
+public String getOrder(@PathVariable("id") String orderId) {}
+```
+
+
+### Swagger - ApiInfo is Deprecated, what is the alternative way to do the DEFAULT_API_INFO
+
+Here is code which compiles with Swagger 2.9.2
+
+```
+public static final ApiInfo DEFAULT_API_INFO = new ApiInfo(
+
+"Awesome API Title", "Awesome API Description", "1.0",
+
+"urn:tos", DEFAULT_CONTACT, 
+
+"Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0", new ArrayList<VendorExtension>());
+```
+
+### Internationalization
+
+##### No 1: Ensure that the name of ResourceBundleMessageSource is the same in both the files related to internationalization.
+
+In the examples below, we use messageSource as the @Autowired bean name and the @Bean method name.
+
+```
+@Autowired
+private MessageSource messageSource;
+@Bean
+public ResourceBundleMessageSource messageSource() {
+    ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+    messageSource.setBasename("messages"); 
+    return messageSource;
+}
+```
+
+##### No 2: Make sure you have these files defined. Check the names and content
+
+/src/main/resources/messages.properties
+```
+good.morning.message=Good Morning
+```
+/src/main/resources/messages_fr.properties
+```
+good.morning.message=Bonjour
+```
+/src/main/resources/messages_nl.properties
+```
+good.morning.message=Goede Morgen
+```
+
+
+### Why do we need profiles in spring?
+
+Enterprise application development is complex. You have multiple environments
+- Dev
+- QA
+- Stage
+- Production
+
+You want to have different application configuration in each of the environments.
+
+Profiles help to have different application configuration for different environments.
+Spring and Spring Boot provide features where you can specify
+
+What is the configuration for various environments in different profiles?
+Set the active profile for a specific environment.
+
+Spring Boot would pick up the application configuration based on the active profile that is set in a specific environment.
+
 
 ### Spring Snapshot and Milestone Repositories
 ```
@@ -4358,6 +4418,232 @@ Here’s the complete guide
 
 ## Hibernate, JPA and In-memory Database
 
+### JpaRepository vs CrudRepository
+
+JpaRepository
+
+JpaRepository (Defined in Spring Data JPA) is the JPA specific Repository interface.
+```
+public interface JpaRepository<T, ID extends Serializable>
+        extends PagingAndSortingRepository<T, ID>, QueryByExampleExecutor<T> {
+```
+JpaRepository extends PagingAndSortingRepository which in turn extends CrudRepository interface. So, JpaRepository inherits all the methods from the two interfaces shown below.
+
+PagingAndSortingRepository
+```
+public abstract interface PagingAndSortingRepository extends CrudRepository {
+  
+  public abstract Iterable findAll(Sort arg0);
+  
+  public abstract Page findAll(Pageable arg0);
+
+}
+```
+CrudRepository
+```
+public interface CrudRepository<T, ID extends Serializable>
+    extends Repository<T, ID> {
+
+    <S extends T> S save(S entity);
+
+    T findOne(ID primaryKey);       
+
+    Iterable<T> findAll();          
+
+    Long count();                   
+
+    void delete(T entity);          
+
+    boolean exists(ID primaryKey);  
+
+    // … more functionality omitted.
+}
+```
+### Writing Complex JPA Queries
+
+You can see a few examples here:
+
+```
+@RepositoryRestResource(path="courses")
+public interface CourseSpringDataRepository extends JpaRepository<Course, Long> {
+    List<Course> findByNameAndId(String name, Long id);
+
+    List<Course> findByName(String name);
+
+    List<Course> countByName(String name);
+
+    List<Course> findByNameOrderByIdDesc(String name);
+
+    List<Course> deleteByName(String name);
+
+    @Query("Select  c  From Course c where name like '%100 Steps'")
+    List<Course> courseWith100StepsInName();
+
+    @Query(value = "Select  *  From Course c where name like '%100 Steps'", nativeQuery = true)
+    List<Course> courseWith100StepsInNameUsingNativeQuery();
+
+    @Query(name = "query_get_100_Step_courses")
+    List<Course> courseWith100StepsInNameUsingNamedQuery();
+}
+```
+You can use Criteria Query
+
+```
+    @Test
+    public void join() {
+        // "Select c From Course c join c.students s"
+
+        // 1. Use Criteria Builder to create a Criteria Query returning the
+        // expected result object
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Course> cq = cb.createQuery(Course.class);
+
+        // 2. Define roots for tables which are involved in the query
+        Root<Course> courseRoot = cq.from(Course.class);
+
+        // 3. Define Predicates etc using Criteria Builder
+        Join<Object, Object> join = courseRoot.join("students");
+
+        // 4. Add Predicates etc to the Criteria Query
+
+        // 5. Build the TypedQuery using the entity manager and criteria query
+        TypedQuery<Course> query = em.createQuery(cq.select(courseRoot));
+
+        List<Course> resultList = query.getResultList();
+
+        logger.info("Typed Query -> {}", resultList);
+        // [Course[JPA in 50 Steps], Course[JPA in 50 Steps], Course[JPA in 50
+        // Steps], Course[Spring Boot in 100 Steps]]
+    }
+
+    @Test
+    public void left_join() {
+        // "Select c From Course c left join c.students s"
+
+        // 1. Use Criteria Builder to create a Criteria Query returning the
+        // expected result object
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Course> cq = cb.createQuery(Course.class);
+
+        // 2. Define roots for tables which are involved in the query
+        Root<Course> courseRoot = cq.from(Course.class);
+
+        // 3. Define Predicates etc using Criteria Builder
+        Join<Object, Object> join = courseRoot.join("students", JoinType.LEFT);
+
+        // 4. Add Predicates etc to the Criteria Query
+
+        // 5. Build the TypedQuery using the entity manager and criteria query
+        TypedQuery<Course> query = em.createQuery(cq.select(courseRoot));
+
+        List<Course> resultList = query.getResultList();
+
+        logger.info("Typed Query -> {}", resultList);
+        // [Course[JPA in 50 Steps], Course[JPA in 50 Steps], Course[JPA in 50
+        // Steps], Course[Spring in 50 Steps], Course[Spring Boot in 100 Steps]]
+    }    
+```
+You can use JPQL
+
+```
+    //JOIN => Select c, s from Course c JOIN c.students s
+    //LEFT JOIN => Select c, s from Course c LEFT JOIN c.students s
+    //CROSS JOIN => Select c, s from Course c, Student s
+    //3 and 4 =>3 * 4 = 12 Rows
+    @Test
+    public void join(){
+        Query query = em.createQuery("Select c, s from Course c JOIN c.students s");
+        List<Object[]> resultList = query.getResultList();
+        logger.info("Results Size -> {}", resultList.size());
+        for(Object[] result:resultList){
+            logger.info("Course{} Student{}", result[0], result[1]);
+        }
+    }
+
+    @Test
+    public void left_join(){
+        Query query = em.createQuery("Select c, s from Course c LEFT JOIN c.students s");
+        List<Object[]> resultList = query.getResultList();
+        logger.info("Results Size -> {}", resultList.size());
+        for(Object[] result:resultList){
+            logger.info("Course{} Student{}", result[0], result[1]);
+        }
+    }
+
+    @Test
+    public void cross_join(){
+        Query query = em.createQuery("Select c, s from Course c, Student s");
+        List<Object[]> resultList = query.getResultList();
+        logger.info("Results Size -> {}", resultList.size());
+        for(Object[] result:resultList){
+            logger.info("Course{} Student{}", result[0], result[1]);
+        }
+    }
+```
+
+### postgresql
+
+Here are a couple of articles that might help you:
+
+- https://dzone.com/articles/configuring-spring-boot-for-postgresql
+
+- http://javasampleapproach.com/spring-framework/use-spring-jpa-postgresql-spring-boot
+
+### H2 - removed the scope "runtime" and It worked for me.
+
+Link to image - https://github.com/in28minutes/in28minutes-initiatives/blob/master/The-in28Minutes-TroubleshootingGuide-And-FAQ/images/h2-solution-image.png
+
+Previous dependency was :
+
+```
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>runtime</scope>
+</dependency>
+```
+
+And latest dependency which fixed my issue :
+```
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+</dependency>
+```
+
+application.properties
+```
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+```
+
+### H2 Database
+
+Thats Spring Boot Autoconfiguration magic.
+
+From https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-auto-configuration.html
+
+"Spring Boot auto-configuration attempts to automatically configure your Spring application based on the jar dependencies that you have added. For example, If HSQLDBis on your classpath, and you have not manually configured any database connection beans, then we will auto-configure an in-memory database.
+
+More Reading
+
+http://www.springboottutorial.com/spring-boot-auto-configuration
+
+### Entities are not being scanned
+
+No qualifying bean of type 'Repository' available.
+
+Make sure that the Entities have @Entity annotation and the Repository class has @Repository annotation.
+
+Make sure that the components are under component scan, entities are in an EntityScan and Repositories under EnableJpaRepositories.
+
+```
+@SpringBootApplication(scanBasePackages= {"com.project.microservices.currency.*"})
+@EntityScan(basePackages = {"com.project.microservices.currency.model"})
+@EnableJpaRepositories(basePackages = {"com.project.microservices.currency.repository"})
+```
+
+
 ### Custom Queries with JPA and Hibernate
 
 The following repository shows how you can do custom SQL queries.
@@ -5454,6 +5740,8 @@ Annotation Changes in JUnit 5
 
 ## Microservices
 
+## Microservices
+
 ### ERROR feign.RetryableException 
 
 connect timed out executing GET http://currency-exchange-service/currency-exchange/from/USD/to/INR] with root cause
@@ -5498,24 +5786,54 @@ If you get an error once, execute it again after a minute
 If you still get an error, post the logs of the each of the components to understand what's happening in the background!
 
 
-### How can you connect to Rabbit MQ on a different Port?
+### Feign is not working
 
-I found answer by myself. Adding the following properties to each of the microservices' application.properties file
+Can you make sure you have the following pieces of code right?
 
 ```
-spring.rabbitmq.host=
-spring.rabbitmq.password=
-spring.rabbitmq.username=
+<dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-openfeign</artifactId>
+    </dependency>
 ```
 
-### How can you connect to Rabbit MQ from Zipkin on Windows?
+```
+      @GetMapping("/currency-converter-feign/from/{from}/to/{to}/quantity/{quantity}")
+  public CurrencyConversionBean convertCurrencyFeign(@PathVariable String from, @PathVariable String to,
+      @PathVariable BigDecimal quantity) {
+
+    CurrencyConversionBean response = proxy.retrieveExchangeValue(from, to);
+
+    return new CurrencyConversionBean(response.getId(), from, to, response.getConversionMultiple(), quantity,
+        quantity.multiply(response.getConversionMultiple()), response.getPort());
+  }
+```
+
+```
+@SpringBootApplication
+@EnableFeignClients("com.in28minutes.microservices.currencyconversionservice")
+public class CurrencyConversionServiceApplication {
+```
+
+```
+@FeignClient(name="currency-exchange-service", url="localhost:8000")
+public interface CurrencyExchangeServiceProxy {
+  @GetMapping("/currency-exchange/from/{from}/to/{to}")
+  public CurrencyConversionBean retrieveExchangeValue
+    (@PathVariable("from") String from, @PathVariable("to") String to);
+}
+```
+
+
+### Zipkin doesn't get anything
+
+Running Zipkin on windows is a little different:
 
 ```
 SET RABBIT_URI=amqp://localhost 
 java -jar zipkin-server-2.5.2-exec.jar
 ```
 
-### Zipkin is not showing the traces
 
 Spring Boot 2.1.3.RELEASE
 
@@ -5528,7 +5846,6 @@ spring.sleuth.sampler.percentage=1.0
 spring.zipkin.sender.type=web
 ```
 
-### Zipkin
 Make sure that you have updated the poms for all the three applications involved. A complete list here.
 - Stop and Rebuild all Applications
 - Start them in the order - Naming Server, Distributed Tracing Server, API Gateway, Calculation Service, Exchange Service
@@ -5583,39 +5900,16 @@ OLD Dependencies to be Replaced
 
 ```
 
-### Unable to get Zuul API Gate way to work
+
 
 ```
 Here's the checklist
-1) Make sure you stop all the servers
-2) Make sure you import step34 versions of all the four components - currency-conversion-service, currency-exchange-service, netflix-eureka-naming-server, netflix-zuul-api-gateway-server 
-3) Make sure you start the services in this order
-  a)netflix-eureka-naming-server
-  b)netflix-zuul-api-gateway-server
-  c)currency-exchange-service
-  d)currency-conversion-service
-4) Make sure all the components are registered with naming server.
-5) Give a minute of warm up time!
-6) If you get an error once, execute it again after a minute
-7) If you still get an error, post the logs of the each of the components to understand what's happening in the background!
+1) Make sure that you have updated the poms for all the three applications involved. A complete list here - https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-10-16-spring-micro-services.md#step-40---connecting-microservices-to-zipkin
+
+2) Stop and Rebuild all Applications
+
+3) Start them in the order - Naming Server, Distributed Tracing Server, API Gateway, Calculation Service, Exchange Service
 ```
-
-
-
-
-### ZUUL API Gateway is not working. What can I check?
-
-Cool. the url looks good.
-​http://localhost:8765/currency-exchange-service/currency-exchange/from/EUR/to/INR​
-You can try the following!
-a) Make sure that all the applications are up and running.
-b) Compare the code against the code here - https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-10-16-spring-micro-services.md#step-34---setting-up-zuul-api-gateway-between-microservice-invocations​
-c) Post the details requested below if you are unable to resolve it.
-Details
-
-a) Log that you see
-b) the code from ​CurrencyExchangeServiceProxy.java, ZuulLoggingFilter ,NetflixZuulApiGatewayServerApplication, CurrencyConversionController, /netflix-zuul-api-gateway-server/src/main/resources/application.properties
-
 
 ### Cloud Config Server Configuring path to local GIT Repo on Windows
 
@@ -5626,25 +5920,46 @@ file:///C:/Users/Gautham/Documents/workspace-sts-3.9.4.RELEASE/git-localconfig-r
 file:\\C:/Users/Gautham/Documents/workspace-sts-3.9.4.RELEASE/git-localconfig-repo
 ```
 
-### Microservices and Transaction Management
+### Spring Cloud Config Server
 
-Microservices - Check out this article - great start for thinking about transaction management.  
+Lets say you have 100 micro services. Let’s say the configuration for them is stored in 100 different repositories. 
 
-https://www.nginx.com/blog/event-driven-data-management-microservices/
+Who would maintain this configuration for stage and production environments? The operations team (with support from dev team)
 
-### Microservices and Bounded Context
+When ever there is a change in configuration, the operations teams need to locate the right repository and make the change.
 
-The scope of the microservice is the most difficult choice you have to make. There is no one good answer to it.
+Compare this with having just one git repository for all the configuration!
 
-One thing I can confirm is that all operations (insert, update, delete) should be part of the same micro service.
+As soon as you commit the change to git, the change will be picked up by the application.
 
-However, should Employee be a micro service on its own? Can I combine with Department? These are things that we will not be able to answer unless we know the business domain, how they would evolve, how dependent these are and what are the relative sizes?
+Think about the flexibility it provides.
 
-A good starting point is to understand Bounded Context. https://martinfowler.com/bliki/BoundedContext.html
+Spring Config Server Supports
+- Git 
+- SVN (Subversion) Here’s an example - https://github.com/spring-cloud-samples/svn-config-server
 
-Use that as the starting point but be flexible to allow evolution of it.
+How does it work?
+- Your application tells the Spring Config Server, what their application name is. Spring Config Server returns configuration based on it.
 
-### Verifying Limits Service 
+/limits-service/src/main/resources/bootstrap.properties
+- `spring.application.name=limits-service`
+- `spring.cloud.config.uri=http://localhost:8888`
+
+#### http://localhost:8888/limits-service/default
+
+Notice that `spring.application.name` matches the application name in URL.
+- APP_NAME = limits-service
+- PROFILE_NAME = default
+
+Spring config server looks for
+- limits-service.properties
+
+#### http://localhost:8888/limits-service/dev
+- APP_NAME = limits-service
+- PROFILE = dev
+Spring config server looks for
+- limits-service-dev.properties with priority over
+- limits-service.properties
 
 ```
 Here's the checklist
@@ -5660,16 +5975,515 @@ file:///C:/git-localconfig-repo
 You should be good to go
 ```
 
-### Zipkin doesn't get anything
+application.properties and bootstrap.properties - Here's the complete configuration hierarchy. bootstrap is at the top of the tree.
+- https://cloud.spring.io/spring-cloud-commons/multi/multi__spring_cloud_context_application_context_services.html#_the_bootstrap_application_context
+- https://cloud.spring.io/spring-cloud-config/single/spring-cloud-config.html#_quick_start
+
+#### Here's the cloud config server URL Patterns
+
+The HTTP service has resources in the following form:
 
 ```
+/{application}/{profile}[/{label}]
+/{application}-{profile}.yml
+/{label}/{application}-{profile}.yml
+/{application}-{profile}.properties
+/{label}/{application}-{profile}.properties
+```
+
+A Few more Examples
+- limits-service-dev.properties => config-server-url/limits-service/dev
+- limits-service-qa.properties => config-server-url/limits-service/qa
+
+### Secure your git repository Spring Cloud Config Server
+
+You can enable security on the git repository.
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/spring-cloud-samples/config-repo
+          username: trolley
+          password: strongpassword
+
+For another security layer, you can encrypt with a secret key each value in the git repository:
+
+example :
+
+spring:                       
+  datasource:                       
+    url: '{cipher}bade81d32a7ec44d4e'                       
+    username: '{cipher}dbe76ffb15e4ec'                       
+    password: '{cipher}ghyb15e4ec8d5'
+https://www.devglan.com/spring-cloud/encrypt-decrypt-cloud-config-properties
+
+
+### Bus Refresh Does not work
+
+need to have these lines on limits-service bootstrap.properties and in the config server application.properties
+
+```
+management.endpoints.web.exposure.include=*
+management.security.enabled=false
+```
+
+OLD URLS 
+- http://localhost:8080/application/bus/refresh
+- http://localhost:8080/bus/refresh
+- http://localhost:8080/actuator/refresh
+
+NEW URLS
+- http://localhost:8080/actuator/bus-refresh
+
+
+### VIDEO Update - Save is happening without default constructor in User Class
+
+I have no default constructor in User.java and still i am able to create user successfully,Could you please help me understand this.
+
+By default, Java provides a no argument constructor if you do not have any constructors defined.
+
+But, If you add a constructor of your own, Java does not provide a no argument constructors but we can define one.
+
+Earlier you needed a no argument constructor to do a JSON Binding to a bean when using Jackson framework.
+
+But, with the latest versions it is not needed anymore.
+
+### Feign vs resttemplate
+
+Look at the two methods below: First uses RestTemplate. Second uses Feign. You can see that Feign helps you reduce the amount of code you need to write to invoke a Rest service by upto 80%.
+
+```
+@GetMapping("/currency-converter/from/{from}/to/{to}/quantity/{quantity}")
+    public CurrencyConversionBean convertCurrency(@PathVariable String from, @PathVariable String to,
+            @PathVariable BigDecimal quantity) {
+
+        // Feign - Problem 1
+        Map<String, String> uriVariables = new HashMap<>();
+        uriVariables.put("from", from);
+        uriVariables.put("to", to);
+
+        ResponseEntity<CurrencyConversionBean> responseEntity = new RestTemplate().getForEntity(
+                "http://localhost:8000/currency-exchange/from/{from}/to/{to}", CurrencyConversionBean.class,
+                uriVariables);
+
+        CurrencyConversionBean response = responseEntity.getBody();
+
+        return new CurrencyConversionBean(response.getId(), from, to, response.getConversionMultiple(), quantity,
+                quantity.multiply(response.getConversionMultiple()), response.getPort());
+    }
+
+    @GetMapping("/currency-converter-feign/from/{from}/to/{to}/quantity/{quantity}")
+    public CurrencyConversionBean convertCurrencyFeign(@PathVariable String from, @PathVariable String to,
+            @PathVariable BigDecimal quantity) {
+
+        CurrencyConversionBean response = proxy.retrieveExchangeValue(from, to);
+
+        logger.info("{}", response);
+        
+        return new CurrencyConversionBean(response.getId(), from, to, response.getConversionMultiple(), quantity,
+                quantity.multiply(response.getConversionMultiple()), response.getPort());
+    }
+```
+
+
+### Zuul
+
+Authentication Example -  https://github.com/shuaicj/zuul-auth-example
+
+When we talk about a microservices architecture, we deal with multiple microservices talking to each other:
+
+How do we make sure we intercept requests and messages exchanged between each pair of microservices? That's where the API Gateway comes into the picture.
+
+Whenever an external service request arrives in the enterprise, or there is an internal communication between microservices, we have it go through the API gateway.
+
+API Gateway is a centralized location where you can implement features like authentication, logging, auditing, and rate limiting. For example, you may not want Microservice3 to be called more than 10 times by a particular client. You could do that as part of rate limiting in the API gateway.
+
+The API gateway acts as a centralized store for the common features for microservices, in your enterprise application.
+
+A popular API Gateway implementation is Zuul API Gateway.
+
+Typically there is a warmup time that is needed at the start of the services to ensure they are all connected - about a couple of minutes usually.
+
+
+#### How does Zuul work?
+
+http://localhost:8765/currency-exchange-service/currency-exchange/from/EUR/to/INR
+- First thing Zuul does is find the url from eureka for currency-exchange-service.
+- And then it would send the request to URL/currency-exchange/from/EUR/to/INR.
+
+Take a generic url
+
+http://localhost:8765/app-name/url-path. Logic in Zuul is simple:
+- Find location for app-name
+- Send request to LOCATION/url-path
+
+#### How can we debug?
+
+1. Make sure that name of the application matches the path in the url.
+http://localhost:8765/`currency-exchange-service`/currency-exchange/from/EUR/to/INR
+
+/currency-exchange-service/src/main/resources/application.properties
+```
+spring.application.name=currency-exchange-service
+```
+
+2. Make sure that `eureka.client.service-url.default-zone` is defined as shown below
+
+/currency-exchange-service/src/main/resources/application.properties Modified New Lines
+
+```
+eureka.client.service-url.default-zone=http://localhost:8761/eureka
+```
+
+3. Make sure that you are able to execute the URL `http://localhost:8000/currency-exchange/from/EUR/to/INR`. 
+
+You can see that the last parts of both the URLs match - http://localhost:8765/currency-exchange-service/`currency-exchange/from/EUR/to/INR`
+
+4.  Check this piece of code up
+
+```
+@FeignClient(name="netflix-zuul-api-gateway-server")
+@RibbonClient(name="currency-exchange-service")
+public interface CurrencyExchangeServiceProxy {
+    @GetMapping("/currency-exchange-service/currency-exchange/from/{from}/to/{to}")
+    public CurrencyConversionBean retrieveExchangeValue
+        (@PathVariable("from") String from, @PathVariable("to") String to);
+```
+
+5. *THIS IS WHERE A NUMBER OF ERRORS HAPPEN* Do the Path Variables have Keys from and to - @PathVariable("from") and @PathVariable("to")?
+```
+    @GetMapping("/currency-exchange-service/currency-exchange/from/{from}/to/{to}")
+    public CurrencyConversionBean retrieveExchangeValue
+        (@PathVariable("from") String from, @PathVariable("to") String to);
+```
+
+You can try the following!
+a) Make sure that all the applications are up and running.
+b) Compare the code against the code here - https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-10-16-spring-micro-services.md#step-34---setting-up-zuul-api-gateway-between-microservice-invocations​
+c) Post the details requested below if you are unable to resolve it.
+
+Details
+a) Log that you see
+b) the code from ​CurrencyExchangeServiceProxy.java, ZuulLoggingFilter ,NetflixZuulApiGatewayServerApplication, CurrencyConversionController, /netflix-zuul-api-gateway-server/src/main/resources/application.properties
+
 Here's the checklist
-1) Make sure that you have updated the poms for all the three applications involved. A complete list here - https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-10-16-spring-micro-services.md#step-40---connecting-microservices-to-zipkin
+1) Make sure you stop all the servers
+2) Make sure you import step34 versions of all the four components - currency-conversion-service, currency-exchange-service, netflix-eureka-naming-server, netflix-zuul-api-gateway-server 
+3) Make sure you start the services in this order
+  a)netflix-eureka-naming-server
+  b)netflix-zuul-api-gateway-server
+  c)currency-exchange-service
+  d)currency-conversion-service
+4) Make sure all the components are registered with naming server.
+5) Give a minute of warm up time!
+6) If you get an error once, execute it again after a minute
+7) If you still get an error, post the logs of the each of the components to understand what's happening in the background!
 
-2) Stop and Rebuild all Applications
+### Microservices performance
 
-3) Start them in the order - Naming Server, Distributed Tracing Server, API Gateway, Calculation Service, Exchange Service
+As we distribute our applications, the tradeoff between performance and scalability becomes ever so important.
+
+We make the application easily scalable by distributing it. The result is better performance.
+
+As you explain, Distributing has network calls which would be slower.
+
+It is upto us to design systems optimizing the balance.
+
+Here's a recommended reading - https://smartbear.com/blog/test-and-monitor/performance-issue-considerations-for-microservices/
+
+### EUREKA
+
+I realised when going to eureka apps http://localhost:8761/eureka/apps I could see hostname was not localhost but the name of my machine and eureka seems it is not able to resolve the name of the machine to localhost:port -> what I did was to include the following property for currency-conversion-service and currency-exchange-service eureka.instance.hostname=localhost
+
+### What if Eureka server is down ?
+
+All the infrastructure components we create - Eureka Naming Server, APIÂ Gateways etc become single point of failures. It becomes essential to build enough redundancy - create multiple instances - so that they are available 100% of time.
+
+There is a feature available with Eureka - Peer mode configuration. Here you can configure multiple/more than one eureka naming server in peer mode and they are aware of each other. Whenever an instance registers with one instance of eureka server, the another instance will be automatically updated.
+
+In this way, you can ensure high avaibility of Eureka.
+
+You can build redundancy for Eureka as well. One option is discussed in this thread - https://stackoverflow.com/questions/38549902/eureka-server-how-to-achieve-high-availability
+
+
+### Microservices Docker
+
+you must create a docker network and then connect the rabbit and zipkin by the docker network and the rabbit host must be the rabbit container name.
+
 ```
+$ docker network create in28minutes
+
+$ docker run -d --hostname in28minutes-rabbit --name in28minutes-rabbit -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+
+$ docker run --name in28minutes-zipkin -e RABBIT_URI=amqp://in28minutes-rabbit --network in28minutes -p 9411:9411 -d openzipkin/zipkin
+```
+
+### Rabbit MQ Magic
+
+The magic happens because of these dependencies. We added these on all the applications we want to trace.
+
+```
+   <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+    </dependency>
+```
+
+As soon as the amqp dependency is added, Spring Boot Auto Configuration establishes a connection to rabbit mq on the default port.
+
+By default, rabbitmq defaults are localhost on port 5672. You can customize it as well.
+
+```
+spring.rabbitmq.host=
+spring.rabbitmq.password=
+spring.rabbitmq.username=
+```
+
+As soon as there are messages exchanged, spring-cloud-sleuth-zipkin ensures that a message with the trace is put on the rabbit mq.
+
+### Microservices, Databases, Scope and Transaction Management
+
+First thing is to figure out why you are adopting the microservice architecture.
+
+You would not realize the benefits of microservices architecture if you take over your monolith database as is.
+
+Here is another recommended reading : https://dzone.com/articles/breaking-the-monolithic-database-in-your-microserv
+
+Once you decide the boundaries of your microservice databases, mapping one to many or any other thing is the same as in a monolith database.
+
+Here's a recommended reading : https://dzone.com/articles/breaking-a-monolith-into-microservices-best-practi
+
+#### Challenge
+
+Let me start with saying that one of most important challenges of microsevices is deciding the boundary of microservices. 
+
+Two options help 
+- Bounded Context 
+- Event Sourcing.
+
+Here are some great reads:
+- https://martinfowler.com/articles/microservices.html#DecentralizedDataManagement
+- https://martinfowler.com/bliki/BoundedContext.html
+- https://martinfowler.com/eaaDev/EventSourcing.html
+- https://microservices.io/patterns/data/event-sourcing.html
+
+The scope of the microservice is the most difficult choice you have to make. There is no one good answer to it.
+
+One thing I can confirm is that all operations (insert, update, delete) should be part of the same micro service.
+
+However, should Employee be a micro service on its own? Can I combine with Department? These are things that we will not be able to answer unless we know the business domain, how they would evolve, how dependent these are and what are the relative sizes?
+
+Typically the pattern used for transaction management is SAGA Pattern.You can explore more in details.
+
+https://medium.com/@so3da/transactions-and-failover-using-saga-pattern-in-microservices-architecture-baf5a13111c9
+
+Here's a couple of other great reads
+- https://www.nginx.com/blog/event-driven-data-management-microservices/
+- https://developers.redhat.com/blog/2018/10/01/patterns-for-distributed-transactions-within-a-microservices-architecture/
+
+
+### FeignClient passing username and password to another micro service
+Here’s the configuration you would need on feign for basic authentication
+
+```
+import feign.auth.BasicAuthRequestInterceptor;
+
+@Configuration
+public class FeignClientConfiguration {
+    @Bean
+    public BasicAuthRequestInterceptor basicAuthRequestInterceptor() {
+         return new BasicAuthRequestInterceptor("admin", "admin");
+    }
+}
+
+FeignClient(name="service",configuration = FeignClientConfiguration.class)
+```
+
+
+In Zuul, you can create a filter to get the Authorisation details 
+```
+    RequestContext ctx = RequestContext.getCurrentContext();
+    HttpServletRequest request = ctx.getRequest();
+
+    String header = request.getHeader("Authorization");
+```
+
+### Using Kafka instead of Rabbit MQ
+
+Spring Cloud Bus uses Spring Cloud Stream to broadcast the messages. So, to get messages to flow, you need only include the binder implementation of your choice in the classpath. There are convenient starters for the bus with AMQP (RabbitMQ) and Kafka (spring-cloud-starter-bus-[amqp|kafka])
+
+If using Kafka, you must set the property spring.zipkin.sender.type property accordingly in application.properties.
+
+```
+spring.zipkin.sender.type: kafka
+```
+
+Initially there won't be any messages available in Kafka message queue, hence it won't be shown in dashboard. So when you access with url then tracing will be logged/stored in kafka message queue with the details appname, traceId, spanId and exportable. Same being reflected in Zipkin dashboard.
+
+for example
+
+[currency-conversation-service,888114b702f9c3aa,888114b702f9c3aa,true]
+
+### Feign Customization
+
+You can add interceptors to add custom logic.
+
+More details : https://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-feign.html#spring-cloud-feign-overriding-defaults
+
+```
+feign:
+  client:
+    config:
+      feignName:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
+        errorDecoder: com.example.SimpleErrorDecoder
+        retryer: com.example.SimpleRetryer
+        requestInterceptors:
+          - com.example.FooRequestInterceptor
+          - com.example.BarRequestInterceptor
+   @Bean
+    public BasicAuthRequestInterceptor basicAuthRequestInterceptor() {
+        return new BasicAuthRequestInterceptor("user", "password");
+    }
+}
+```
+
+### Eureka does not work with boot 2.2.0
+
+Correct the classpath of your application so that it contains a single, compatible version of org.springframework.boot.actuate.health.CompositeHealthIndicator
+
+Caused by: java.lang.NoSuchMethodError: org.springframework.boot.actuate.health.CompositeHealthIndicator.<init>(Lorg/springframework/boot/actuate/health/HealthAggregator;)V
+
+https://github.com/spring-cloud/spring-cloud-netflix/issues/3410
+
+SpringBoot 2.2 will be supported by the upcoming Spring Cloud Hoxton Release Train. For now, with Greenwich, please use Boot 2.1.
+
+https://github.com/spring-cloud/spring-cloud-netflix/issues/3410
+
+For now use 2.1.3.RELEASE
+```
+<parent>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-parent</artifactId>
+<version>2.1.3.RELEASE</version>
+<relativePath/> <!-- lookup parent from repository -->
+</parent>
+```
+
+
+### VIDEO UPDATE - i did not commit the file and it still works dev & qa environment how ????
+
+With a local repository, you don't need to commit :)
+
+
+### @Refreshscope vs Cloud Bus Refresh
+
+There are two things with refreshing property values when using Spring Cloud Config Server
+
+1) When property changes are done in Config Server, Distributing them to the 10 Instance of the Applications which are connected to it.
+
+2) Each Application identifying the change in properties and acting on them.
+
+Spring Cloud Bus Refresh helps with 1. @RefreshScope helps with 2.
+
+### Using RestTemplate generated 2 separate traces: one for currency-conversion-service, one for currency-exchange-service?
+
+RestTemplate has to be wrapped in @Bean.
+
+```
+@Autowired
+RestTemplate restTemplate;
+@Bean
+public RestTemplate getRestTemplate() {
+return new RestTemplate();
+}
+```
+Replace new RestTemplate() with the Autowired RestTemplate. Then it is instrumented by Sleuth.
+
+
+### OAUTH
+
+Heres a good starting point - https://spring.io/guides/tutorials/spring-boot-oauth2/
+
+
+
+### Zuul JWT Authentication
+
+Bearer token is not being forwarded to posts-Service from users-Service through PostServiceProxy
+
+To receive  headers from zuul, add below in application properties. By default Authorization is also part of sensitiveHeaders
+
+```
+zuul.sensitiveHeaders=Cookie,Set-Cookie
+```
+
+```
+@Component
+
+public class CustomRequestInterceptor implements RequestInterceptor {
+
+
+private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+@Override
+
+public void apply(RequestTemplate template) {
+
+logger.info("-------------------IN INTERCEPTOR--------------------");
+
+ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+
+        if (requestAttributes == null) {
+
+            return;
+
+        }
+
+        HttpServletRequest request = requestAttributes.getRequest();
+
+        if (request == null) {
+
+            return;
+
+        }
+
+        String header = request.getHeader(HttpHeaders.AUTHORIZATION);
+
+        if (header == null) {
+
+            return;
+
+        }
+
+        template.header(HttpHeaders.AUTHORIZATION, header);
+
+}
+
+
+
+}
+```
+
+### Load Balancer vs Hystrix
+
+Load balancing between multiple instances is the starting point for great availability.
+
+Once you reach an instance, Hystrix ensures that you provide a safe response instead of an error. Its to counter situations where some dependency, common to all instances is unavailable.
+
+
+### 12 Factor App
+
+12 Factor App. https://www.youtube.com/watch?v=wjqBxJX35fU
+
 
 ### How are each microservices deployed in production? Do we use Tomcat? Do we use Websphere or Weblogic?
 I’ve worked with clients where we use tomcat in production to manage millions of users. That exactly what most micro service deployments use.
@@ -5679,44 +6493,6 @@ I’ve worked with clients where we use tomcat in production to manage millions 
 Typically you containerize with Docker and manage it with a Kubernetes cluster.
 
 
-
-### Feign is not working
-
-Can you make sure you have the following pieces of code right?
-
-```
-<dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-openfeign</artifactId>
-    </dependency>
-```
-
-```
-      @GetMapping("/currency-converter-feign/from/{from}/to/{to}/quantity/{quantity}")
-  public CurrencyConversionBean convertCurrencyFeign(@PathVariable String from, @PathVariable String to,
-      @PathVariable BigDecimal quantity) {
-
-    CurrencyConversionBean response = proxy.retrieveExchangeValue(from, to);
-
-    return new CurrencyConversionBean(response.getId(), from, to, response.getConversionMultiple(), quantity,
-        quantity.multiply(response.getConversionMultiple()), response.getPort());
-  }
-```
-
-```
-@SpringBootApplication
-@EnableFeignClients("com.in28minutes.microservices.currencyconversionservice")
-public class CurrencyConversionServiceApplication {
-```
-
-```
-@FeignClient(name="currency-exchange-service", url="localhost:8000")
-public interface CurrencyExchangeServiceProxy {
-  @GetMapping("/currency-exchange/from/{from}/to/{to}")
-  public CurrencyConversionBean retrieveExchangeValue
-    (@PathVariable("from") String from, @PathVariable("to") String to);
-}
-```
 
 
 ## Python
@@ -6752,3 +7528,8 @@ Over a period of time, you would gain expertise to be called an expert.
 If you are uncomfortable in something do it 100 times
 
 Don't worry about it. Spring framework has been working on trimming the log in the last couple of releases. Good Luck.
+
+We are in our first years of developing applications with cloud. Frameworks will get better over the next few years. Until then, a few teething issues are order of the day.
+
+in28Minutes is my way of expressing the need for continuous learning. I believe that if you spend half an hour everyday learning something new, you would do really well. And in28minutes was the nearest domain name I was able to obtain!
+

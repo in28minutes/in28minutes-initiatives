@@ -6990,13 +6990,13 @@ file:\\C:/Users/Gautham/Documents/workspace-sts-3.9.4.RELEASE/git-localconfig-re
 
 (8) Make sure that you have committed all the code to GIT Local Repo
 
-If everything's right
+**If everything is fine**
 (1) Stop all the servers
 (2) Launch Config Server First
 (3) Launch Limits Service
 (4) Wait for 2 minutes
 
-If you still have a problem, post a question including all the details:
+**If you still have a problem, post a question including all the details:**
 (1) Response for http://localhost:8080/limits
 (2) Response for http://localhost:8888/limits-service/default
 (3) Response for http://localhost:8888/limits-service/dev
@@ -7227,13 +7227,13 @@ hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=60000
 (6) Compare against the code given below:
 
 
-If everything is fine
+**If everything is fine**
 
 (1) Make sure you start the services in this order (a)currency-exchange-service (b)currency-conversion-service
 
 (2) Give a minute of warm up time!
 
-If you still get an error, Post 
+**If you still have a problem, post a question including all the details:**
 
 (1) Responses from all 3 URLs - http://localhost:8100/currency-converter-feign/from/EUR/to/INR/quantity/10000, http://localhost:8000/currency-exchange/from/EUR/to/INR and http://localhost:8100/currency-converter/from/USD/to/INR/quantity/10
 
@@ -7422,7 +7422,7 @@ hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=60000
 (11) Double Check if you are using the recommended versions!
 
 
-If everything is fine
+**If everything is fine**
 
 (1) Make sure you start the services in this order (a)netflix-eureka-naming-server  (b)currency-exchange-service (c)currency-conversion-service
 
@@ -7605,8 +7605,6 @@ For now use 2.1.3.RELEASE
 
 ### Debugging Zuul Problems
 
-Here are the things you can check
-
 First of all ensure you are using the recommended versions of Spring Boot (`<version>2.1.3.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Greenwich.RC2</spring-cloud.version>`) with all the four applications - netflix-eureka-naming-server, currency-exchange-service, currency-conversion-service and netflix-zuul-api-gateway-server.
 
 (1) Make sure that you have this configured in `application.properties` of currency-exchange-service, currency-conversion-service and netflix-zuul-api-gateway-server `eureka.client.service-url.default-zone=http://localhost:8761/eureka`
@@ -7633,7 +7631,7 @@ spring.application.name=currency-exchange-service
    (d) Path Variables are explicitly defined with keys from and to as in `(@PathVariable("from") String from, @PathVariable("to") String to)`
 
 
-If everything is fine
+**If everything is fine**
 
 (1) Make sure you start the services in this order (a) netflix-eureka-naming-server  (b) netflix-zuul-api-gateway-server (c)currency-exchange-service (d)currency-conversion-service
 
@@ -7644,7 +7642,7 @@ If everything is fine
 (4) If you get an error once, execute it again after 10 minutes
 
 
-If you still get an error, Post 
+**If you still have a problem, post a question including all the details:**
 
 (1) Screenshot of services registration with Eureka
 
@@ -7780,8 +7778,6 @@ Typically there is a warmup time that is needed at the start of the services to 
 
 ### Debugging Problems with Zipkin
 
-Here are the things you can check
-
 First of all ensure you are using the recommended versions of Spring Boot (`<version>2.1.3.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Greenwich.RC2</spring-cloud.version>`) with all the four applications - netflix-eureka-naming-server, currency-exchange-service, currency-conversion-service and netflix-zuul-api-gateway-server.
 
 
@@ -7848,7 +7844,7 @@ hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=60000
 ```
 
 
-If everything is fine
+**If everything is fine**
 
 (1) Make sure you start the services in this order (a) netflix-eureka-naming-server  (b) netflix-zuul-api-gateway-server (c)currency-exchange-service (d)currency-conversion-service
 
@@ -7858,7 +7854,7 @@ If everything is fine
 
 (4) If you get an error once, execute it again after 10 minutes
 
-If you still get an error, Post 
+**If you still have a problem, post a question including all the details:**
 
 (1) Screenshot of services registration with Eureka
 

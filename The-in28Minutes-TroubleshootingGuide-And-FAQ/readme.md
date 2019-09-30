@@ -7200,25 +7200,9 @@ spring:
 https://www.devglan.com/spring-cloud/encrypt-decrypt-cloud-config-properties
 
 
-### Bus Refresh Does not work
-
-need to have these lines on limits-service bootstrap.properties and in the config server application.properties
-
-```properties
-management.endpoints.web.exposure.include=*
-management.security.enabled=false
-```
-
-OLD URLS 
-- http://localhost:8080/application/bus/refresh
-- http://localhost:8080/bus/refresh
-- http://localhost:8080/actuator/refresh
-
-NEW URLS
-- http://localhost:8080/actuator/bus-refresh
-
 
 ### Debugging problems with Feign and Ribbon
+
 ### Feign is not working
 
 (1) Ensure you have the right dependencies - `spring-cloud-starter-openfeign` and `spring-cloud-starter-netflix-ribbon`
@@ -7234,11 +7218,6 @@ NEW URLS
 ```
 feign.client.config.default.connectTimeout: 160000000
 feign.client.config.default.readTimeout: 160000000
-```
-
-Other configuration if you get timeouts from other components include:
-
-```
 ribbon:
   ConnectTimeout: 120000
    ReadTimeout: 120000
@@ -7246,6 +7225,25 @@ hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=60000
 ```
 
 (6) Compare against the code given below:
+
+
+If everything is fine
+
+(1) Make sure you start the services in this order (a)currency-exchange-service (b)currency-conversion-service
+
+(2) Give a minute of warm up time!
+
+If you still get an error, Post 
+
+(1) Responses from all 3 URLs - http://localhost:8100/currency-converter-feign/from/EUR/to/INR/quantity/10000, http://localhost:8000/currency-exchange/from/EUR/to/INR and http://localhost:8100/currency-converter/from/USD/to/INR/quantity/10
+
+(3) Start up logs of the each of the components to understand what's happening in the background!
+
+(4) What was the last working state of the application? Explain in Detail.
+
+(5) Post the version of Spring Boot and Spring Cloud You are Using.
+
+(6) Post Code for all the components listed below:
 
 
 /currency-conversion-service/pom.xml Modified
@@ -7390,17 +7388,26 @@ Look at the two methods below: First uses RestTemplate. Second uses Feign. You c
 Ensure you are using the recommended versions of Spring Boot (`<version>2.1.3.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Greenwich.RC2</spring-cloud.version>`)
 
 (1) Ensure `@EnableEurekaServer` is enabled on `NetflixEurekaNamingServerApplication`
+
 (2) `@EnableDiscoveryClient` is enabled on `CurrencyConversionServiceApplication` and `CurrencyExchangeServiceApplication`
+
 (3) `spring-cloud-starter-netflix-eureka-client` dependency is added in both the client application pom.xml files.
+
 (4) `eureka.client.service-url.default-zone=http://localhost:8761/eureka` is configured in `application.properties` of both `currency-exchange-service` and `currency-conversion-service`
+
 (5) Ensure that both the services are registered with Eureka at http://localhost:8761/.
+
 (6) Ensure that you are using the right url - http://localhost:8100/currency-converter-feign/from/EUR/to/INR/quantity/10000
+
 (7) Ensure that you are able to hit the urls directly - http://localhost:8000/currency-exchange/from/EUR/to/INR and http://localhost:8100/currency-converter/from/USD/to/INR/quantity/10
+
 (8) Compare code against the complete list of components below.
+
 (9) Try if it works when you include the following property in `application.properties` for currency-conversion-service and currency-exchange-service 
 ```
 eureka.instance.hostname=localhost
 ```
+
 (10) See if configuring timeouts would help.
 
 ```
@@ -7411,20 +7418,33 @@ ribbon:
    ReadTimeout: 120000
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=60000
 ```
+
 (11) Double Check if you are using the recommended versions!
 
 
 If everything is fine
+
 (1) Make sure you start the services in this order (a)netflix-eureka-naming-server  (b)currency-exchange-service (c)currency-conversion-service
+
 (2) Make sure all the components are registered with naming server.
+
 (3) Give a minute of warm up time!
+
 (4) If you get an error once, execute it again after a few minutes
 
 If you still get an error, Post 
+
 (1) Screenshot of services registration with Eureka
+
 (2) Responses from all 3 URLs - http://localhost:8100/currency-converter-feign/from/EUR/to/INR/quantity/10000, http://localhost:8000/currency-exchange/from/EUR/to/INR and http://localhost:8100/currency-converter/from/USD/to/INR/quantity/10
+
 (3) Start up logs of the each of the components to understand what's happening in the background!
-(4) Code for all the components listed below:
+
+(4) What was the last working state of the application? Explain in Detail.
+
+(5) Post the version of Spring Boot and Spring Cloud You are Using.
+
+(6) Code for all the components listed below:
 
 
 /netflix-eureka-naming-server/pom.xml New
@@ -7535,7 +7555,6 @@ In Zuul, you can create a filter to get the Authorisation details
     String header = request.getHeader("Authorization");
 ```
 
-
 ### Feign Customization
 
 You can add interceptors to add custom logic.
@@ -7586,58 +7605,61 @@ For now use 2.1.3.RELEASE
 
 ### Debugging Zuul Problems
 
-First make sure you understand how Zuul works:
-
-When you send a request to Zuul with URL `http://localhost:8765/currency-exchange-service/currency-exchange/from/EUR/to/INR`
-- First thing Zuul does is find the url from eureka for currency-exchange-service.
-- And then it would send the request to the currency-exchange-service with URL /currency-exchange/from/EUR/to/INR.
-
-Here's the logic in a generic way - When you send a request to http://localhost:8765/app-name/url-path, logic in Zuul is simple:
-- Find LOCATION for app-name from naming server
-- Send request to LOCATION/url-path
-
-Make sure you using the right url - http://localhost:8100/currency-converter-feign/from/EUR/to/INR/quantity/10000
-
 Here are the things you can check
+
+First of all ensure you are using the recommended versions of Spring Boot (`<version>2.1.3.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Greenwich.RC2</spring-cloud.version>`) with all the four applications - netflix-eureka-naming-server, currency-exchange-service, currency-conversion-service and netflix-zuul-api-gateway-server.
+
 (1) Make sure that you have this configured in `application.properties` of currency-exchange-service, currency-conversion-service and netflix-zuul-api-gateway-server `eureka.client.service-url.default-zone=http://localhost:8761/eureka`
+
 (2) Make sure that name of the currency-exchange-service application matches the path in the url.
 http://localhost:8765/`currency-exchange-service`/currency-exchange/from/EUR/to/INR
 /currency-exchange-service/src/main/resources/application.properties
 ```
 spring.application.name=currency-exchange-service
 ```
+
 (3) Make sure that you are able to execute the URLs `http://localhost:8000/currency-exchange/from/EUR/to/INR` and http://localhost:8100/currency-converter/from/USD/to/INR/quantity/10
+
 (4) Does this URL work - http://localhost:8765/currency-exchange-service/currency-exchange/from/EUR/to/INR?
+
 (5) Do you have these right in CurrencyExchangeServiceProxy
+
    (a) `@FeignClient(name="netflix-zuul-api-gateway-server")` 
+
    (b) `@RibbonClient(name="currency-exchange-service")`
+
    (c) `@GetMapping("/currency-exchange-service/currency-exchange/from/{from}/to/{to}")`   
+
    (d) Path Variables are explicitly defined with keys from and to as in `(@PathVariable("from") String from, @PathVariable("to") String to)`
 
-You can try the following!
 
-(1) Make sure that all the applications are up and running.
+If everything is fine
 
-(2) Compare the code against the code here - https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-10-16-spring-micro-services.md#step-34---setting-up-zuul-api-gateway-between-microservice-invocations​
+(1) Make sure you start the services in this order (a) netflix-eureka-naming-server  (b) netflix-zuul-api-gateway-server (c)currency-exchange-service (d)currency-conversion-service
 
-(3) Post the details requested below if you are unable to resolve it.
+(2) Make sure all the components are registered with naming server. 
 
-Details
-a) Log that you see
-b) the code from ​CurrencyExchangeServiceProxy.java, ZuulLoggingFilter ,NetflixZuulApiGatewayServerApplication, CurrencyConversionController, /netflix-zuul-api-gateway-server/src/main/resources/application.properties
+(3) Give a minute of warm up time!
 
-Here's the checklist
-1) Make sure you stop all the servers
-2) Make sure you import step34 versions of all the four components - currency-conversion-service, currency-exchange-service, netflix-eureka-naming-server, netflix-zuul-api-gateway-server 
-3) Make sure you start the services in this order
-  a)netflix-eureka-naming-server
-  b)netflix-zuul-api-gateway-server
-  c)currency-exchange-service
-  d)currency-conversion-service
-4) Make sure all the components are registered with naming server.
-5) Give a minute of warm up time!
-6) If you get an error once, execute it again after a minute
-7) If you still get an error, post the logs of the each of the components to understand what's happening in the background!
+(4) If you get an error once, execute it again after 10 minutes
+
+
+If you still get an error, Post 
+
+(1) Screenshot of services registration with Eureka
+
+(2) Responses from all the 4 URLs - http://localhost:8100/currency-converter-feign/from/EUR/to/INR/quantity/10000, http://localhost:8000/currency-exchange/from/EUR/to/INR, http://localhost:8765/currency-exchange-service/currency-exchange/from/EUR/to/INR and http://localhost:8100/currency-converter/from/USD/to/INR/quantity/10
+
+(3) Start up logs of the each of the components to understand what's happening in the background!
+
+(4) If you still get an error, post the logs of the each of the components to understand what's happening in the background!
+
+(5) What was the last working state of the application? Explain in Detail.
+
+(6) Post the version of Spring Boot and Spring Cloud You are Using.
+
+(7) Post Code for all the components listed below:
+
 
 ##### /currency-conversion-service/src/main/java/com/in28minutes/microservices/currencyconversionservice/CurrencyExchangeServiceProxy.java Modified
 New Lines
@@ -7723,6 +7745,18 @@ server.port=8765
 eureka.client.service-url.default-zone=http://localhost:8761/eureka
 ```
 
+### How does Zuul Work?
+
+When you send a request to Zuul with URL `http://localhost:8765/currency-exchange-service/currency-exchange/from/EUR/to/INR`
+- First thing Zuul does is find the url from eureka for currency-exchange-service.
+- And then it would send the request to the currency-exchange-service with URL /currency-exchange/from/EUR/to/INR.
+
+Here's the logic in a generic way - When you send a request to http://localhost:8765/app-name/url-path, logic in Zuul is simple:
+- Find LOCATION for app-name from naming server
+- Send request to LOCATION/url-path
+
+Make sure you using the right url - http://localhost:8100/currency-converter-feign/from/EUR/to/INR/quantity/10000
+
 ### How can we implement Authentication with Zuul?
 
 Authentication Example -  https://github.com/shuaicj/zuul-auth-example
@@ -7744,82 +7778,101 @@ A popular API Gateway implementation is Zuul API Gateway.
 Typically there is a warmup time that is needed at the start of the services to ensure they are all connected - about a couple of minutes usually.
 
 
+### Debugging Problems with Zipkin
 
-### Debugging Zipkin
+Here are the things you can check
 
-Spring Boot 2.1.3.RELEASE
+First of all ensure you are using the recommended versions of Spring Boot (`<version>2.1.3.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Greenwich.RC2</spring-cloud.version>`) with all the four applications - netflix-eureka-naming-server, currency-exchange-service, currency-conversion-service and netflix-zuul-api-gateway-server.
 
-Try to add these configurations to all 4 projects using Sleuth to their application.properties:
+
+(1) Check that All 3 Spring Boot Application class have Sampler defined as shown below
+
+(a) CurrencyConversionServiceApplication.java
+
+(b) CurrencyExchangeServiceApplication.java
+
+(c) NetflixZuulApiGatewayServerApplication.java
+
+```
+
+  @Bean
+  public Sampler defaultSampler(){
+    return Sampler.ALWAYS_SAMPLE;
+  }
+```
+
+(2) Verify that All three pom.xml's have these three dependencies
+
+(a) /currency-conversion-service/pom.xml
+
+(b) /currency-exchange-service/pom.xml 
+
+(c) /netflix-zuul-api-gateway-server/pom.xml
+
+```
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-sleuth</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-zipkin</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.amqp</groupId>
+      <artifactId>spring-rabbit</artifactId>
+    </dependency>
+```
+
+(3) Try configuring these in application.properties of all 3 projects  (a) netflix-zuul-api-gateway-server (b)currency-exchange-service (c)currency-conversion-service
 
 ```
 #Sleuth
 spring.sleuth.sampler.percentage=1.0
+
 #Zipkin
 spring.zipkin.sender.type=web
 ```
 
-Make sure that you have updated the poms for all the three applications involved. A complete list here.
-- Stop and Rebuild all Applications
-- Start them in the order - Naming Server, Distributed Tracing Server, API Gateway, Calculation Service, Exchange Service
-- Execute the currency conversion service
-- Check the Zipkin UI
-
-Dependencies
-> If you are using Spring Boot Release >= 2.1.*, you would need to use spring-cloud-starter-zipkin and spring-rabbit instead of spring-cloud-sleuth-zipkin and spring-cloud-starter-bus-amqp.
-
-You would need to make this change in THREE pom.xmls - in currency-conversion-service, currency-exchange-service and zuul-api-gateway projects
-
-New Dependencies
+(4) Check if the following timeout configurations help:
 
 ```
-    <dependency>
-
-      <groupId>org.springframework.cloud</groupId>
-
-      <artifactId>spring-cloud-starter-zipkin</artifactId>
-
-    </dependency>
-
-    <dependency>
-
-      <groupId>org.springframework.amqp</groupId>
-
-      <artifactId>spring-rabbit</artifactId>
-
-    </dependency>
+feign.client.config.default.connectTimeout: 160000000
+feign.client.config.default.readTimeout: 160000000
+ribbon:
+  ConnectTimeout: 120000
+   ReadTimeout: 120000
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=60000
 ```
 
-OLD Dependencies to be Replaced
-```
 
-    <dependency>
+If everything is fine
 
-      <groupId>org.springframework.cloud</groupId>
+(1) Make sure you start the services in this order (a) netflix-eureka-naming-server  (b) netflix-zuul-api-gateway-server (c)currency-exchange-service (d)currency-conversion-service
 
-      <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+(2) Make sure all the components are registered with naming server. 
 
-    </dependency>
+(3) Give a minute of warm up time!
 
- 
+(4) If you get an error once, execute it again after 10 minutes
 
-    <dependency>
+If you still get an error, Post 
 
-      <groupId>org.springframework.cloud</groupId>
+(1) Screenshot of services registration with Eureka
 
-      <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+(2) Responses from all the 4 URLs - http://localhost:8100/currency-converter-feign/from/EUR/to/INR/quantity/10000, http://localhost:8000/currency-exchange/from/EUR/to/INR, http://localhost:8765/currency-exchange-service/currency-exchange/from/EUR/to/INR and http://localhost:8100/currency-converter/from/USD/to/INR/quantity/10
 
-    </dependency>
+(3) Start up logs of the each of the components to understand what's happening in the background!
 
-```
+(4) If you still get an error, post the logs of the each of the components to understand what's happening in the background!
 
-```
-Here's the checklist
-1) Make sure that you have updated the poms for all the three applications involved. A complete list here - https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-10-16-spring-micro-services.md#step-40---connecting-microservices-to-zipkin
+(5) What was the last working state of the application? Explain in Detail.
 
-2) Stop and Rebuild all Applications
+(6) Post the version of Spring Boot and Spring Cloud You are Using.
 
-3) Start them in the order - Naming Server, Distributed Tracing Server, API Gateway, Calculation Service, Exchange Service
-```
+(7) Post all the pom.xml and application.properties from (a) netflix-eureka-naming-server  (b) netflix-zuul-api-gateway-server (c)currency-exchange-service (d)currency-conversion-service
 
 ### Running Zipkin on Windows
 
@@ -7838,16 +7891,16 @@ The magic happens because of these dependencies. We added these on all the appli
 ```
    <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+      <artifactId>spring-cloud-starter-zipkin</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+      <groupId>org.springframework.amqp</groupId>
+      <artifactId>spring-rabbit</artifactId>
     </dependency>
 ```
 
-As soon as the amqp dependency is added, Spring Boot Auto Configuration establishes a connection to rabbit mq on the default port.
+As soon as the rabbit dependency is added, Spring Boot Auto Configuration establishes a connection to rabbit mq on the default port.
 
 By default, rabbitmq defaults are localhost on port 5672. You can customize it as well.
 
@@ -7935,6 +7988,24 @@ Here's a couple of other great reads
 ### VIDEO UPDATE - i did not commit the file and it still works dev & qa environment how ????
 
 With a local repository, you don't need to commit :)
+
+### Bus Refresh Does not work
+
+need to have these lines on limits-service bootstrap.properties and in the config server application.properties
+
+```properties
+management.endpoints.web.exposure.include=*
+management.security.enabled=false
+```
+
+OLD URLS 
+- http://localhost:8080/application/bus/refresh
+- http://localhost:8080/bus/refresh
+- http://localhost:8080/actuator/refresh
+
+NEW URLS
+- http://localhost:8080/actuator/bus-refresh
+
 
 
 ### @Refreshscope vs Cloud Bus Refresh

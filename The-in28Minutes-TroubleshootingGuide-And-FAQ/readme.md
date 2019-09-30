@@ -6958,7 +6958,7 @@ jshell --enable-preview
 
 ## Microservices
 
-### Debugging problems with Spring Cloud Config Server
+## Debugging problems with Spring Cloud Config Server
 
 First of all check if you have any typos in the URL. Does it match exactly what is given below?
 
@@ -7208,7 +7208,7 @@ https://www.devglan.com/spring-cloud/encrypt-decrypt-cloud-config-properties
 
 
 
-### Debugging problems with Feign and Ribbon
+## Debugging problems with Feign and Ribbon
 
 ### Feign is not working
 
@@ -7390,7 +7390,7 @@ Look at the two methods below: First uses RestTemplate. Second uses Feign. You c
 
 
 
-### Debugging Problems with Naming Server Eureka and Ribbon
+## Debugging Problems with Naming Server Eureka and Ribbon
 
 Ensure you are using the recommended versions of Spring Boot (`<version>2.1.3.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Greenwich.RC2</spring-cloud.version>`)
 
@@ -7611,7 +7611,7 @@ For now use 2.1.3.RELEASE
 </parent>
 ```
 
-### Debugging Problems with Zuul API Gateway
+## Debugging Problems with Zuul API Gateway
 
 First of all ensure you are using the recommended versions of Spring Boot (`<version>2.1.3.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Greenwich.RC2</spring-cloud.version>`) with all the four applications - netflix-eureka-naming-server, currency-exchange-service, currency-conversion-service and netflix-zuul-api-gateway-server.
 
@@ -7808,7 +7808,7 @@ A popular API Gateway implementation is Zuul API Gateway.
 Typically there is a warmup time that is needed at the start of the services to ensure they are all connected - about a couple of minutes usually.
 
 
-### Debugging Problems with Zipkin
+## Debugging Problems with Zipkin
 
 First of all ensure you are using the recommended versions of Spring Boot (`<version>2.1.3.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Greenwich.RC2</spring-cloud.version>`) with all the four applications - netflix-eureka-naming-server, currency-exchange-service, currency-conversion-service and netflix-zuul-api-gateway-server.
 

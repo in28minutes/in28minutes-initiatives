@@ -7432,7 +7432,7 @@ hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=60000
 
 (4) If you get an error once, execute it again after a few minutes
 
-If you still get an error, Post 
+**If you still have a problem, post a question including all the details:**
 
 (1) Screenshot of services registration with Eureka
 
@@ -7629,7 +7629,6 @@ spring.application.name=currency-exchange-service
    (c) `@GetMapping("/currency-exchange-service/currency-exchange/from/{from}/to/{to}")`   
 
    (d) Path Variables are explicitly defined with keys from and to as in `(@PathVariable("from") String from, @PathVariable("to") String to)`
-
 
 **If everything is fine**
 

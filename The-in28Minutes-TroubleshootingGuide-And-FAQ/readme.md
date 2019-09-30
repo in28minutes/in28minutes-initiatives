@@ -7212,13 +7212,13 @@ https://www.devglan.com/spring-cloud/encrypt-decrypt-cloud-config-properties
 
 ### Feign is not working
 
-(1) Ensure you have the right dependencies - `spring-cloud-starter-openfeign` and `spring-cloud-starter-netflix-ribbon`
+(1) Ensure you have the right dependencies defined in `pom.xml` of `currency-conversion-service` - `spring-cloud-starter-openfeign` and `spring-cloud-starter-netflix-ribbon`
 
 (2) Ensure you are using the recommended versions of Spring Boot (`<version>2.1.3.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Greenwich.RC2</spring-cloud.version>`)
 
-(3) Ensure that you have `@EnableFeignClients("com.in28minutes.microservices.currencyconversionservice")` on the class `public class CurrencyConversionServiceApplication`
+(3) Ensure that you have the annotation `@EnableFeignClients` with right packages on the class `public class CurrencyConversionServiceApplication` `@EnableFeignClients("com.in28minutes.microservices.currencyconversionservice")` 
 
-(4) Ensure you have path variables defined for from and to in `CurrencyExchangeServiceProxy` - `@PathVariable("from") String from, @PathVariable("to") String to`
+(4) Ensure you have path variables defined for `from` and `to` with the key `from` and `to` as shown in `CurrencyExchangeServiceProxy` - `@PathVariable("from") String from, @PathVariable("to") String to`
 
 (5) Check if the following timeout configurations help:
 
@@ -7610,7 +7610,7 @@ For now use 2.1.3.RELEASE
 </parent>
 ```
 
-### Debugging Zuul Problems
+### Debugging Problems with Zuul API Gateway
 
 First of all ensure you are using the recommended versions of Spring Boot (`<version>2.1.3.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Greenwich.RC2</spring-cloud.version>`) with all the four applications - netflix-eureka-naming-server, currency-exchange-service, currency-conversion-service and netflix-zuul-api-gateway-server.
 

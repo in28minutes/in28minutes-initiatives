@@ -8011,10 +8011,10 @@ Typically there is a warmup time that is needed at the start of the services to 
 First of all ensure you are using the recommended versions of Spring Boot (`<version>2.1.3.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Greenwich.RC2</spring-cloud.version>`) with all the four applications - netflix-eureka-naming-server, currency-exchange-service, currency-conversion-service and netflix-zuul-api-gateway-server.
 
 
-(1) Check that All 3 Spring Boot Application class have Sampler defined as shown below 
-(a) CurrencyConversionServiceApplication.java
-(b) CurrencyExchangeServiceApplication.java
-(c) NetflixZuulApiGatewayServerApplication.java
+(1) Check that All 3 Spring Boot Application classes have Sampler defined
+(a) `CurrencyConversionServiceApplication.java`
+(b) `CurrencyExchangeServiceApplication.java`
+(c) `NetflixZuulApiGatewayServerApplication.java`
 
 ```java
 
@@ -8025,9 +8025,9 @@ First of all ensure you are using the recommended versions of Spring Boot (`<ver
 ```
 
 (2) Verify that All three pom.xml's have these three dependencies
-(a) /currency-conversion-service/pom.xml
-(b) /currency-exchange-service/pom.xml 
-(c) /netflix-zuul-api-gateway-server/pom.xml
+(a) `/currency-conversion-service/pom.xml`
+(b) `/currency-exchange-service/pom.xml`
+(c) `/netflix-zuul-api-gateway-server/pom.xml`
 
 ```xml
     <dependency>

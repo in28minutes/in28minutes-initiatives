@@ -6964,20 +6964,23 @@ Does the URL http://localhost:8888/limits-service/default work?
 
 First of all check if you have any typos in the URL. Does it match exactly what is given above?
 
-1) If the URL does not work, check if you have the same name for limits-service in
-a) `spring.application.name` in bootstrap.properties
-b) in the URL
-c) in the name of the property file
+(1) If the URL does not work, check if you have the same name for limits-service in
 
-2) Check if the name in `@ConfigurationProperties("limits-service")` matches the prefix of property values in `application.properties`. `limits-service.minimum=9 limits-service.maximum=999`
+(a) `spring.application.name` in bootstrap.properties
 
-3) Check if you have `@EnableConfigServer` enabled on `SpringCloudConfigServerApplication` class
+(b) in the URL
 
-4) Check if you have the right repository url in `/spring-cloud-config-server/src/main/resources/application.properties` - `spring.cloud.config.server.git.uri=file:///in28Minutes/git/spring-micro-services/03.microservices/git-localconfig-repo`
+(c) in the name of the property file
 
-5) Do not have any spaces in your git repository path.
+(2) Check if the name in `@ConfigurationProperties("limits-service")` matches the prefix of property values in `application.properties`. `limits-service.minimum=9 limits-service.maximum=999`
 
-6) If you are on windows, make sure that you are using one of these formats for your git repository
+(3) Check if you have `@EnableConfigServer` enabled on `SpringCloudConfigServerApplication` class
+
+(4) Check if you have the right repository url in `/spring-cloud-config-server/src/main/resources/application.properties` - `spring.cloud.config.server.git.uri=file:///in28Minutes/git/spring-micro-services/03.microservices/git-localconfig-repo`
+
+(5) Do not have any spaces in your git repository path.
+
+(6) If you are on windows, make sure that you are using one of these formats for your git repository
 ```
  file:\\C:/WORKSPACE/GIT/git-localconfig-repo
  file:///C:/microservices/git-localconfig-repo
@@ -6985,15 +6988,15 @@ file:///C:/Users/Gautham/Documents/workspace-sts-3.9.4.RELEASE/git-localconfig-r
 file:\\C:/Users/Gautham/Documents/workspace-sts-3.9.4.RELEASE/git-localconfig-repo
 ```
 
-7) Make sure that you have the right code - Compare against the code here - https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-10-16-spring-micro-services.md#step-01---part-2---setting-up-limits-microservice​
+(7) Make sure that you have the right code - Compare against the code here - https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-10-16-spring-micro-services.md#step-01---part-2---setting-up-limits-microservice​
 
-8) Make sure that you have committed all the code to GIT Local Repo
+(8) Make sure that you have committed all the code to GIT Local Repo
 
 If everything's right
-1) Stop all the servers
-2) Launch Config Server First
-3) Launch Limits Service
-4) Wait for 2 minutes
+(1) Stop all the servers
+(2) Launch Config Server First
+(3) Launch Limits Service
+(4) Wait for 2 minutes
 
 If it's not working, post a question including all the details:
 1) Response for http://localhost:8080/limits

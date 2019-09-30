@@ -7635,7 +7635,7 @@ spring.application.name=currency-exchange-service
 
    (c) `@GetMapping("/currency-exchange-service/currency-exchange/from/{from}/to/{to}")`   
 
-   (d) Path Variables are explicitly defined with keys from and to as in `(@PathVariable("from") String from, @PathVariable("to") String to)`
+   (d) Path Variables are explicitly defined with keys `from` and `to` as shown - `(@PathVariable("from") String from, @PathVariable("to") String to)`
 
 **If everything is fine**
 

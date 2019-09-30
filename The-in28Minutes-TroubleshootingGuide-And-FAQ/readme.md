@@ -8046,7 +8046,7 @@ First of all ensure you are using the recommended versions of Spring Boot (`<ver
     </dependency>
 ```
 
-(3) Try configuring these in application.properties of all 3 projects  (a) netflix-zuul-api-gateway-server (b)currency-exchange-service (c)currency-conversion-service
+(3) Try configuring these in `application.properties` of all 3 projects  (a) netflix-zuul-api-gateway-server (b)currency-exchange-service (c)currency-conversion-service
 
 ```properties
 #Sleuth

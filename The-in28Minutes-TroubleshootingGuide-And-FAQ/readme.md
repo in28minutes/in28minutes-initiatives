@@ -6960,11 +6960,11 @@ jshell --enable-preview
 
 ### Debugging problems with Spring Cloud Config Server
 
-Does the URL http://localhost:8888/limits-service/default work?
+
 
 First of all check if you have any typos in the URL. Does it match exactly what is given above?
 
-(1) If the URL does not work, check if you have the same name for limits-service in
+(1) Does the URL http://localhost:8888/limits-service/default work? If the URL does not work, check if you have the same name for limits-service in
 (a) `spring.application.name` in bootstrap.properties
 (b) in the URL
 (c) in the name of the property file

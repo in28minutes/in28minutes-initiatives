@@ -6958,7 +6958,7 @@ jshell --enable-preview
 
 ## Microservices
 
-### Debugging Spring Cloud Config Server
+### Debugging problems with Spring Cloud Config Server
 
 Does the URL http://localhost:8888/limits-service/default work?
 

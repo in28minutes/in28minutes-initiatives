@@ -7003,7 +7003,7 @@ If you still have a problem, post a question including all the details:
 (4) Start up logs for limits-service and spring cloud config server with debug mode enabled
 (5) All code for files included below.
 
-#### /limits-service/src/main/java/com/in28minutes/microservices/limitsservice/Configuration.java New
+#/limits-service/src/main/java/com/in28minutes/microservices/limitsservice/Configuration.java New
 
 ```java
 package com.in28minutes.microservices.limitsservice;
@@ -7020,7 +7020,7 @@ public class Configuration {
 ```
 ---
 
-#### /limits-service/src/main/java/com/in28minutes/microservices/limitsservice/LimitsConfigurationController.java New
+#/limits-service/src/main/java/com/in28minutes/microservices/limitsservice/LimitsConfigurationController.java New
 
 ```java
 @RestController
@@ -7039,7 +7039,7 @@ public class LimitsConfigurationController {
 ```
 ---
 
-#### /limits-service/src/main/java/com/in28minutes/microservices/limitsservice/bean/LimitConfiguration.java New
+#/limits-service/src/main/java/com/in28minutes/microservices/limitsservice/bean/LimitConfiguration.java New
 
 ```java
 package com.in28minutes.microservices.limitsservice.bean;
@@ -7050,7 +7050,7 @@ public class LimitConfiguration {
 ```
 ---
 
-#### /limits-service/src/main/resources/application.properties Modified
+#/limits-service/src/main/resources/application.properties Modified
 New Lines
 ```
 spring.application.name=limits-service
@@ -7073,7 +7073,7 @@ limits-service.minimum=8
 limits-service.maximum=888
 ```
 
-##### /spring-cloud-config-server/src/main/java/com/in28minutes/microservices/springcloudconfigserver/SpringCloudConfigServerApplication.java Modified
+##/spring-cloud-config-server/src/main/java/com/in28minutes/microservices/springcloudconfigserver/SpringCloudConfigServerApplication.java Modified
 
 ```java
 @EnableConfigServer
@@ -7081,7 +7081,7 @@ limits-service.maximum=888
 public class SpringCloudConfigServerApplication {
 ```
 
-##### /spring-cloud-config-server/src/main/resources/application.properties New
+##/spring-cloud-config-server/src/main/resources/application.properties New
 
 ```properties
 spring.application.name=spring-cloud-config-server
@@ -7090,9 +7090,9 @@ spring.cloud.config.server.git.uri=file:///in28Minutes/git/spring-micro-services
 ```
 ---
 
-##### /limits-service/src/main/resources/application.properties Deleted
+##/limits-service/src/main/resources/application.properties Deleted
 
-##### /limits-service/src/main/resources/bootstrap.properties New
+##/limits-service/src/main/resources/bootstrap.properties New
 
 ```properties
 spring.application.name=limits-service
@@ -7204,7 +7204,7 @@ https://www.devglan.com/spring-cloud/encrypt-decrypt-cloud-config-properties
 
 need to have these lines on limits-service bootstrap.properties and in the config server application.properties
 
-```
+```properties
 management.endpoints.web.exposure.include=*
 management.security.enabled=false
 ```
@@ -7216,6 +7216,109 @@ OLD URLS
 
 NEW URLS
 - http://localhost:8080/actuator/bus-refresh
+
+
+### Debugging problems with Feign and Ribbon
+### Feign is not working
+
+(1) Ensure you have the right dependencies - `spring-cloud-starter-openfeign` and `spring-cloud-starter-netflix-ribbon`
+
+(2) Ensure you are using the recommended versions of Spring Boot (`<version>2.1.3.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Greenwich.RC2</spring-cloud.version>`)
+
+(3) Ensure that you have `@EnableFeignClients("com.in28minutes.microservices.currencyconversionservice")` on the class `public class CurrencyConversionServiceApplication`
+
+(4) Ensure you have path variables defined for from and to in `CurrencyExchangeServiceProxy` - `@PathVariable("from") String from, @PathVariable("to") String to`
+
+(5) Check if the following timeout configurations help:
+
+```
+feign.client.config.default.connectTimeout: 160000000
+feign.client.config.default.readTimeout: 160000000
+```
+
+Other configuration if you get timeouts from other components include:
+
+```
+ribbon:
+  ConnectTimeout: 120000
+   ReadTimeout: 120000
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=60000
+```
+
+(6) Compare against the code given below:
+
+
+/currency-conversion-service/pom.xml Modified
+New Lines
+```xml
+     <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-openfeign</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+    </dependency>
+```
+
+/currency-conversion-service/src/main/java/com/in28minutes/microservices/currencyconversionservice/CurrencyConversionController.java Modified
+```java
+
+@RestController
+public class CurrencyConversionController {
+
+  @Autowired
+  private CurrencyExchangeServiceProxy proxy;
+
+  @GetMapping("/currency-converter-feign/from/{from}/to/{to}/quantity/{quantity}")
+  public CurrencyConversionBean convertCurrencyFeign(@PathVariable String from, @PathVariable String to,
+      @PathVariable BigDecimal quantity) {
+
+    CurrencyConversionBean response = proxy.retrieveExchangeValue(from, to);
+
+    return new CurrencyConversionBean(response.getId(), from, to, response.getConversionMultiple(), quantity,
+        quantity.multiply(response.getConversionMultiple()), response.getPort());
+  }
+
+```
+
+/currency-conversion-service/src/main/java/com/in28minutes/microservices/currencyconversionservice/CurrencyConversionServiceApplication.java Modified
+New Lines
+```java
+@SpringBootApplication
+@EnableFeignClients("com.in28minutes.microservices.currencyconversionservice")
+public class CurrencyConversionServiceApplication {
+
+```
+---
+
+/currency-conversion-service/src/main/java/com/in28minutes/microservices/currencyconversionservice/CurrencyExchangeServiceProxy.java New
+
+```java
+package com.in28minutes.microservices.currencyconversionservice;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+//@FeignClient(name="currency-exchange-service", url="localhost:8000")
+@FeignClient(name="currency-exchange-service")
+@RibbonClient(name="currency-exchange-service")
+public interface CurrencyExchangeServiceProxy {
+  @GetMapping("/currency-exchange/from/{from}/to/{to}")
+  public CurrencyConversionBean retrieveExchangeValue
+    (@PathVariable("from") String from, @PathVariable("to") String to);
+}
+```
+---
+
+/currency-conversion-service/src/main/resources/application.properties Modified
+New Lines
+```
+currency-exchange-service.ribbon.listOfServers=http://localhost:8000,http://localhost:8001
+```
 
 
 ### Timeout with Feign, Zuul, Ribbon or Hystrix ERROR feign.RetryableException 
@@ -7233,83 +7336,416 @@ feign.client.config.default.readTimeout: 160000000
 Other configuration if you get timeouts from other components include:
 
 ```
-hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=60000
 ribbon:
   ConnectTimeout: 120000
    ReadTimeout: 120000
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=60000
 ```
 
 ```
 zuul.routes.currency-exchange-service.url=http://localhost:8000/
 ```
 
-### Eureka Check List with Ribbon
+### Why do we use Feign? vs resttemplate
 
-Here's the checklist
-
-Make sure you stop all the servers
-
-Compare code changes for Steps 26 to 28 with the code down here -  https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-10-16-spring-micro-services.md#step-26---connecting-currency-conversion-microservice-to-eureka
-
-Make sure you start the services in this order a)netflix-eureka-naming-server  b)currency-exchange-service c)currency-conversion-service
-
-Make sure all the components are registered with naming server.
-
-Give a minute of warm up time!
-
-If you get an error once, execute it again after a minute
-
-If you still get an error, post the logs of the each of the components to understand what's happening in the background!
-
-
-### Feign is not working
-
-Can you make sure you have the following pieces of code right?
+Look at the two methods below: First uses RestTemplate. Second uses Feign. You can see that Feign helps you reduce the amount of code you need to write to invoke a Rest service by upto 80%.
 
 ```
+@GetMapping("/currency-converter/from/{from}/to/{to}/quantity/{quantity}")
+    public CurrencyConversionBean convertCurrency(@PathVariable String from, @PathVariable String to,
+            @PathVariable BigDecimal quantity) {
+
+        // Feign - Problem 1
+        Map<String, String> uriVariables = new HashMap<>();
+        uriVariables.put("from", from);
+        uriVariables.put("to", to);
+
+        ResponseEntity<CurrencyConversionBean> responseEntity = new RestTemplate().getForEntity(
+                "http://localhost:8000/currency-exchange/from/{from}/to/{to}", CurrencyConversionBean.class,
+                uriVariables);
+
+        CurrencyConversionBean response = responseEntity.getBody();
+
+        return new CurrencyConversionBean(response.getId(), from, to, response.getConversionMultiple(), quantity,
+                quantity.multiply(response.getConversionMultiple()), response.getPort());
+    }
+
+    @GetMapping("/currency-converter-feign/from/{from}/to/{to}/quantity/{quantity}")
+    public CurrencyConversionBean convertCurrencyFeign(@PathVariable String from, @PathVariable String to,
+            @PathVariable BigDecimal quantity) {
+
+        CurrencyConversionBean response = proxy.retrieveExchangeValue(from, to);
+
+        logger.info("{}", response);
+        
+        return new CurrencyConversionBean(response.getId(), from, to, response.getConversionMultiple(), quantity,
+                quantity.multiply(response.getConversionMultiple()), response.getPort());
+    }
+```
+
+
+
+### Debugging Problems with Naming Server Eureka and Ribbon
+
+Ensure you are using the recommended versions of Spring Boot (`<version>2.1.3.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Greenwich.RC2</spring-cloud.version>`)
+
+(1) Ensure `@EnableEurekaServer` is enabled on `NetflixEurekaNamingServerApplication`
+(2) `@EnableDiscoveryClient` is enabled on `CurrencyConversionServiceApplication` and `CurrencyExchangeServiceApplication`
+(3) `spring-cloud-starter-netflix-eureka-client` dependency is added in both the client application pom.xml files.
+(4) `eureka.client.service-url.default-zone=http://localhost:8761/eureka` is configured in `application.properties` of both `currency-exchange-service` and `currency-conversion-service`
+(5) Ensure that both the services are registered with Eureka at http://localhost:8761/.
+(6) Ensure that you are using the right url - http://localhost:8100/currency-converter-feign/from/EUR/to/INR/quantity/10000
+(7) Ensure that you are able to hit the urls directly - http://localhost:8000/currency-exchange/from/EUR/to/INR and http://localhost:8100/currency-converter/from/USD/to/INR/quantity/10
+(8) Compare code against the complete list of components below.
+(9) Try if it works when you include the following property in `application.properties` for currency-conversion-service and currency-exchange-service 
+```
+eureka.instance.hostname=localhost
+```
+(10) See if configuring timeouts would help.
+
+```
+feign.client.config.default.connectTimeout: 160000000
+feign.client.config.default.readTimeout: 160000000
+ribbon:
+  ConnectTimeout: 120000
+   ReadTimeout: 120000
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=60000
+```
+(11) Double Check if you are using the recommended versions!
+
+
+If everything is fine
+(1) Make sure you start the services in this order (a)netflix-eureka-naming-server  (b)currency-exchange-service (c)currency-conversion-service
+(2) Make sure all the components are registered with naming server.
+(3) Give a minute of warm up time!
+(4) If you get an error once, execute it again after a few minutes
+
+If you still get an error, Post 
+(1) Screenshot of services registration with Eureka
+(2) Responses from all 3 URLs - http://localhost:8100/currency-converter-feign/from/EUR/to/INR/quantity/10000, http://localhost:8000/currency-exchange/from/EUR/to/INR and http://localhost:8100/currency-converter/from/USD/to/INR/quantity/10
+(3) Start up logs of the each of the components to understand what's happening in the background!
+(4) Code for all the components listed below:
+
+
+/netflix-eureka-naming-server/pom.xml New
+```xml
 <dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+</dependency>
+```
+---
+
+/netflix-eureka-naming-server/src/main/java/com/in28minutes/microservices/netflixeurekanamingserver/NetflixEurekaNamingServerApplication.java New
+
+```java
+@SpringBootApplication
+@EnableEurekaServer
+public class NetflixEurekaNamingServerApplication {
+```
+---
+
+/netflix-eureka-naming-server/src/main/resources/application.properties New
+
+```properties
+
+spring.application.name=netflix-eureka-naming-server
+server.port=8761
+
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+```
+/currency-conversion-service/pom.xml Modified
+```xml
+    <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-openfeign</artifactId>
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
     </dependency>
 ```
 
+/currency-conversion-service/src/main/resources/application.properties Modified
 ```
-      @GetMapping("/currency-converter-feign/from/{from}/to/{to}/quantity/{quantity}")
-  public CurrencyConversionBean convertCurrencyFeign(@PathVariable String from, @PathVariable String to,
-      @PathVariable BigDecimal quantity) {
-
-    CurrencyConversionBean response = proxy.retrieveExchangeValue(from, to);
-
-    return new CurrencyConversionBean(response.getId(), from, to, response.getConversionMultiple(), quantity,
-        quantity.multiply(response.getConversionMultiple()), response.getPort());
-  }
+eureka.client.service-url.default-zone=http://localhost:8761/eureka
+#currency-exchange-service.ribbon.listOfServers=http://localhost:8000,http://localhost:8001
 ```
 
-```
+/currency-conversion-service/src/main/java/com/in28minutes/microservices/currencyconversionservice/CurrencyConversionServiceApplication.java Modified
+```java
 @SpringBootApplication
-@EnableFeignClients("com.in28minutes.microservices.currencyconversionservice")
+@EnableDiscoveryClient
 public class CurrencyConversionServiceApplication {
 ```
 
+/currency-exchange-service/pom.xml Modified
+New Lines
+```xml
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+    </dependency>
 ```
-@FeignClient(name="currency-exchange-service", url="localhost:8000")
+
+/currency-exchange-service/src/main/java/com/in28minutes/microservices/currencyexchangeservice/CurrencyExchangeServiceApplication.java Modified
+New Lines
+```java
+@SpringBootApplication
+@EnableDiscoveryClient
+public class CurrencyExchangeServiceApplication {
+```
+
+/currency-exchange-service/src/main/resources/application.properties Modified
+New Lines
+```
+eureka.client.service-url.default-zone=http://localhost:8761/eureka
+```
+
+### How can you increase availablity of Eureka?
+
+All the infrastructure components we create - Eureka Naming Server, APIÂ Gateways etc become single point of failures. It becomes essential to build enough redundancy - create multiple instances - so that they are available 100% of time.
+
+There is a feature available with Eureka - Peer mode configuration. Here you can configure multiple/more than one eureka naming server in peer mode and they are aware of each other. Whenever an instance registers with one instance of eureka server, the another instance will be automatically updated.
+
+In this way, you can ensure high avaibility of Eureka.
+
+You can build redundancy for Eureka as well. One option is discussed in this thread - https://stackoverflow.com/questions/38549902/eureka-server-how-to-achieve-high-availability
+
+### FeignClient passing username and password to another micro service
+Here’s the configuration you would need on feign for basic authentication
+
+```
+import feign.auth.BasicAuthRequestInterceptor;
+
+@Configuration
+public class FeignClientConfiguration {
+    @Bean
+    public BasicAuthRequestInterceptor basicAuthRequestInterceptor() {
+         return new BasicAuthRequestInterceptor("admin", "admin");
+    }
+}
+
+FeignClient(name="service",configuration = FeignClientConfiguration.class)
+```
+
+
+In Zuul, you can create a filter to get the Authorisation details 
+```
+    RequestContext ctx = RequestContext.getCurrentContext();
+    HttpServletRequest request = ctx.getRequest();
+
+    String header = request.getHeader("Authorization");
+```
+
+
+### Feign Customization
+
+You can add interceptors to add custom logic.
+
+More details : https://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-feign.html#spring-cloud-feign-overriding-defaults
+
+```
+feign:
+  client:
+    config:
+      feignName:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
+        errorDecoder: com.example.SimpleErrorDecoder
+        retryer: com.example.SimpleRetryer
+        requestInterceptors:
+          - com.example.FooRequestInterceptor
+          - com.example.BarRequestInterceptor
+   @Bean
+    public BasicAuthRequestInterceptor basicAuthRequestInterceptor() {
+        return new BasicAuthRequestInterceptor("user", "password");
+    }
+}
+```
+
+### Eureka does not work with boot 2.2.0
+
+Correct the classpath of your application so that it contains a single, compatible version of org.springframework.boot.actuate.health.CompositeHealthIndicator
+
+Caused by: java.lang.NoSuchMethodError: org.springframework.boot.actuate.health.CompositeHealthIndicator.<init>(Lorg/springframework/boot/actuate/health/HealthAggregator;)V
+
+https://github.com/spring-cloud/spring-cloud-netflix/issues/3410
+
+SpringBoot 2.2 will be supported by the upcoming Spring Cloud Hoxton Release Train. For now, with Greenwich, please use Boot 2.1.
+
+https://github.com/spring-cloud/spring-cloud-netflix/issues/3410
+
+For now use 2.1.3.RELEASE
+```
+<parent>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-parent</artifactId>
+<version>2.1.3.RELEASE</version>
+<relativePath/> <!-- lookup parent from repository -->
+</parent>
+```
+
+### Debugging Zuul Problems
+
+First make sure you understand how Zuul works:
+
+When you send a request to Zuul with URL `http://localhost:8765/currency-exchange-service/currency-exchange/from/EUR/to/INR`
+- First thing Zuul does is find the url from eureka for currency-exchange-service.
+- And then it would send the request to the currency-exchange-service with URL /currency-exchange/from/EUR/to/INR.
+
+Here's the logic in a generic way - When you send a request to http://localhost:8765/app-name/url-path, logic in Zuul is simple:
+- Find LOCATION for app-name from naming server
+- Send request to LOCATION/url-path
+
+Make sure you using the right url - http://localhost:8100/currency-converter-feign/from/EUR/to/INR/quantity/10000
+
+Here are the things you can check
+(1) Make sure that you have this configured in `application.properties` of currency-exchange-service, currency-conversion-service and netflix-zuul-api-gateway-server `eureka.client.service-url.default-zone=http://localhost:8761/eureka`
+(2) Make sure that name of the currency-exchange-service application matches the path in the url.
+http://localhost:8765/`currency-exchange-service`/currency-exchange/from/EUR/to/INR
+/currency-exchange-service/src/main/resources/application.properties
+```
+spring.application.name=currency-exchange-service
+```
+(3) Make sure that you are able to execute the URLs `http://localhost:8000/currency-exchange/from/EUR/to/INR` and http://localhost:8100/currency-converter/from/USD/to/INR/quantity/10
+(4) Does this URL work - http://localhost:8765/currency-exchange-service/currency-exchange/from/EUR/to/INR?
+(5) Do you have these right in CurrencyExchangeServiceProxy
+   (a) `@FeignClient(name="netflix-zuul-api-gateway-server")` 
+   (b) `@RibbonClient(name="currency-exchange-service")`
+   (c) `@GetMapping("/currency-exchange-service/currency-exchange/from/{from}/to/{to}")`   
+   (d) Path Variables are explicitly defined with keys from and to as in `(@PathVariable("from") String from, @PathVariable("to") String to)`
+
+You can try the following!
+
+(1) Make sure that all the applications are up and running.
+
+(2) Compare the code against the code here - https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-10-16-spring-micro-services.md#step-34---setting-up-zuul-api-gateway-between-microservice-invocations​
+
+(3) Post the details requested below if you are unable to resolve it.
+
+Details
+a) Log that you see
+b) the code from ​CurrencyExchangeServiceProxy.java, ZuulLoggingFilter ,NetflixZuulApiGatewayServerApplication, CurrencyConversionController, /netflix-zuul-api-gateway-server/src/main/resources/application.properties
+
+Here's the checklist
+1) Make sure you stop all the servers
+2) Make sure you import step34 versions of all the four components - currency-conversion-service, currency-exchange-service, netflix-eureka-naming-server, netflix-zuul-api-gateway-server 
+3) Make sure you start the services in this order
+  a)netflix-eureka-naming-server
+  b)netflix-zuul-api-gateway-server
+  c)currency-exchange-service
+  d)currency-conversion-service
+4) Make sure all the components are registered with naming server.
+5) Give a minute of warm up time!
+6) If you get an error once, execute it again after a minute
+7) If you still get an error, post the logs of the each of the components to understand what's happening in the background!
+
+##### /currency-conversion-service/src/main/java/com/in28minutes/microservices/currencyconversionservice/CurrencyExchangeServiceProxy.java Modified
+New Lines
+
+```java
+
+@FeignClient(name="netflix-zuul-api-gateway-server")
+@RibbonClient(name="currency-exchange-service")
 public interface CurrencyExchangeServiceProxy {
-  @GetMapping("/currency-exchange/from/{from}/to/{to}")
+  @GetMapping("/currency-exchange-service/currency-exchange/from/{from}/to/{to}")
   public CurrencyConversionBean retrieveExchangeValue
     (@PathVariable("from") String from, @PathVariable("to") String to);
 }
 ```
 
+##### /netflix-zuul-api-gateway-server/pom.xml
 
-### Zipkin doesn't get anything
+```xml
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
 
-Running Zipkin on windows is a little different:
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+</dependency>
+```
+---
+
+##### /netflix-zuul-api-gateway-server/src/main/java/com/in28minutes/microservices/netflixzuulapigatewayserver/NetflixZuulApiGatewayServerApplication.java New
+
+```java
+@EnableZuulProxy
+@EnableDiscoveryClient
+@SpringBootApplication
+public class NetflixZuulApiGatewayServerApplication {
 
 ```
-SET RABBIT_URI=amqp://localhost 
-java -jar zipkin-server-2.5.2-exec.jar
+---
+
+##### /netflix-zuul-api-gateway-server/src/main/java/com/in28minutes/microservices/netflixzuulapigatewayserver/ZuulLoggingFilter.java New
+
+```java
+package com.in28minutes.microservices.netflixzuulapigatewayserver;
+
+@Component
+public class ZuulLoggingFilter extends ZuulFilter{
+
+  private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+  @Override
+  public boolean shouldFilter() {
+    return true;
+  }
+
+  @Override
+  public Object run() {
+    HttpServletRequest request = 
+        RequestContext.getCurrentContext().getRequest();
+    logger.info("request -> {} request uri -> {}", 
+        request, request.getRequestURI());
+    return null;
+  }
+
+  @Override
+  public String filterType() {
+    return "pre";
+  }
+
+  @Override
+  public int filterOrder() {
+    return 1;
+  }
+}
 ```
 
+/netflix-zuul-api-gateway-server/src/main/resources/application.properties
+
+```properties
+spring.application.name=netflix-zuul-api-gateway-server
+server.port=8765
+eureka.client.service-url.default-zone=http://localhost:8761/eureka
+```
+
+### How can we implement Authentication with Zuul?
+
+Authentication Example -  https://github.com/shuaicj/zuul-auth-example
+
+### Why do we need an API Gateway like Zuul?
+
+When we talk about a microservices architecture, we deal with multiple microservices talking to each other:
+
+How do we make sure we intercept requests and messages exchanged between each pair of microservices? That's where the API Gateway comes into the picture.
+
+Whenever an external service request arrives in the enterprise, or there is an internal communication between microservices, we have it go through the API gateway.
+
+API Gateway is a centralized location where you can implement features like authentication, logging, auditing, and rate limiting. For example, you may not want Microservice3 to be called more than 10 times by a particular client. You could do that as part of rate limiting in the API gateway.
+
+The API gateway acts as a centralized store for the common features for microservices, in your enterprise application.
+
+A popular API Gateway implementation is Zuul API Gateway.
+
+Typically there is a warmup time that is needed at the start of the services to ensure they are all connected - about a couple of minutes usually.
+
+
+
+### Debugging Zipkin
 
 Spring Boot 2.1.3.RELEASE
 
@@ -7385,175 +7821,15 @@ Here's the checklist
 3) Start them in the order - Naming Server, Distributed Tracing Server, API Gateway, Calculation Service, Exchange Service
 ```
 
-### Feign vs resttemplate
+### Running Zipkin on Windows
 
-Look at the two methods below: First uses RestTemplate. Second uses Feign. You can see that Feign helps you reduce the amount of code you need to write to invoke a Rest service by upto 80%.
-
-```
-@GetMapping("/currency-converter/from/{from}/to/{to}/quantity/{quantity}")
-    public CurrencyConversionBean convertCurrency(@PathVariable String from, @PathVariable String to,
-            @PathVariable BigDecimal quantity) {
-
-        // Feign - Problem 1
-        Map<String, String> uriVariables = new HashMap<>();
-        uriVariables.put("from", from);
-        uriVariables.put("to", to);
-
-        ResponseEntity<CurrencyConversionBean> responseEntity = new RestTemplate().getForEntity(
-                "http://localhost:8000/currency-exchange/from/{from}/to/{to}", CurrencyConversionBean.class,
-                uriVariables);
-
-        CurrencyConversionBean response = responseEntity.getBody();
-
-        return new CurrencyConversionBean(response.getId(), from, to, response.getConversionMultiple(), quantity,
-                quantity.multiply(response.getConversionMultiple()), response.getPort());
-    }
-
-    @GetMapping("/currency-converter-feign/from/{from}/to/{to}/quantity/{quantity}")
-    public CurrencyConversionBean convertCurrencyFeign(@PathVariable String from, @PathVariable String to,
-            @PathVariable BigDecimal quantity) {
-
-        CurrencyConversionBean response = proxy.retrieveExchangeValue(from, to);
-
-        logger.info("{}", response);
-        
-        return new CurrencyConversionBean(response.getId(), from, to, response.getConversionMultiple(), quantity,
-                quantity.multiply(response.getConversionMultiple()), response.getPort());
-    }
-```
-
-
-### Zuul
-
-Authentication Example -  https://github.com/shuaicj/zuul-auth-example
-
-When we talk about a microservices architecture, we deal with multiple microservices talking to each other:
-
-How do we make sure we intercept requests and messages exchanged between each pair of microservices? That's where the API Gateway comes into the picture.
-
-Whenever an external service request arrives in the enterprise, or there is an internal communication between microservices, we have it go through the API gateway.
-
-API Gateway is a centralized location where you can implement features like authentication, logging, auditing, and rate limiting. For example, you may not want Microservice3 to be called more than 10 times by a particular client. You could do that as part of rate limiting in the API gateway.
-
-The API gateway acts as a centralized store for the common features for microservices, in your enterprise application.
-
-A popular API Gateway implementation is Zuul API Gateway.
-
-Typically there is a warmup time that is needed at the start of the services to ensure they are all connected - about a couple of minutes usually.
-
-
-#### How does Zuul work?
-
-http://localhost:8765/currency-exchange-service/currency-exchange/from/EUR/to/INR
-- First thing Zuul does is find the url from eureka for currency-exchange-service.
-- And then it would send the request to URL/currency-exchange/from/EUR/to/INR.
-
-Take a generic url
-
-http://localhost:8765/app-name/url-path. Logic in Zuul is simple:
-- Find location for app-name
-- Send request to LOCATION/url-path
-
-#### How can we debug?
-
-1. Make sure that name of the application matches the path in the url.
-http://localhost:8765/`currency-exchange-service`/currency-exchange/from/EUR/to/INR
-
-/currency-exchange-service/src/main/resources/application.properties
-```
-spring.application.name=currency-exchange-service
-```
-
-2. Make sure that `eureka.client.service-url.default-zone` is defined as shown below
-
-/currency-exchange-service/src/main/resources/application.properties Modified New Lines
+Running Zipkin on windows is a little different:
 
 ```
-eureka.client.service-url.default-zone=http://localhost:8761/eureka
+SET RABBIT_URI=amqp://localhost 
+java -jar zipkin-server-2.5.2-exec.jar
 ```
 
-3. Make sure that you are able to execute the URL `http://localhost:8000/currency-exchange/from/EUR/to/INR`. 
-
-You can see that the last parts of both the URLs match - http://localhost:8765/currency-exchange-service/`currency-exchange/from/EUR/to/INR`
-
-4.  Check this piece of code up
-
-```
-@FeignClient(name="netflix-zuul-api-gateway-server")
-@RibbonClient(name="currency-exchange-service")
-public interface CurrencyExchangeServiceProxy {
-    @GetMapping("/currency-exchange-service/currency-exchange/from/{from}/to/{to}")
-    public CurrencyConversionBean retrieveExchangeValue
-        (@PathVariable("from") String from, @PathVariable("to") String to);
-```
-
-5. *THIS IS WHERE A NUMBER OF ERRORS HAPPEN* Do the Path Variables have Keys from and to - @PathVariable("from") and @PathVariable("to")?
-```
-    @GetMapping("/currency-exchange-service/currency-exchange/from/{from}/to/{to}")
-    public CurrencyConversionBean retrieveExchangeValue
-        (@PathVariable("from") String from, @PathVariable("to") String to);
-```
-
-You can try the following!
-a) Make sure that all the applications are up and running.
-b) Compare the code against the code here - https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-10-16-spring-micro-services.md#step-34---setting-up-zuul-api-gateway-between-microservice-invocations​
-c) Post the details requested below if you are unable to resolve it.
-
-Details
-a) Log that you see
-b) the code from ​CurrencyExchangeServiceProxy.java, ZuulLoggingFilter ,NetflixZuulApiGatewayServerApplication, CurrencyConversionController, /netflix-zuul-api-gateway-server/src/main/resources/application.properties
-
-Here's the checklist
-1) Make sure you stop all the servers
-2) Make sure you import step34 versions of all the four components - currency-conversion-service, currency-exchange-service, netflix-eureka-naming-server, netflix-zuul-api-gateway-server 
-3) Make sure you start the services in this order
-  a)netflix-eureka-naming-server
-  b)netflix-zuul-api-gateway-server
-  c)currency-exchange-service
-  d)currency-conversion-service
-4) Make sure all the components are registered with naming server.
-5) Give a minute of warm up time!
-6) If you get an error once, execute it again after a minute
-7) If you still get an error, post the logs of the each of the components to understand what's happening in the background!
-
-### Microservices performance
-
-As we distribute our applications, the tradeoff between performance and scalability becomes ever so important.
-
-We make the application easily scalable by distributing it. The result is better performance.
-
-As you explain, Distributing has network calls which would be slower.
-
-It is upto us to design systems optimizing the balance.
-
-Here's a recommended reading - https://smartbear.com/blog/test-and-monitor/performance-issue-considerations-for-microservices/
-
-### EUREKA
-
-I realised when going to eureka apps http://localhost:8761/eureka/apps I could see hostname was not localhost but the name of my machine and eureka seems it is not able to resolve the name of the machine to localhost:port -> what I did was to include the following property for currency-conversion-service and currency-exchange-service eureka.instance.hostname=localhost
-
-### What if Eureka server is down ?
-
-All the infrastructure components we create - Eureka Naming Server, APIÂ Gateways etc become single point of failures. It becomes essential to build enough redundancy - create multiple instances - so that they are available 100% of time.
-
-There is a feature available with Eureka - Peer mode configuration. Here you can configure multiple/more than one eureka naming server in peer mode and they are aware of each other. Whenever an instance registers with one instance of eureka server, the another instance will be automatically updated.
-
-In this way, you can ensure high avaibility of Eureka.
-
-You can build redundancy for Eureka as well. One option is discussed in this thread - https://stackoverflow.com/questions/38549902/eureka-server-how-to-achieve-high-availability
-
-
-### Microservices Docker
-
-you must create a docker network and then connect the rabbit and zipkin by the docker network and the rabbit host must be the rabbit container name.
-
-```
-$ docker network create in28minutes
-
-$ docker run -d --hostname in28minutes-rabbit --name in28minutes-rabbit -p 5672:5672 -p 15672:15672 rabbitmq:3-management
-
-$ docker run --name in28minutes-zipkin -e RABBIT_URI=amqp://in28minutes-rabbit --network in28minutes -p 9411:9411 -d openzipkin/zipkin
-```
 
 ### Rabbit MQ Magic
 
@@ -7583,6 +7859,37 @@ spring.rabbitmq.username=
 
 As soon as there are messages exchanged, spring-cloud-sleuth-zipkin ensures that a message with the trace is put on the rabbit mq.
 
+
+### Using Kafka instead of Rabbit MQ
+
+Spring Cloud Bus uses Spring Cloud Stream to broadcast the messages. So, to get messages to flow, you need only include the binder implementation of your choice in the classpath. There are convenient starters for the bus with AMQP (RabbitMQ) and Kafka (spring-cloud-starter-bus-[amqp|kafka])
+
+If using Kafka, you must set the property spring.zipkin.sender.type property accordingly in application.properties.
+
+```
+spring.zipkin.sender.type: kafka
+```
+
+Initially there won't be any messages available in Kafka message queue, hence it won't be shown in dashboard. So when you access with url then tracing will be logged/stored in kafka message queue with the details appname, traceId, spanId and exportable. Same being reflected in Zipkin dashboard.
+
+for example
+
+[currency-conversation-service,888114b702f9c3aa,888114b702f9c3aa,true]
+
+
+### Microservices performance
+
+As we distribute our applications, the tradeoff between performance and scalability becomes ever so important.
+
+We make the application easily scalable by distributing it. The result is better performance.
+
+As you explain, Distributing has network calls which would be slower.
+
+It is upto us to design systems optimizing the balance.
+
+Here's a recommended reading - https://smartbear.com/blog/test-and-monitor/performance-issue-considerations-for-microservices/
+
+
 ### Microservices, Databases, Scope and Transaction Management
 
 First thing is to figure out why you are adopting the microservice architecture.
@@ -7595,7 +7902,7 @@ Once you decide the boundaries of your microservice databases, mapping one to ma
 
 Here's a recommended reading : https://dzone.com/articles/breaking-a-monolith-into-microservices-best-practi
 
-#### Challenge
+#### Challenges with Microservices
 
 Let me start with saying that one of most important challenges of microsevices is deciding the boundary of microservices. 
 
@@ -7623,96 +7930,6 @@ Here's a couple of other great reads
 - https://www.nginx.com/blog/event-driven-data-management-microservices/
 - https://developers.redhat.com/blog/2018/10/01/patterns-for-distributed-transactions-within-a-microservices-architecture/
 
-
-### FeignClient passing username and password to another micro service
-Here’s the configuration you would need on feign for basic authentication
-
-```
-import feign.auth.BasicAuthRequestInterceptor;
-
-@Configuration
-public class FeignClientConfiguration {
-    @Bean
-    public BasicAuthRequestInterceptor basicAuthRequestInterceptor() {
-         return new BasicAuthRequestInterceptor("admin", "admin");
-    }
-}
-
-FeignClient(name="service",configuration = FeignClientConfiguration.class)
-```
-
-
-In Zuul, you can create a filter to get the Authorisation details 
-```
-    RequestContext ctx = RequestContext.getCurrentContext();
-    HttpServletRequest request = ctx.getRequest();
-
-    String header = request.getHeader("Authorization");
-```
-
-### Using Kafka instead of Rabbit MQ
-
-Spring Cloud Bus uses Spring Cloud Stream to broadcast the messages. So, to get messages to flow, you need only include the binder implementation of your choice in the classpath. There are convenient starters for the bus with AMQP (RabbitMQ) and Kafka (spring-cloud-starter-bus-[amqp|kafka])
-
-If using Kafka, you must set the property spring.zipkin.sender.type property accordingly in application.properties.
-
-```
-spring.zipkin.sender.type: kafka
-```
-
-Initially there won't be any messages available in Kafka message queue, hence it won't be shown in dashboard. So when you access with url then tracing will be logged/stored in kafka message queue with the details appname, traceId, spanId and exportable. Same being reflected in Zipkin dashboard.
-
-for example
-
-[currency-conversation-service,888114b702f9c3aa,888114b702f9c3aa,true]
-
-### Feign Customization
-
-You can add interceptors to add custom logic.
-
-More details : https://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-feign.html#spring-cloud-feign-overriding-defaults
-
-```
-feign:
-  client:
-    config:
-      feignName:
-        connectTimeout: 5000
-        readTimeout: 5000
-        loggerLevel: full
-        errorDecoder: com.example.SimpleErrorDecoder
-        retryer: com.example.SimpleRetryer
-        requestInterceptors:
-          - com.example.FooRequestInterceptor
-          - com.example.BarRequestInterceptor
-   @Bean
-    public BasicAuthRequestInterceptor basicAuthRequestInterceptor() {
-        return new BasicAuthRequestInterceptor("user", "password");
-    }
-}
-```
-
-### Eureka does not work with boot 2.2.0
-
-Correct the classpath of your application so that it contains a single, compatible version of org.springframework.boot.actuate.health.CompositeHealthIndicator
-
-Caused by: java.lang.NoSuchMethodError: org.springframework.boot.actuate.health.CompositeHealthIndicator.<init>(Lorg/springframework/boot/actuate/health/HealthAggregator;)V
-
-https://github.com/spring-cloud/spring-cloud-netflix/issues/3410
-
-SpringBoot 2.2 will be supported by the upcoming Spring Cloud Hoxton Release Train. For now, with Greenwich, please use Boot 2.1.
-
-https://github.com/spring-cloud/spring-cloud-netflix/issues/3410
-
-For now use 2.1.3.RELEASE
-```
-<parent>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-starter-parent</artifactId>
-<version>2.1.3.RELEASE</version>
-<relativePath/> <!-- lookup parent from repository -->
-</parent>
-```
 
 
 ### VIDEO UPDATE - i did not commit the file and it still works dev & qa environment how ????
@@ -7748,7 +7965,6 @@ Replace new RestTemplate() with the Autowired RestTemplate. Then it is instrumen
 ### OAUTH
 
 Heres a good starting point - https://spring.io/guides/tutorials/spring-boot-oauth2/
-
 
 
 ### Zuul JWT Authentication
@@ -7821,6 +8037,7 @@ Once you reach an instance, Hystrix ensures that you provide a safe response ins
 
 
 ### How are each microservices deployed in production? Do we use Tomcat? Do we use Websphere or Weblogic?
+
 I’ve worked with clients where we use tomcat in production to manage millions of users. That exactly what most micro service deployments use.
 
 ### How are microservices instances are created and managed , also where and how production grade application with microservices deployed ?

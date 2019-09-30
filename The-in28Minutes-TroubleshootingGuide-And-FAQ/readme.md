@@ -6965,11 +6965,8 @@ Does the URL http://localhost:8888/limits-service/default work?
 First of all check if you have any typos in the URL. Does it match exactly what is given above?
 
 (1) If the URL does not work, check if you have the same name for limits-service in
-
 (a) `spring.application.name` in bootstrap.properties
-
 (b) in the URL
-
 (c) in the name of the property file
 
 (2) Check if the name in `@ConfigurationProperties("limits-service")` matches the prefix of property values in `application.properties`. `limits-service.minimum=9 limits-service.maximum=999`
@@ -6988,7 +6985,8 @@ file:///C:/Users/Gautham/Documents/workspace-sts-3.9.4.RELEASE/git-localconfig-r
 file:\\C:/Users/Gautham/Documents/workspace-sts-3.9.4.RELEASE/git-localconfig-repo
 ```
 
-(7) Make sure that you have the right code - Compare against the code here - https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-10-16-spring-micro-services.md#step-01---part-2---setting-up-limits-microservice​
+(7) Make sure that you have the right code - Compare against the code below.
+
 
 (8) Make sure that you have committed all the code to GIT Local Repo
 
@@ -6998,11 +6996,108 @@ If everything's right
 (3) Launch Limits Service
 (4) Wait for 2 minutes
 
-If it's not working, post a question including all the details:
-1) Response for http://localhost:8080/limits
-2) Response for http://localhost:8888/limits-service/default
-3) Response for http://localhost:8888/limits-service/dev
-3) All code for files included in https://github.com/in28minutes/in28minutes.com/blob/master/_posts/2017-10-16-spring-micro-services.md#step-01---part-2---setting-up-limits-microservice​
+If you still have a problem, post a question including all the details:
+(1) Response for http://localhost:8080/limits
+(2) Response for http://localhost:8888/limits-service/default
+(3) Response for http://localhost:8888/limits-service/dev
+(4) Start up logs for limits-service and spring cloud config server with debug mode enabled
+(5) All code for files included below.
+
+#### /limits-service/src/main/java/com/in28minutes/microservices/limitsservice/Configuration.java New
+
+```java
+package com.in28minutes.microservices.limitsservice;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+@Component
+@ConfigurationProperties("limits-service")
+public class Configuration {
+  
+  private int minimum;
+  private int maximum;
+```
+---
+
+#### /limits-service/src/main/java/com/in28minutes/microservices/limitsservice/LimitsConfigurationController.java New
+
+```java
+@RestController
+public class LimitsConfigurationController {
+
+  @Autowired
+  private Configuration configuration;
+
+  @GetMapping("/limits")
+  public LimitConfiguration retrieveLimitsFromConfigurations() {
+    return new LimitConfiguration(configuration.getMaximum(), 
+        configuration.getMinimum());
+  }
+
+}
+```
+---
+
+#### /limits-service/src/main/java/com/in28minutes/microservices/limitsservice/bean/LimitConfiguration.java New
+
+```java
+package com.in28minutes.microservices.limitsservice.bean;
+
+public class LimitConfiguration {
+  private int maximum;
+  private int minimum;
+```
+---
+
+#### /limits-service/src/main/resources/application.properties Modified
+New Lines
+```
+spring.application.name=limits-service
+limits-service.minimum=9
+limits-service.maximum=999
+```
+
+/git-localconfig-repo/limits-service-dev.properties New
+
+```properties
+limits-service.minimum=1
+limits-service.maximum=111
+```
+---
+
+/git-localconfig-repo/limits-service.properties New
+
+```properties
+limits-service.minimum=8
+limits-service.maximum=888
+```
+
+##### /spring-cloud-config-server/src/main/java/com/in28minutes/microservices/springcloudconfigserver/SpringCloudConfigServerApplication.java Modified
+
+```java
+@EnableConfigServer
+@SpringBootApplication
+public class SpringCloudConfigServerApplication {
+```
+
+##### /spring-cloud-config-server/src/main/resources/application.properties New
+
+```properties
+spring.application.name=spring-cloud-config-server
+server.port=8888
+spring.cloud.config.server.git.uri=file:///in28Minutes/git/spring-micro-services/03.microservices/git-localconfig-repo
+```
+---
+
+##### /limits-service/src/main/resources/application.properties Deleted
+
+##### /limits-service/src/main/resources/bootstrap.properties New
+
+```properties
+spring.application.name=limits-service
+spring.cloud.config.uri=http://localhost:8888
+```
 
 ### Why should we use Spring Cloud Config Server?
 

@@ -6989,16 +6989,25 @@ file:\\C:/Users/Gautham/Documents/workspace-sts-3.9.4.RELEASE/git-localconfig-re
 (8) Make sure that you have committed all the code to GIT Local Repo
 
 **If everything is fine**
+
 (1) Stop all the servers
+
 (2) Launch Config Server First
+
 (3) Launch Limits Service
+
 (4) Wait for 2 minutes
 
 **If you still have a problem, post a question including all the details:**
+
 (1) Response for http://localhost:8080/limits
+
 (2) Response for http://localhost:8888/limits-service/default
+
 (3) Response for http://localhost:8888/limits-service/dev
+
 (4) Start up logs for limits-service and spring cloud config server with debug mode enabled
+
 (5) All code for files included below.
 
 #/limits-service/src/main/java/com/in28minutes/microservices/limitsservice/Configuration.java New

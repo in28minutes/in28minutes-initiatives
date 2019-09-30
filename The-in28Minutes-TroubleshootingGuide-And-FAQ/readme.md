@@ -1,8 +1,8 @@
-We love all our 100,000 learners. We want to help you in every way possible.
+We love all our 300,000 learners. We want to help you in every way possible.
 
 We do not want you to get stuck because of a simple error.
 
-This 50 page troubleshooting guide and faq is our way of thanking you for choosing to learn from in28Minutes. 
+This Longggg....... troubleshooting guide and faq is our way of thanking you for choosing to learn from in28Minutes. 
 
 If you do not find a good answer here, I would request you post the following details in the question:
 
@@ -1183,6 +1183,159 @@ This will help you to unit test the Journey class with different Vehicle impleme
 @Bean is used in Spring Configuration Files and Classes. It is used to directly instantiate or configure spring beans.
 
 @Autowired can be used with methods also. Spring would find a matching bean for AuthenticationManagerBuilder and call the method once the bean is created.
+
+### Autowiring - Great Example
+
+
+When I added following constructor, log correctly printed - Autowiring by type from bean name 'binarySearchImpl' via constructor to bean named 'bubbleSortAlgorithm'
+
+```
+package com.in28minutes.spring.basics.springin5steps;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.stereotype.Component;
+
+@Component
+
+public class BinarySearchImpl {
+
+@Autowired
+
+private SortAlgorithm sortAlgorithm; //SortAlgorithm  is the dependency of BinarySearchImpl
+
+public BinarySearchImpl(SortAlgorithm sortAlgorithm) {
+
+super();
+
+this.sortAlgorithm = sortAlgorithm;
+
+}
+
+
+
+public int binarySearch(int[] numbers, int numberToSearchFor) {
+
+
+
+int [] sortedNumbers = sortAlgorithm.sort(numbers);
+
+System.out.println(sortAlgorithm);
+
+return 3;
+
+}//binarySearch
+
+}
+
+
+
+Case2
+
+------------
+
+When I added setter, Autowiring message is not getting printed in logs -
+
+package com.in28minutes.spring.basics.springin5steps;
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.stereotype.Component;
+
+
+
+@Component
+
+public class BinarySearchImpl {
+
+
+
+@Autowired
+
+private SortAlgorithm sortAlgorithm; //SortAlgorithm  is the dependency of BinarySearchImpl
+
+
+
+public void setSortAlgorithm(SortAlgorithm sortAlgorithm) {
+
+this.sortAlgorithm = sortAlgorithm;
+
+}
+
+
+
+public int binarySearch(int[] numbers, int numberToSearchFor) {
+
+
+
+int [] sortedNumbers = sortAlgorithm.sort(numbers);
+
+System.out.println(sortAlgorithm);
+
+return 3;
+
+}//binarySearch
+
+}
+
+
+
+Case 3
+
+-----------
+
+When I removed constructor and setter then log still didn't print Autowiring message.
+
+package com.in28minutes.spring.basics.springin5steps;
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.stereotype.Component;
+
+
+
+@Component
+
+public class BinarySearchImpl {
+
+
+
+@Autowired
+
+private SortAlgorithm sortAlgorithm; //SortAlgorithm  is the dependency of BinarySearchImpl
+
+
+
+
+
+public int binarySearch(int[] numbers, int numberToSearchFor) {
+
+
+
+int [] sortedNumbers = sortAlgorithm.sort(numbers);
+
+System.out.println(sortAlgorithm);
+
+return 3;
+
+}//binarySearch
+
+}
+```
+
+Case 1 : @Autowired on field. Only Constructor present. Autowired using Constructor.
+
+Case 2: @Autowired on field. Both Constructor and Setter present. Setter used.
+
+Case 3: @Autowired on field. None of Constructor and Setter present. Field Autowiring used using reflection.
+
+
+
+If you want use Constructor autowiring always, you can place @Autowired on Constructor.
 
 ### Why Dependency Injection?
 

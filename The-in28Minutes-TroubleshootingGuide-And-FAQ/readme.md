@@ -7408,14 +7408,12 @@ Ensure you are using the recommended versions of Spring Boot (`<version>2.1.3.RE
 
 (7) Ensure that you are able to hit the urls directly - http://localhost:8000/currency-exchange/from/EUR/to/INR and http://localhost:8100/currency-converter/from/USD/to/INR/quantity/10
 
-(8) Compare code against the complete list of components below.
-
-(9) Try if it works when you include the following property in `application.properties` for currency-conversion-service and currency-exchange-service 
+(8) Try if it works when you include the following property in `application.properties` for currency-conversion-service and currency-exchange-service 
 ```
 eureka.instance.hostname=localhost
 ```
 
-(10) See if configuring timeouts would help.
+(9) See if configuring timeouts would help.
 
 ```
 feign.client.config.default.connectTimeout: 160000000
@@ -7426,7 +7424,10 @@ ribbon:
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=60000
 ```
 
-(11) Double Check if you are using the recommended versions!
+(10) Double Check if you are using the recommended versions!
+
+(11) Compare code against the complete list of components below.
+
 
 
 **If everything is fine**
@@ -7614,6 +7615,8 @@ For now use 2.1.3.RELEASE
 
 First of all ensure you are using the recommended versions of Spring Boot (`<version>2.1.3.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Greenwich.RC2</spring-cloud.version>`) with all the four applications - netflix-eureka-naming-server, currency-exchange-service, currency-conversion-service and netflix-zuul-api-gateway-server.
 
+Ensure that there are no typos in the URLs you are using - http://localhost:8100/currency-converter-feign/from/EUR/to/INR/quantity/10000, http://localhost:8000/currency-exchange/from/EUR/to/INR, http://localhost:8100/currency-converter/from/USD/to/INR/quantity/10, http://localhost:8765/currency-conversion-service/currency-converter-feign/from/USD/to/INR/quantity/10 and http://localhost:8765/currency-exchange-service/currency-exchange/from/EUR/to/INR.
+
 (1) Make sure that you have this configured in `application.properties` of currency-exchange-service, currency-conversion-service and netflix-zuul-api-gateway-server `eureka.client.service-url.default-zone=http://localhost:8761/eureka`
 
 (2) Make sure that name of the currency-exchange-service application matches the path in the url.
@@ -7625,7 +7628,7 @@ spring.application.name=currency-exchange-service
 
 (3) Make sure that you are able to execute the URLs `http://localhost:8000/currency-exchange/from/EUR/to/INR` and http://localhost:8100/currency-converter/from/USD/to/INR/quantity/10
 
-(4) Does this URL work - http://localhost:8765/currency-exchange-service/currency-exchange/from/EUR/to/INR?
+(4) Does these URLs Work - http://localhost:8100/currency-converter-feign/from/EUR/to/INR/quantity/10000, http://localhost:8000/currency-exchange/from/EUR/to/INR, http://localhost:8100/currency-converter/from/USD/to/INR/quantity/10, http://localhost:8765/currency-conversion-service/currency-converter-feign/from/USD/to/INR/quantity/10 and http://localhost:8765/currency-exchange-service/currency-exchange/from/EUR/to/INR.
 
 (5) Do you have these right in CurrencyExchangeServiceProxy
 
@@ -7637,6 +7640,29 @@ spring.application.name=currency-exchange-service
 
    (d) Path Variables are explicitly defined with keys `from` and `to` as shown - `(@PathVariable("from") String from, @PathVariable("to") String to)`
 
+(6) Ensure that all the three services are registered with Eureka at http://localhost:8761/.
+
+(7) Try if it works when you include the following property in `application.properties` for currency-conversion-service and currency-exchange-service 
+```
+eureka.instance.hostname=localhost
+```
+
+(8) See if configuring timeouts would help.
+
+```
+feign.client.config.default.connectTimeout: 160000000
+feign.client.config.default.readTimeout: 160000000
+ribbon:
+  ConnectTimeout: 120000
+   ReadTimeout: 120000
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=60000
+```
+
+(9) Double Check if you are using the recommended versions!
+
+(10) Compare code against the complete list of components below.
+
+
 **If everything is fine**
 
 (1) Make sure you start the services in this order (a) netflix-eureka-naming-server  (b) netflix-zuul-api-gateway-server (c)currency-exchange-service (d)currency-conversion-service
@@ -7645,14 +7671,14 @@ spring.application.name=currency-exchange-service
 
 (3) Give a minute of warm up time!
 
-(4) If you get an error once, execute it again after 10 minutes
+(4) If you get an error once, execute it again after 5 minutes
 
 
 **If you still have a problem, post a question including all the details:**
 
 (1) Screenshot of services registration with Eureka
 
-(2) Responses from all the 4 URLs - http://localhost:8100/currency-converter-feign/from/EUR/to/INR/quantity/10000, http://localhost:8000/currency-exchange/from/EUR/to/INR, http://localhost:8765/currency-exchange-service/currency-exchange/from/EUR/to/INR and http://localhost:8100/currency-converter/from/USD/to/INR/quantity/10
+(2) Responses from all the 5 URLs - http://localhost:8100/currency-converter-feign/from/EUR/to/INR/quantity/10000, http://localhost:8000/currency-exchange/from/EUR/to/INR, http://localhost:8100/currency-converter/from/USD/to/INR/quantity/10, http://localhost:8765/currency-conversion-service/currency-converter-feign/from/USD/to/INR/quantity/10 and http://localhost:8765/currency-exchange-service/currency-exchange/from/EUR/to/INR
 
 (3) Start up logs of the each of the components to understand what's happening in the background!
 
@@ -7848,6 +7874,8 @@ ribbon:
    ReadTimeout: 120000
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=60000
 ```
+
+(5) Double Check Trouble Shooting Instructions for Zuul - Recommended to open this in a new tab - https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-TroubleshootingGuide-And-FAQ#debugging-problems-with-zuul-api-gateway
 
 
 **If everything is fine**

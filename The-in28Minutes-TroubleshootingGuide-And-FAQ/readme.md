@@ -7010,7 +7010,7 @@ file:\\C:/Users/Gautham/Documents/workspace-sts-3.9.4.RELEASE/git-localconfig-re
 
 (5) All code for files included below.
 
-#/limits-service/src/main/java/com/in28minutes/microservices/limitsservice/Configuration.java New
+/limits-service/src/main/java/com/in28minutes/microservices/limitsservice/Configuration.java New
 
 ```java
 package com.in28minutes.microservices.limitsservice;
@@ -7027,7 +7027,7 @@ public class Configuration {
 ```
 ---
 
-#/limits-service/src/main/java/com/in28minutes/microservices/limitsservice/LimitsConfigurationController.java New
+/limits-service/src/main/java/com/in28minutes/microservices/limitsservice/LimitsConfigurationController.java New
 
 ```java
 @RestController
@@ -7046,7 +7046,7 @@ public class LimitsConfigurationController {
 ```
 ---
 
-#/limits-service/src/main/java/com/in28minutes/microservices/limitsservice/bean/LimitConfiguration.java New
+/limits-service/src/main/java/com/in28minutes/microservices/limitsservice/bean/LimitConfiguration.java New
 
 ```java
 package com.in28minutes.microservices.limitsservice.bean;
@@ -7057,7 +7057,7 @@ public class LimitConfiguration {
 ```
 ---
 
-#/limits-service/src/main/resources/application.properties Modified
+/limits-service/src/main/resources/application.properties Modified
 New Lines
 ```
 spring.application.name=limits-service
@@ -7080,7 +7080,7 @@ limits-service.minimum=8
 limits-service.maximum=888
 ```
 
-##/spring-cloud-config-server/src/main/java/com/in28minutes/microservices/springcloudconfigserver/SpringCloudConfigServerApplication.java Modified
+/spring-cloud-config-server/src/main/java/com/in28minutes/microservices/springcloudconfigserver/SpringCloudConfigServerApplication.java Modified
 
 ```java
 @EnableConfigServer
@@ -7088,7 +7088,7 @@ limits-service.maximum=888
 public class SpringCloudConfigServerApplication {
 ```
 
-##/spring-cloud-config-server/src/main/resources/application.properties New
+/spring-cloud-config-server/src/main/resources/application.properties New
 
 ```properties
 spring.application.name=spring-cloud-config-server
@@ -7097,9 +7097,9 @@ spring.cloud.config.server.git.uri=file:///in28Minutes/git/spring-micro-services
 ```
 ---
 
-##/limits-service/src/main/resources/application.properties Deleted
+/limits-service/src/main/resources/application.properties Deleted
 
-##/limits-service/src/main/resources/bootstrap.properties New
+/limits-service/src/main/resources/bootstrap.properties New
 
 ```properties
 spring.application.name=limits-service

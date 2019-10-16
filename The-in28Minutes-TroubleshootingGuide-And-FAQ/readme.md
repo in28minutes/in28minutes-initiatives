@@ -5397,7 +5397,9 @@ spring.datasource.url=jdbc:h2:file:~/yourdbname;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=
 spring.jpa.hibernate.ddl-auto = update
 ```
 
-### Error :  Table is not created automatically in h2 embedded db or I'm unable to see the tables
+### Error :  Table is not created automatically in h2 embedded db or I'm unable to see the tables 
+
+H2 Console Error
 
 Usually, the table's are created but the url used in H2 GUI Console is wrong.
 
@@ -5406,6 +5408,32 @@ In the browser, change the database url to jdbc:h2:mem:testdb (Shown in the scre
 ![](images/h2-solution-image.png)
 
 You should be good to go!
+
+### Error :  H2 Console comes up empty after enabling Spring Security
+
+H2 uses frames and spring security disables them by default. So, you would need to enable them.
+
+```
+@Configuration
+@EnableWebSecurity
+public class SpringSecurityConfigurationBasicAuth extends WebSecurityConfigurerAdapter {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        // ALL OTHER CODE
+        // ALL OTHER CODE
+        // ALL OTHER CODE
+        // ALL OTHER CODE
+        // ALL OTHER CODE
+
+        http.headers().frameOptions().disable();
+
+    }
+
+
+}
+
+```
+
 
 ### Error :  H2 Console is not Launched up?
 

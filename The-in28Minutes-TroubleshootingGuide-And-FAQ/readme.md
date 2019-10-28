@@ -8450,5 +8450,3 @@ in28Minutes is my way of expressing the need for continuous learning. I believe 
 - [Modern Development Practices - Unit Testing - What is Mocking?](https://www.youtube.com/watch?v=xJreuzP2C0M)
 - [Modern Development Practices - Continuous Integration - 5 Tips to get better at CI](https://www.youtube.com/watch?v=i8WNumrDMcA)
 - [Modern Development Practices - Automation Testing - 5 Types of Automation Tests](https://www.youtube.com/watch?v=kwqH1C76siE)
-
-

@@ -2,7 +2,7 @@
 
 - Give you a platform to share your expertise
 	- We are requesting you to be part of this because we think you are an expert and have a passion towards what you do!
-	- With this platform, you get the opportunity to (possibly) share your vision, passion and knowledge with  43,000 Subscribers on YouTube (https://www.youtube.com/rithustutorials) and 100,000 Students on Udemy (https://www.udemy.com/user/in28minutes/)
+	- With this platform, you get the opportunity to (possibly) share your vision, passion and knowledge with  43,000 Subscribers on YouTube (https://www.youtube.com/rithustutorials) and 100,000 Students on Udemy (https://github.com/in28minutes/learn#best-selling-courses)
 - Create Great Programmers from India
 	- There are awesome programmers from India doing great work across the world. However, as a percentage of IT professionals, the number of awesome programmers remains miniscule.
 - Promote Online Learning in India
@@ -47,7 +47,7 @@
 	- Surprise
 	- Have a Narrative
 - Research a little bit about in28Minutes
-	- Udemy - https://www.udemy.com/user/in28minutes/ 
+	- Udemy - https://github.com/in28minutes/learn#best-selling-courses 
 
 ## Usually Talked About
 
@@ -91,7 +91,7 @@
 	- For Indian IT Professions (if you had an opportunity to work with them) 
 	- For Other Udemy Instructors (If you are one)
 - Our Connection
-	- Have you heard about in28Minutes - https://www.udemy.com/user/in28minutes/ ?
+	- Have you heard about in28Minutes - https://github.com/in28minutes/learn#best-selling-courses ?
 	- Do you connect with our vision and message?
 		- Vision
 			- Learn in 28 Minutes everyday - Continuous Learning

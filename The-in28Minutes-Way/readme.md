@@ -3,12 +3,9 @@
 
 #### Question
 
-> How did in28Minutes get to 100,000 learners across the world? 
-
-![](images/udemy-total-students.png)
+> How did in28Minutes get to 300,000 learners across the world? 
 
 #### Answer
-
 
 > We are focused on creating the awesome course (learning) experiences. Period.
 
@@ -22,8 +19,6 @@ You need to understand "The in28Minutes Way"
 - What do we love? 
 - Why do we do what we do? 
 - How do we design our courses?
-
-To find out more about our courses visit http://www.in28minutes.com
 
 Let's get started on "The in28Minutes Way"!
 
@@ -53,7 +48,7 @@ Let's get started on "The in28Minutes Way"!
 
 Trends change. Period. 
 
-Yesterday it was REST, Spring, Spring MVC. Today it is Spring Boot, Microservices and Full Stack Development. Tomorrow it will be AI, Machine Learning and Big Data. 
+Yesterday it was REST, Spring, Spring MVC, Spring Boot and Microservices. Today it is  Full Stack Development, Containers (Docker) , Container Orchestration (Kubernetes) and the Cloud. Tomorrow it will be AI, Machine Learning and Big Data. 
 
 Irrespective of the direction technology is heading, we think there are two characteristics that seperate the frontrunners from others
 - You are an expert at what you do.
@@ -72,17 +67,9 @@ Infact, this belief in continuous learning is what made me choose the name - in2
 
 At in28Minutes we believe in Continous Learning. We are learning with you and identifying things you would want to learn. 
 
-We started with Spring and Spring MVC. We have expanded to Spring Boot and Spring Cloud. We now have the best courses on building web applications, SOAP and RESTful web services, APIs and Microservices. We also teach the finer aspects of programming - unit testing, mocking and modern development practices - TDD, 4 Principles of Simple Design and Refactoring.
+We started with Spring and Spring MVC. We have expanded to Spring Boot and Spring Cloud. We now have the best courses on building web applications, SOAP and RESTful web services, APIs, Microservices, Full Stack, Docker, Kubernetes and the Cloud. We also teach the finer aspects of programming - unit testing, mocking and modern development practices - TDD, 4 Principles of Simple Design and Refactoring.
 
-Today, we have courses to help a Java beginner to become an expert on APIs, Web Services and Microservices with Spring, Spring Boot and Spring Cloud. Almost all these courses are
-- Best sellers on Udemy
-- Have Great Reviews
-
-![](images/in28Minutes-Java-Course-Roadmap.png)
-
-In the next few months, we are expanding into 
-- Front End
-- Automation Testing
+Today, we have courses to help a Java beginner to become an expert on APIs, Web Services and Microservices with Spring, Spring Boot and Spring Cloud. We have course which help get into the cloud - AWS, Azure, Google Cloud using Docker and Kubernetes.
 
 We continuously work on creating awesome course experiences.  
 - Code and Complete Notes on Github (https://github.com/in28minutes/)
@@ -105,7 +92,7 @@ That's how you learn the most and that's exactly how we design our courses!
 
 > We design them to be hands-on.
 
-If you are one of our 1300 followers on GitHub (https://github.com/in28minutes/) , you will know that we start working on a course atleast 3-6 months ahead of the release. 
+If you are one of our followers on GitHub (https://github.com/in28minutes/) , you will know that we start working on a course atleast 3-6 months ahead of the release. 
 
 Sometimes, it could be years before the course is live.
 
@@ -156,12 +143,6 @@ The fundamentals of a web service, a web application or a microservice do not ch
 
 The frameworks you use might change but the applications will live for longer. We focus on helping you to learn to build great applications so that you can easily adapt to new frameworks.
 
-Here are some of the titles of our awesome courses and you can see that all of them are focused on building something using the framework. They help you understand the framework but more importantly - they help you build an application with the framework.
-  - Master Microservices with Spring Boot and Spring Cloud
-  - Master Web Services and REST API with Spring Boot
-  - Build Java EE(JEE) app in 25 Steps - Java Servlets and JSP
-  - Build Java Web App in 25 Steps - Spring MVC For Beginners
-
 Here are some of the reviews related to building awesome applications with a wide variety of frameworks and tools
 
 ##### Spring MVC For Beginners : Build Java Web App in 25 Steps 
@@ -187,12 +168,15 @@ We think that understanding the fundametals of a tool, framework or a language i
 We want you to learn the fundamentals. We want you to be able to make the different choices involved in choosing and using a framework. 
 
 We want you to understand not just the What and How. We would want you to understand the Why and When questions as well?
+- Why Cloud?
+- Why Kubernetes and Docker?
 - Why Microservices?
 - Why Spring? Why Spring Boot?
 - Why are we using Maven?
 - When should you use Mockito?
 - What magic happens behind Spring Boot?
 - What are the best practices in developing RESTful Web Services
+
 
 In Spring MVC course, we teach you basics of JSPs and Servlets and then move to Spring MVC to ensure you understand why we are using Spring MVC.
 
@@ -378,7 +362,7 @@ Unit Testing enables
 
 We believe that great developers write great unit tests and we want all our learners to be great developers!
 
-We have courses on JUnit (a free course) and Mockito to teach how to write great unit tests using mocks. And We ensure that all our web services and framework courses teach how to write great unit tests and integration tests.
+We have courses on Spring Boot Starter Test, JUnit and Mockito to teach how to write great unit tests using mocks. And We ensure that all our web services and framework courses teach how to write great unit tests and integration tests.
 
 Our Spring Course has sections on JUnit, Mockito and teaches unit testing as an integral part of the course.
 
@@ -471,8 +455,7 @@ There is a lot of churn in the industry. There is new stuff happening all around
 We would want to ensure that you are aware of the trends. We would give a new direction to our YouTube channel and help you whats happening with the buzzwords as well as the technologies where we are experts.
 - Microservices - Node JS/Spring Boot
 - Frontend Frameworks - Javascript/etc
-- Automation Testing
-- Mobile Development - Android/iPhone/Cross Platform
+- Cloud
 
 We would create more videos like these to help you understand our view of what's happending in the industry - Java Learning Roadmap and Trends - May 2017 - https://www.youtube.com/watch?v=6ObWpCUpGYc
 
@@ -497,7 +480,7 @@ We want to give you
 
 We would want an inclusive society where every one has an equal chance to succeed.
 
-We are ready to offer our courses at substantial discounts and even for free for the right causes
+We are ready to offer our courses at substantial discounts for the right causes
   - We are and would want to support initiatives like women back to work 
   - We want to help re-skilling for those who lost jobs.
 
@@ -519,8 +502,6 @@ And we would want to do our bit.
 ##### Create More Great Programmers from India
 
 > There are awesome programmers from India doing great work across the world. However, as a percentage of IT professionals, the number of awesome programmers remains miniscule.
-
-For enabling this - we would create awesome free courses for entry level programmers to understand and love programming. 
 
 We would want to reduce the barriers in learning programming by creating programming courses in local languages
   - c++ in telugu - https://www.youtube.com/watch?v=FzosXb-n3V8&list=PLB54DFFD608FDCCA5
@@ -586,8 +567,6 @@ Here are a few reviews show our learner's love for us
 
 We are helping shape the careers of our learners and that's what we love doing. Since we started teaching full time, we put in more effort to ensure you are having the best course experience possible. 
 
-We are venturing into Automation Testing and Full Stack Development next and we will bring the same level of expertise and commitment to those courses as well.
-
 We want you to achieve what you want by making you experts and enjoy what you are learning.
 
 ##### Master Microservices with Spring Boot and Spring Cloud
@@ -611,16 +590,15 @@ We want you to achieve what you want by making you experts and enjoy what you ar
 ## The End
 
 Wow! Wasn't it a wonderful read? We would love to hear your thoughts.  
-To find out more about our courses visit http://www.in28minutes.com
 
 Share on Twitter - https://twitter.com/home?status=Having%20a%20great%20time!%20%0A%20%23in28Minutes%20%23ImLearningIn28Minutes
 
 #in28Minutes #ImLearningIn28Minutes #ImLovingIn28Minutes 
 
 Good Luck and Keep Learning in28Minutes
+- Course    : https://github.com/in28minutes/learn
 - Linked In : https://www.linkedin.com/in/rangakaranam/​
 - Facebook  : https://www.facebook.com/in28Minutes​
 - Twitter   : https://twitter.com/in28Minutes​
 - YouTube   : https://www.youtube.com/rithustutorials​
 ​
-![](images/udemy-courses.png)

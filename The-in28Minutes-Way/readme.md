@@ -115,21 +115,10 @@ When you learn something with a hands-on example, you retain the concepts for lo
 
 That's the secret recipe for our amazing reviews. 
 
-##### Spring Master Class - Beginner to Expert 
+> "Spring Master Class - Beginner to Expert " -  You do not get bored in long conversations and you get time to get your hands dirty at the end of each video
 
-> You do not get bored in long conversations and you get time to get your hands dirty at the end of each video
+ > "Java Servlets and JSP" - The best part of it is the hands-on approach which the author maintained throughout the course as he had promised at the beginning of the lecture. He explains the concepts really well and also makes sure that there is not a single line of code you type without understanding what it really does. It was so engaging that it gets you interested in web development and kinda makes you want to learn more about it.
 
-> The instructor has  explained and demonstrated each single setting and covered so much!
-
-##### Java Servlets and JSP 
-
-> The best part of it is the hands-on approach which the author maintained throughout the course as he had promised at the beginning of the lecture. He explains the concepts really well and also makes sure that there is not a single line of code you type without understanding what it really does. It was so engaging that it gets you interested in web development and kinda makes you want to learn more about it.
-
-> I got a working servlet! I got a working website!
-
-##### Learn Spring Boot in 100 Steps - Beginner to Expert 
-
-> I also appreciate the mind and hands approach of teaching something and then having the student apply it.  It makes everything a lot clearer for the student and uncovers issues that we will face in our project early.
 
 ## We don't teach frameworks. We teach building applications!
 
@@ -147,17 +136,9 @@ Here are some of the reviews related to building awesome applications with a wid
 
 ##### Spring MVC For Beginners : Build Java Web App in 25 Steps 
 
-> I learned a lot practically building the web application and you guys have tried using new concepts like bootstrap, HTML 5 which helps us go through them as well.
-
 > This course covers quite a lot of subjects: Maven, Spring MVC, and Maven support for Bootstrap, Hibernate Validator, JSTL, jQuery, ...The author does a good job introducing all of these technologies.
 
-##### JUnit Tutorial for Beginners - Learn Java Unit Testing
-
-> This course starts and develops into more complex topics with clear explanations. It uses Eclipse and Maven so you can have the same tools available to use.
-
 ##### Java Servlets and JSP - Build Java EE(JEE) app in 25 Steps
-
-> Simple, yet precise explanation. The course is also enabling in understanding how to use tools like eclipse, maven, tomcat.
 
 > You will learn the concepts of Servlets, JSP, Maven, TomCat, and bit of bootstrap and CSS also. A++++
 
@@ -188,19 +169,11 @@ Lets look at a few of the reviews
 
 ##### Master Java Web Services and REST API with Spring Boot 
 
-> I was always confused about RESTful web services and kept away from it. This course opened my eyes. Thanks a lot!
-
 > I have worked on the webservices before, but did not know what was going behind the scene. Now i do and it makes lot easier to debug.
 
 ##### Spring Master Class - Beginner to Expert 
 
 > Amazing course. Explained super difficult concepts (that I have spent hours on the internet finding a good explanation) in under 5 minutes.
-
-> I've finaly undrestood the concept of DI and Autowiring ...
-
-> I love it,teaches me Spring like I am toddler.Fully detailed
-
-> You have really de-mystified dependency injection especially how it relates to Inversion of Control a concept that was failing to wrap around my mind, now i get it.!!!
 
 ##### Spring MVC For Beginners : Build Java Web App in 25 Steps 
 
@@ -221,10 +194,6 @@ Let's hear this being reflected in our reviews for our courses
 #### "Spring Master Class - Beginner to Expert" 
 
 > Well-paced, clear, step-by-step explanation of a framework that is extremely complex if you try to absorb it all at once, but very intuitive when broken down.  The instructor breaks it down extremely well and the supplemental materials make it easy to play along.
-
-> A great course which simplifies learning the complex things in depth.
-
-> The course is structured in a very logical way and the instructor is well versed with whatever he is teaching. Liked it. A great experience!
 
 ## Efficient and Effective
 
@@ -273,8 +242,6 @@ And as always, our efforts reflect in our reviews.
 
 ##### "Master Java Web Services and REST API with Spring Boot" 
 
-> Course made by in28minutes are really excellent.  And it directly helpful in developing application .
-
 > Great course. The instructor has an easy way to explain exposing practical examples. Very straight. I definitely recommend!
 
 ##### "Spring MVC For Beginners : Build Java Web App in 25 Steps" 
@@ -316,8 +283,6 @@ We focus on enabling these during the courses. Let's hear this in the voice of o
 
 > He sometimes (deliberately) make mistakes which is very helpful for newbies.
 
-> I have worked on the webservices before, but did not know what was going behind the scene. Now i do and it makes lot easier to debug.
-
 ## Modules - Beginners and Experts!
 
 We love modularization! We love building applications using a modular structure and the cool thing is we structure our courses around modules too!
@@ -357,12 +322,12 @@ Here are a few awesome learning talking about this in their reviews.
 ## Focus on Unit Testing
 
 Unit Testing enables 
-	- Quick Feedback
-	- Continuous Improvement of Code
+- Quick Feedback
+- Continuous Improvement of Code
 
 We believe that great developers write great unit tests and we want all our learners to be great developers!
 
-We have courses on Spring Boot Starter Test, JUnit and Mockito to teach how to write great unit tests using mocks. And We ensure that all our web services and framework courses teach how to write great unit tests and integration tests.
+We have courses on Spring Boot Unit Testing (Starter Test), JUnit and Mockito to teach how to write great unit tests using mocks. And We ensure that all our web services and framework courses teach how to write great unit tests and integration tests.
 
 Our Spring Course has sections on JUnit, Mockito and teaches unit testing as an integral part of the course.
 
@@ -371,8 +336,6 @@ Here are a few reviews on our unit testing courses
 ##### Mockito Tutorial : Learn mocking with 25 Junit Examples 
 
 > The best course of mockito and poweMockito that I have seen. Thanks for posting this great amount of great content to us.
-
-> Very good course. The approach is very systematic and step by step. I really like the combination of theory and practical goes hand by hand. The journey from JUnit to Mockito to Powermock is very well described.
 
 ## Code on Github
 
@@ -408,8 +371,6 @@ Here are few videos:
 - Introduction to Design Patterns in 25 Minutes - https://www.youtube.com/watch?v=Vp7q_pE7Fzg
 - 4 Principles of Simple Design - https://www.youtube.com/watch?v=OwS8ydVTx1c&list=PL066F8F24976D837C
 - Web Service Design - REST - https://www.youtube.com/watch?v=dEL6762fj8M&list=PLBBog2r6uMCTsOXlw9xFpgONdKnT2ls3u
-
-
 
 ## Modern Development Practices
 
@@ -517,50 +478,19 @@ We care for our learners. We ensure that their needs are addressed and we are cr
 
 Here are a few reviews show our learner's love for us
 
-##### Master Microservices with Spring Boot and Spring Cloud
-
-> Superb course! Very detailed and helpful
-
-> Its amazing to learn from this  course
-
 ##### Learn Spring Boot in 100 Steps - Beginner to Expert
-
 > So clear, funny and easy to learn with you. A pleasure!
-
-> Lot lot, lot of great and quality stuff, as always with Ranga.
-
 > Honestly, this is the best Spring Boot course I've ever tried out. These things make even more sense to me, and I am enjoying every single moment of it. Super snazzy and flawless presentations, Ranga! Keep up the clean work!
 
-> I love this guy
-
-##### Java EE Made Easy - Patterns, Architecture and Frameworks
-
-> Excellent as usual
-
-##### Spring Master Class - Beginner to Expert" 
-
-> Excellent and amazing course!!! I've been searching for such a complete and awesome course on spring for a long time. It's a really comprehensive course and all concepts are explained in details.
-
-> The way he explains everything is just amazing. He understand very well the concepts and very meticulous explaining every concept 
-
 ##### Master Java Web Services and REST API with Spring Boot 
-
 > Genius !!!
 
-> V V good and what else i should say  .. no word ..
-
 ##### Master Hibernate and JPA with Spring Boot in 100 Steps 
-
 > this is a big course , excelent teacher  , the best  hahahahha
-
 > We are lucky to have Ranga's courses published on Udemy so that we got opportunity to learn those in faster pace.
 
 ##### Spring MVC For Beginners : Build Java Web App in 25 Steps 
-
 > Brilliant! The best course ever!
-
-> "Very Good lecture and I have not seen like this before I salute for you Sir"
-
 > Excellent, fabulous. The way he has prepared the material and the way he teaches is really awesome. What an effort .. Thanks a million
 
 ## We love what we do
@@ -569,29 +499,9 @@ We are helping shape the careers of our learners and that's what we love doing. 
 
 We want you to achieve what you want by making you experts and enjoy what you are learning.
 
-##### Master Microservices with Spring Boot and Spring Cloud
-
-> Its amazing to learn from this  course
-
-##### Learn Spring Boot in 100 Steps - Beginner to Expert
-
-> So clear, funny and easy to learn with you. A pleasure!
-
-> Lot lot, lot of great and quality stuff, as always with Ranga.
-
-##### Spring MVC For Beginners : Build Java Web App in 25 Steps 
-
-> Wow, great coach!
-
-> By the time you complete the course, you realise that he has taught you all the most important Spring concepts in a fun, entertaining and easy to understand manner.
-
-> This guy is fantastic. Really. Wonderful teaching skills, and goes well out of his way to make sure that everything he is doing is fully understood. This is the kind of tutorial that gets me excited to work with a framework that I may otherwise not be.
-
 ## The End
 
 Wow! Wasn't it a wonderful read? We would love to hear your thoughts.  
-
-Share on Twitter - https://twitter.com/home?status=Having%20a%20great%20time!%20%0A%20%23in28Minutes%20%23ImLearningIn28Minutes
 
 #in28Minutes #ImLearningIn28Minutes #ImLovingIn28Minutes 
 

@@ -21509,7 +21509,7 @@ public class RestfulWebServicesApplicationTests {
 
 ## Course Links
 
-https://rebrand.ly/MISC-JAVA
+https://links.in28minutes.com/MISC-JAVA
 
 ## Getting Started
 - Eclipse - https://courses.in28minutes.com/p/eclipse-tutorial-for-beginners

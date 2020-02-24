@@ -630,24 +630,6 @@ public class Todo {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        Todo other = (Todo) obj;
-        if (id != other.id) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
         return String.format(
                 "Todo [id=%s, user=%s, desc=%s, targetDate=%s, isDone=%s]", id,
@@ -38248,72 +38230,6 @@ spring.h2.console.enabled=false
 # Your First Full Stack Application with React and Spring Boot
 
 
-## Take your first steps towards becoming a Full Stack Developer with React and Spring Boot
-
-React is a one of the most popular front end view frameworks
-- Components
-- JSX
-- State
-- Props
-
-In combination with other libraries, React helps in doing a wide variety of front end features
-- Forms Handling
-- Routing System
-- HTTP Requests
-
-Spring Boot is an awesome framework to build RESTful API and Microservices.
-
-In this course, lets combine these awesome frameworks to create your first full stack web application.
-
-## References
-- https://github.com/facebook/create-react-app
-- https://facebook.github.io/create-react-app/docs/troubleshooting
-- https://babeljs.io/repl
-
-## Installation Guides
-
-#### Required Tools
-
-- Node v8+ for npm
-- Visual Studio Code - Latest Version
-- Java 8+
-- Eclipse - Oxygen+ - (Embedded Maven From Eclipse)
-
-#### Installing Node Js (npm) & Visual Studio Code 
-
-- Playlist - https://www.youtube.com/playlist?list=PLBBog2r6uMCQN4X3Aa_jM9qVjgMCHMWx6
-- Steps
-  - Step 01 - Installing NodeJs and NPM - Node Package Manager
-  - Step 02 - Quick Introduction to NPM
-  - Step 03 - Installing Visual Studio Code - Front End Java Script Editor
-
-#### Installing Java, Eclipse & Embedded Maven
-
-- Playlist - https://www.youtube.com/playlist?list=PLBBog2r6uMCSmMVTW_QmDLyASBvovyAO3
-- Steps
-  - 0 - Overview - Installation Java, Eclipse and Maven
-  - 1 - Installing Java JDK
-  - 2 - Installing Eclipse IDE
-  - 3 - Using Embedded Maven in Eclipse
-  - 4 - Troubleshooting Java, Eclipse and Maven
-
-#### Troubleshooting Installations
-
-- Node JS and NPM 
-  - https://docs.npmjs.com/common-errors
-  - https://docs.npmjs.com/getting-started/troubleshooting
-- Visual Studio Code
-  - https://code.visualstudio.com/docs/supporting/errors
-  - https://code.visualstudio.com/docs/supporting/FAQ
-- Eclipse and Embedded Maven
-  - PDF : https://github.com/in28minutes/SpringIn28Minutes/blob/master/InstallationGuide-JavaEclipseAndMaven_v2.pdf
-  - GIT Repository For Installation : https://github.com/in28minutes/getting-started-in-5-steps
-
-### Getting Started with Spring, Spring Boot and JPA
-- Spring Tutorial for Beginners - https://www.youtube.com/watch?v=edgZo2g-LTM
-- Spring Boot Tutorial for Beginners - https://www.youtube.com/watch?v=pcdpk3Yd1EA
-- JPA and Hibernate Tutorial for Beginners - https://www.youtube.com/watch?v=MaI0_XdpdP8
-
 ## Course Overview
 
 ### Introduction
@@ -38494,35 +38410,12 @@ Current Directory : /in28Minutes/git/full-stack-with-react-and-spring-boot
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <meta name="theme-color" content="#000000" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
     <title>My Todo Application</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>
 ```
@@ -39611,159 +39504,6 @@ class HelloWorldService {
 export default new HelloWorldService()
 ```
 ---
-
-### /frontend/todo-app/src/serviceWorker.js
-
-```js
-// This optional code is used to register a service worker.
-// register() is not called by default.
-
-// This lets the app load faster on subsequent visits in production, and gives
-// it offline capabilities. However, it also means that developers (and users)
-// will only see deployed updates on subsequent visits to a page, after all the
-// existing tabs open on the page have been closed, since previously cached
-// resources are updated in the background.
-
-// To learn more about the benefits of this model and instructions on how to
-// opt-in, read https://bit.ly/CRA-PWA
-
-const isLocalhost = Boolean(
-  window.location.hostname === 'localhost' ||
-    // [::1] is the IPv6 localhost address.
-    window.location.hostname === '[::1]' ||
-    // 127.0.0.1/8 is considered localhost for IPv4.
-    window.location.hostname.match(
-      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-    )
-);
-
-export function register(config) {
-  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-    // The URL constructor is available in all browsers that support SW.
-    const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
-    if (publicUrl.origin !== window.location.origin) {
-      // Our service worker won't work if PUBLIC_URL is on a different origin
-      // from what our page is served on. This might happen if a CDN is used to
-      // serve assets; see https://github.com/facebook/create-react-app/issues/2374
-      return;
-    }
-
-    window.addEventListener('load', () => {
-      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
-
-      if (isLocalhost) {
-        // This is running on localhost. Let's check if a service worker still exists or not.
-        checkValidServiceWorker(swUrl, config);
-
-        // Add some additional logging to localhost, pointing developers to the
-        // service worker/PWA documentation.
-        navigator.serviceWorker.ready.then(() => {
-          console.log(
-            'This web app is being served cache-first by a service ' +
-              'worker. To learn more, visit https://bit.ly/CRA-PWA'
-          );
-        });
-      } else {
-        // Is not localhost. Just register service worker
-        registerValidSW(swUrl, config);
-      }
-    });
-  }
-}
-
-function registerValidSW(swUrl, config) {
-  navigator.serviceWorker
-    .register(swUrl)
-    .then(registration => {
-      registration.onupdatefound = () => {
-        const installingWorker = registration.installing;
-        if (installingWorker == null) {
-          return;
-        }
-        installingWorker.onstatechange = () => {
-          if (installingWorker.state === 'installed') {
-            if (navigator.serviceWorker.controller) {
-              // At this point, the updated precached content has been fetched,
-              // but the previous service worker will still serve the older
-              // content until all client tabs are closed.
-              console.log(
-                'New content is available and will be used when all ' +
-                  'tabs for this page are closed. See https://bit.ly/CRA-PWA.'
-              );
-
-              // Execute callback
-              if (config && config.onUpdate) {
-                config.onUpdate(registration);
-              }
-            } else {
-              // At this point, everything has been precached.
-              // It's the perfect time to display a
-              // "Content is cached for offline use." message.
-              console.log('Content is cached for offline use.');
-
-              // Execute callback
-              if (config && config.onSuccess) {
-                config.onSuccess(registration);
-              }
-            }
-          }
-        };
-      };
-    })
-    .catch(error => {
-      console.error('Error during service worker registration:', error);
-    });
-}
-
-function checkValidServiceWorker(swUrl, config) {
-  // Check if the service worker can be found. If it can't reload the page.
-  fetch(swUrl)
-    .then(response => {
-      // Ensure service worker exists, and that we really are getting a JS file.
-      const contentType = response.headers.get('content-type');
-      if (
-        response.status === 404 ||
-        (contentType != null && contentType.indexOf('javascript') === -1)
-      ) {
-        // No service worker found. Probably a different app. Reload the page.
-        navigator.serviceWorker.ready.then(registration => {
-          registration.unregister().then(() => {
-            window.location.reload();
-          });
-        });
-      } else {
-        // Service worker found. Proceed as normal.
-        registerValidSW(swUrl, config);
-      }
-    })
-    .catch(() => {
-      console.log(
-        'No internet connection found. App is running in offline mode.'
-      );
-    });
-}
-
-export function unregister() {
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.ready.then(registration => {
-      registration.unregister();
-    });
-  }
-}
-```
----
-
-### /frontend/todo-app/src/logo.svg
-
-```
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 841.9 595.3">
-    <g fill="#61DAFB">
-        <path d="M666.3 296.5c0-32.5-40.7-63.3-103.1-82.4 14.4-63.6 8-114.2-20.2-130.4-6.5-3.8-14.1-5.6-22.4-5.6v22.3c4.6 0 8.3.9 11.4 2.6 13.6 7.8 19.5 37.5 14.9 75.7-1.1 9.4-2.9 19.3-5.1 29.4-19.6-4.8-41-8.5-63.5-10.9-13.5-18.5-27.5-35.3-41.6-50 32.6-30.3 63.2-46.9 84-46.9V78c-27.5 0-63.5 19.6-99.9 53.6-36.4-33.8-72.4-53.2-99.9-53.2v22.3c20.7 0 51.4 16.5 84 46.6-14 14.7-28 31.4-41.3 49.9-22.6 2.4-44 6.1-63.6 11-2.3-10-4-19.7-5.2-29-4.7-38.2 1.1-67.9 14.6-75.8 3-1.8 6.9-2.6 11.5-2.6V78.5c-8.4 0-16 1.8-22.6 5.6-28.1 16.2-34.4 66.7-19.9 130.1-62.2 19.2-102.7 49.9-102.7 82.3 0 32.5 40.7 63.3 103.1 82.4-14.4 63.6-8 114.2 20.2 130.4 6.5 3.8 14.1 5.6 22.5 5.6 27.5 0 63.5-19.6 99.9-53.6 36.4 33.8 72.4 53.2 99.9 53.2 8.4 0 16-1.8 22.6-5.6 28.1-16.2 34.4-66.7 19.9-130.1 62-19.1 102.5-49.9 102.5-82.3zm-130.2-66.7c-3.7 12.9-8.3 26.2-13.5 39.5-4.1-8-8.4-16-13.1-24-4.6-8-9.5-15.8-14.4-23.4 14.2 2.1 27.9 4.7 41 7.9zm-45.8 106.5c-7.8 13.5-15.8 26.3-24.1 38.2-14.9 1.3-30 2-45.2 2-15.1 0-30.2-.7-45-1.9-8.3-11.9-16.4-24.6-24.2-38-7.6-13.1-14.5-26.4-20.8-39.8 6.2-13.4 13.2-26.8 20.7-39.9 7.8-13.5 15.8-26.3 24.1-38.2 14.9-1.3 30-2 45.2-2 15.1 0 30.2.7 45 1.9 8.3 11.9 16.4 24.6 24.2 38 7.6 13.1 14.5 26.4 20.8 39.8-6.3 13.4-13.2 26.8-20.7 39.9zm32.3-13c5.4 13.4 10 26.8 13.8 39.8-13.1 3.2-26.9 5.9-41.2 8 4.9-7.7 9.8-15.6 14.4-23.7 4.6-8 8.9-16.1 13-24.1zM421.2 430c-9.3-9.6-18.6-20.3-27.8-32 9 .4 18.2.7 27.5.7 9.4 0 18.7-.2 27.8-.7-9 11.7-18.3 22.4-27.5 32zm-74.4-58.9c-14.2-2.1-27.9-4.7-41-7.9 3.7-12.9 8.3-26.2 13.5-39.5 4.1 8 8.4 16 13.1 24 4.7 8 9.5 15.8 14.4 23.4zM420.7 163c9.3 9.6 18.6 20.3 27.8 32-9-.4-18.2-.7-27.5-.7-9.4 0-18.7.2-27.8.7 9-11.7 18.3-22.4 27.5-32zm-74 58.9c-4.9 7.7-9.8 15.6-14.4 23.7-4.6 8-8.9 16-13 24-5.4-13.4-10-26.8-13.8-39.8 13.1-3.1 26.9-5.8 41.2-7.9zm-90.5 125.2c-35.4-15.1-58.3-34.9-58.3-50.6 0-15.7 22.9-35.6 58.3-50.6 8.6-3.7 18-7 27.7-10.1 5.7 19.6 13.2 40 22.5 60.9-9.2 20.8-16.6 41.1-22.2 60.6-9.9-3.1-19.3-6.5-28-10.2zM310 490c-13.6-7.8-19.5-37.5-14.9-75.7 1.1-9.4 2.9-19.3 5.1-29.4 19.6 4.8 41 8.5 63.5 10.9 13.5 18.5 27.5 35.3 41.6 50-32.6 30.3-63.2 46.9-84 46.9-4.5-.1-8.3-1-11.3-2.7zm237.2-76.2c4.7 38.2-1.1 67.9-14.6 75.8-3 1.8-6.9 2.6-11.5 2.6-20.7 0-51.4-16.5-84-46.6 14-14.7 28-31.4 41.3-49.9 22.6-2.4 44-6.1 63.6-11 2.3 10.1 4.1 19.8 5.2 29.1zm38.5-66.7c-8.6 3.7-18 7-27.7 10.1-5.7-19.6-13.2-40-22.5-60.9 9.2-20.8 16.6-41.1 22.2-60.6 9.9 3.1 19.3 6.5 28.1 10.2 35.4 15.1 58.3 34.9 58.3 50.6-.1 15.7-23 35.6-58.4 50.6zM320.8 78.4z"/>
-        <circle cx="420.9" cy="296.5" r="45.7"/>
-        <path d="M520.5 78.1z"/>
-    </g>
-</svg>
-```
 ---
 
 ### /frontend/todo-app/src/App.js
@@ -39840,3 +39580,717 @@ export default App;
 }
 ```
 ---
+
+### Docker, Kubernetes, AWSm Azure and Cloud Courses
+
+```
+brew install kompose
+kompose convert
+
+kubectl delete all -l app=todo-web-application-h2
+
+kubectl apply -f mysql-database-data-volume-persistentvolumeclaim.yaml,mysql-deployment.yaml,mysql-service.yaml
+kubectl get svc
+kubectl apply -f todo-web-application-deployment.yaml,todo-web-application-service.yaml
+docker push in28min/todo-web-application-mysql:0.0.1-SNAPSHOT
+kubectl logs todo-web-application-b65cc44d9-7h9pr -f
+
+kubectl apply -f mysql-service.yaml
+kubectl get pv
+kubectl get pvc
+kubectl describe pod/mysql-5ccbbbdcd8-5zjqg 
+
+kubectl create configmap todo-web-application-config --from-literal=RDS_DB_NAME=todos
+kubectl get configmap todo-web-application-config
+kubectl describe configmap/todo-web-application-config
+
+kubectl edit configmap/todo-web-application-config
+kubectl scale deployment todo-web-application --replicas=0
+kubectl scale deployment todo-web-application --replicas=1
+
+kubectl edit configmap/todo-web-application-config
+kubectl apply -f todo-web-application-deployment.yaml 
+kubectl edit configmap todo-web-application-config
+kubectl scale deployment todo-web-application --replicas=0
+kubectl scale deployment todo-web-application --replicas=1
+
+kubectl create secret generic todo-web-application-secrets --from-literal=RDS_PASSWORD=dummytodos
+kubectl get secret/todo-web-application-secrets
+kubectl describe secret/todo-web-application-secrets
+kubectl apply -f todo-web-application-deployment.yaml 
+
+kubectl delete -f mysql-database-data-volume-persistentvolumeclaim.yaml,mysql-deployment.yaml,mysql-service.yaml,todo-web-application-deployment.yaml,todo-web-application-service.yaml
+
+apiVersion: v1
+data:
+  RDS_DB_NAME: todos
+  RDS_HOSTNAME: mysql
+  RDS_PORT: "3306"
+  RDS_USERNAME: todos-user
+kind: ConfigMap
+metadata:
+  name: todo-web-application-config
+  namespace: default
+
+cd /in28Minutes/git/kubernetes-crash-course/04-currency-exchange-microservice-basic 
+mvn clean install
+docker push in28min/currency-exchange:0.0.1-RELEASE
+kubectl apply -f deployment.yaml
+curl 34.67.103.178:8000/currency-exchange/from/USD/to/INR
+
+kubectl create configmap currency-conversion --from-literal=YOUR_PROPERTY=value --from-literal=YOUR_PROPERTY_2=value2
+
+kubectl autoscale deployment currency-exchange --min=1 --max=3 --cpu-percent=10 
+kubectl get events
+kubectl get hpa
+kubectl get hpa -o yaml
+kubectl get hpa -o yaml > 01-hpa.yaml
+kubectl get hpa currency-exchange -o yaml > 01-hpa.yaml
+
+kubectl set image deployment hello-world-rest-api --image=in28min/hello-world-rest-api:0.0.4-SNAPSHOT
+kubectl apply -f ingress.yaml
+kubectl get ingress
+kubectl describe gateway-ingress
+kubectl describe gateway gateway-ingress
+kubectl describe ingress gateway-ingress
+kubectl apply -f rbac.yml
+ 
+docker push in28min/currency-conversion:0.0.5-RELEASE
+
+kubectl create configmap currency-conversion --from-literal=YOUR_PROPERTY=value --from-literal=YOUR_PROPERTY_2=value2
+
+kubectl describe configmap/currency-conversion
+
+
+kubectl label namespace default istio-injection=enabled
+
+kubectl get svc --namespace istio-system
+kubectl apply -f 01-helloworld-deployment.yaml 
+kubectl apply -f 02-creating-http-gateway.yaml 
+kubectl apply -f 03-creating-virtualservice-external.yaml 
+kubectl get svc --namespace istio-system
+kubectl get svc istio-ingressgateway --namespace istio-system
+kubectl scale deployment hello-world-rest-api --replicas=4
+kubectl delete all -l app=hello-world-rest-api
+kubectl apply -f 04-helloworld-multiple-deployments.yaml 
+kubectl apply -f 05-helloworld-mirroring.yaml 
+kubectl apply -f 06-helloworld-canary.yaml 
+watch -n 0.1 curl 35.223.25.220/hello-world
+
+gcloud container clusters get-credentials in28minutes-cluster-istio --zone us-central1-a --project solid-course-258105
+kubectl create namespace istio-system
+curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.2.2 sh -
+ls istio-1.2.2
+ls istio-1.2.2/install/kubernetes/helm/istio-init/files/crd*yaml
+cd istio-1.2.2
+for i in install/kubernetes/helm/istio-init/files/crd*yaml; do kubectl apply -f $i; done
+helm template install/kubernetes/helm/istio --name istio --set global.mtls.enabled=false --set tracing.enabled=true --set kiali.enabled=true --set grafana.enabled=true --namespace istio-system > istio.yaml
+kubectl apply -f istio.yaml
+kubectl get pods --namespace istio-system
+kubectl get services --namespace istio-system
+
+
+docker push in28min/currency-exchange:3.0.0-RELEASE
+kubectl apply -f deployment.yaml 
+kubectl apply -f 11-istio-scripts-and-configuration/07-hw-virtualservice-all-services.yaml 
+kubectl get secret -n istio-system kiali
+kubectl create secret generic kiali -n istio-system --from-literal=username=admin --from-literal=passphrase=admin
+kubectl get svc --namespace istio-system
+
+
+gcloud container clusters get-credentials helm-cluster --zone us-central1-a --project solid-course-258105
+helm init
+kubectl get deploy,svc tiller-deploy -n kube-system
+clear
+unzip 12-helm.zip
+ls helm-tiller.sh
+chmod +x helm-tiller.sh
+
+gcloud container clusters get-credentials helm-cluster --zone us-central1-a --project solid-course-258105
+./helm-tiller.sh
+cat helm-tiller.sh 
+kubectl get deploy,svc tiller-deploy -n kube-system
+helm install ./currency-exchange/ --name=currency-services
+helm install ./currency-conversion/ --name=currency-services-1
+helm install ./currency-conversion/ --name=currency-services-3 --debug --dry-run
+helm history currency-services-1
+helm upgrade currency-services-1 ./currency-conversion/
+helm rollback currency-services-1 1
+helm upgrade currency-services-1 ./currency-conversion/ --debug --dry-run
+helm upgrade currency-services-1 ./currency-conversion/
+helm history currency-services-1
+
+cf --version
+cf login
+cf help -a
+cf help login
+cf login -a https://api.run.pivotal.io
+cf target
+cf help target
+cf push hello-world-rest-api
+cf push hello-world-rest-api -r hello-world-rest-api-001.cfapps.io
+cf push hello-world-rest-api --random-route
+cf logout
+cf login -a https://api.run.pivotal.io
+cf push hello-world-rest-api -p target/hello-world-rest-api.jar
+cf apps
+cf routes
+cf map-route hello-world-rest-api-ranga-101 cfapps.io --hostname hello-world-rest-api
+cf map-route hello-world-rest-api cfapps.io --hostname hello-world-rest-api-ranga-101
+cf spaces
+cf orgs
+cf stop hello-world-rest-api
+cf start hello-world-rest-api
+cf restart hello-world-rest-api
+
+cf create-app-manifest hello-world-rest-api
+
+cf v3-droplets hello-world-rest-api
+ls target/hello-world-rest-api.jar
+
+docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=todos-user --env MYSQL_PASSWORD=dummytodos --env MYSQL_DATABASE=todos --name mysql --publish 3306:3306 mysql:5.7
+
+docker container list
+docker stop 9a8dfcfa01d4
+docker rm 9a8dfcfa01d4
+
+cf services
+cf help create-service 
+cf v3-delete todo-web-application-mysql
+
+
+cf scale currency-exchange-service -i 2
+
+cf install-plugin ~/Downloads/autoscaler-for-pcf-cliplugin-macosx64-binary-2.0.199
+
+cf autoscaling-apps
+cf autoscaling-events currency-exchange-service
+cf routes
+cf events currency-conversion-service
+cf events currency-exchange-service
+cf disable-autoscaling currency-exchange-service
+cf set-env currency-conversion-service CURRENCY_EXCHANGE_URI http://currency-exchange-service-ranga-101.cfapps.io
+cf env currency-conversion-service
+cf help -a
+cf unset-env currency-conversion-service CURRENCY_EXCHANGE_URI
+
+cf create-user-provided-service spring-boot-route-service -r https://spring-boot-route-service-ranga-101.cfapps.io
+cf routes
+cf bind-route-service cfapps.io --hostname currency-exchange-service-ranga-101 spring-boot-route-service
+cf bind-route-service cfapps.io --hostname currency-conversion-service-ranga-101 spring-boot-route-service
+cf unbind-route-service cfapps.io --hostname currency-exchange-service-ranga-101 spring-boot-route-service
+cf unbind-route-service cfapps.io --hostname currency-conversion-service-ranga-101 spring-boot-route-service
+cf stop spring-boot-route-service
+
+cd /in28Minutes/git/config-server 
+git init
+git add *
+git status
+git commit -m "first commit"
+git remote add origin https://github.com/in28minutes/config-server.git
+git push -u origin master
+
+
+cf create-service p-config-server trial config-server -c config-server.json
+
+cf update-service config-server -c  '{ "count":1, "git":{  "uri":"https://github.com/in28minutes/dev-config-server-test.git", "label":"master", "searchPaths":"currency-exchange-service" }}'
+
+cf set-env currency-conversion-service hystrix.command.default.circuitBreaker.requestVolumeThreshold 2
+
+
+cf set-health-check currency-conversion-service http --endpoint /manage/health
+cf set-health-check currency-conversion-service http --endpoint /manage/health-error
+cf set-health-check currency-conversion-service http --endpoint /manage/health
+
+cf set-env currency-exchange-service spring.cloud.services.registrationMethod direct
+cf network-policies
+cf remove-network-policy currency-conversion-service --destination-app currency-exchange-service --protocol tcp --port 8080
+cf network-policies
+cf unset-env currency-exchange-service spring.cloud.services.registrationMethod
+
+cf map-route hello-world-rest-api-green cfapps.io --hostname hello-world-rest-api-ranga-101
+cf unmap-route hello-world-rest-api cfapps.io --hostname hello-world-rest-api-ranga-101
+
+docker container exec unruffled_tereshkova ls /tmp
+docker container cp target/hello-world-rest-api.jar 54cf414254e48d5f68c4d468b2dd4cbdd95d17f9e2074fdb9df7f64987697f2b:/tmp
+docker container commit unruffled_tereshkova in28min/hello-world-rest-api:manual 
+docker run -p 8080:8080 in28min/hello-world-rest-api:manual
+docker container commit --change='CMD ["java","-jar","/tmp/hello-world-rest-api.jar"]' unruffled_tereshkova in28min:hello-world-rest-api:manual2
+docker run -p 8080:8080 in28min/hello-world-rest-api:manual2
+docker inspect in28min/hello-world-rest-api:dockerfile1
+docker history in28min/hello-world-rest-api:dockerfile1
+
+docker build -t in28min/hello-world-rest-api:dockerfile1 .
+docker run -p 8080:8080 in28min/hello-world-rest-api:dockerfile1
+docker history in28min/hello-world-rest-api:dockerfile1
+
+docker run -p 8080:8080 in28min/hello-world-rest-api:0.0.1-SNAPSHOT
+
+mvn docker:build
+docker run -p 8080:8080 webservices/01-hello-world-rest-api
+
+docker run -dit 51297c224d60
+docker container exec 7714 ls /maven
+docker run -p 8080:8080 01-hello-world-rest-api:latest
+
+#/02-todo-web-application-h2/
+docker run -p 8080:8080 in28min/todo-web-application-h2:0.0.1-SNAPSHOT
+docker run -p 8080:8080 in28min/todo-web-application-h2:0.0.1-SNAPSHOT ping google.com
+docker run -p 8080:8080 in28min/hello-world-rest-api:dockerfile1 param1 param2
+docker run -p 8080:8080 in28min/todo-web-application-mysql:0.0.1-SNAPSHOT
+
+docker run -p 8080:8080 --network=host  in28min/todo-web-application-mysql:0.0.1-SNAPSHOT ping http://localhost:8080 
+
+docker network ls
+docker inspect bridge
+docker container run -p 8080:8080 --link=mysql -e RDS_HOSTNAME=mysql  in28min/todo-web-application-mysql:0.0.1-SNAPSHOT
+
+docker network create web-application-mysql-network
+docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=todos-user --env MYSQL_PASSWORD=dummytodos --env MYSQL_DATABASE=todos --name mysql --publish 3306:3306 --network=web-application-mysql-network mysql:5.7
+docker container run -p 8080:8080 --network=web-application-mysql-network -e RDS_HOSTNAME=mysql  in28min/todo-web-application-mysql:0.0.1-SNAPSHOT
+docker container restart mysql
+docker container run -p 8080:8080 --network=web-application-mysql-network -e RDS_HOSTNAME=mysql  in28min/todo-web-application-mysql:0.0.1-SNAPSHOT
+
+docker container prune
+
+
+docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=todos-user --env MYSQL_PASSWORD=dummytodos --env MYSQL_DATABASE=todos --name mysql --publish 3306:3306 --network=web-application-mysql-network --volume mysql-database-volume:/var/lib/mysql  mysql:5.7
+
+
+#/04-spring-boot-react-full-stack-h2/restful-web-services/
+docker tag 3f4765872126 in28min/rest-api-full-stack:2stagebuild
+docker run -p 8080:8080 in28min/rest-api-full-stack:2stagebuild
+
+npm install
+npm start
+npm run build
+
+docker network create currency-network
+docker run -p 8000:8000 --network=currency-network --name=currency-exchange-service in28min/currency-exchange-service:0.0.1-SNAPSHOT
+docker run -p 8100:8100 --network=currency-network --name=currency-conversion-service --env CURRENCY_EXCHANGE_URI=http://currency-exchange-service:8000 -d in28min/currency-conversion-service:0.0.1-SNAPSHOT
+
+docker-compose up
+docker-compose up -d
+docker-compose scale currency-conversion-service=2
+docker-compose logs
+docker-compose logs -f
+
+docker system prun
+docker system prune -a
+
+docker search mysql
+docker images
+docker tag in28min/todo-rest-api-h2:1.0.0.RELEASE latest
+docker rmi latest:latest
+docker pull mysql
+docker image ls --format='{{json .}}'
+
+docker container run -p 5000:5000 -d in28min/todo-rest-api-h2:1.0.0.RELEASE
+docker container pause 6478
+docker container unpause 6478
+
+docker run -p 5000:5000 in28min/todo-rest-api-h2:0.0.1-SNAPSHOT
+docker run -p 5000:5000 -d in28min/todo-rest-api-h2:0.0.1-SNAPSHOT
+docker run -p 5000:5000 -d --restart=always in28min/todo-rest-api-h2:0.0.1-SNAPSHOT
+
+docker events
+docker top c710
+docker stats
+docker run -m 512m --cpu-quota 50000
+docker system df
+
+docker container stop 1b1
+docker container kill 9b8
+
+docker-compose config
+docker-compose images
+docker-compose ps
+docker-compose top
+docker-compose pause
+docker-compose unpause
+docker-compose rm
+docker-compose build
+docker-compose events
+
+Deleted Networks:
+web-application-mysql-network
+03-todo-web-application-mysql_todo-web-application-network
+currency-network
+05-microservices_currency-compose-network
+
+# Azure Kubernetes Cluster Info
+az login
+az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/<<azure_subscription_id>>"
+
+# Create Public Key for SSH Access
+ssh-keygen -m PEM -t rsa -b 4096 # PEM - Privacy Enhanced Mail - Certificate Format RSA- Encryption Algorithm
+
+# ls /Users/rangakaranam/.ssh/id_rsa.pub
+
+# Get Cluster Credentials
+az aks get-credentials --name <<MyManagedCluster>> --resource-group <<MyResourceGroup>>
+
+
+# AWS Kubernetes Cluster Info
+aws configure
+aws eks --region us-east-1 update-kubeconfig --name in28minutes-cluster 
+kubectl get pods
+kubectl get svc
+kubectl get serviceaccounts
+kubectl get serviceaccounts default -o yaml
+kubectl get secret default-token-hqkvj -o yaml
+kubectl cluster-info
+
+
+cd /in28Minutes/git/devops-master-class/ansible 
+ansible --version
+ansible -m ping all
+ansible all -a "whoami"
+ansible all -a "uname"
+ssh -vvv -i ~/aws/aws_keys/default-ec2.pem ec2-user@3.83.104.44
+ls ~/aws/aws_keys/default-ec2.pem
+chmod 400 /Users/rangaraokaranam/aws/aws_keys/default-ec2.pem
+ansible all -a "uname"
+ansible all -a "uname -a"
+ansible all -a "pwd"
+ansible all -a "python --version"
+ansible dev -a "python --version"
+ansible qa -a "python --version"
+ansible first -a "python --version"
+ansible groupofgroups -a "python --version"
+ansible devsubset -a "python --version"
+ansible --list-host all
+ansible --list-host dev
+ansible --list-host first
+ansible --list-host \!first
+ansible --list-host qa:dev
+ansible-playbook playbooks/01-ping.yml
+ansible-playbook playbooks/02-shell.yml 
+ansible-playbook playbooks/03-variables.yml 
+ansible-playbook playbooks/03-variables.yml -e variable1=CommandLineValue
+ansible-playbook playbooks/04-ansible-facts.yml 
+ansible-playbook playbooks/05-install-apache.yml 
+ansible-playbook playbooks/06-playbooks.yml 
+ansible-playbook playbooks/06-playbooks.yml --list-tasks
+ansible-playbook playbooks/06-playbooks.yml --list-hosts
+ansible-playbook playbooks/06-playbooks.yml --list-tags
+ansible-playbook -l dev playbooks/01-ping.yml
+ansible-playbook playbooks/07-conditionals-and-loops.yml 
+ansible-inventory --list
+ansible-inventory --graph
+ansible-playbook playbooks/08-dynamic-inventory-ping.yml 
+ansible-playbook playbooks/09-create-ec2.yml 
+docker --version
+docker run -p 5000:5000 in28min/hello-world-python:0.0.1.RELEASE
+docker run -p 5000:5000 in28min/hello-world-java:0.0.1.RELEASE
+docker run -p 5000:5000 in28min/hello-world-nodejs:0.0.1.RELEASE
+docker run -d -p 5000:5000 in28min/hello-world-nodejs:0.0.1.RELEASE
+docker run -d -p 5001:5000 in28min/hello-world-python:0.0.1.RELEASE
+docker logs 04e52ff9270f5810eefe1f77222852dc1461c22440d4ecd6228b5c38f09d838e
+docker logs c2ba
+docker images
+docker container ls
+docker container ls -a
+docker container stop f708b7ee1a8b
+docker run -d -p 5001:8080 in28min/hello-world-rest-api:0.0.1.RELEASE
+docker pull mysql
+docker search mysql
+docker image history in28min/hello-world-java:0.0.1.RELEASE
+docker image history 100229ba687e
+docker image inspect 100229ba687e
+docker image remove mysql
+docker image remove in28min/hello-world-java:0.0.1.RELEASE
+docker container rm 3e657ae9bd16
+docker container ls -a
+docker container pause 832
+docker container unpause 832
+docker container stop 832
+docker container inspect ff521fa58db3
+docker container prune
+docker system
+docker system df
+docker system info
+docker system prune -a
+docker top 9009722eac4d
+docker stats 9009722eac4d
+docker container run -p 5000:5000 -d -m 512m in28min/hello-world-java:0.0.1.RELEASE
+docker container run -p 5000:5000 -d -m 512m --cpu-quota=50000  in28min/hello-world-java:0.0.1.RELEASE
+docker system events
+
+docker container stats 4faca1ea914e3e4587d1d790948ec6cb8fa34f26e900c12632fd64d4722fd59a
+docker stats 42f170966ce613d2a16d7404495af7b3295e01aeb9142e1fa1762bbdc581f502
+
+cd /in28Minutes/git/devops-master-class/projects/hello-world/hello-world-python 
+docker build -t in28min/hello-world-python:0.0.2.RELEASE . 
+docker run -p 5000:5000 -d in28min/hello-world-python:0.0.2.RELEASE
+docker history e66dc383f7a0
+docker push in28min/hello-world-python:0.0.2.RELEASE
+
+cd ../hello-world-nodejs/
+docker build -t in28min/hello-world-nodejs:0.0.2.RELEASE . 
+docker container run -d -p 5000:5000 in28min/hello-world-nodejs:0.0.2.RELEASE
+docker push in28min/hello-world-nodejs:0.0.2.RELEASE
+
+cd ../hello-world-java/
+docker build -t in28min/hello-world-java:0.0.2.RELEASE . 
+docker run -d -p 5000:5000 in28min/hello-world-java:0.0.2.RELEASE
+docker push in28min/hello-world-java:0.0.2.RELEASE
+
+docker run -d -p 5001:5000 in28min/hello-world-nodejs:0.0.3.RELEASE ping google.com
+
+
+docker run -d -p 8000:8000 --name=currency-exchange in28min/currency-exchange:0.0.1-RELEASE
+docker run -d -p 8100:8100 --name=currency-conversion in28min/currency-conversion:0.0.1-RELEASE
+
+docker network ls
+docker network inspect bridge
+
+docker run -d -p 8100:8100 --env CURRENCY_EXCHANGE_SERVICE_HOST=http://currency-exchange --name=currency-conversion --link currency-exchange in28min/currency-conversion:0.0.1-RELEASE
+
+docker network create currency-network
+docker container stop currency-exchange
+docker container stop currency-conversion
+docker run -d -p 8000:8000 --name=currency-exchange --network=currency-network in28min/currency-exchange:0.0.1-RELEASE
+docker run -d -p 8100:8100 --env CURRENCY_EXCHANGE_SERVICE_HOST=http://currency-exchange --name=currency-conversion --network=currency-network in28min/currency-conversion:0.0.1-RELEASE
+
+docker-compose --version
+cd ../../microservices/
+docker-compose up
+docker-compose up -d
+docker container ls
+docker network ls
+docker network inspect microservices_currency-compose-network
+docker-compose down
+docker container ls -a
+docker system prune -a
+docker-compose config
+docker-compose images
+docker-compose ps
+docker-compose top
+
+docker build -t in28min/hello-world-java:0.0.1.RELEASE .
+docker push in28min/hello-world-java:0.0.1.RELEASE
+
+docker build -t in28min/hello-world-python:0.0.1.RELEASE .
+docker push in28min/hello-world-python:0.0.1.RELEASE
+
+docker build -t in28min/hello-world-nodejs:0.0.1.RELEASE .
+docker push in28min/hello-world-nodejs:0.0.1.RELEASE
+
+kubectl create deployment hello-world-rest-api --image=in28min/hello-world-rest-api:0.0.1.RELEASE
+kubectl expose deployment hello-world-rest-api --type=LoadBalancer --port=8080
+kubectl scale deployment hello-world-rest-api --replicas=3
+kubectl delete pod hello-world-rest-api-58ff5dd898-62l9d
+kubectl autoscale deployment hello-world-rest-api --max=10 --cpu-percent=70
+kubectl edit deployment hello-world-rest-api #minReadySeconds: 15
+kubectl set image deployment hello-world-rest-api hello-world-rest-api=in28min/hello-world-rest-api:0.0.2.RELEASE
+
+gcloud container clusters get-credentials in28minutes-cluster --zone us-central1-a --project solid-course-258105
+kubectl create deployment hello-world-rest-api --image=in28min/hello-world-rest-api:0.0.1.RELEASE
+kubectl expose deployment hello-world-rest-api --type=LoadBalancer --port=8080
+kubectl set image deployment hello-world-rest-api hello-world-rest-api=DUMMY_IMAGE:TEST
+kubectl get events --sort-by=.metadata.creationTimestamp
+kubectl set image deployment hello-world-rest-api hello-world-rest-api=in28min/hello-world-rest-api:0.0.2.RELEASE
+kubectl get events --sort-by=.metadata.creationTimestamp
+kubectl get componentstatuses
+kubectl get pods --all-namespaces
+
+kubectl get events
+kubectl get pods
+kubectl get replicaset
+kubectl get deployment
+kubectl get service
+
+kubectl get pods -o wide
+
+kubectl explain pods
+kubectl get pods -o wide
+
+kubectl describe pod hello-world-rest-api-58ff5dd898-9trh2
+
+kubectl get replicasets
+kubectl get replicaset
+
+kubectl scale deployment hello-world-rest-api --replicas=3
+kubectl get pods
+kubectl get replicaset
+kubectl get events
+kubectl get events --sort.by=.metadata.creationTimestamp
+
+kubectl get rs
+kubectl get rs -o wide
+kubectl set image deployment hello-world-rest-api hello-world-rest-api=DUMMY_IMAGE:TEST
+kubectl get rs -o wide
+kubectl get pods
+kubectl describe pod hello-world-rest-api-85995ddd5c-msjsm
+kubectl get events --sort-by=.metadata.creationTimestamp
+
+kubectl set image deployment hello-world-rest-api hello-world-rest-api=in28min/hello-world-rest-api:0.0.2.RELEASE
+kubectl get events --sort-by=.metadata.creationTimestamp
+kubectl get pods -o wide
+kubectl delete pod hello-world-rest-api-67c79fd44f-n6c7l
+kubectl get pods -o wide
+kubectl delete pod hello-world-rest-api-67c79fd44f-8bhdt
+
+kubectl get componentstatuses
+kubectl get pods --all-namespaces
+
+gcloud auth login
+kubectl version
+gcloud container clusters get-credentials in28minutes-cluster --zone us-central1-a --project solid-course-258105
+
+kubectl rollout history deployment hello-world-rest-api
+kubectl set image deployment hello-world-rest-api hello-world-rest-api=in28min/hello-world-rest-api:0.0.3.RELEASE --record=true
+kubectl rollout undo deployment hello-world-rest-api --to-revision=1
+
+kubectl logs hello-world-rest-api-58ff5dd898-6ctr2
+kubectl logs -f hello-world-rest-api-58ff5dd898-6ctr2
+
+kubectl get deployment hello-world-rest-api -o yaml
+kubectl get deployment hello-world-rest-api -o yaml > deployment.yaml
+kubectl get service hello-world-rest-api -o yaml > service.yaml
+kubectl apply -f deployment.yaml
+kubectl get all -o wide
+kubectl delete all -l app=hello-world-rest-api
+
+kubectl get svc --watch
+kubectl diff -f deployment.yaml
+kubectl delete deployment hello-world-rest-api
+kubectl get all -o wide
+kubectl delete replicaset.apps/hello-world-rest-api-797dd4b5dc
+
+kubectl get pods --all-namespaces
+kubectl get pods --all-namespaces -l app=hello-world-rest-api
+kubectl get services --all-namespaces
+kubectl get services --all-namespaces --sort-by=.spec.type
+kubectl get services --all-namespaces --sort-by=.metadata.name
+kubectl cluster-info
+kubectl cluster-info dump
+kubectl top node
+kubectl top pod
+kubectl get services
+kubectl get svc
+kubectl get ev
+kubectl get rs
+kubectl get ns
+kubectl get nodes
+kubectl get no
+kubectl get pods
+kubectl get po
+
+kubectl delete all -l app=hello-world-rest-api
+kubectl get all
+
+kubectl apply -f deployment.yaml 
+kubectl apply -f ../currency-conversion/deployment.yaml 
+
+brew install terraform
+terraform --version
+terraform version
+terraform init
+export AWS_ACCESS_KEY_ID=*******
+export AWS_SECRET_ACCESS_KEY=*********
+terraform plan
+terraform console
+terraform apply -refresh=false
+terraform plan -out iam.tfplan
+terraform apply "iam.tfplan"
+terraform apply -target=aws_iam_user.my_iam_user
+terraform destroy
+terraform validate
+terraform fmt
+terraform show
+export TF_VAR_iam_user_name_prefix = FROM_ENV_VARIABLE_IAM_PREFIX
+export TF_VAR_iam_user_name_prefix=FROM_ENV_VARIABLE_IAM_PREFIX
+terraform plan -refresh=false -var="iam_user_name_prefix=VALUE_FROM_COMMAND_LINE"
+terraform apply -target=aws_default_vpc.default
+terraform apply -target=data.aws_subnet_ids.default_subnets
+terraform apply -target=data.aws_ami_ids.aws_linux_2_latest_ids
+terraform apply -target=data.aws_ami.aws_linux_2_latest
+terraform workspace show
+terraform workspace new prod-env
+terraform workspace select default
+terraform workspace list
+terraform workspace select prod-env
+```
+
+## Enviroment Variables
+
+SSM URN - `arn:aws:ssm:us-east-1:<account-id>:parameter/<name>`
+
+- /dev/currency-conversion-service/CURRENCY_EXCHANGE_URI
+- /dev/currency-exchange-service/RDS_DB_NAME  - exchange_db
+- /dev/currency-exchange-service/RDS_HOSTNAME 
+- /dev/currency-exchange-service/RDS_PASSWORD 
+- /dev/currency-exchange-service/RDS_PORT     - 3306
+- /dev/currency-exchange-service/RDS_USERNAME - exchange_db_user
+
+## Setting up App Mesh
+
+#### Virtual nodes 
+- currency-exchange-service-vn - currency-exchange-service.in28minutes-dev.com
+- currency-conversion-service-vn - currency-conversion-service.in28minutes-dev.com
+
+#### Virtual services 
+- currency-exchange-service.in28minutes-dev.com -> currency-exchange-service-vn
+- currency-conversion-service.in28minutes-dev.com -> currency-conversion-service-vn
+
+#### Backend Registration
+- currency-conversion-service-vn -> currency-exchange-service.in28minutes-dev.com
+
+#### Task Definition Updates
+- aws-currency-conversion-service
+- aws-currency-exchange-service-h2
+- ```ENVOY_LOG_LEVEL-trace, ENABLE_ENVOY_XRAY_TRACING-1```
+
+#### Service Updates
+- aws-currency-conversion-service-appmesh
+- aws-currency-exchange-service-appmesh
+
+## Deploying Version 2 of Currency Exchange Service to ECS and App Mesh
+
+#### App Mesh - New Virtual Node
+currency-exchange-service-v2-vn - currency-exchange-service-v2.in28minutes-dev.com
+
+#### ECS Fargate - Update Task Definition
+aws-currency-exchange-service-h2
+ - in28min/aws-currency-exchange-service-h2:1.0.1-RELEASE
+ - Use New Virtual Node
+ 
+#### ECS Fargate - Create New Service 
+aws-currency-exchange-service-v2-appmesh
+- Service Discovery - currency-exchange-service-v2
+
+#### App Mesh - Create Virtual Router
+currency-exchange-service-vr distributing traffic to
+- currency-exchange-service-vn
+- currency-exchange-service-v2-vn
+
+#### App Mesh - Update Service to Use Virtual Router
+currency-exchange-service.in28minutes-dev.com -> currency-exchange-service-vr
+
+
+#### jq
+
+```
+sudo yum install jq
+```
+
+#### AWS CLI Hosted Zones
+
+```
+aws --version
+aws configure
+aws servicediscovery list-services
+aws servicediscovery delete-service --id={id}
+aws servicediscovery list-services
+
+aws servicediscovery list-namespaces
+aws servicediscovery delete-namespace --id={id}
+aws servicediscovery list-namespaces
+
+aws servicediscovery delete-service --id=srv-7q3fkztnbo6aa5kc
+aws servicediscovery delete-service --id=srv-mdybugm4bh5u4ugx
+aws servicediscovery delete-service --id=srv-7upzjx3mhfleyfoz
+aws servicediscovery delete-namespace --id=ns-ctvtysasurklojm3
+```

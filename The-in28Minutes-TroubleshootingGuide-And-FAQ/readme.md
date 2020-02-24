@@ -187,6 +187,52 @@ Solution
 
 ### Hateoas
 
+There is a slight incompatiblity with latest releases between Swagger and Hateoas.
+
+Here are set of latest dependencies working well.
+
+```
+<parent>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-parent</artifactId>
+<version>2.1.3.RELEASE</version>
+<relativePath/> <!-- lookup parent from repository -->
+</parent>
+```
+
+```
+<dependency>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-swagger2</artifactId>
+    <version>2.9.2</version>
+</dependency>
+
+<dependency>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-swagger-ui</artifactId>
+    <version>2.9.2</version>
+</dependency>
+```
+
+Here's the working HATEOAS code with 2.1.3.Release
+
+```
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
+import org.springframework.hateoas.Resource;
+
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+
+Resource<User> resource = new Resource<User>(user);
+
+ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllUsers());
+
+resource.add(linkTo.withRel("all-users"));
+
+return resource;
+```
+
 There are a few modifications of HATEOAS  in the latest release of Spring HATEOAS 1.0.0:
 
 One of these should work
@@ -6704,6 +6750,7 @@ Good Luck and Keep Learning in28Minutes
 - Twitter   : https://twitter.com/in28Minutes​
 - YouTube   : https://www.youtube.com/rithustutorials​
 ​
+
 ##### Udemy Support
 
 I’m so sorry about this issue! Its not fun when things like this happen.

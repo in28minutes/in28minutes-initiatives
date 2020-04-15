@@ -24,7 +24,7 @@ If you have Message 2, high probability that the problem is with Backend API Spr
 
 ### Is your backend API configured right?
 
-Are you able to send a request to http://localhost:8080/hello-world/path-variable/Ranga or to the todo urls with username = 'in28minutes' and password = 'dummy' directly from your browser or REST API client (without using your fronend application).
+Are you able to send a request to http://localhost:8080/hello-world/path-variable/Ranga or to the todo urls with username = 'in28minutes' and password = 'dummy' directly from your browser or REST API client (without using your frontend application).
 
 ![](images/full-stack-01-basic-auth.png)
 
@@ -105,7 +105,7 @@ Picking up username from login screen and using basicauth url for authentication
  `http://localhost:8080/basicauth`,
 ```
 
-Compare your code against working
+Compare your code against working code
 - Angular - https://github.com/in28minutes/full-stack-with-angular-and-spring-boot/blob/master/Backup-18-Working-App-With-Basic-Authentication-After-Enabling-HttpInterceptor.md#frontendtodosrcapperrorerrorcomponentts
 - React - https://github.com/in28minutes/full-stack-with-react-and-spring-boot/blob/master/0001-0365-Basic-Auth-Done.md
 

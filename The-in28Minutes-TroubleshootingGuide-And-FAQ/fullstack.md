@@ -24,9 +24,11 @@ If you have Message 2, high probability that the problem is with Backend API Spr
 
 ### Is your backend API configured right?
 
-Are you able to send a request to http://localhost:8080/hello-world/path-variable/Ranga with username = 'in28minutes' and password = 'dummy' directly from your browser or REST API client (without using your fronend application).
+Are you able to send a request to http://localhost:8080/hello-world/path-variable/Ranga or to the todo urls with username = 'in28minutes' and password = 'dummy' directly from your browser or REST API client (without using your fronend application).
 
-If you are not able to then check your spring security configuration of username and password in application.properties:
+![](images/full-stack-01-basic-auth.png)
+
+Check your spring security configuration of username and password in application.properties:
 
 ```
 spring.security.user.name=in28minutes
@@ -60,24 +62,6 @@ public class SpringSecurityConfigurationBasicAuth extends WebSecurityConfigurerA
 }
 ```
 
-Have you created BasicAuthenticationController?  If not don't worry about this!
-
-If so, are you able to send a request to http://localhost:8080/authenticate with username = 'in28minutes' and password = 'dummy' directly from your browser or REST API client (without using your fronend application).
-
-Do you have @CrossOrigin?
-
-```
-@CrossOrigin(origins="http://localhost:4200")
-@RestController
-public class BasicAuthenticationController {
-
-	@GetMapping(path = "/basicauth")
-	public AuthenticationBean helloWorldBean() {
-		//throw new RuntimeException("Some Error has Happened! Contact Support at ***-***");
-		return new AuthenticationBean("You are authenticated");
-	}	
-}
-```
 
 ### Is your front end code sending the right details?
 
@@ -105,21 +89,20 @@ Hard Coded Code
 let username = 'in28minutes'
 let password = 'dummy'
 let basicAuthHeaderString = 'Basic ' + window.btoa(`${username}:${password}`);
-const headers = new HttpHeaders({ Authorization: basicAuthHeaderString });
-return { headers };
+{ Authorization: basicAuthHeaderString }
+
 ```
 
 Picking up username from login screen and using basicauth url for authentication.
 
 ```
-let basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
+'Basic ' + window.btoa(username + ':' + password);
 
-let headers = new HttpHeaders({
+{
     Authorization: basicAuthHeaderString
-  })
+  }
 
-return this.http.get<AuthenticationBean>(
-  `http://localhost:8080/basicauth`,
+ `http://localhost:8080/basicauth`,
 ```
 
 Compare your code against working
@@ -237,7 +220,7 @@ Are you able to use the Bearer token Authorization header and send GET request t
 Important things to check in code:
 Are you using right syntax:
 ```
-`http://localhost:8080/authenticate`,{
+{
         username,
         password
       }

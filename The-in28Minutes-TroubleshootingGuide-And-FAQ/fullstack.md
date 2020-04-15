@@ -22,12 +22,6 @@ If you have Message 2, high probability that the problem is with Backend API Spr
 
 ## Basic Authentication Problems
 
-### First thing you would need to focus on is 
-- What was your last working state?
-- What are the code changes that you made since then?
-	- Make sure that if you ae using a space after Basic in header `Basic `
-	- Make sure you are replacing the variables right
-
 ### Is your backend API configured right?
 
 Are you able to send a request to http://localhost:8080/hello-world/path-variable/Ranga with username = 'in28minutes' and password = 'dummy' directly from your browser or REST API client (without using your fronend application).
@@ -87,20 +81,19 @@ public class BasicAuthenticationController {
 
 ### Is your front end code sending the right details?
 
-- Open notepad and Note down the URL and the headers from the browser network tab.
+Open notepad and Note down the URL and the headers from the browser network tab.
 	- URL - ??
 	- Authorization Header Name - ??
 	- Authorization Header Value - ??
-- Open REST API client. Create a new request using values noted above. Are you able to execute the request successfully?
 
-![](images/full-stack-01-basic-auth.png)
 ![](images/full-stack-02-network-01.png)
 ![](images/full-stack-02-network-02.png)
 ![](images/full-stack-02-network-03.png)
 
+Open REST API client. Create a new request using values noted above. Are you able to execute the request successfully?
 
+![](images/full-stack-01-basic-auth.png)
 
-- If you are not check if the problem is with your URL or with your header value? Post these values in the Q&A.
 
 Important things to check in code below:
 - SPACE after Basic: There SHOULD be a SPACE after Basic : 'Basic ' in ('Basic ' + window.btoa(`${username}:${password}`))
@@ -129,9 +122,17 @@ return this.http.get<AuthenticationBean>(
   `http://localhost:8080/basicauth`,
 ```
 
-Working code backup
+Compare your code against working
 - Angular - https://github.com/in28minutes/full-stack-with-angular-and-spring-boot/blob/master/Backup-18-Working-App-With-Basic-Authentication-After-Enabling-HttpInterceptor.md#frontendtodosrcapperrorerrorcomponentts
 - React - https://github.com/in28minutes/full-stack-with-react-and-spring-boot/blob/master/0001-0365-Basic-Auth-Done.md
+
+### Q&A Details Update
+
+Debugging this problem is tough. So, please provide us with as many details as possible:
+- What was your last working state?
+- What are the code changes that you made since then?
+- Screenshots of all the above checks with details for URL, Authorization Header name and value
+
 
 
 ## JWT Authentication Problems
@@ -216,15 +217,17 @@ Are you able to use the Bearer token Authorization header and send GET request t
 - Open notepad and Note down the URL and the headers from the browser network tab for the authenticate request.
 	- URL - ??
 	- Body Content - ??
+![](images/full-stack-02-network-01.png)
+![](images/full-stack-02-network-02.png)
+![](images/full-stack-02-network-03.png)
+
+
 - Open REST API client. Create a new request using values noted above. Are you able to execute the request successfully?
 - If you are able to then repeat the same thing with the hello world request.
 	- URL - ??
 	- Authorization Header Name - ??
 	- Authorization Header Value - ??
 
-![](images/full-stack-02-network-01.png)
-![](images/full-stack-02-network-02.png)
-![](images/full-stack-02-network-03.png)
 ![](images/full-stack-04-jwt-01.png)
 ![](images/full-stack-04-jwt-02.png)
 
@@ -246,6 +249,13 @@ Is the name of the token and the value right? Are you using ticks instead of quo
 ```
 `Bearer ${data.token}`
 ```
+
+### Q&A Details Update
+
+Debugging this problem is tough. So, please provide us with as many details as possible:
+- What was your last working state?
+- What are the code changes that you made since then?
+- Screenshots of all the above checks with details for URL, Authorization Header name and value
 
 
 ## Other Imports

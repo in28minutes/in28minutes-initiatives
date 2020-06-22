@@ -41,18 +41,19 @@ In the browser, change the database url to jdbc:h2:mem:testdb (Shown in the scre
 
 ### No 1 : Are you using Spring Boot >=2.3.0 Release?
 
-Are you using >=2.3.0 Release of Spring Boot? Can you configure this in `application.properties`
+Configure this in `application.properties`
 
 ```
 spring.datasource.url=jdbc:h2:mem:testdb
 spring.data.jpa.repositories.bootstrap-mode=default
 ```
 
-
 You should see this in the log
 ```
 H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
 ```
+
+> Why do we need to configure bootstrap-mode? Details here - https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.3-Release-Notes#bootstrapmode-for-jpa-repositories
 
 ### No 2 : Make sure you have the right annotations!
 
@@ -62,9 +63,7 @@ Make sure that the Entities have @Entity annotation and the Repository class has
 
 Spring Boot does a component scan in the package and sub-packages where your @SpringBootApplication is defined. 
 
-Why is this important?
-
-If your entity class or the repository class is NOT under the package of your @SpringBootApplication class, it will NOT be picked up by component scan. 
+>  Why is this important? If your entity class or the repository class is NOT under the package of your @SpringBootApplication class, it will NOT be picked up by component scan. 
 
 #### RECOMMENDED OPTION - Option 1 : Move the component under component scan
 Simplest way to fix this is to identify the packages of the SpringBootApplication class and move all the components into that package or sub-packages of it. 

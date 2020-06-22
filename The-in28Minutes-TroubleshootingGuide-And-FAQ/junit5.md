@@ -31,3 +31,6 @@ Spring Boot projects with versions >= 2.2.0 use JUnit 5 by default. You should s
 <dependency>
 ```
 
+## JUnit 5 Image
+
+![](images/junit5-changes.png)

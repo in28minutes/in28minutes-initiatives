@@ -66,6 +66,7 @@ Spring Boot does a component scan in the package and sub-packages where your @Sp
 >  Why is this important? If your entity class or the repository class is NOT under the package of your @SpringBootApplication class, it will NOT be picked up by component scan. 
 
 #### RECOMMENDED OPTION - Option 1 : Move the component under component scan
+
 Simplest way to fix this is to identify the packages of the SpringBootApplication class and move all the components into that package or sub-packages of it. 
 
 #### Option 2 : Add component and entity scan for the packages containing the components

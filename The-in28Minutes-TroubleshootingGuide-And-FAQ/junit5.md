@@ -1,9 +1,11 @@
 ## JUnit 5 Changes
 
+Spring Boot projects with versions >= 2.2.0 use JUnit 5 by default.
+
 |Description|JUnit 4| JUnit 5|
 |--|--|--|
 |Package changes from `org.junit` to `org.junit.jupiter.api.*` |`import org.junit.Test;` <BR/> `import static org.junit.Assert.assertFalse;`|`import org.junit.jupiter.api.Test;` <BR/>`import static org.junit.jupiter.api.Assertions.assertFalse;`|
-|Use `@ExtendWith` instead of `@RunWith`|`@RunWith(SpringJUnit4ClassRunner.class)`|`@ExtendWith(SpringExtension.class)`|
+|Use `@ExtendWith` instead of `@RunWith`|`@RunWith (SpringJUnit4ClassRunner.class)`|`@ExtendWith (SpringExtension.class)`|
 |`@RunWith` is not needed for `@SpringBootTest` classes|`@RunWith(SpringRunner.class)`<BR/>`@SpringBootTest(classes = DemoApplication.class)`|`@SpringBootTest(classes = DemoApplication.class)`|
 |Test Annotation Changes|`@Before`<BR/>`@After`<BR/>`@BeforeClass`<BR/>`@AfterClass`<BR/>`@Ignore`|`@BeforeEach`<BR/>`@AfterEach`<BR/>`@BeforeAll`<BR/>`@AfterAll`<BR/>`@Disabled`|
 

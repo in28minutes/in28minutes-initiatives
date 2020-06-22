@@ -93,3 +93,11 @@ Make the database URL a constant by configuring this in application.properties.
 ```
 spring.datasource.url=jdbc:h2:mem:testdb
 ```
+
+#### If you face any problems:
+
+**Spring Boot 2.3.1 Upgrade - Changes**
+- https://github.com/in28minutes/jpa-with-hibernate/commit/1f30e868ccd2eb7e69cdb989bc990cd00cc82168
+
+**JUnit 5 Upgrade - Changes**
+- https://github.com/in28minutes/jpa-with-hibernate/commit/0ae2007c8e08420e6d5ab2a86499274c7c60c8ae

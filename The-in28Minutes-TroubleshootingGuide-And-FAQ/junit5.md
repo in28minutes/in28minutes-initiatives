@@ -24,3 +24,7 @@ Spring Boot projects with versions >= 2.2.0 use JUnit 5 by default. You should s
 	</exclusions>
 <dependency>
 ```
+
+## JUnit 5 Upgrades For Different Projects
+
+- https://github.com/in28minutes/jpa-with-hibernate/commit/0ae2007c8e08420e6d5ab2a86499274c7c60c8ae

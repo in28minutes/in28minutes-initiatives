@@ -1,21 +1,6 @@
 ## Unable to login into H2 Console
 
-1. Do you have H2 dependency in `pom.xml`? Try removing `<scope>runtime</scope>` and see if it makes a difference.
-
-```
-<dependency>
-	<groupId>com.h2database</groupId>
-	<artifactId>h2</artifactId>
-</dependency>
-```
-
-2. Check if H2 Console is enabled in `application.properties` 
-
-```
-spring.h2.console.enabled=true
-```
-
-3. Are you using >=2.3.0 Release of Spring Boot? You would need to configure this in `application.properties`.
+1. Are you using >=2.3.0 Release of Spring Boot? You would need to configure this in `application.properties`.
 
 ```
 spring.datasource.url=jdbc:h2:mem:testdb
@@ -27,11 +12,26 @@ spring.datasource.url=jdbc:h2:mem:testdb
 H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:dd222195-7e0b-4dc0-ae4c-7f53e5ea7ceb'
 ```
 
-4. Make sure you are using `jdbc:h2:mem:testdb` as the database URL in H2 Console as shown in the image below.
+2. Make sure you are using `jdbc:h2:mem:testdb` as the database URL in H2 Console as shown in the image below.
 
 In the browser, change the database url to jdbc:h2:mem:testdb (Shown in the screen below).
 
 ![](images/h2-solution-image.png)
+
+3. Do you have H2 dependency in `pom.xml`? Try removing `<scope>runtime</scope>` and see if it makes a difference.
+
+```
+<dependency>
+	<groupId>com.h2database</groupId>
+	<artifactId>h2</artifactId>
+</dependency>
+```
+
+4. Check if H2 Console is enabled in `application.properties` 
+
+```
+spring.h2.console.enabled=true
+```
 
 5. Delete your maven local repository (content of .m2 folder) and rebuild the project. (You are right. This looks silly. But do not skip it. I've seen many problems caused by dependency caches!)
 

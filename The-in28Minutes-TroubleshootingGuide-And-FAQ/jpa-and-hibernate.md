@@ -21,7 +21,7 @@ spring.h2.console.enabled=true
 spring.datasource.url=jdbc:h2:mem:testdb
 ```
 
-> Why is this needed? In releases >=2.3.0 , Spring Boot creates a database with random URL as shown below. We do NOT want that. We want a constant URL.
+> Why is this needed? With the latest versions of Spring Boot (2.3+), the H2 database name is randomly generated each time you restart the server.  We do NOT want that. We want a constant URL.
 
 ```
 H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:dd222195-7e0b-4dc0-ae4c-7f53e5ea7ceb'
@@ -33,7 +33,7 @@ In the browser, change the database url to jdbc:h2:mem:testdb (Shown in the scre
 
 ![](images/h2-solution-image.png)
 
-5. Delete your maven local repository () and rebuild the project. (You are right. This looks silly. But do not skip it. I've seen many problems caused by dependency caches!)
+5. Delete your maven local repository (content of .m2 folder) and rebuild the project. (You are right. This looks silly. But do not skip it. I've seen many problems caused by dependency caches!)
 
 ![](images/eclipse-maven-m2-folder.png)
 
@@ -79,3 +79,17 @@ Simplest way to fix this is to identify the packages of the SpringBootApplicatio
 Learn more about component scan:
 - https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-TroubleshootingGuide-And-FAQ#q---what-is-the-need-for-a-component-scan
 
+
+## 2.3.0 Course Update
+
+With the latest versions of Spring Boot (2.3+), the H2 database name is randomly generated each time you restart the server.
+
+You can find the database name and URL from the console log.
+
+#### RECOMMENDED: 
+
+Make the database URL a constant by configuring this in application.properties.
+
+```
+spring.datasource.url=jdbc:h2:mem:testdb
+```

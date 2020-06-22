@@ -5,10 +5,9 @@ Spring Boot projects with versions >= 2.2.0 use JUnit 5 by default.
 |Description|JUnit 4| JUnit 5|
 |--|--|--|
 |Test Annotation Changes|`@Before`<BR/>`@After`<BR/>`@BeforeClass`<BR/>`@AfterClass`<BR/>`@Ignore`|`@BeforeEach`<BR/>`@AfterEach`<BR/>`@BeforeAll`<BR/>`@AfterAll`<BR/>`@Disabled`|
-|Use `@ExtendWith` instead of `@RunWith`|`@RunWith (SpringJUnit4ClassRunner.class)`|`@ExtendWith (SpringExtension.class)`|
+|Use `@ExtendWith` instead of `@RunWith`|`@RunWith (SpringJUnit4ClassRunner.class)`<BR/>`@RunWith(MockitoJUnitRunner.class)`|`@ExtendWith (SpringExtension.class)` <BR/>`@ExtendWith(MockitoExtension.class)`|
 |`@RunWith` is not needed for `@SpringBootTest`, `@WebMvcTest`,`@DataJpaTest` classes|`@RunWith(SpringRunner.class)`<BR/>`@SpringBootTest(classes = DemoApplication.class)`|`@SpringBootTest(classes = DemoApplication.class)`|
-|Changes to `MockitoJUnitRunner`|`@RunWith(MockitoJUnitRunner.class)`|`@ExtendWith(MockitoExtension.class)`|
-|Package changes from `org.junit` to `org.junit.jupiter` |`import org.junit.Test;` <BR/> `import static org.junit.Assert.assertFalse;`|`import org.junit.jupiter.api.Test;` <BR/>`import static org.junit.jupiter.api.Assertions.assertFalse;`|
+|Package changes from `org.junit` to `org.junit.jupiter` |`import org.junit.Test;` <BR/> `import static org.junit.Assert.*;`|`import org.junit.jupiter.api.Test;` <BR/>`import static org.junit.jupiter.api.Assertions.*;`|
 
 ## JUnit 5 Upgrades For Different Projects
 

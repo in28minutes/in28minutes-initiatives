@@ -92,8 +92,6 @@ What error do you see when you type jshell in command prompt? Can you post a scr
 
 #### Use Latest Version of Eclipse
 
-Correct the classpath of your application so that it contains a single, compatible version of org.springframework.plugin.core.PluginRegistry
-
 I downloaded a project from spring initializr but when I see the pom.xml showing errors on parent tag.
 
 https://stackoverflow.com/questions/56154266/why-does-change-from-spring-boot-version-2-1-4-to-2-1-5-gives-unknown-configurat
@@ -122,21 +120,21 @@ Other option is to use 2.1.3.RELEASE.
 </parent>
 ```
 
-#### Use Spring Cloud - Greenwich.RC2 and Spring Boot - 2.1.1.RELEASE.
+#### Use Spring Cloud - Hoxton.SR5 and Spring Boot - 2.3.1.RELEASE.
 
 Change 1
 ```
 <parent>
 <groupId>org.springframework.boot</groupId>
 <artifactId>spring-boot-starter-parent</artifactId>
-<version>2.1.1.RELEASE</version>
+<version>2.3.1.RELEASE</version>
 <relativePath/> <!-- lookup parent from repository -->
 </parent>
 ```
 
 Change 2
 ```
-<spring-cloud.version>Greenwich.RC2</spring-cloud.version>
+<spring-cloud.version>Hoxton.SR5</spring-cloud.version>
 ```
 
 ## Recent Course Updates
@@ -187,79 +185,11 @@ Solution
 
 ### Hateoas
 
-There is a slight incompatiblity with latest releases between Swagger and Hateoas.
-
-Here are set of latest dependencies working well.
-
-```
-<parent>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-starter-parent</artifactId>
-<version>2.1.3.RELEASE</version>
-<relativePath/> <!-- lookup parent from repository -->
-</parent>
-```
-
-```
-<dependency>
-    <groupId>io.springfox</groupId>
-    <artifactId>springfox-swagger2</artifactId>
-    <version>2.9.2</version>
-</dependency>
-
-<dependency>
-    <groupId>io.springfox</groupId>
-    <artifactId>springfox-swagger-ui</artifactId>
-    <version>2.9.2</version>
-</dependency>
-```
-
-Here's the working HATEOAS code with 2.1.3.Release
-
-```
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
-
-import org.springframework.hateoas.Resource;
-
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
-
-Resource<User> resource = new Resource<User>(user);
-
-ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllUsers());
-
-resource.add(linkTo.withRel("all-users"));
-
-return resource;
-```
 
 There are a few modifications of HATEOAS  in the latest release of Spring HATEOAS 1.0.0:
 
-One of these should work
+For Spring Boot v2.2 or greater - complete code: https://github.com/in28minutes/spring-microservices/blob/master/02.restful-web-services/2.3.1.RELEASE-upgrade.md#srcmainjavacomin28minutesrestwebservicesrestfulwebservicesuseruserresourcejava
 
-#### Option 1 : Latest SNAPSHOT releases
-
-```
-import org.springframework.hateoas.EntityModel;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
-EntityModel<User> model = new EntityModel<>(user);
-WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllUsers());
-model.add(linkTo.withRel("all-users"));
-```
-
-#### Option 2: Older versions
-
-```
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
- 
-Resource<User> resource = new Resource<User>(user);
-ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllUsers());
-resource.add(linkTo.withRel("all-users"));
-return resource;
-```
 
 ## Spring 2.0.0.RELEASE Upgrades
 
@@ -462,8 +392,7 @@ https://maven.apache.org/plugins/maven-compiler-plugin/examples/set-compiler-sou
 > Recommended to use Eclipse Java EE version
 
 Recommended Eclipse Version
-- Oxygen https://www.eclipse.org/downloads/packages/release/Oxygen/
-- Eclipse Java EE version
+- Latest Eclipse Java EE version
 
 ### Tip : Troubleshooting Embedded Maven in Eclipse
 
@@ -3008,42 +2937,44 @@ Mixins can be option. Recommended Reading - https://stackoverflow.com/questions/
 
 ### Swagger
 
-Here are set of latest dependencies working well.
 
-```
-<parent>
+Refer pom.xml here - https://github.com/in28minutes/spring-microservices/blob/master/02.restful-web-services/2.3.1.RELEASE-upgrade.md#pomxml
 
-<groupId>org.springframework.boot</groupId>
+Refer SwaggerConfig file from here - https://github.com/in28minutes/spring-microservices/blob/master/02.restful-web-services/2.3.1.RELEASE-upgrade.md#srcmainjavacomin28minutesrestwebservicesrestfulwebservicesswaggerconfigjava
 
-<artifactId>spring-boot-starter-parent</artifactId>
-
-<version>2.1.3.RELEASE</version>
-
-<relativePath/> <!-- lookup parent from repository -->
-
-</parent>
-```
-
+We recommend 3.0.0-SNAPSHOT version for Spring Boot >= 2.2
 ```
 <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+      <version>3.0.0-SNAPSHOT</version>
+    </dependency>
 
-    <groupId>io.springfox</groupId>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger-ui</artifactId>
+      <version>3.0.0-SNAPSHOT</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-spring-webmvc</artifactId>
+      <version>3.0.0-SNAPSHOT</version>
+    </dependency>
+```
 
-    <artifactId>springfox-swagger2</artifactId>
-
-    <version>2.9.2</version>
-
-</dependency>
-
-<dependency>
-
-    <groupId>io.springfox</groupId>
-
-    <artifactId>springfox-swagger-ui</artifactId>
-
-    <version>2.9.2</version>
-
-</dependency>
+Ensure that you configure repository for jfrog-snapshots to use snapshot version
+```
+<repositories>
+    <repository>
+      <id>jfrog-snapshots</id>
+      <name>JFROG Snapshots</name>
+      <url>http://oss.jfrog.org/artifactory/oss-snapshot-local</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
 ```
 
 ### How to deploy Spring Boot Application to unix server ? JAR vs WAR
@@ -4276,7 +4207,7 @@ With 2.0.0.M4 Spring Boot is making a lot of changes to Actuator.
 
 > Do not use SNAPSHOT versions
 
-For now we recommend using 2.0.0.RELEASE with all courses. I will wait for the changes that are introduced with M4 to stabilize before incorporating into the course.
+For now we recommend using 2.3.1.RELEASE with all courses. I will wait for the changes that are introduced with M4 to stabilize before incorporating into the course.
 
 Recommmended Reading
 - https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.0.0-M4-Release-Notes
@@ -4287,7 +4218,7 @@ Solution : Update your pom.xml
 <parent>
 	<groupId>org.springframework.boot</groupId>
 	<artifactId>spring-boot-starter-parent</artifactId>
-	<version>2.0.0.RELEASE</version>
+	<version>2.3.1.RELEASE</version>
 	<relativePath /> <!-- lookup parent from repository -->
 </parent>
 ```
@@ -4444,7 +4375,7 @@ Remove the existing dependency on spring-boot-starter-web and add these in.
 
 ### Error :  Failure to transfer org.springframework.boot:spring-boot-starter-parent:pom:2.0.0.RELEASE from https://repo.spring.io/snapshot
 
-SNAPSHOT versions are versions under development. Of late, there are a few issues with some of the SNAPSHOT version of Spring Boot 2. We recommend using 2.0.0.RELEASE for now.
+SNAPSHOT versions are versions under development. Of late, there are a few issues with some of the SNAPSHOT version of Spring Boot 2. We recommend using 2.3.1.RELEASE for now.
 
 In you pom.xml, you can change the version in the parent as shown below:
 
@@ -4452,7 +4383,7 @@ In you pom.xml, you can change the version in the parent as shown below:
 <parent>
 	<groupId>org.springframework.boot</groupId>
 	<artifactId>spring-boot-starter-parent</artifactId>
-	<version>2.0.0.RELEASE</version>
+	<version>2.3.1.RELEASE</version>
 	<relativePath/> <!-- lookup parent from repository -->
 </parent>
 ```
@@ -5573,7 +5504,7 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 
 This is because of conflicts with older version of Hibernate.
 
-Ensure you are using the recommended version of Spring Boot - 2.0.0.RELEASE
+Ensure you are using the recommended version of Spring Boot - 2.3.1.RELEASE
 
 
 ### Q :  Is it mandatory to specify @Repository on a repository which is extending JPARepository?
@@ -7486,7 +7417,7 @@ https://www.devglan.com/spring-cloud/encrypt-decrypt-cloud-config-properties
 
 (1) Ensure you have the right dependencies defined in `pom.xml` of `currency-conversion-service` - `spring-cloud-starter-openfeign` and `spring-cloud-starter-netflix-ribbon`
 
-(2) Ensure you are using the recommended versions of Spring Boot (`<version>2.1.3.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Greenwich.RC2</spring-cloud.version>`)
+(2) Ensure you are using the recommended versions of Spring Boot (`<version>2.3.1.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Hoxton.SR5</spring-cloud.version>`)
 
 (3) Ensure that you have the annotation `@EnableFeignClients` with right packages on the class `public class CurrencyConversionServiceApplication` `@EnableFeignClients("com.in28minutes.microservices.currencyconversionservice")` 
 
@@ -7664,7 +7595,13 @@ Look at the two methods below: First uses RestTemplate. Second uses Feign. You c
 
 ## Debugging Problems with Naming Server Eureka and Ribbon
 
-Ensure you are using the recommended versions of Spring Boot (`<version>2.1.3.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Greenwich.RC2</spring-cloud.version>`)
+If you see an error of this kind - Wait for 5 minutes and give it a try again! 
+
+```
+com.netflix.client.ClientException: Load balancer does not have available server for client: 
+```
+
+Ensure you are using the recommended versions of Spring Boot (`<version>2.3.1.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Hoxton.SR5</spring-cloud.version>`)
 
 (1) Ensure `@EnableEurekaServer` is enabled on `NetflixEurekaNamingServerApplication`
 
@@ -7862,33 +7799,18 @@ feign:
 }
 ```
 
-### Eureka does not work with boot 2.2.0
-
-Correct the classpath of your application so that it contains a single, compatible version of org.springframework.boot.actuate.health.CompositeHealthIndicator
-
-Caused by: java.lang.NoSuchMethodError: org.springframework.boot.actuate.health.CompositeHealthIndicator.<init>(Lorg/springframework/boot/actuate/health/HealthAggregator;)V
-
-https://github.com/spring-cloud/spring-cloud-netflix/issues/3410
-
-SpringBoot 2.2 will be supported by the upcoming Spring Cloud Hoxton Release Train. For now, with Greenwich, please use Boot 2.1.
-
-https://github.com/spring-cloud/spring-cloud-netflix/issues/3410
-
-For now use 2.1.3.RELEASE
-```xml
-<parent>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-starter-parent</artifactId>
-<version>2.1.3.RELEASE</version>
-<relativePath/> <!-- lookup parent from repository -->
-</parent>
-```
-
 ## Debugging Problems with Zuul API Gateway
 
-First of all ensure you are using the recommended versions of Spring Boot (`<version>2.1.3.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Greenwich.RC2</spring-cloud.version>`) with all the four applications - netflix-eureka-naming-server, currency-exchange-service, currency-conversion-service and netflix-zuul-api-gateway-server.
+First of all ensure you are using the recommended versions of Spring Boot (`<version>2.3.1.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Hoxton.SR5</spring-cloud.version>`) with all the four applications - netflix-eureka-naming-server, currency-exchange-service, currency-conversion-service and netflix-zuul-api-gateway-server.
 
 Ensure that there are no typos in the URLs you are using - http://localhost:8100/currency-converter-feign/from/EUR/to/INR/quantity/10000, http://localhost:8000/currency-exchange/from/EUR/to/INR, http://localhost:8100/currency-converter/from/USD/to/INR/quantity/10, http://localhost:8765/currency-conversion-service/currency-converter-feign/from/USD/to/INR/quantity/10 and http://localhost:8765/currency-exchange-service/currency-exchange/from/EUR/to/INR.
+
+If you see an error of this kind - Wait for 5 minutes and give it a try again! 
+
+```
+com.netflix.client.ClientException: Load balancer does not have available server for client: 
+```
+
 
 (1) Make sure that you have this configured in `application.properties` of currency-exchange-service, currency-conversion-service and netflix-zuul-api-gateway-server `eureka.client.service-url.default-zone=http://localhost:8761/eureka`
 
@@ -8083,7 +8005,13 @@ Typically there is a warmup time that is needed at the start of the services to 
 
 ## Debugging Problems with Zipkin
 
-First of all ensure you are using the recommended versions of Spring Boot (`<version>2.1.3.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Greenwich.RC2</spring-cloud.version>`) with all the four applications - netflix-eureka-naming-server, currency-exchange-service, currency-conversion-service and netflix-zuul-api-gateway-server.
+First of all ensure you are using the recommended versions of Spring Boot (`<version>2.3.1.RELEASE</version>`) and Spring Cloud (`<spring-cloud.version>Hoxton.SR5</spring-cloud.version>`) with all the four applications - netflix-eureka-naming-server, currency-exchange-service, currency-conversion-service and netflix-zuul-api-gateway-server.
+
+If you see an error of this kind - Wait for 5 minutes and give it a try again! 
+
+```
+com.netflix.client.ClientException: Load balancer does not have available server for client: 
+```
 
 
 (1) Check that All 3 Spring Boot Application classes have Sampler defined

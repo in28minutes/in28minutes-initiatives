@@ -44,19 +44,7 @@ We recommend 3.0.0-SNAPSHOT version for Spring Boot >= 2.2
 ```
 <dependency>
 			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-spring-webmvc</artifactId>
+			<artifactId>springfox-boot-starter</artifactId>
 			<version>3.0.0-SNAPSHOT</version>
 		</dependency>
 ```

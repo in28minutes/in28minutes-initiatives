@@ -59,7 +59,13 @@ H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb
 
 Make sure that the Entities have @Entity annotation and the Repository class has @Repository annotation
 
-### No 3 : Make sure your component is picked up by Component Scan
+### No 3 : Make sure you do NOT have schema.sql 
+
+Delete schema.sql if you have created one.
+
+If `schema.sql` file exist, tables are NOT created.
+
+### No 4 : Make sure your component is picked up by Component Scan
 
 Spring Boot does a component scan in the package and sub-packages where your @SpringBootApplication is defined. 
 

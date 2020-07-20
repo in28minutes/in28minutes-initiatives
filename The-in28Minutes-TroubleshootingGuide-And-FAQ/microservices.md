@@ -40,16 +40,15 @@ Refer pom.xml here - https://github.com/in28minutes/spring-microservices/blob/ma
 
 Refer SwaggerConfig file from here - https://github.com/in28minutes/spring-microservices/blob/master/02.restful-web-services/2.3.1.RELEASE-upgrade.md#srcmainjavacomin28minutesrestwebservicesrestfulwebservicesswaggerconfigjava
 
-We recommend 3.0.0-SNAPSHOT version for Spring Boot >= 2.2
+We recommend 3.0.0 version for Spring Boot >= 2.2
 ```
 <dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-boot-starter</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
+			<version>3.0.0</version>
 		</dependency>
 ```
 
-Ensure that you configure repository for jfrog-snapshots to use snapshot version
 ```
 <repositories>
 		<repository>

@@ -13,6 +13,7 @@ Spring Boot projects with versions >= 2.2.0 use JUnit 5 by default.
 
 - JPA - https://github.com/in28minutes/jpa-with-hibernate/commit/0ae2007c8e08420e6d5ab2a86499274c7c60c8ae
 - Unit Testing with Spring Boot - https://github.com/in28minutes/spring-unit-testing-with-junit-and-mockito/commit/2c6df429aec248d455b7ad19e60e90743979ba1c
+- Spring Framework - https://github.com/in28minutes/spring-master-class/commit/60b61500f8f80517ef86d50e7dffb5826b2b3720
 
 ## pom.xml changes
 

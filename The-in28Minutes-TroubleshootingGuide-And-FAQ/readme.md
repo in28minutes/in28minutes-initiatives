@@ -7165,6 +7165,15 @@ As always, there are other technologies going up too - big data, analytics, fron
 
 First of all check if you have any typos in the URL. Does it match exactly what is given below?
 
+(0) Are you using >=2.4.0 of Spring Boot? You need to add this dependency to enable bootstrapping:
+
+```
+<dependency>
+   <groupId>org.springframework.cloud</groupId>
+   <artifactId>spring-cloud-starter-bootstrap</artifactId>
+</dependency>
+```
+
 (1) Does the URL http://localhost:8888/limits-service/default work? If the URL does not work, check if you have the same name for limits-service in
 (a) `spring.application.name` in bootstrap.properties
 (b) in the URL

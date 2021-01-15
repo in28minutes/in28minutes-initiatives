@@ -5326,9 +5326,9 @@ In pom.xml file it needs the following dependencys:
 In application.properties:
 
 ```
-***REMOVED***
-***REMOVED***
-***REMOVED***
+spring.datasource.url=jdbc:sybase:Tds:abc:15600/ro
+spring.datasource.username=
+spring.datasource.password=
 spring.datasource.driverClassName=com.sybase.jdbc4.jdbc.SybDriver
 ```
 

@@ -1,15 +1,5 @@
 ## Unable to login into H2 Console
 
-0. Are you using >=2.5.0 Release of Spring Boot? You would need to configure this in `application.properties`.
-
-```
-spring.jpa.defer-datasource-initialization=true
-```
-
-OR you can use schema.sql instead of data.sql
-
-> Why is this needed? https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.5.0-M3-Release-Notes#hibernate-and-datasql => *By default, data.sql scripts are now run before Hibernate is initialized. This aligns the behaviour of basic script-based initialization with that of Flyway and Liquibase. If you want to use data.sql to populate a schema created by Hibernate, set spring.jpa.defer-datasource-initialization to true. While mixing database initialization technologies is not recommended, this will also allow you to use a schema.sql script to build upon a Hibernate-created schema before it’s populated via data.sql* 
-
 1. Are you using >=2.3.0 Release of Spring Boot? You would need to configure this in `application.properties`.
 
 ```
@@ -48,6 +38,19 @@ spring.h2.console.enabled=true
 ![](images/eclipse-maven-m2-folder.png)
 
 ## Tables are not created
+
+### Are you using Spring Boot >=2.5.0 Release?
+
+0. Are you using >=2.5.0 Release of Spring Boot? You would need to configure this in `application.properties`.
+
+```
+spring.jpa.defer-datasource-initialization=true
+```
+
+OR you can use schema.sql instead of data.sql
+
+> Why is this needed? https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.5.0-M3-Release-Notes#hibernate-and-datasql => *By default, data.sql scripts are now run before Hibernate is initialized. This aligns the behaviour of basic script-based initialization with that of Flyway and Liquibase. If you want to use data.sql to populate a schema created by Hibernate, set spring.jpa.defer-datasource-initialization to true. While mixing database initialization technologies is not recommended, this will also allow you to use a schema.sql script to build upon a Hibernate-created schema before it’s populated via data.sql* 
+
 
 ### No 1 : Are you using Spring Boot >=2.3.0 Release?
 

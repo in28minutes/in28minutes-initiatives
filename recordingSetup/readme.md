@@ -2,7 +2,9 @@
 
 - Blue Microphones YETI USB Microphone(Silver)
 https://www.amazon.in/gp/product/B002VA464S
-- Studio Microphone Mic Wind Screen Pop Filter/ Swivel Mount, 360Â° Flexible Gooseneck Holder
+- (EARLIER) Studio Microphone Mic Wind Screen Pop Filter/ Swivel Mount, 360Â° Flexible Gooseneck Holder
+- (NOW) Mudder Mic Cover Foam Microphone Windscreen for Blue Yeti, Yeti Pro Condenser Microphone
+- (NOW) ZRAMO Foam Windscreen Designed to fit the Blue Yeti, Yeti Pro Condenser Microphone, MXL, Audio Technica, and Other Large Microphones - Black
 
 ### Settings
 

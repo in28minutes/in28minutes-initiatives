@@ -9,8 +9,8 @@ https://www.amazon.in/gp/product/B002VA464S
 > Make sure you adjust volume, gain and pattern to the settings shown in the screen.
 
 ![](./images/recording-setup-1.jpeg)
-![](./images/recording-setup-2.jpeg)
-![](./images/recording-setup-3.jpeg)
+![](./images/recording-setup-21.jpeg)
+![](./images/recording-setup-31.jpeg)
 
 
 ## Software

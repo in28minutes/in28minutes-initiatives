@@ -1,24 +1,21 @@
+## JPA and Hibernate Debugging Guide
+
 ## Unable to login into H2 Console
 
-1. Are you using >=2.3.0 Release of Spring Boot? You would need to configure this in `application.properties`.
+Enable h2 console
+```
+spring.h2.console.enabled=true
+```
 
+You don't want a random generated h2 database url. Make it a constant.
 ```
 spring.datasource.url=jdbc:h2:mem:testdb
 ```
 
-> Why is this needed? With the latest versions of Spring Boot (2.3+), the H2 database name is randomly generated each time you restart the server.  We do NOT want that. We want a constant URL.
-
-```
-H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:dd222195-7e0b-4dc0-ae4c-7f53e5ea7ceb'
-```
-
-2. Make sure you are using `jdbc:h2:mem:testdb` as the database URL in H2 Console as shown in the image below.
-
-In the browser, change the database url to jdbc:h2:mem:testdb (Shown in the screen below).
-
+Use `jdbc:h2:mem:testdb` as the database URL in H2 Console
 ![](images/h2-solution-image.png)
 
-3. Do you have H2 dependency in `pom.xml`? Try removing `<scope>runtime</scope>` and see if it makes a difference.
+If you still have problems, try removing `<scope>runtime</scope>`  from your pom.xml definition of h2 and see if it makes a difference.
 
 ```
 <dependency>
@@ -27,58 +24,45 @@ In the browser, change the database url to jdbc:h2:mem:testdb (Shown in the scre
 </dependency>
 ```
 
-4. Check if H2 Console is enabled in `application.properties` 
-
-```
-spring.h2.console.enabled=true
-```
-
-5. Delete your maven local repository (content of .m2 folder) and rebuild the project. (You are right. This looks silly. But do not skip it. I've seen many problems caused by dependency caches!)
-
-![](images/eclipse-maven-m2-folder.png)
-
 ## Tables are not created
 
-### Are you using Spring Boot >=2.5.0 Release?
+If you are having problems with table creation or logging into H2 console, we recommend using this configuration in `application.properties` (This is the FIRST THING you should try. Reasons for each of the configuration is explained later in the guide.)
 
-0. Are you using >=2.5.0 Release of Spring Boot? You would need to configure this in `application.properties`.
+```
+spring.datasource.url=jdbc:h2:mem:testdb;NON_KEYWORDS=USER
+spring.h2.console.enabled=true
+spring.jpa.defer-datasource-initialization=true
+spring.data.jpa.repositories.bootstrap-mode=default
+```
+
+
+https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.5.0-M3-Release-Notes#hibernate-and-datasql => *By default, data.sql scripts are now run before Hibernate is initialized. This aligns the behaviour of basic script-based initialization with that of Flyway and Liquibase. If you want to use data.sql to populate a schema created by Hibernate, set spring.jpa.defer-datasource-initialization to true. While mixing database initialization technologies is not recommended, this will also allow you to use a schema.sql script to build upon a Hibernate-created schema before it’s populated via data.sql* 
 
 ```
 spring.jpa.defer-datasource-initialization=true
 ```
 
-OR you can use schema.sql instead of data.sql
-
-> Why is this needed? https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.5.0-M3-Release-Notes#hibernate-and-datasql => *By default, data.sql scripts are now run before Hibernate is initialized. This aligns the behaviour of basic script-based initialization with that of Flyway and Liquibase. If you want to use data.sql to populate a schema created by Hibernate, set spring.jpa.defer-datasource-initialization to true. While mixing database initialization technologies is not recommended, this will also allow you to use a schema.sql script to build upon a Hibernate-created schema before it’s populated via data.sql* 
-
-
-### No 1 : Are you using Spring Boot >=2.3.0 Release?
-
-Configure this in `application.properties`
-
+Notes about bootstrap-mode https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.3-Release-Notes#bootstrapmode-for-jpa-repositories
 ```
-spring.datasource.url=jdbc:h2:mem:testdb
 spring.data.jpa.repositories.bootstrap-mode=default
 ```
 
-You should see this in the log
+Delete schema.sql if you have created one. If `schema.sql` file exist, tables are NOT created.
+
+
+## Make sure that Components are picked by Component Scan
+
+Have the right annotations!
+
 ```
-H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+@Entity
+public class Todo {
+
+
+@Repository
+public class ComponentDAO {
 ```
 
-> Why do we need to configure bootstrap-mode? Details here - https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.3-Release-Notes#bootstrapmode-for-jpa-repositories
-
-### No 2 : Make sure you have the right annotations!
-
-Make sure that the Entities have @Entity annotation and the Repository class has @Repository annotation
-
-### No 3 : Make sure you do NOT have schema.sql 
-
-Delete schema.sql if you have created one.
-
-If `schema.sql` file exist, tables are NOT created.
-
-### No 4 : Make sure your component is picked up by Component Scan
 
 Spring Boot does a component scan in the package and sub-packages where your @SpringBootApplication is defined. 
 
@@ -112,6 +96,11 @@ Make the database URL a constant by configuring this in application.properties.
 ```
 spring.datasource.url=jdbc:h2:mem:testdb
 ```
+
+Delete your maven local repository (content of .m2 folder) and rebuild the project. (You are right. This looks silly. But do not skip it. I've seen many problems caused by dependency caches!)
+
+![](images/eclipse-maven-m2-folder.png)
+
 
 #### If you face any problems:
 

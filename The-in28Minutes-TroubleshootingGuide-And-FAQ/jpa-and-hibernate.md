@@ -35,6 +35,7 @@ spring.jpa.defer-datasource-initialization=true
 spring.data.jpa.repositories.bootstrap-mode=default
 ```
 
+### Configuration Notes
 
 https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.5.0-M3-Release-Notes#hibernate-and-datasql => *By default, data.sql scripts are now run before Hibernate is initialized. This aligns the behaviour of basic script-based initialization with that of Flyway and Liquibase. If you want to use data.sql to populate a schema created by Hibernate, set spring.jpa.defer-datasource-initialization to true. While mixing database initialization technologies is not recommended, this will also allow you to use a schema.sql script to build upon a Hibernate-created schema before it’s populated via data.sql* 
 

@@ -1,169 +1,10 @@
-# Spring 2.0.0.RELEASE Upgrades
+# All Code from In28minutes
 
-## REST Web Services
+# Spring Boot Web Application
 
-### Actuator
-
-Replace old url - http://localhost:8080/application
-New URL - http://localhost:8080/actuator
-
-application.properties
-
-```
-management.endpoints.web.exposure.include=*
-```
-
-In HAL Browser, enter the actuator URL to browse.
-
-### Spring Security
-
-```
-#security.user.name=username
-#security.user.password=password
-spring.security.user.name=username
-spring.security.user.password=password
-spring.security.filter.dispatcher-types=request
-```
-
-```
-+        auth.inMemoryAuthentication()
-+            .passwordEncoder(NoOpPasswordEncoder.getInstance())
-+           .withUser("in28Minutes").password("dummy")
-```
-
-### Internationalization!
-
-```java
-    @GetMapping("/hello")
-    public String helloWorld() {
-        return msgSource.getMessage("msg.hello", null, "Whoops!", LocaleContextHolder.getLocale());
-    }
-```
-
-```java
-    @Bean
-    public LocaleResolver localeResolver() {
-        AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
-        localeResolver.setDefaultLocale(Locale.US);
-        return localeResolver;
-    }
-```
-
-```properties
-spring.jackson.serialization.write-dates-as-timestamps=false
-spring.messages.basename=messages
-
-```
-## Spring Cloud Microservices
-
-### Artifact/Code Changes
-```xml
--     <artifactId>spring-cloud-starter-zuul</artifactId>
-+     <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
-
--     <artifactId>spring-cloud-starter-feign</artifactId>
-+     <artifactId>spring-cloud-starter-openfeign</artifactId>
-
--     <artifactId>spring-cloud-starter-eureka</artifactId>
-+     <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-
--     <artifactId>spring-cloud-starter-eureka-server</artifactId>
-+     <artifactId>spring-cloud-starter-netflix-eureka-server</
-
--     <artifactId>spring-cloud-starter-ribbon</artifactId>
-+     <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
-
--     <artifactId>spring-cloud-starter-hystrix</artifactId>
-+     <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-```
-
-```java
-- public AlwaysSampler defaultSampler() {
--   return new AlwaysSampler();
-+ public Sampler defaultSampler() {
-+   return Sampler.ALWAYS_SAMPLE;
-```
-
-### ZipkinUi, ZipkinStream, StreamRabbit Not Available
-
-Not available on spring.io for current version of spring boot.
-
-#### New Installation Approach for Zipkin
-
-Quick Start Page
-- https://zipkin.io/pages/quickstart
-
-Downloading Zipkin Jar
-- https://search.maven.org/remote_content?g=io.zipkin.java&a=zipkin-server&v=LATEST&c=exec
-
-Command to run
-
-```
-RABBIT_URI=amqp://localhost java -jar zipkin-server-2.5.2-exec.jar
-```
-
-
-## Installing and Setting Up MySQL
-
-- Install MySQL https://dev.mysql.com/doc/en/installing.html
-  - More details : http://www.mysqltutorial.org/install-mysql/
-  - Trouble Shooting - https://dev.mysql.com/doc/refman/en/problems.html
-- Startup the Server (as a service)
-- Go to command prompt (or terminal)
-   - Execute following commands to create a database and a user
-
-```
-mysql --user=user_name --password db_name
-create database todo_example;
-create user 'todouser'@'localhost' identified by 'YOUR_PASSWORD';
-grant all on todo_example.* to 'todouser'@'localhost';
-```
-
-- Execute following sql queries to create the table and insert the data
-
-Table
-```sql
-create table todo 
-(id integer not null, 
-desc varchar(255), 
-is_done boolean not null, 
-target_date timestamp, 
-user varchar(255), 
-primary key (id));
-```
-
-Data
-```sql
-INSERT INTO TODO
-VALUES(10001, 'Learn Spring Boot', false, sysdate(),'in28Minutes');
-
-INSERT INTO TODO
-VALUES(10002, 'Learn RESTful Web Services', false, sysdate(),'in28Minutes');
-
-INSERT INTO TODO
-VALUES(10003, 'Learn SOAP Web Services', false, sysdate(),'in28Minutes');
-```
-
-## Code changes to connect to MySQL
-- Add dependency to pom.xml (and remove H2 dependency)
-```xml
-<dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
-</dependency>
-```
-- Configure application.properties
-
-```properties
-spring.jpa.hibernate.ddl-auto=none
-spring.datasource.url=jdbc:mysql://localhost:3306/todo_example
-spring.datasource.username=todouser
-spring.datasource.password=YOUR_PASSWORD
-```
-
-- Restart and You are ready!
-
-
+<!---
+Current Directory : /Users/rangakaranam/Ranga/git/00.courses/spring-boot-master-class/02.Spring-Boot-Web-Application-V2
+-->
 
 ## Complete Code Example
 
@@ -173,31 +14,24 @@ spring.datasource.password=YOUR_PASSWORD
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-	<groupId>com.in28minutes.springboot.web</groupId>
-	<artifactId>spring-boot-first-web-application-git</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
-
-	<name>spring-boot-first-web-application</name>
-	<description>Demo project for Spring Boot</description>
-
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.3.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<version>3.0.0-M3</version>
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-
+	<groupId>com.in28minutes.springboot</groupId>
+	<artifactId>myfirstwebapp</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>myfirstwebapp</name>
+	<description>Demo project for Spring Boot</description>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
+		<java.version>18</java.version>
 	</properties>
-
 	<dependencies>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -208,38 +42,26 @@ spring.datasource.password=YOUR_PASSWORD
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		
-		<dependency>
+<!--		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
+		</dependency> -->
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
-
-		<!--<dependency>
+		
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>-->
-
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
 		</dependency>
 
+
 		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>3.3.6</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap-datepicker</artifactId>
-			<version>1.0.1</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>jquery</artifactId>
-			<version>1.9.1</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
 		<dependency>
@@ -249,11 +71,40 @@ spring.datasource.password=YOUR_PASSWORD
 		</dependency>
 
 		<dependency>
+			<groupId>jakarta.servlet.jsp.jstl</groupId>
+			<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>glassfish-jstl</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>5.1.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>3.6.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap-datepicker</artifactId>
+			<version>1.9.0</version>
+		</dependency>
+
+		
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
+			<optional>true</optional>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -269,731 +120,7 @@ spring.datasource.password=YOUR_PASSWORD
 			</plugin>
 		</plugins>
 	</build>
-
-</project>
-```
----
-
-### /src/main/java/com/in28minutes/springboot/web/controller/ErrorController.java
-
-```java
-package com.in28minutes.springboot.web.controller;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.ModelAndView;
-
-@Controller("error")
-public class ErrorController {
-	
-	@ExceptionHandler(Exception.class)
-	public ModelAndView handleException
-		(HttpServletRequest request, Exception ex){
-		ModelAndView mv = new ModelAndView();
-
-		mv.addObject("exception", ex.getLocalizedMessage());
-		mv.addObject("url", request.getRequestURL());
-		
-		mv.setViewName("error");
-		return mv;
-	}
-
-}
-```
----
-
-### /src/main/java/com/in28minutes/springboot/web/controller/LogoutController.java
-
-```java
-package com.in28minutes.springboot.web.controller;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.logout.LogoutHandler;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-@Controller
-public class LogoutController {
-
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(HttpServletRequest request,
-			HttpServletResponse response) {
-		
-		Authentication authentication = SecurityContextHolder.getContext()
-				.getAuthentication();
-		
-		if (authentication != null) {
-			new SecurityContextLogoutHandler().logout(request, response,
-					authentication);
-		}
-
-		return "redirect:/";
-	}
-}
-```
----
-
-### /src/main/java/com/in28minutes/springboot/web/controller/TodoController.java
-
-```java
-package com.in28minutes.springboot.web.controller;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import com.in28minutes.springboot.web.model.Todo;
-import com.in28minutes.springboot.web.service.TodoRepository;
-
-@Controller
-public class TodoController {
-	
-	@Autowired
-	TodoRepository repository;
-
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		// Date - dd/MM/yyyy
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(
-				dateFormat, false));
-	}
-
-	@RequestMapping(value = "/list-todos", method = RequestMethod.GET)
-	public String showTodos(ModelMap model) {
-		String name = getLoggedInUserName(model);
-		model.put("todos", repository.findByUser(name));
-		//model.put("todos", service.retrieveTodos(name));
-		return "list-todos";
-	}
-
-	private String getLoggedInUserName(ModelMap model) {
-		Object principal = SecurityContextHolder.getContext()
-				.getAuthentication().getPrincipal();
-		
-		if (principal instanceof UserDetails) {
-			return ((UserDetails) principal).getUsername();
-		}
-		
-		return principal.toString();
-	}
-
-	@RequestMapping(value = "/add-todo", method = RequestMethod.GET)
-	public String showAddTodoPage(ModelMap model) {
-		model.addAttribute("todo", new Todo(0, getLoggedInUserName(model),
-				"Default Desc", new Date(), false));
-		return "todo";
-	}
-
-	@RequestMapping(value = "/delete-todo", method = RequestMethod.GET)
-	public String deleteTodo(@RequestParam int id) {
-
-		//if(id==1)
-			//throw new RuntimeException("Something went wrong");
-		repository.delete(id);
-		//service.deleteTodo(id);
-		return "redirect:/list-todos";
-	}
-
-	@RequestMapping(value = "/update-todo", method = RequestMethod.GET)
-	public String showUpdateTodoPage(@RequestParam int id, ModelMap model) {
-		Todo todo = repository.findOne(id);
-		//Todo todo = service.retrieveTodo(id);
-		model.put("todo", todo);
-		return "todo";
-	}
-
-	@RequestMapping(value = "/update-todo", method = RequestMethod.POST)
-	public String updateTodo(ModelMap model, @Valid Todo todo,
-			BindingResult result) {
-
-		if (result.hasErrors()) {
-			return "todo";
-		}
-
-		todo.setUser(getLoggedInUserName(model));
-
-		repository.save(todo);
-		//service.updateTodo(todo);
-
-		return "redirect:/list-todos";
-	}
-
-	@RequestMapping(value = "/add-todo", method = RequestMethod.POST)
-	public String addTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
-
-		if (result.hasErrors()) {
-			return "todo";
-		}
-
-		todo.setUser(getLoggedInUserName(model));
-		repository.save(todo);
-		/*service.addTodo(getLoggedInUserName(model), todo.getDesc(), todo.getTargetDate(),
-				false);*/
-		return "redirect:/list-todos";
-	}
-}
-```
----
-
-### /src/main/java/com/in28minutes/springboot/web/controller/WelcomeController.java
-
-```java
-package com.in28minutes.springboot.web.controller;
-
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-@Controller
-public class WelcomeController {
-
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String showWelcomePage(ModelMap model) {
-		model.put("name", getLoggedinUserName());
-		return "welcome";
-	}
-
-	private String getLoggedinUserName() {
-		Object principal = SecurityContextHolder.getContext()
-				.getAuthentication().getPrincipal();
-		
-		if (principal instanceof UserDetails) {
-			return ((UserDetails) principal).getUsername();
-		}
-		
-		return principal.toString();
-	}
-
-}
-```
----
-
-### /src/main/java/com/in28minutes/springboot/web/model/Todo.java
-
-```java
-package com.in28minutes.springboot.web.model;
-
-import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.validation.constraints.Size;
-
-@Entity
-public class Todo {
-    
-	@Id
-	@GeneratedValue
-	private int id;
-    
-	private String user;
-    
-    @Size(min=10, message="Enter at least 10 Characters...")
-    private String desc;
-
-    private Date targetDate;
-    private boolean isDone;
-
-    public Todo() {
-    		super();
-    }
-    
-    public Todo(int id, String user, String desc, Date targetDate,
-            boolean isDone) {
-        super();
-        this.id = id;
-        this.user = user;
-        this.desc = desc;
-        this.targetDate = targetDate;
-        this.isDone = isDone;
-    }
-
-    //Getter and Setters
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + id;
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return String.format(
-                "Todo [id=%s, user=%s, desc=%s, targetDate=%s, isDone=%s]", id,
-                user, desc, targetDate, isDone);
-    }
-
-}
-```
----
-
-### /src/main/java/com/in28minutes/springboot/web/security/SecurityConfiguration.java
-
-```java
-package com.in28minutes.springboot.web.security;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
-@Configuration
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
-	//Create User - in28Minutes/dummy
-	@Autowired
-    public void configureGlobalSecurity(AuthenticationManagerBuilder auth)
-            throws Exception {
-        auth.inMemoryAuthentication().passwordEncoder(org.springframework.security.crypto.password.NoOpPasswordEncoder.getInstance()).withUser("in28Minutes").password("dummy")
-                .roles("USER", "ADMIN");
-    }
-	
-	@Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/login", "/h2-console/**").permitAll()
-                .antMatchers("/", "/*todo*/**").access("hasRole('USER')").and()
-                .formLogin();
-        
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
-    }
-}
-```
----
-
-### /src/main/java/com/in28minutes/springboot/web/service/TodoRepository.java
-
-```java
-package com.in28minutes.springboot.web.service;
-
-import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.in28minutes.springboot.web.model.Todo;
-
-public interface TodoRepository extends JpaRepository<Todo, Integer>{
-	List<Todo> findByUser(String user);
-	
-	//service.retrieveTodos(name)
-
-	//service.deleteTodo(id);
-	//service.retrieveTodo(id)
-	//service.updateTodo(todo)
-	//service.addTodo(getLoggedInUserName(model), todo.getDesc(), todo.getTargetDate(),false);
-}
-```
----
-
-### /src/main/java/com/in28minutes/springboot/web/service/TodoService.java
-
-```java
-package com.in28minutes.springboot.web.service;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
-import com.in28minutes.springboot.web.model.Todo;
-
-@Service
-public class TodoService {
-    private static List<Todo> todos = new ArrayList<Todo>();
-    private static int todoCount = 3;
-
-    static {
-        todos.add(new Todo(1, "in28Minutes", "Learn Spring MVC", new Date(),
-                false));
-        todos.add(new Todo(2, "in28Minutes", "Learn Struts", new Date(), false));
-        todos.add(new Todo(3, "in28Minutes", "Learn Hibernate", new Date(),
-                false));
-    }
-
-    public List<Todo> retrieveTodos(String user) {
-        List<Todo> filteredTodos = new ArrayList<Todo>();
-        for (Todo todo : todos) {
-            if (todo.getUser().equalsIgnoreCase(user)) {
-                filteredTodos.add(todo);
-            }
-        }
-        return filteredTodos;
-    }
-    
-    public Todo retrieveTodo(int id) {
-        for (Todo todo : todos) {
-            if (todo.getId()==id) {
-                return todo;
-            }
-        }
-        return null;
-    }
-
-    public void updateTodo(Todo todo){
-    		todos.remove(todo);
-    		todos.add(todo);
-    }
-
-    public void addTodo(String name, String desc, Date targetDate,
-            boolean isDone) {
-        todos.add(new Todo(++todoCount, name, desc, targetDate, isDone));
-    }
-
-    public void deleteTodo(int id) {
-        Iterator<Todo> iterator = todos.iterator();
-        while (iterator.hasNext()) {
-            Todo todo = iterator.next();
-            if (todo.getId() == id) {
-                iterator.remove();
-            }
-        }
-    }
-}
-```
----
-
-### /src/main/java/com/in28minutes/springboot/web/SpringBootFirstWebApplication.java
-
-```java
-package com.in28minutes.springboot.web;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
-
-@SpringBootApplication
-@ComponentScan("com.in28minutes.springboot.web")
-public class SpringBootFirstWebApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(SpringBootFirstWebApplication.class, args);
-	}
-}
-```
----
-
-### /src/main/resources/application.properties
-
-```properties
-spring.mvc.view.prefix=/WEB-INF/jsp/
-spring.mvc.view.suffix=.jsp
-logging.level.org.springframework.web=INFO
-
-spring.jpa.show-sql=true
-spring.h2.console.enabled=true
-```
----
-
-### /src/main/resources/data.sql
-
-```
-insert into TODO
-values(10001, 'Learn Spring Boot', false, sysdate(), 'in28Minutes');
-insert into TODO
-values(10002, 'Learn Angular JS', false, sysdate(), 'in28Minutes');
-insert into TODO
-values(10003, 'Learn to Dance', false, sysdate(), 'in28Minutes');
-```
----
-
-### /src/main/webapp/WEB-INF/jsp/common/footer.jspf
-
-```
-<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
-<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script
-	src="webjars/bootstrap-datepicker/1.0.1/js/bootstrap-datepicker.js"></script>
-<script>
-	$('#targetDate').datepicker({
-		format : 'dd/mm/yyyy'
-	});
-</script>
-
-</body>
-</html>
-```
----
-
-### /src/main/webapp/WEB-INF/jsp/common/header.jspf
-
-```
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
-<html>
-
-<head>
-<title>First Web Application</title>
-<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
-	rel="stylesheet">
-
-</head>
-
-<body>
-```
----
-
-### /src/main/webapp/WEB-INF/jsp/common/navigation.jspf
-
-```
-
-<nav role="navigation" class="navbar navbar-default">
-	<div class="">
-		<a href="http://www.in28minutes.com" class="navbar-brand">in28Minutes</a>
-	</div>
-	<div class="navbar-collapse">
-		<ul class="nav navbar-nav">
-			<li class="active"><a href="/">Home</a></li>
-			<li><a href="/list-todos">Todos</a></li>
-		</ul>
-		<ul class="nav navbar-nav navbar-right">
-			<li><a href="/logout">Logout</a></li>
-		</ul>
-	</div>
-</nav>
-```
----
-
-### /src/main/webapp/WEB-INF/jsp/error.jsp
-
-```
-<%@ include file="common/header.jspf"%>
-<%@ include file="common/navigation.jspf"%>
-<div class="container">
-An exception occurred! Please contact Support!
-</div>
-<%@ include file="common/footer.jspf"%>
-```
----
-
-### /src/main/webapp/WEB-INF/jsp/list-todos.jsp
-
-```
-<%@ include file="common/header.jspf" %>
-<%@ include file="common/navigation.jspf" %>
-	
-	<div class="container">
-		<table class="table table-striped">
-			<caption>Your todos are</caption>
-			<thead>
-				<tr>
-					<th>Description</th>
-					<th>Target Date</th>
-					<th>Is it Done?</th>
-					<th></th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${todos}" var="todo">
-					<tr>
-						<td>${todo.desc}</td>
-						<td><fmt:formatDate value="${todo.targetDate}" pattern="dd/MM/yyyy"/></td>
-						<td>${todo.done}</td>
-						<td><a type="button" class="btn btn-success"
-							href="/update-todo?id=${todo.id}">Update</a></td>
-						<td><a type="button" class="btn btn-warning"
-							href="/delete-todo?id=${todo.id}">Delete</a></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-		<div>
-			<a class="button" href="/add-todo">Add a Todo</a>
-		</div>
-	</div>
-<%@ include file="common/footer.jspf" %>
-```
----
-
-### /src/main/webapp/WEB-INF/jsp/todo.jsp
-
-```
-<%@ include file="common/header.jspf" %>
-<%@ include file="common/navigation.jspf" %>
-<div class="container">
-	<form:form method="post" commandName="todo">
-		<form:hidden path="id" />
-		<fieldset class="form-group">
-			<form:label path="desc">Description</form:label>
-			<form:input path="desc" type="text" class="form-control"
-				required="required" />
-			<form:errors path="desc" cssClass="text-warning" />
-		</fieldset>
-
-		<fieldset class="form-group">
-			<form:label path="targetDate">Target Date</form:label>
-			<form:input path="targetDate" type="text" class="form-control"
-				required="required" />
-			<form:errors path="targetDate" cssClass="text-warning" />
-		</fieldset>
-
-		<button type="submit" class="btn btn-success">Add</button>
-	</form:form>
-</div>
-<%@ include file="common/footer.jspf" %>
-```
----
-
-### /src/main/webapp/WEB-INF/jsp/welcome.jsp
-
-```
-<%@ include file="common/header.jspf"%>
-<%@ include file="common/navigation.jspf"%>
-<div class="container">
-	Welcome ${name}!! <a href="/list-todos">Click here</a> to manage your
-	todo's.
-</div>
-<%@ include file="common/footer.jspf"%>
-```
----
-
-### /src/test/java/com/in28minutes/springboot/web/SpringBootFirstWebApplicationTests.java
-
-```java
-package com.in28minutes.springboot.web;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class SpringBootFirstWebApplicationTests {
-
-	@Test
-	public void contextLoads() {
-	}
-
-}
-```
----
-
-##  Spring In Depth
-
-
-
-## Complete Code Example
-
-
-### /pom.xml
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-
-	<groupId>com.in28minutes.spring.basics</groupId>
-	<artifactId>spring-in-5-steps</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
-
-	<name>spring-in-5-steps</name>
-	<description>Demo project for Spring Boot</description>
-
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.0.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
-	</parent>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-	</properties>
-
-	<dependencies>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-			<version>1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
 	<repositories>
-		<repository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>https://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
 		<repository>
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
@@ -1003,16 +130,7 @@ public class SpringBootFirstWebApplicationTests {
 			</snapshots>
 		</repository>
 	</repositories>
-
 	<pluginRepositories>
-		<pluginRepository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>https://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
 		<pluginRepository>
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
@@ -1023,549 +141,1589 @@ public class SpringBootFirstWebApplicationTests {
 		</pluginRepository>
 	</pluginRepositories>
 
-
 </project>
 ```
 ---
 
-### /src/main/java/com/in28minutes/spring/basics/componentscan/ComponentDAO.java
+### /src/main/java/com/in28minutes/springboot/myfirstwebapp/MyfirstwebappApplication.java
 
 ```java
-package com.in28minutes.spring.basics.componentscan;
+package com.in28minutes.springboot.myfirstwebapp;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@Repository
-public class ComponentDAO {
+@SpringBootApplication
+public class MyfirstwebappApplication {
 
-	@Autowired
-	ComponentJdbcConnection jdbcConnection;
-
-	public ComponentJdbcConnection getJdbcConnection() {
-		return jdbcConnection;
+	public static void main(String[] args) {
+		SpringApplication.run(MyfirstwebappApplication.class, args);
 	}
 
-	public void setComponentJdbcConnection(ComponentJdbcConnection jdbcConnection) {
-		this.jdbcConnection = jdbcConnection;
+}
+```
+---
+
+### /src/main/java/com/in28minutes/springboot/myfirstwebapp/hello/SayHelloController.java
+
+```java
+package com.in28minutes.springboot.myfirstwebapp.hello;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class SayHelloController {
+	
+	//"say-hello" => "Hello! What are you learning today?"
+	
+	//say-hello
+	// http://localhost:8080/say-hello
+	@RequestMapping("say-hello")
+	@ResponseBody
+	public String sayHello() {
+		return "Hello! What are you learning today?";
+	}
+	
+	@RequestMapping("say-hello-html")
+	@ResponseBody
+	public String sayHelloHtml() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("<html>");
+		sb.append("<head>");
+		sb.append("<title> My First HTML Page - Changed</title>");
+		sb.append("</head>");
+		sb.append("<body>");
+		sb.append("My first html page with body - Changed");
+		sb.append("</body>");
+		sb.append("</html>");
+		
+		return sb.toString();
+	}
+	
+	//
+	// "say-hello-jsp" => sayHello.jsp 
+	// /src/main/resources/META-INF/resources/WEB-INF/jsp/sayHello.jsp
+	// /src/main/resources/META-INF/resources/WEB-INF/jsp/welcome.jsp
+	// /src/main/resources/META-INF/resources/WEB-INF/jsp/login.jsp
+	// /src/main/resources/META-INF/resources/WEB-INF/jsp/todos.jsp
+	@RequestMapping("say-hello-jsp")
+	public String sayHelloJsp() {
+		return "sayHello";
 	}
 }
 ```
 ---
 
-### /src/main/java/com/in28minutes/spring/basics/componentscan/ComponentJdbcConnection.java
+### /src/main/java/com/in28minutes/springboot/myfirstwebapp/login/WelcomeController.java
 
 ```java
-package com.in28minutes.spring.basics.componentscan;
+package com.in28minutes.springboot.myfirstwebapp.login;
 
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Component;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
-@Component
-@Scope(value=ConfigurableBeanFactory.SCOPE_PROTOTYPE, 
-		proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class ComponentJdbcConnection {
-	public ComponentJdbcConnection() {
-		System.out.println("JDBC Connection");
+@Controller
+@SessionAttributes("name")
+public class WelcomeController {
+
+	@RequestMapping(value="/",method = RequestMethod.GET)
+	public String gotoWelcomePage(ModelMap model) {
+		model.put("name", getLoggedinUsername());
+		return "welcome";
+	}
+	
+	private String getLoggedinUsername() {
+		Authentication authentication = 
+				SecurityContextHolder.getContext().getAuthentication();
+		return authentication.getName();
 	}
 }
 ```
 ---
 
-### /src/main/java/com/in28minutes/spring/basics/springin5steps/basic/BinarySearchImpl.java
+### /src/main/java/com/in28minutes/springboot/myfirstwebapp/security/SpringSecurityConfiguration.java
 
 ```java
-package com.in28minutes.spring.basics.springin5steps.basic;
+package com.in28minutes.springboot.myfirstwebapp.security;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+import static org.springframework.security.config.Customizer.withDefaults;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import java.util.function.Function;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+public class SpringSecurityConfiguration {
+	//LDAP or Database
+	//In Memory 
+	
+	//InMemoryUserDetailsManager
+	//InMemoryUserDetailsManager(UserDetails... users)
+	
+	@Bean
+	public InMemoryUserDetailsManager createUserDetailsManager() {
+		
+		UserDetails userDetails1 = createNewUser("in28minutes", "dummy");
+		UserDetails userDetails2 = createNewUser("ranga", "dummydummy");
+		
+		return new InMemoryUserDetailsManager(userDetails1, userDetails2);
+	}
+
+	private UserDetails createNewUser(String username, String password) {
+		Function<String, String> passwordEncoder
+		= input -> passwordEncoder().encode(input);
+
+		UserDetails userDetails = User.builder()
+									.passwordEncoder(passwordEncoder)
+									.username(username)
+									.password(password)
+									.roles("USER","ADMIN")
+									.build();
+		return userDetails;
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
+	//All URLs are protected
+	//A login form is shown for unauthorized requests
+	//CSRF disable
+	//Frames
+	
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		
+		http.authorizeHttpRequests(
+				auth -> auth.anyRequest().authenticated());
+		http.formLogin(withDefaults());
+		
+		http.csrf().disable();
+		http.headers().frameOptions().disable();
+		
+		return http.build();
+	}
+	
+	
+	
+	
+	
+}
+```
+---
+
+### /src/main/java/com/in28minutes/springboot/myfirstwebapp/todo/Todo.java
+
+```java
+package com.in28minutes.springboot.myfirstwebapp.todo;
+
+import java.time.LocalDate;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Size;
+
+//Database (MySQL) 
+//Static List of todos => Database (H2, MySQL)
+
+//JPA
+// Bean -> Database Table
+
+@Entity
+public class Todo {
+
+	public Todo() {
+		
+	}
+	
+	public Todo(int id, String username, String description, LocalDate targetDate, boolean done) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.description = description;
+		this.targetDate = targetDate;
+		this.done = done;
+	}
+
+	@Id
+	@GeneratedValue
+	private int id;
+
+	private String username;
+	
+	@Size(min=10, message="Enter atleast 10 characters")
+	private String description;
+	private LocalDate targetDate;
+	private boolean done;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public LocalDate getTargetDate() {
+		return targetDate;
+	}
+
+	public void setTargetDate(LocalDate targetDate) {
+		this.targetDate = targetDate;
+	}
+
+	public boolean isDone() {
+		return done;
+	}
+
+	public void setDone(boolean done) {
+		this.done = done;
+	}
+
+	@Override
+	public String toString() {
+		return "Todo [id=" + id + ", username=" + username + ", description=" + description + ", targetDate="
+				+ targetDate + ", done=" + done + "]";
+	}
+
+}
+```
+---
+
+### /src/main/java/com/in28minutes/springboot/myfirstwebapp/todo/TodoController.java
+
+```java
+package com.in28minutes.springboot.myfirstwebapp.todo;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import jakarta.validation.Valid;
+
+//@Controller
+@SessionAttributes("name")
+public class TodoController {
+	
+	public TodoController(TodoService todoService) {
+		super();
+		this.todoService = todoService;
+	}
+
+	private TodoService todoService;
+		
+	
+	@RequestMapping("list-todos")
+	public String listAllTodos(ModelMap model) {
+		String username = getLoggedInUsername(model);
+		List<Todo> todos = todoService.findByUsername(username);
+		model.addAttribute("todos", todos);
+		
+		return "listTodos";
+	}
+
+	//GET, POST
+	@RequestMapping(value="add-todo", method = RequestMethod.GET)
+	public String showNewTodoPage(ModelMap model) {
+		String username = getLoggedInUsername(model);
+		Todo todo = new Todo(0, username, "", LocalDate.now().plusYears(1), false);
+		model.put("todo", todo);
+		return "todo";
+	}
+
+	@RequestMapping(value="add-todo", method = RequestMethod.POST)
+	public String addNewTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "todo";
+		}
+		
+		String username = getLoggedInUsername(model);
+		todoService.addTodo(username, todo.getDescription(), 
+				LocalDate.now().plusYears(1), false);
+		return "redirect:list-todos";
+	}
+
+	@RequestMapping("delete-todo")
+	public String deleteTodo(@RequestParam int id) {
+		//Delete todo
+		
+		todoService.deleteById(id);
+		return "redirect:list-todos";
+		
+	}
+
+	@RequestMapping(value="update-todo", method = RequestMethod.GET)
+	public String showUpdateTodoPage(@RequestParam int id, ModelMap model) {
+		Todo todo = todoService.findById(id);
+		model.addAttribute("todo", todo);
+		return "todo";
+	}
+
+	@RequestMapping(value="update-todo", method = RequestMethod.POST)
+	public String updateTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "todo";
+		}
+		
+		String username = getLoggedInUsername(model);
+		todo.setUsername(username);
+		todoService.updateTodo(todo);
+		return "redirect:list-todos";
+	}
+
+	private String getLoggedInUsername(ModelMap model) {
+		Authentication authentication = 
+				SecurityContextHolder.getContext().getAuthentication();
+		return authentication.getName();
+	}
+
+}
+```
+---
+
+### /src/main/java/com/in28minutes/springboot/myfirstwebapp/todo/TodoControllerJpa.java
+
+```java
+package com.in28minutes.springboot.myfirstwebapp.todo;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import jakarta.validation.Valid;
+
+@Controller
+@SessionAttributes("name")
+public class TodoControllerJpa {
+	
+	public TodoControllerJpa(TodoRepository todoRepository) {
+		super();
+		this.todoRepository = todoRepository;
+	}
+
+	private TodoRepository todoRepository;
+			
+	@RequestMapping("list-todos")
+	public String listAllTodos(ModelMap model) {
+		String username = getLoggedInUsername(model);
+				
+		List<Todo> todos = todoRepository.findByUsername(username);
+		model.addAttribute("todos", todos);
+		
+		return "listTodos";
+	}
+
+	//GET, POST
+	@RequestMapping(value="add-todo", method = RequestMethod.GET)
+	public String showNewTodoPage(ModelMap model) {
+		String username = getLoggedInUsername(model);
+		Todo todo = new Todo(0, username, "", LocalDate.now().plusYears(1), false);
+		model.put("todo", todo);
+		return "todo";
+	}
+
+	@RequestMapping(value="add-todo", method = RequestMethod.POST)
+	public String addNewTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "todo";
+		}
+		
+		String username = getLoggedInUsername(model);
+		todo.setUsername(username);
+		todoRepository.save(todo);
+//		todoService.addTodo(username, todo.getDescription(), 
+//				todo.getTargetDate(), todo.isDone());
+		return "redirect:list-todos";
+	}
+
+	@RequestMapping("delete-todo")
+	public String deleteTodo(@RequestParam int id) {
+		//Delete todo
+		todoRepository.deleteById(id);
+		return "redirect:list-todos";
+		
+	}
+
+	@RequestMapping(value="update-todo", method = RequestMethod.GET)
+	public String showUpdateTodoPage(@RequestParam int id, ModelMap model) {
+		Todo todo = todoRepository.findById(id).get();
+		model.addAttribute("todo", todo);
+		return "todo";
+	}
+
+	@RequestMapping(value="update-todo", method = RequestMethod.POST)
+	public String updateTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "todo";
+		}
+		
+		String username = getLoggedInUsername(model);
+		todo.setUsername(username);
+		todoRepository.save(todo);
+		return "redirect:list-todos";
+	}
+
+	private String getLoggedInUsername(ModelMap model) {
+		Authentication authentication = 
+				SecurityContextHolder.getContext().getAuthentication();
+		return authentication.getName();
+	}
+
+}
+```
+---
+
+### /src/main/java/com/in28minutes/springboot/myfirstwebapp/todo/TodoRepository.java
+
+```java
+package com.in28minutes.springboot.myfirstwebapp.todo;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TodoRepository extends JpaRepository<Todo, Integer>{
+	public List<Todo> findByUsername(String username);
+}
+```
+---
+
+### /src/main/java/com/in28minutes/springboot/myfirstwebapp/todo/TodoService.java
+
+```java
+package com.in28minutes.springboot.myfirstwebapp.todo;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+
 import org.springframework.stereotype.Service;
 
-@Service
-@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-public class BinarySearchImpl {
-	
-	private Logger logger = LoggerFactory.getLogger(this.getClass()); 
-
-	@Autowired
-	@Qualifier("bubble")
-	private SortAlgorithm sortAlgorithm;
-	
-	public int binarySearch(int[] numbers, int numberToSearchFor) {
-
-		int[] sortedNumbers = sortAlgorithm.sort(numbers);
-		System.out.println(sortAlgorithm);
-		// Search the array
-		return 3;
-	}
-	
-	@PostConstruct
-	public void postConstruct() {
-		logger.info("postConstruct");
-	}
-
-	@PreDestroy
-	public void preDestroy() {
-		logger.info("preDestroy");
-	}
-
-}
-```
----
-
-### /src/main/java/com/in28minutes/spring/basics/springin5steps/basic/BubbleSortAlgorithm.java
-
-```java
-package com.in28minutes.spring.basics.springin5steps.basic;
-
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+import jakarta.validation.Valid;
 
 @Service
-@Qualifier("bubble")
-public class BubbleSortAlgorithm implements SortAlgorithm {
-	public int[] sort(int[] numbers) {
-		// Logic for Bubble Sort
-		return numbers;
-	}
-}
-```
----
-
-### /src/main/java/com/in28minutes/spring/basics/springin5steps/basic/QuickSortAlgorithm.java
-
-```java
-package com.in28minutes.spring.basics.springin5steps.basic;
-
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
-
-@Service
-@Qualifier("quick")
-public class QuickSortAlgorithm implements SortAlgorithm {
-	public int[] sort(int[] numbers) {
-		// Logic for Quick Sort
-		return numbers;
-	}
-}
-```
----
-
-### /src/main/java/com/in28minutes/spring/basics/springin5steps/basic/SortAlgorithm.java
-
-```java
-package com.in28minutes.spring.basics.springin5steps.basic;
-
-public interface SortAlgorithm {
-	public int[] sort(int[] numbers);
-}
-```
----
-
-### /src/main/java/com/in28minutes/spring/basics/springin5steps/cdi/SomeCdiBusiness.java
-
-```java
-package com.in28minutes.spring.basics.springin5steps.cdi;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
-@Named
-public class SomeCdiBusiness {
+public class TodoService {
 	
-	@Inject
-	SomeCdiDao someCdiDao;
-
-    //Getter and Setters
-}
-```
----
-
-### /src/main/java/com/in28minutes/spring/basics/springin5steps/cdi/SomeCdiDao.java
-
-```java
-package com.in28minutes.spring.basics.springin5steps.cdi;
-
-import javax.inject.Named;
-
-@Named
-public class SomeCdiDao {
-
-}
-```
----
-
-### /src/main/java/com/in28minutes/spring/basics/springin5steps/properties/SomeExternalService.java
-
-```java
-package com.in28minutes.spring.basics.springin5steps.properties;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
-@Component
-public class SomeExternalService {
+	private static List<Todo> todos = new ArrayList<>();
 	
-	@Value("${external.service.url}")
-	private String url;
+	private static int todosCount = 0;
 	
-	public String returnServiceURL(){
-		return url;
+	static {
+		todos.add(new Todo(++todosCount, "in28minutes","Get AWS Certified 1", 
+							LocalDate.now().plusYears(1), false ));
+		todos.add(new Todo(++todosCount, "in28minutes","Learn DevOps 1", 
+				LocalDate.now().plusYears(2), false ));
+		todos.add(new Todo(++todosCount, "in28minutes","Learn Full Stack Development 1", 
+				LocalDate.now().plusYears(3), false ));
+	}
+	
+	public List<Todo> findByUsername(String username){
+		Predicate<? super Todo> predicate = 
+				todo -> todo.getUsername().equalsIgnoreCase(username);
+		return todos.stream().filter(predicate).toList();
+	}
+	
+	public void addTodo(String username, String description, LocalDate targetDate, boolean done) {
+		Todo todo = new Todo(++todosCount,username,description,targetDate,done);
+		todos.add(todo);
+	}
+	
+	public void deleteById(int id) {
+		//todo.getId() == id
+		// todo -> todo.getId() == id
+		Predicate<? super Todo> predicate = todo -> todo.getId() == id;
+		todos.removeIf(predicate);
 	}
 
-}
-```
----
-
-### /src/main/java/com/in28minutes/spring/basics/springin5steps/scope/JdbcConnection.java
-
-```java
-package com.in28minutes.spring.basics.springin5steps.scope;
-
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Component;
-
-@Component
-@Scope(value=ConfigurableBeanFactory.SCOPE_PROTOTYPE, 
-		proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class JdbcConnection {
-	public JdbcConnection() {
-		System.out.println("JDBC Connection");
+	public Todo findById(int id) {
+		Predicate<? super Todo> predicate = todo -> todo.getId() == id;
+		Todo todo = todos.stream().filter(predicate).findFirst().get();
+		return todo;
 	}
-}
-```
----
 
-### /src/main/java/com/in28minutes/spring/basics/springin5steps/scope/PersonDAO.java
-
-```java
-package com.in28minutes.spring.basics.springin5steps.scope;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
-@Repository
-public class PersonDAO {
-
-	@Autowired
-	JdbcConnection jdbcConnection;
-
-    //Getter and Setters
-
-```
----
-
-### /src/main/java/com/in28minutes/spring/basics/springin5steps/SpringIn5StepsBasicApplication.java
-
-```java
-package com.in28minutes.spring.basics.springin5steps;
-
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-
-import com.in28minutes.spring.basics.springin5steps.basic.BinarySearchImpl;
-
-@Configuration
-@ComponentScan
-public class SpringIn5StepsBasicApplication {
-
-	public static void main(String[] args) {
-
-		try (AnnotationConfigApplicationContext applicationContext = 
-				new AnnotationConfigApplicationContext(
-				SpringIn5StepsBasicApplication.class)) {
-
-			BinarySearchImpl binarySearch = 
-					applicationContext.getBean(BinarySearchImpl.class);
-
-			BinarySearchImpl binarySearch1 = 
-					applicationContext.getBean(BinarySearchImpl.class);
-
-			System.out.println(binarySearch);
-			System.out.println(binarySearch1);
-
-			int result = binarySearch.binarySearch(new int[] { 12, 4, 6 }, 3);
-			System.out.println(result);
-		}
+	public void updateTodo(@Valid Todo todo) {
+		deleteById(todo.getId());
+		todos.add(todo);
 	}
 }
 ```
 ---
 
-### /src/main/java/com/in28minutes/spring/basics/springin5steps/SpringIn5StepsCdiApplication.java
+### /src/main/resources/META-INF/resources/WEB-INF/jsp/common/footer.jspf
 
-```java
-package com.in28minutes.spring.basics.springin5steps;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-
-import com.in28minutes.spring.basics.springin5steps.cdi.SomeCdiBusiness;
-
-@Configuration
-@ComponentScan
-public class SpringIn5StepsCdiApplication {
-
-	private static Logger LOGGER = LoggerFactory.getLogger(SpringIn5StepsCdiApplication.class);
-
-	public static void main(String[] args) {
-		try (AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-				SpringIn5StepsCdiApplication.class)) {
-			SomeCdiBusiness business = applicationContext.getBean(SomeCdiBusiness.class);
-
-			LOGGER.info("{} dao-{}", business, business.getSomeCDIDAO());
-		}
-	}
-}
+```
+<script src="webjars/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+		<script src="webjars/jquery/3.6.0/jquery.min.js"></script>
+		<script src="webjars/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+						
+	</body>
+</html>
 ```
 ---
 
-### /src/main/java/com/in28minutes/spring/basics/springin5steps/SpringIn5StepsComponentScanApplication.java
+### /src/main/resources/META-INF/resources/WEB-INF/jsp/common/header.jspf
 
-```java
-package com.in28minutes.spring.basics.springin5steps;
+```
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 
-import com.in28minutes.spring.basics.componentscan.ComponentDAO;
-
-@Configuration
-@ComponentScan("com.in28minutes.spring.basics.componentscan")
-public class SpringIn5StepsComponentScanApplication {
-
-	private static Logger LOGGER = LoggerFactory.getLogger(SpringIn5StepsComponentScanApplication.class);
-
-	public static void main(String[] args) {
-
-		try (AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-				SpringIn5StepsComponentScanApplication.class)) {
-			ComponentDAO componentDAO = applicationContext.getBean(ComponentDAO.class);
-
-			LOGGER.info("{}", componentDAO);
-		}
-	}
-}
+<html>
+	<head>
+		<link href="webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" >
+		<link href="webjars/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css" rel="stylesheet" >
+		
+		<title>Manage Your Todos</title>		
+	</head>
+	<body>
 ```
 ---
 
-### /src/main/java/com/in28minutes/spring/basics/springin5steps/SpringIn5StepsPropertiesApplication.java
+### /src/main/resources/META-INF/resources/WEB-INF/jsp/common/navigation.jspf
 
-```java
-package com.in28minutes.spring.basics.springin5steps;
-
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-
-import com.in28minutes.spring.basics.springin5steps.properties.SomeExternalService;
-
-@Configuration
-@ComponentScan
-// 
-@PropertySource("classpath:app.properties")
-public class SpringIn5StepsPropertiesApplication {
-
-	public static void main(String[] args) {
-
-		try (AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-				SpringIn5StepsPropertiesApplication.class)) {
-
-			SomeExternalService service = applicationContext.getBean(SomeExternalService.class);
-			System.out.println(service.returnServiceURL());
-		}
-	}
-}
+```
+<nav class="navbar navbar-expand-md navbar-light bg-light mb-3 p-1">
+	<a class="navbar-brand m-1" href="https://courses.in28minutes.com">in28minutes</a>
+	<div class="collapse navbar-collapse">
+		<ul class="navbar-nav">
+			<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+			<li class="nav-item"><a class="nav-link" href="/list-todos">Todos</a></li>
+		</ul>
+	</div>
+	<ul class="navbar-nav">
+		<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+	</ul>	
+</nav>
 ```
 ---
 
-### /src/main/java/com/in28minutes/spring/basics/springin5steps/SpringIn5StepsScopeApplication.java
+### /src/main/resources/META-INF/resources/WEB-INF/jsp/listTodos.jsp
 
-```java
-package com.in28minutes.spring.basics.springin5steps;
+```
+<%@ include file="common/header.jspf" %>
+<%@ include file="common/navigation.jspf" %>	
+<div class="container">
+	<h1>Your Todos</h1>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Description</th>
+				<th>Target Date</th>
+				<th>Is Done?</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>		
+			<c:forEach items="${todos}" var="todo">
+				<tr>
+					<td>${todo.description}</td>
+					<td>${todo.targetDate}</td>
+					<td>${todo.done}</td>
+					<td> <a href="delete-todo?id=${todo.id}" class="btn btn-warning">Delete</a>   </td>
+					<td> <a href="update-todo?id=${todo.id}" class="btn btn-success">Update</a>   </td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	<a href="add-todo" class="btn btn-success">Add Todo</a>
+</div>
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-
-import com.in28minutes.spring.basics.springin5steps.scope.PersonDAO;
-
-@Configuration
-@ComponentScan
-public class SpringIn5StepsScopeApplication {
-
-	private static Logger LOGGER = LoggerFactory.getLogger(SpringIn5StepsScopeApplication.class);
-
-	public static void main(String[] args) {
-
-		try (AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-				SpringIn5StepsScopeApplication.class)) {
-
-			PersonDAO personDao = applicationContext.getBean(PersonDAO.class);
-
-			PersonDAO personDao2 = applicationContext.getBean(PersonDAO.class);
-
-			LOGGER.info("{}", personDao);
-			LOGGER.info("{}", personDao.getJdbcConnection());
-			LOGGER.info("{}", personDao.getJdbcConnection());
-
-			LOGGER.info("{}", personDao2);
-			LOGGER.info("{}", personDao.getJdbcConnection());
-		}
-	}
-}
+<%@ include file="common/footer.jspf" %>
 ```
 ---
 
-### /src/main/java/com/in28minutes/spring/basics/springin5steps/SpringIn5StepsXMLContextApplication.java
+### /src/main/resources/META-INF/resources/WEB-INF/jsp/sayHello.jsp
 
-```java
-package com.in28minutes.spring.basics.springin5steps;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.in28minutes.spring.basics.springin5steps.xml.XmlPersonDAO;
-
-public class SpringIn5StepsXMLContextApplication {
-
-	private static Logger LOGGER = LoggerFactory.getLogger(SpringIn5StepsScopeApplication.class);
-
-	public static void main(String[] args) {
-
-		try (ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-				"applicationContext.xml")) {
-
-			LOGGER.info("Beans Loaded -> {}", (Object) applicationContext.getBeanDefinitionNames());
-			// [xmlJdbcConnection, xmlPersonDAO]
-
-			XmlPersonDAO personDao = applicationContext.getBean(XmlPersonDAO.class);
-
-			LOGGER.info("{} {}", personDao, personDao.getXmlJdbcConnection());
-		}
-	}
-}
+```
+<html>
+	<head>
+		<title> My first HTML Page - JSP</title>
+	</head>
+	<body>
+		<h1>Heading 1</h1>
+		<h2>Heading 2</h2>
+		
+		My first html page with body - JSP
+	</body>
+</html>
 ```
 ---
 
-### /src/main/java/com/in28minutes/spring/basics/springin5steps/xml/XmlJdbcConnection.java
+### /src/main/resources/META-INF/resources/WEB-INF/jsp/todo.jsp
 
-```java
-package com.in28minutes.spring.basics.springin5steps.xml;
+```
+<%@ include file="common/header.jspf" %>
+<%@ include file="common/navigation.jspf" %>	
 
-public class XmlJdbcConnection {
-	public XmlJdbcConnection() {
-		System.out.println("JDBC Connection");
-	}
-}
+<div class="container">
+	
+	<h1>Enter Todo Details</h1>
+	
+	<form:form method="post" modelAttribute="todo">
+
+		<fieldset class="mb-3">				
+			<form:label path="description">Description</form:label>
+			<form:input type="text" path="description" required="required"/>
+			<form:errors path="description" cssClass="text-warning"/>
+		</fieldset>
+
+		<fieldset class="mb-3">				
+			<form:label path="targetDate">Target Date</form:label>
+			<form:input type="text" path="targetDate" required="required"/>
+			<form:errors path="targetDate" cssClass="text-warning"/>
+		</fieldset>
+
+		
+		<form:input type="hidden" path="id"/>
+
+		<form:input type="hidden" path="done"/>
+
+		<input type="submit" class="btn btn-success"/>
+	
+	</form:form>
+	
+</div>
+
+<%@ include file="common/footer.jspf" %>
+
+<script type="text/javascript">
+	$('#targetDate').datepicker({
+	    format: 'yyyy-mm-dd'
+	});
+</script>
 ```
 ---
 
-### /src/main/java/com/in28minutes/spring/basics/springin5steps/xml/XmlPersonDAO.java
+### /src/main/resources/META-INF/resources/WEB-INF/jsp/welcome.jsp
 
-```java
-package com.in28minutes.spring.basics.springin5steps.xml;
-
-public class XmlPersonDAO {
-
-	XmlJdbcConnection xmlJdbcConnection;
-
-	public XmlJdbcConnection getXmlJdbcConnection() {
-		return xmlJdbcConnection;
-	}
-
-	public void setXmlJdbcConnection(XmlJdbcConnection jdbcConnection) {
-		this.xmlJdbcConnection = jdbcConnection;
-	}
-}
 ```
----
+<%@ include file="common/header.jspf" %>
+<%@ include file="common/navigation.jspf" %>	
 
-### /src/main/resources/app.properties
+<div class="container">
+	<h1>Welcome ${name}</h1>
+	<a href="list-todos">Manage</a> your todos
+</div>
 
-```properties
-external.service.url=http://someserver.dev.com/service
+<%@ include file="common/footer.jspf" %>
 ```
 ---
 
 ### /src/main/resources/application.properties
 
 ```properties
-#logging.level.org.springframework = debug
+#server.port=8081
+#sayHello.jsp
+#/WEB-INF/jsp/sayHello.jsp
+
+# /WEB-INF/jsp/login.jsp => View Resolver
+spring.mvc.view.prefix=/WEB-INF/jsp/
+spring.mvc.view.suffix=.jsp
+logging.level.org.springframework=info
+logging.level.com.in28minutes.springboot.myfirstwebapp=info
+
+spring.mvc.format.date=yyyy-MM-dd
+
+#spring.datasource.url=jdbc:h2:mem:testdb
+spring.jpa.defer-datasource-initialization=true
+
+spring.datasource.url=jdbc:mysql://localhost:3306/todos
+spring.datasource.username=todos-user
+spring.datasource.password=dummytodos
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+
+spring.jpa.hibernate.ddl-auto=update
+
+#/connect todos-user@localhost:3306
+#docker run --detach 
+#--env MYSQL_ROOT_PASSWORD=dummypassword 
+#--env MYSQL_USER=todos-user 
+#--env MYSQL_PASSWORD=dummytodos 
+#--env MYSQL_DATABASE=todos 
+#--name mysql 
+#--publish 3306:3306 
+#mysql:8-oracle
 ```
 ---
 
-### /src/main/resources/applicationContext.xml
+### /src/main/resources/data.sql
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
-	
-	<context:component-scan base-package="com.in28minutes.spring.basics"/>
+```
+insert into todo (ID, USERNAME, DESCRIPTION, TARGET_DATE, DONE)
+values(10001,'in28minutes', 'Get AWS Certified', CURRENT_DATE(), false);
 
-    <bean id="xmlJdbcConnection" 
-    	class="com.in28minutes.spring.basics.springin5steps.xml.XmlJdbcConnection">
-    </bean>
+insert into todo (ID, USERNAME, DESCRIPTION, TARGET_DATE, DONE)
+values(10002,'in28minutes', 'Get Azure Certified', CURRENT_DATE(), false);
 
-    <bean id="xmlPersonDAO" class="com.in28minutes.spring.basics.springin5steps.xml.XmlPersonDAO">
-    		<property name="xmlJdbcConnection" ref="xmlJdbcConnection"/>
-    </bean>
+insert into todo (ID, USERNAME, DESCRIPTION, TARGET_DATE, DONE)
+values(10003,'in28minutes', 'Get GCP Certified', CURRENT_DATE(), false);
 
-</beans>
+insert into todo (ID, USERNAME, DESCRIPTION, TARGET_DATE, DONE)
+values(10004,'in28minutes', 'Learn DevOps', CURRENT_DATE(), false);
 ```
 ---
 
-### /src/test/java/com/in28minutes/spring/basics/springin5steps/SpringIn5StepsBasicApplicationTests.java
+### /src/test/java/com/in28minutes/springboot/myfirstwebapp/MyfirstwebappApplicationTests.java
 
 ```java
-package com.in28minutes.spring.basics.springin5steps;
+package com.in28minutes.springboot.myfirstwebapp;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringIn5StepsBasicApplicationTests {
+class MyfirstwebappApplicationTests {
 
 	@Test
-	public void contextLoads() {
+	void contextLoads() {
 	}
 
 }
 ```
 ---
+
+
+# Spring Boot REST API (Advanced)
+
+<!---
+Current Directory : /Users/rangakaranam/Ranga/git/00.courses/spring-boot-master-class/05.Spring-Boot-Advanced-V2
+-->
+
+## Complete Code Example
+
+
+### /pom.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.0.0-M3</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.in28minutes.springboot</groupId>
+	<artifactId>first-rest-api</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>first-rest-api</name>
+	<description>Demo project for Spring Boot</description>
+	<properties>
+		<java.version>17</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+</project>
+```
+---
+
+### /src/main/java/com/in28minutes/springboot/firstrestapi/FirstRestApiApplication.java
+
+```java
+package com.in28minutes.springboot.firstrestapi;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class FirstRestApiApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(FirstRestApiApplication.class, args);
+	}
+
+}
+```
+---
+
+### /src/main/java/com/in28minutes/springboot/firstrestapi/helloworld/HelloWorldBean.java
+
+```java
+package com.in28minutes.springboot.firstrestapi.helloworld;
+
+public class HelloWorldBean {
+
+	public HelloWorldBean(String message) {
+		super();
+		this.message = message;
+	}
+
+	private String message;
+
+	public String getMessage() {
+		return message;
+	}
+
+	@Override
+	public String toString() {
+		return "HelloWorldBean [message=" + message + "]";
+	}
+
+}
+```
+---
+
+### /src/main/java/com/in28minutes/springboot/firstrestapi/helloworld/HelloWorldResource.java
+
+```java
+package com.in28minutes.springboot.firstrestapi.helloworld;
+
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+//@Controller
+@RestController
+public class HelloWorldResource {
+	// /hello-world => "Hello World"
+	
+	@RequestMapping("/hello-world")
+	public String helloWorld() {
+		return "Hello World";
+	}
+
+	
+	@RequestMapping("/hello-world-bean")
+	public HelloWorldBean helloWorldBean() {
+		return new HelloWorldBean("Hello World");
+	}
+	
+	//Path Variable or Path Params
+	// /user/Ranga/todos/1
+	
+	@RequestMapping("/hello-world-path-param/{name}")
+	public HelloWorldBean helloWorldPathParam(@PathVariable String name) {
+		return new HelloWorldBean("Hello World, " + name);
+	}
+	
+	@RequestMapping("/hello-world-path-param/{name}/message/{message}")
+	public HelloWorldBean helloWorldMultiplePathParam
+					(@PathVariable String name,
+							@PathVariable String message) {
+		return new HelloWorldBean("Hello World " + name + "," + message);
+	}
+
+}
+```
+---
+
+### /src/main/java/com/in28minutes/springboot/firstrestapi/survey/Question.java
+
+```java
+package com.in28minutes.springboot.firstrestapi.survey;
+
+import java.util.List;
+
+public class Question {
+
+	public Question() {
+
+	}
+
+	public Question(String id, String description, List<String> options, String correctAnswer) {
+		super();
+		this.id = id;
+		this.description = description;
+		this.options = options;
+		this.correctAnswer = correctAnswer;
+	}
+
+	private String id;
+	private String description;
+	private List<String> options;
+	private String correctAnswer;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public List<String> getOptions() {
+		return options;
+	}
+
+	public String getCorrectAnswer() {
+		return correctAnswer;
+	}
+
+	@Override
+	public String toString() {
+		return "Question [id=" + id + ", description=" + description + ", options=" + options + ", correctAnswer="
+				+ correctAnswer + "]";
+	}
+
+}
+```
+---
+
+### /src/main/java/com/in28minutes/springboot/firstrestapi/survey/Survey.java
+
+```java
+package com.in28minutes.springboot.firstrestapi.survey;
+
+import java.util.List;
+
+public class Survey {
+
+	public Survey() {
+
+	}
+
+	public Survey(String id, String title, String description, List<Question> questions) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.questions = questions;
+	}
+
+	private String id;
+	private String title;
+	private String description;
+	private List<Question> questions;
+
+	public String getId() {
+		return id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public List<Question> getQuestions() {
+		return questions;
+	}
+
+	@Override
+	public String toString() {
+		return "Survey [id=" + id + ", title=" + title + ", description=" + description + ", questions=" + questions
+				+ "]";
+	}
+
+}
+```
+---
+
+### /src/main/java/com/in28minutes/springboot/firstrestapi/survey/SurveyResource.java
+
+```java
+package com.in28minutes.springboot.firstrestapi.survey;
+
+import java.net.URI;
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+@RestController
+public class SurveyResource {
+	
+	private SurveyService surveyService;
+	
+	public SurveyResource(SurveyService surveyService) {
+		super();
+		this.surveyService = surveyService;
+	}
+
+	// /surveys => surveys
+	@RequestMapping("/surveys")
+	public List<Survey> retrieveAllSurveys(){
+		return surveyService.retrieveAllSurveys();
+	}
+	
+	@RequestMapping("/surveys/{surveyId}")
+	public Survey retrieveSurveyById(@PathVariable String surveyId){
+		Survey survey = surveyService.retrieveSurveyById(surveyId);
+		
+		if(survey==null)
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		
+		return survey;
+	}
+
+	@RequestMapping("/surveys/{surveyId}/questions")
+	public List<Question> retrieveAllSurveyQuestions(@PathVariable String surveyId){
+		List<Question> questions = surveyService.retrieveAllSurveyQuestions(surveyId);
+		
+		if(questions==null)
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		
+		return questions;
+	}
+	
+	@RequestMapping("/surveys/{surveyId}/questions/{questionId}")
+	public Question retrieveSpecificSurveyQuestion(@PathVariable String surveyId,
+			@PathVariable String questionId){
+		Question question = surveyService.retrieveSpecificSurveyQuestion
+										(surveyId, questionId);
+		
+		if(question==null)
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		
+		return question;
+	}
+
+	@RequestMapping(value="/surveys/{surveyId}/questions", method = RequestMethod.POST)
+	public ResponseEntity<Object> addNewSurveyQuestion(@PathVariable String surveyId,
+			@RequestBody Question question){
+		
+		String questionId = surveyService.addNewSurveyQuestion(surveyId, question);
+		// /surveys/{surveyId}/questions/{questionId}
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{questionId}").buildAndExpand(questionId).toUri();
+		return ResponseEntity.created(location ).build();
+		
+	}
+
+	@RequestMapping(value="/surveys/{surveyId}/questions/{questionId}", method = RequestMethod.DELETE)
+	public ResponseEntity<Object> deleteSurveyQuestion(@PathVariable String surveyId,
+			@PathVariable String questionId){
+		surveyService.deleteSurveyQuestion(surveyId, questionId);
+		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(value="/surveys/{surveyId}/questions/{questionId}", method = RequestMethod.PUT)
+	public ResponseEntity<Object> updateSurveyQuestion(@PathVariable String surveyId,
+			@PathVariable String questionId,
+			@RequestBody Question question){
+		
+		surveyService.updateSurveyQuestion(surveyId, questionId, question);
+		
+		return ResponseEntity.noContent().build();
+	}
+
+}
+```
+---
+
+### /src/main/java/com/in28minutes/springboot/firstrestapi/survey/SurveyService.java
+
+```java
+package com.in28minutes.springboot.firstrestapi.survey;
+
+import java.math.BigInteger;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class SurveyService {
+
+	private static List<Survey> surveys = new ArrayList<>();
+
+	static {
+
+		Question question1 = new Question("Question1", "Most Popular Cloud Platform Today",
+				Arrays.asList("AWS", "Azure", "Google Cloud", "Oracle Cloud"), "AWS");
+		Question question2 = new Question("Question2", "Fastest Growing Cloud Platform",
+				Arrays.asList("AWS", "Azure", "Google Cloud", "Oracle Cloud"), "Google Cloud");
+		Question question3 = new Question("Question3", "Most Popular DevOps Tool",
+				Arrays.asList("Kubernetes", "Docker", "Terraform", "Azure DevOps"), "Kubernetes");
+
+		List<Question> questions = new ArrayList<>(Arrays.asList(question1, question2, question3));
+
+		Survey survey = new Survey("Survey1", "My Favorite Survey", "Description of the Survey", questions);
+
+		surveys.add(survey);
+
+	}
+
+	public List<Survey> retrieveAllSurveys() {
+		return surveys;
+	}
+
+	public Survey retrieveSurveyById(String surveyId) {
+
+		Predicate<? super Survey> predicate = survey -> survey.getId().equalsIgnoreCase(surveyId);
+
+		Optional<Survey> optionalSurvey = surveys.stream().filter(predicate).findFirst();
+
+		if (optionalSurvey.isEmpty())
+			return null;
+
+		return optionalSurvey.get();
+	}
+
+	public List<Question> retrieveAllSurveyQuestions(String surveyId) {
+		Survey survey = retrieveSurveyById(surveyId);
+
+		if (survey == null)
+			return null;
+
+		return survey.getQuestions();
+	}
+
+	public Question retrieveSpecificSurveyQuestion(String surveyId, String questionId) {
+
+		List<Question> surveyQuestions = retrieveAllSurveyQuestions(surveyId);
+
+		if (surveyQuestions == null)
+			return null;
+
+		Optional<Question> optionalQuestion = surveyQuestions.stream()
+				.filter(q -> q.getId().equalsIgnoreCase(questionId)).findFirst();
+
+		if (optionalQuestion.isEmpty())
+			return null;
+
+		return optionalQuestion.get();
+	}
+
+	public String addNewSurveyQuestion(String surveyId, Question question) {
+		List<Question> questions = retrieveAllSurveyQuestions(surveyId);
+		question.setId(generateRandomId());
+		questions.add(question);
+		return question.getId();
+	}
+
+	private String generateRandomId() {
+		SecureRandom secureRandom = new SecureRandom();
+		String randomId = new BigInteger(32, secureRandom).toString();
+		return randomId;
+	}
+
+	public String deleteSurveyQuestion(String surveyId, String questionId) {
+
+		List<Question> surveyQuestions = retrieveAllSurveyQuestions(surveyId);
+
+		if (surveyQuestions == null)
+			return null;
+		
+
+		Predicate<? super Question> predicate = q -> q.getId().equalsIgnoreCase(questionId);
+		boolean removed = surveyQuestions.removeIf(predicate);
+		
+		if(!removed) return null;
+
+		return questionId;
+	}
+
+	public void updateSurveyQuestion(String surveyId, String questionId, Question question) {
+		List<Question> questions = retrieveAllSurveyQuestions(surveyId);
+		questions.removeIf(q -> q.getId().equalsIgnoreCase(questionId));
+		questions.add(question);
+	}
+
+}
+```
+---
+
+### /src/main/java/com/in28minutes/springboot/firstrestapi/user/UserDetails.java
+
+```java
+package com.in28minutes.springboot.firstrestapi.user;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
+@Entity
+public class UserDetails {
+	
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+	private String name;
+	private String role;
+	
+	public UserDetails() {
+		
+	}
+	
+	public UserDetails(String name, String role) {
+		super();
+		this.name = name;
+		this.role = role;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	@Override
+	public String toString() {
+		return "UserDetails [id=" + id + ", name=" + name + ", role=" + role + "]";
+	}
+
+}
+```
+---
+
+### /src/main/java/com/in28minutes/springboot/firstrestapi/user/UserDetailsCommandLineRunner.java
+
+```java
+package com.in28minutes.springboot.firstrestapi.user;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+@Component
+public class UserDetailsCommandLineRunner implements CommandLineRunner {
+
+	public UserDetailsCommandLineRunner(UserDetailsRepository repository) {
+		super();
+		this.repository = repository;
+	}
+
+	private Logger logger = LoggerFactory.getLogger(getClass());
+
+	private UserDetailsRepository repository;
+
+	@Override
+	public void run(String... args) throws Exception {
+		repository.save(new UserDetails("Ranga", "Admin"));
+		repository.save(new UserDetails("Ravi", "Admin"));
+		repository.save(new UserDetails("John", "User"));
+		
+		//List<UserDetails> users = repository.findAll();
+		
+		List<UserDetails> users = repository.findByRole("Admin");
+		
+		users.forEach(user -> logger.info(user.toString()));
+		
+		
+	}
+
+}
+```
+---
+
+### /src/main/java/com/in28minutes/springboot/firstrestapi/user/UserDetailsRepository.java
+
+```java
+package com.in28minutes.springboot.firstrestapi.user;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserDetailsRepository extends JpaRepository<UserDetails, Long>{
+	List<UserDetails> findByRole(String role);
+}
+```
+---
+
+### /src/main/java/com/in28minutes/springboot/firstrestapi/user/UserDetailsRestRepository.java
+
+```java
+package com.in28minutes.springboot.firstrestapi.user;
+
+import java.util.List;
+
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+public interface UserDetailsRestRepository extends PagingAndSortingRepository<UserDetails, Long>{
+	List<UserDetails> findByRole(String role);
+}
+```
+---
+
+### /src/main/resources/application.properties
+
+```properties
+logging.level.org.springframework=info
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.jpa.show-sql=true
+```
+---
+
+### /src/test/java/com/in28minutes/springboot/firstrestapi/FirstRestApiApplicationTests.java
+
+```java
+package com.in28minutes.springboot.firstrestapi;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class FirstRestApiApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
+```
+---
+
+### /src/test/java/com/in28minutes/springboot/firstrestapi/survey/JsonAssertTest.java
+
+```java
+package com.in28minutes.springboot.firstrestapi.survey;
+
+import org.json.JSONException;
+import org.junit.jupiter.api.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+
+public class JsonAssertTest {
+
+	@Test
+	void testJsonAssert() throws JSONException {
+		JSONAssert.assertEquals("{}", "{}", false);
+		JSONAssert.assertEquals("{id:5}", "{ id : 5 }", false);
+		JSONAssert.assertEquals("{id:6, name:Ranga}", "{ id : 6, attr:5, name: \"Ranga\" }", false);	
+	}
+
+}
+```
+---
+
+### /src/test/java/com/in28minutes/springboot/firstrestapi/survey/SurveyResponseIT.java
+
+```java
+package com.in28minutes.springboot.firstrestapi.survey;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.json.JSONException;
+import org.junit.jupiter.api.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+class SurveyResponseIT {
+
+	// 
+	/*
+	 
+  "id": "Question1",
+  "description": "Most Popular Cloud Platform Today",
+  "options": [
+    "AWS",
+    "Azure",
+    "Google Cloud",
+    "Oracle Cloud"
+  ],
+  "correctAnswer": "AWS"
+} 
+	 
+	 */
+	
+	//{"id":"Question1","description":"Most Popular Cloud Platform Today","options":["AWS","Azure","Google Cloud","Oracle Cloud"],"correctAnswer":"AWS"}
+
+	
+	@Autowired
+	TestRestTemplate template;
+	
+	@Test
+	void retrieveSpecificSurveyQuestion_basicScenario() throws JSONException {
+		String url = "/surveys/Survey1/questions/Question1";
+		ResponseEntity<String> response = template.getForEntity(url, String.class);
+		//String expectedResponse="{\"id\":\"Question1\",\"description\":\"Most Popular Cloud Platform Today\",\"options\":[\"AWS\",\"Azure\",\"Google Cloud\",\"Oracle Cloud\"],\"correctAnswer\":\"AWS\"}";
+		String expectedResponse = "{id:Question1, correctAnswer:AWS, \"description\":\"Most Popular Cloud Platform Today\"}"; 
+		
+		JSONAssert.assertEquals(expectedResponse, response.getBody(), false);
+	}
+	
+	
+	
+	@Test
+	void addNewSurveyQuestion_basicScenario() {
+		
+		String url = "/surveys/Survey1/questions/";
+		
+		String requestBody = """
+					{
+					  "description": "Most Popular Cloud Platform Today New",
+					  "options": [
+					    "AWS",
+					    "Azure",
+					    "Google Cloud",
+					    "Oracle Cloud"
+					  ],
+					  "correctAnswer": "AWS"
+					}
+				""";
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type", "application/json");
+		HttpEntity<String> httpEntity = new HttpEntity(requestBody, headers);
+		
+		ResponseEntity<String> responseEntity = template.exchange(url, HttpMethod.POST, httpEntity, String.class);
+		System.out.println(responseEntity);
+
+		//<201 CREATED Created,
+		assertTrue(responseEntity.getStatusCode().is2xxSuccessful());
+		
+		String locationHeader = responseEntity.getHeaders().get("Location").get(0);
+		
+		//Location:"http://localhost:55163/surveys/Survey1/questions/2080216181"
+		assertTrue(locationHeader.contains("/surveys/Survey1/questions"));
+		
+		
+	}
+}
+```
+---
+
 
 # RESTful Web Services with Spring and Spring Boot
 

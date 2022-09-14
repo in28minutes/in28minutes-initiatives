@@ -1,22 +1,13 @@
 # The in28Minutes initiatives
 
-Read about
-- Our Journey to 100,000 Students, Our Love and Beliefs - [The-in28Minutes-Way](The-in28Minutes-Way)
-- Establishing a connect between Experts and the Learners - [The-in28Minutes-connect](in28Minutes-connect)
-- in28Minutes Troubleshooting Guide and FAQ - [The-in28Minutes-TroubleshootingGuide-And-FAQ](The-in28Minutes-TroubleshootingGuide-And-FAQ)
+## Keep Learning Every Day**
+- **1:** [FOLLOW](https://links.in28minutes.com/lin) Ranga on LinkedIn
 
-### More Courses and Videos From in28Minutes
-- https://github.com/in28minutes/learn
-
-We would love to hear your thoughts.  
-
-Share on Twitter - https://twitter.com/home?status=Having%20a%20great%20time!%20%0A%20%23in28Minutes%20%23ImLearningIn28Minutes
-
-#in28Minutes #ImLearningIn28Minutes #ImLovingIn28Minutes 
-
-Good Luck and Keep Learning in28Minutes
-- Linked In : https://www.linkedin.com/in/rangakaranam/​
-- Facebook  : https://www.facebook.com/in28Minutes​
-- Twitter   : https://twitter.com/in28Minutes​
-- YouTube   : https://www.youtube.com/rithustutorials​
-​
+## Check Out Our Amazing ROADMAPS
+- **1:** [AWS Roadmap](https://github.com/in28minutes/roadmaps/blob/main/README.md#aws-roadmap)
+- **2:** [Azure Roadmap](https://github.com/in28minutes/roadmaps/blob/main/README.md#azure-roadmap)
+- **3:** [Google Cloud Roadmap](https://github.com/in28minutes/roadmaps/blob/main/README.md#google-cloud-roadmap)
+- **4:** [Cloud Beginner Roadmap](https://github.com/in28minutes/roadmaps/blob/main/README.md#cloud-beginner-roadmap)
+- **5:** [DevOps Roadmap](https://github.com/in28minutes/roadmaps/blob/main/README.md#devops-roadmap)
+- **6:** [Java Full Stack Roadmap](https://github.com/in28minutes/roadmaps/blob/main/README.md#java-full-stack-roadmap)
+- **7:** [Java Microservices Roadmap](https://github.com/in28minutes/roadmaps/blob/main/README.md#java-microservices-roadmap)

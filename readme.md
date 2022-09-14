@@ -1,6 +1,6 @@
 # The in28Minutes initiatives
 
-## Keep Learning Every Day**
+## Keep Learning Every Day
 - **1:** [FOLLOW](https://links.in28minutes.com/lin) Ranga on LinkedIn
 
 ## Check Out Our Amazing ROADMAPS

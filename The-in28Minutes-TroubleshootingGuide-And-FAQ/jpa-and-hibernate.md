@@ -30,6 +30,7 @@ If you are having problems with table creation or logging into H2 console, we re
 
 ```
 spring.datasource.url=jdbc:h2:mem:testdb;NON_KEYWORDS=USER
+spring.h2.console.path=/h2-console
 spring.h2.console.enabled=true
 spring.jpa.defer-datasource-initialization=true
 spring.data.jpa.repositories.bootstrap-mode=default
